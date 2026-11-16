@@ -35,10 +35,11 @@ photograph appears; no code change is needed.
 | `educators-02.webp` | For Educators, step 03 | 1200×900 | Students moving from VR to real equipment |
 | `high-schools.webp` | Pathways by Level | 1280×720 (16:9) | High school students in headsets, teacher supervising |
 | `mission.webp` | Mission | 1200×900 | A Black skilled-trades professional at work |
-| `og-image.jpg` | Link previews | 1200×630 | Any strong brand image with headroom |
 
 **Already supplied:** `hero-vr-800/1200/1448.webp` — the original classroom
 artwork, re-encoded for `srcset`. Used in the hero and Our Approach.
+`og-image.jpg` — the 1200×630 link-preview card, composed from the logo, the
+hero headline and that photograph.
 
 ### Video — `assets/video/`
 
@@ -70,19 +71,38 @@ photograph you actually use — it is the main accessibility touchpoint.
 
 ## 2. Logo and favicon
 
-The mark is inline SVG in `index.html` (search `brand__mark`) — an electric-blue
-rounded square with a white X, used in the header and the footer.
+The mark is an electric-blue tile carrying a geometric **X** with chamfered
+terminals, backed by an ice-blue copy offset 2.6 units down-right. The offset
+reads as depth — the "next dimension" idea — and puts the secondary accent to
+work. It was drawn to stay legible down to 16px, where the offset reads as
+weight rather than detail.
 
-To replace it:
-1. Swap the inline `<svg class="brand__mark">` in both places (header, footer)
-   for your artwork, keeping `width`/`height` near 34×34 and `aria-hidden="true"`.
-2. Replace `assets/favicon/favicon.svg` with the same mark on a 34×34 viewBox.
-3. Replace `assets/favicon/apple-touch-icon.png` at 180×180.
+| File | Use |
+|---|---|
+| `favicon/logo-mark.svg` | the mark on its own, 48×48 viewBox |
+| `favicon/favicon.svg` | same artwork, served as the favicon |
+| `favicon/apple-touch-icon.png` | 180×180, full-bleed so iOS applies its own rounding |
+| `favicon/logo-lockup-light.png` | mark + wordmark for light backgrounds |
+| `favicon/logo-lockup-dark.png` | mark + wordmark for dark backgrounds |
 
-The wordmark is live text (Barlow Condensed 800), not an image, so it stays sharp
-and searchable. Replace it with an image only if the brand requires exact letterforms.
+In the page the mark is **inline SVG** (search `brand__mark` — it appears in the
+header and the footer) so it inherits crisp rendering at any size with no extra
+request. The wordmark beside it is **live text** in Barlow Condensed 800, not an
+image, so it stays selectable, searchable and sharp.
 
----
+**Clear space:** keep at least the height of the tile's corner radius (23% of
+the mark's width) free on all sides.
+
+**Minimum size:** 20px for the mark on screen; 16px works for the favicon.
+
+**To replace the mark with other artwork:**
+1. Swap the inline `<svg class="brand__mark">` in both places in `index.html`,
+   keeping `viewBox`, `class` and `aria-hidden="true"`.
+2. Replace `favicon/favicon.svg` with the same artwork.
+3. Re-export `favicon/apple-touch-icon.png` at 180×180 and the two lockups.
+
+The lockup PNGs are renders of the live markup, so if the mark or wordmark
+changes, re-export them rather than editing the PNGs.
 
 ## 3. Brand specification
 
