@@ -38,19 +38,28 @@ cwebp -q 78 -resize 1600 0 source.jpg -o educators.webp
 photo you actually use — it is the main accessibility touchpoint on the page.
 
 ## Brand colours
-Defined once in `index.html` under `:root`, matching the live site:
+Defined once in `index.html` under `:root`. Change these and the whole page follows.
 
-| Token | Value | Use |
+| Token | Value | Role |
 |---|---|---|
-| `--paper` | `#f5f4ee` | page background |
-| `--ink` | `#14272c` | text, dark bands, buttons |
-| `--lime` | `#d5f56a` | the accent — button fills, highlights, dark-band accents |
-| `--lime-deep` | `#4e6a0f` | the accent as small text, where lime alone would not meet AA |
-| `--line` / `--line-strong` | `#d8ddd5` / `#b9c0b4` | borders |
-| `--muted` | `#536364` | secondary text |
+| `--paper` | `#F8F9FC` | warm white page background |
+| `--paper-2` | `#FFFFFF` | cards |
+| `--paper-3` | `#EEF2F8` | sunken panels |
+| `--tint` | `#EFF6FF` | hover / highlight wash |
+| `--navy` | `#14213D` | **primary** — headlines, body text, nav bar, footer, dark bands |
+| `--navy-2` | `#1E2E52` | raised surface on a navy band |
+| `--muted` | `#4C5A75` | secondary text |
+| `--blue` | `#2563EB` | **secondary** — buttons, links, key highlights |
+| `--cyan` | `#06B6D4` | **third** — icons, hover states, underlines, VR details |
+| `--line` / `--line-strong` | `#DDE3EE` / `#B9C4D8` | borders |
 
-Change those and the whole page follows. Note `--lime` is a light tint: it is
-used as a *fill* behind ink text, never as text on paper.
+Roughly 60% light background, 30% navy, 10% blue and cyan combined.
+
+**One rule worth keeping:** cyan sits at 2.3:1 on white, so it is never used for
+text. It carries icons, the eyebrow rules, hover edges, the ticker marks and the
+accents on navy bands (where it reads at 6.6:1). Any text that needs the accent
+uses `--blue` (4.9:1 on paper) or navy. The FAQ open/close control uses blue
+rather than cyan for the same reason — it is the only thing marking that state.
 
 ## Fonts
 DM Sans (body) and Barlow Condensed (labels, mark) match the live site.

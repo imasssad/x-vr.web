@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="X-VR Skilled Trades">
-  <rect width="32" height="32" rx="6" fill="#14272c"/>
-  <g stroke="#d5f56a" stroke-width="4.2" stroke-linecap="round" transform="skewX(-7) translate(2,0)">
+  <rect width="32" height="32" rx="6" fill="#14213D"/>
+  <g stroke="#06B6D4" stroke-width="4.2" stroke-linecap="round" transform="skewX(-7) translate(2,0)">
     <path d="M9 9 L21 23"/>
     <path d="M21 9 L9 23"/>
   </g>
