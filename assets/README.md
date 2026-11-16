@@ -1,67 +1,152 @@
-# /assets — what to drop in
+# X-VR Skilled Trades — asset and brand guide
 
-Filenames below are referenced by `index.html`. Where a file is missing the page
-shows generated placeholder artwork instead — nothing breaks, and no code change
-is needed when you add the real file. **Keep the filenames exactly as listed**
-(or update the matching `src` in `index.html`).
+`index.html` is self-contained: all HTML, CSS and JavaScript live in that one
+file. Everything below is referenced from this `/assets` directory.
 
-## Already in place
-| File | Notes |
-|---|---|
-| `vr-classroom-800.webp` / `-1200` / `-1448` | The original classroom artwork from the live site, re-encoded and sized for `srcset`. Used in the hero and in Our Approach. 317 KB original → 57/93/114 KB. |
-| `favicon.svg` | Brand mark: lime X on ink, skewed 7°. |
-| `apple-touch-icon.png` | 180×180 version of the same mark. |
-
-## Hero video (optional — plays over the photograph)
-| File | Notes |
-|---|---|
-| `hero.mp4` | H.264, 1920×1080, ~8–15s loop. Target under 6 MB. |
-| `hero.webm` | Optional VP9/AV1 version — tried first. |
-
-The hero shows the classroom photograph by default. Add a video file and it
-fades in over the photo, and the "Play with sound" control appears by itself.
-If the photograph is ever removed too, a canvas motion background takes over.
-
-## Still needed
-| File | Where it appears | Suggested crop |
-|---|---|---|
-| `educators.webp` | For Educators, full width | 1600×650 (16:6.5) |
-| `og-image.jpg` | Open Graph / Twitter card | 1200×630 |
-
-## Compressing
-Export WebP at quality 72–80, under ~180 KB each.
 ```
-cwebp -q 78 -resize 1600 0 source.jpg -o educators.webp
+x-vr-skilled-trades/
+├── index.html
+└── assets/
+    ├── images/        photography + social card
+    ├── video/         hero video + poster
+    └── favicon/       favicon.svg, apple-touch-icon.png
 ```
 
-**Alt text** lives in `index.html` beside each `src`. Update it to describe the
-photo you actually use — it is the main accessibility touchpoint on the page.
+---
 
-## Brand colours
-Defined once in `index.html` under `:root`. Change these and the whole page follows.
+## 1. Assets that need to be supplied
 
+Nothing here is a finished asset. Until a file exists, the page draws a
+placeholder panel that says **"Photography to be supplied"** — it is deliberately
+honest rather than decorative. Add the file at the exact path below and the
+photograph appears; no code change is needed.
+
+### Photography — `assets/images/`
+
+| File | Section | Crop | Subject |
+|---|---|---|---|
+| `welding.webp` | Explore Trades → Welding | 1280×560 (16:7) | Welding student in a protective helmet working a joint |
+| `hvac.webp` | Explore Trades → HVAC | 1280×560 | HVAC technician at a heating / ventilation unit |
+| `electrical.webp` | Explore Trades → Electrical | 1280×560 | Student at a wiring training board |
+| `manufacturing.webp` | Explore Trades → Manufacturing | 1280×560 | Technician measuring a machined part |
+| `construction.webp` | Explore Trades → Construction | 1280×560 | Trainees reviewing building plans on site |
+| `emerging-technology.webp` | Explore Trades → Emerging technology | 1280×560 | Technician inspecting a robotic work cell |
+| `educators-01.webp` | For Educators, step 01 | 1200×900 (4:3) | Instructor guiding a student |
+| `educators-02.webp` | For Educators, step 03 | 1200×900 | Students moving from VR to real equipment |
+| `high-schools.webp` | Pathways by Level | 1280×720 (16:9) | High school students in headsets, teacher supervising |
+| `mission.webp` | Mission | 1200×900 | A Black skilled-trades professional at work |
+| `og-image.jpg` | Link previews | 1200×630 | Any strong brand image with headroom |
+
+**Already supplied:** `hero-vr-800/1200/1448.webp` — the original classroom
+artwork, re-encoded for `srcset`. Used in the hero and Our Approach.
+
+### Video — `assets/video/`
+
+| File | Notes |
+|---|---|
+| `hero-video.mp4` | H.264, 1920×1080, ~8–15s seamless loop. Target under 6 MB. |
+| `hero-video.webm` | Optional VP9/AV1 version — tried first. |
+| `hero-poster.webp` | First frame, 1920×1080. |
+
+The hero shows the classroom photograph by default. When a video file is added
+it fades in over the photograph and the play/pause + sound controls appear on
+their own. If the photograph is ever removed as well, a CSS/JS motion
+background takes over as a last resort.
+
+### Preparing images
+Export WebP at quality 72–80, under ~180 KB each. AVIF is also fine — change the
+extension in the matching `<img src>`.
+```
+cwebp -q 78 -resize 1280 0 source.jpg -o welding.webp
+```
+Every slot already has `loading="lazy"` (except the hero, which is
+`fetchpriority="high"` and preloaded), `decoding="async"`, explicit `width`/
+`height` to prevent layout shift, and `object-fit: cover`.
+
+**Alt text** sits beside each `src` in `index.html`. Update it to describe the
+photograph you actually use — it is the main accessibility touchpoint.
+
+---
+
+## 2. Logo and favicon
+
+The mark is inline SVG in `index.html` (search `brand__mark`) — an electric-blue
+rounded square with a white X, used in the header and the footer.
+
+To replace it:
+1. Swap the inline `<svg class="brand__mark">` in both places (header, footer)
+   for your artwork, keeping `width`/`height` near 34×34 and `aria-hidden="true"`.
+2. Replace `assets/favicon/favicon.svg` with the same mark on a 34×34 viewBox.
+3. Replace `assets/favicon/apple-touch-icon.png` at 180×180.
+
+The wordmark is live text (Barlow Condensed 800), not an image, so it stays sharp
+and searchable. Replace it with an image only if the brand requires exact letterforms.
+
+---
+
+## 3. Brand specification
+
+### Colour — all defined once in `:root`
 | Token | Value | Role |
 |---|---|---|
-| `--paper` | `#F8F9FC` | warm white page background |
-| `--paper-2` | `#FFFFFF` | cards |
-| `--paper-3` | `#EEF2F8` | sunken panels |
-| `--tint` | `#EFF6FF` | hover / highlight wash |
-| `--navy` | `#14213D` | **primary** — headlines, body text, nav bar, footer, dark bands |
-| `--navy-2` | `#1E2E52` | raised surface on a navy band |
-| `--muted` | `#4C5A75` | secondary text |
-| `--blue` | `#2563EB` | **secondary** — buttons, links, key highlights |
-| `--cyan` | `#06B6D4` | **third** — icons, hover states, underlines, VR details |
-| `--line` / `--line-strong` | `#DDE3EE` / `#B9C4D8` | borders |
+| `--cloud` | `#F5F8FC` | primary background |
+| `--white` | `#FFFFFF` | cards, secondary background |
+| `--navy` | `#15283F` | primary text, dark surfaces |
+| `--navy-2` | `#1E3550` | raised surface on a navy band |
+| `--blue` | `#2864E8` | primary accent — CTAs, links, numbered markers, highlights |
+| `--blue-dark` | `#1C4FC2` | accent hover / pressed |
+| `--ice` | `#B9D5F5` | secondary accent — fills, connectors, accent text on navy |
+| `--ice-wash` | `#EDF3FD` | soft blue background treatment |
+| `--slate` | `#64748B` | supporting text |
+| `--slate-aa` | `#5C6B82` | supporting text on `--cloud` and `--ice-wash` (see note) |
+| `--border` | `#E2E8F0` | borders |
 
-Roughly 60% light background, 30% navy, 10% blue and cyan combined.
+Distribution is roughly 60% light background, 20% navy surfaces, 15%
+photography, 5% blue accents.
 
-**One rule worth keeping:** cyan sits at 2.3:1 on white, so it is never used for
-text. It carries icons, the eyebrow rules, hover edges, the ticker marks and the
-accents on navy bands (where it reads at 6.6:1). Any text that needs the accent
-uses `--blue` (4.9:1 on paper) or navy. The FAQ open/close control uses blue
-rather than cyan for the same reason — it is the only thing marking that state.
+> **Note on `--slate`.** `#64748B` measures 4.47:1 on `#F5F8FC`, just under the
+> 4.5:1 WCAG AA threshold for normal text. It passes on pure white (4.76:1), so
+> it is used there, and `--slate-aa` (`#5C6B82`, 5.05:1) carries supporting text
+> on the cloud and ice-wash backgrounds. If you would rather use one value
+> everywhere, set `--slate` to `#5C6B82`.
 
-## Fonts
-DM Sans (body) and Barlow Condensed (labels, mark) match the live site.
-Bricolage Grotesque (display) and Instrument Serif italic (emphasis) are added
-for the headline treatment.
+> **Note on `--ice`.** At 1.5:1 on white it is a fill, never text. It is used for
+> connectors, soft fills and accent text on navy bands (9.9:1 there). Numbered
+> markers use `--blue`.
+
+### Type
+| Role | Family | Weight |
+|---|---|---|
+| Headlines | Barlow Condensed | 800, uppercase |
+| Headline emphasis | Barlow Condensed Italic | 700 |
+| Body | DM Sans | 400 |
+| Eyebrows and labels | DM Sans | 500, uppercase, `.14em` tracking |
+
+Sizes are responsive via `clamp()`: hero 48→100px, section 35→64px,
+card 22→30px, body 16→18px, labels 11→13px.
+
+---
+
+## 4. Testing locally
+
+The page uses no build step. Because it loads media over `file://`, serve it
+rather than double-clicking:
+
+```
+python3 -m http.server 8000
+```
+
+Then open `http://localhost:8000`. Any static server works
+(`npx serve`, `php -S localhost:8000`).
+
+## 5. Deploying
+
+Upload `index.html` and the `assets/` folder, keeping the structure intact. It
+is a static site — Netlify, Vercel, Cloudflare Pages, GitHub Pages or ordinary
+shared hosting all work with no configuration.
+
+Before going live:
+1. Add the real photography and video listed in section 1.
+2. Set the production domain in `<link rel="canonical">` and `og:url`
+   (both currently `https://example.com/`).
+3. Add `og-image.jpg` so link previews render.
