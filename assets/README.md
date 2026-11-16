@@ -30,14 +30,18 @@ photograph appears; no code change is needed.
 | `electrical.webp` | Explore Trades → Electrical | 1280×560 | Student at a wiring training board |
 | `manufacturing.webp` | Explore Trades → Manufacturing | 1280×560 | Technician measuring a machined part |
 | `construction.webp` | Explore Trades → Construction | 1280×560 | Trainees reviewing building plans on site |
-| `emerging-technology.webp` | Explore Trades → Emerging technology | 1280×560 | Technician inspecting a robotic work cell |
-| `educators-01.webp` | For Educators, step 01 | 1200×900 (4:3) | Instructor guiding a student |
 | `educators-02.webp` | For Educators, step 03 | 1200×900 | Students moving from VR to real equipment |
-| `high-schools.webp` | Pathways by Level | 1280×720 (16:9) | High school students in headsets, teacher supervising |
-| `mission.webp` | Mission | 1200×900 | A Black skilled-trades professional at work |
+| `high-schools.webp` | Pathways by Level | 1280×720 (16:9) | High school students in a trades classroom |
 
-**Already supplied:** `hero-vr-800/1200/1448.webp` — the original classroom
-artwork, re-encoded for `srcset`. Used in the hero and Our Approach.
+**Already supplied:**
+- `hero-vr-800/1200/1448.webp` — the original classroom artwork, re-encoded for `srcset`. Hero and Our Approach.
+- `educators-01.webp` — instructor and student in an engineering technology centre.
+- `emerging-technology.webp` — students with robotics equipment in a lab.
+- `mission.webp` — graduates before a commencement ceremony.
+
+Those three came from the client's own photography. Because they show
+identifiable people, confirm you hold their permission to use the images
+commercially before the site goes live.
 `og-image.jpg` — the 1200×630 link-preview card, composed from the logo, the
 hero headline and that photograph.
 
