@@ -35,10 +35,10 @@ photograph appears; no code change is needed.
 - `mission.webp` — graduates before a commencement ceremony.
 - `educators-02.webp` — two welding students with helmet and gloves.
 - `welding.webp` — a student welding a steel frame, arc and sparks visible.
-- `manufacturing.webp` — the fabrication shop floor, grinders and drill presses.
+- `manufacturing.webp` — a welded test coupon checked against a gauge.
 - `approach-practice.webp` — a student welding at the bench, in Our Approach.
-- `pathways.webp` — an instructor with two students, in Career Pathways.
-- `access-equipment.webp` — hands setting a welding power source, in Access.
+- `pathways.webp` — students finishing a concrete pad, in Career Pathways.
+- `access-equipment.webp` — the shop floor of machines, in Access.
 - `closing.webp` — three welding students and their instructor, in the closing CTA.
 - `construction.webp` — students laying concrete block in the masonry yard.
 - `educators-03.webp` / `-04.webp` — a prepared classroom and render practice walls.
