@@ -1,51 +1,58 @@
 # /assets — what to drop in
 
-Every file below is referenced by `index.html`. Until a file exists, the page
-shows generated placeholder artwork in its place — nothing breaks, and no code
-change is needed when you add the real file. **Keep the filenames exactly as
-listed** (or update the matching `src` in `index.html`).
+Filenames below are referenced by `index.html`. Where a file is missing the page
+shows generated placeholder artwork instead — nothing breaks, and no code change
+is needed when you add the real file. **Keep the filenames exactly as listed**
+(or update the matching `src` in `index.html`).
 
-## Hero video (full-width, autoplay, muted, loop)
+## Already in place
 | File | Notes |
 |---|---|
-| `hero.mp4` | H.264, 1920×1080, ~8–15s loop, no audio track needed. Target under 6 MB. |
-| `hero.webm` | Optional VP9/AV1 version — served first when the browser supports it. |
-| `hero-poster.jpg` | First frame, 1920×1080, shown before the video paints. |
+| `vr-classroom-800.webp` / `-1200` / `-1448` | The original classroom artwork from the live site, re-encoded and sized for `srcset`. Used in the hero and in Our Approach. 317 KB original → 57/93/114 KB. |
+| `favicon.svg` | Brand mark: lime X on ink, skewed 7°. |
+| `apple-touch-icon.png` | 180×180 version of the same mark. |
 
-If no video is present, a canvas motion background (perspective grid + drifting
-embers) runs instead and the "Play with sound" control hides itself.
+## Hero video (optional — plays over the photograph)
+| File | Notes |
+|---|---|
+| `hero.mp4` | H.264, 1920×1080, ~8–15s loop. Target under 6 MB. |
+| `hero.webm` | Optional VP9/AV1 version — tried first. |
 
-## Photography
+The hero shows the classroom photograph by default. Add a video file and it
+fades in over the photo, and the "Play with sound" control appears by itself.
+If the photograph is ever removed too, a canvas motion background takes over.
+
+## Still needed
 | File | Where it appears | Suggested crop |
 |---|---|---|
-| `approach-classroom.webp` | Our Approach, full width | 1600×700 (16:7) |
 | `educators.webp` | For Educators, full width | 1600×650 (16:6.5) |
-| `trade-welding.webp` | Welding card | 1280×640 (16:8) |
-| `trade-hvac.webp` | HVAC card | 1280×640 |
-| `trade-electrical.webp` | Electrical card | 1280×640 |
-| `trade-manufacturing.webp` | Manufacturing card | 1280×640 |
-| `trade-construction.webp` | Construction card | 1280×640 |
-| `trade-emerging.webp` | Emerging Technology card | 1280×640 |
+| `og-image.jpg` | Open Graph / Twitter card | 1200×630 |
 
-All photo slots are already `loading="lazy"` + `decoding="async"` with width and
-height set, so they will not shift the layout.
-
-**Compressing:** export WebP at quality 72–80. Aim for under 180 KB each.
+## Compressing
+Export WebP at quality 72–80, under ~180 KB each.
 ```
-cwebp -q 78 -resize 1280 0 source.jpg -o trade-welding.webp
+cwebp -q 78 -resize 1600 0 source.jpg -o educators.webp
 ```
 
-**Alt text** lives in `index.html` next to each `src`. Update it to describe the
-photo you actually use — this is the main accessibility touchpoint on the page.
-
-## Social + icons
-| File | Notes |
-|---|---|
-| `og-image.jpg` | 1200×630, used by Open Graph and Twitter cards. |
-| `favicon.svg` | Supplied. Replace with the real logo mark when it exists. |
-| `apple-touch-icon.png` | Supplied, 180×180. Regenerate from the real mark. |
+**Alt text** lives in `index.html` beside each `src`. Update it to describe the
+photo you actually use — it is the main accessibility touchpoint on the page.
 
 ## Brand colours
-The single accent is defined once in `index.html` as `--accent: #ff6b1a`
-(with `--accent-soft` and `--accent-dim` derived from it). Change those three
-values in `:root` to re-brand the whole page.
+Defined once in `index.html` under `:root`, matching the live site:
+
+| Token | Value | Use |
+|---|---|---|
+| `--paper` | `#f5f4ee` | page background |
+| `--ink` | `#14272c` | text, dark bands, buttons |
+| `--lime` | `#d5f56a` | the accent — button fills, highlights, dark-band accents |
+| `--lime-deep` | `#4e6a0f` | the accent as small text, where lime alone would not meet AA |
+| `--line` / `--line-strong` | `#d8ddd5` / `#b9c0b4` | borders |
+| `--muted` | `#536364` | secondary text |
+
+Change those and the whole page follows. Note `--lime` is a light tint: it is
+used as a *fill* behind ink text, never as text on paper.
+
+## Fonts
+DM Sans (body) and Barlow Condensed (labels, mark) match the live site.
+Bricolage Grotesque (display) and Instrument Serif italic (emphasis) are added
+for the headline treatment.
