@@ -25,10 +25,8 @@ photograph appears; no code change is needed.
 
 | File | Section | Crop | Subject |
 |---|---|---|---|
-| `welding.webp` | Explore Trades → Welding | 1280×560 (16:7) | Welding student in a protective helmet working a joint |
 | `hvac.webp` | Explore Trades → HVAC | 1280×560 | HVAC technician at a heating / ventilation unit |
 | `electrical.webp` | Explore Trades → Electrical | 1280×560 | Student at a wiring training board |
-| `manufacturing.webp` | Explore Trades → Manufacturing | 1280×560 | Technician measuring a machined part |
 | `construction.webp` | Explore Trades → Construction | 1280×560 | Trainees reviewing building plans on site |
 | `educators-02.webp` | For Educators, step 03 | 1200×900 | Students moving from VR to real equipment |
 | `high-schools.webp` | Pathways by Level | 1280×720 (16:9) | High school students in a trades classroom |
@@ -38,6 +36,9 @@ photograph appears; no code change is needed.
 - `educators-01.webp` — instructor and student in an engineering technology centre.
 - `emerging-technology.webp` — students with robotics equipment in a lab.
 - `mission.webp` — graduates before a commencement ceremony.
+- `educators-02.webp` — two welding students with helmet and gloves.
+- `welding.webp` — a student welding a steel frame, arc and sparks visible.
+- `manufacturing.webp` — the fabrication shop floor, grinders and drill presses.
 
 Those three came from the client's own photography. Because they show
 identifiable people, confirm you hold their permission to use the images
