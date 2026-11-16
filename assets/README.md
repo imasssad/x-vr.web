@@ -27,9 +27,6 @@ photograph appears; no code change is needed.
 |---|---|---|---|
 | `hvac.webp` | Explore Trades → HVAC | 1280×560 | HVAC technician at a heating / ventilation unit |
 | `electrical.webp` | Explore Trades → Electrical | 1280×560 | Student at a wiring training board |
-| `construction.webp` | Explore Trades → Construction | 1280×560 | Trainees reviewing building plans on site |
-| `educators-02.webp` | For Educators, step 03 | 1200×900 | Students moving from VR to real equipment |
-| `high-schools.webp` | Pathways by Level | 1280×720 (16:9) | High school students in a trades classroom |
 
 **Already supplied:**
 - `hero-vr-800/1200/1448.webp` — the original classroom artwork, re-encoded for `srcset`. Hero and Our Approach.
@@ -43,9 +40,12 @@ photograph appears; no code change is needed.
 - `pathways.webp` — an instructor with two students, in Career Pathways.
 - `access-equipment.webp` — hands setting a welding power source, in Access.
 - `closing.webp` — three welding students and their instructor, in the closing CTA.
+- `construction.webp` — students laying concrete block in the masonry yard.
+- `educators-03.webp` / `-04.webp` — a prepared classroom and render practice walls.
+- `high-schools.webp` — a student in the institute corridor.
 - `video/hero-poster.webp` — a student torch-cutting, the poster frame for the hero video.
 
-Thirteen distinct photographs are in use. No image is repeated: the commencement
+Sixteen distinct photographs are in use. No image is repeated: the commencement
 photograph carries the Mission section, so it is deliberately not reused on the
 High schools card.
 
