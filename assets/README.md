@@ -39,6 +39,13 @@ photograph appears; no code change is needed.
 - `educators-02.webp` — two welding students with helmet and gloves.
 - `welding.webp` — a student welding a steel frame, arc and sparks visible.
 - `manufacturing.webp` — the fabrication shop floor, grinders and drill presses.
+- `approach-practice.webp` — a student welding at the bench, in Our Approach.
+- `pathways.webp` — an instructor with two students, in Career Pathways.
+- `access-equipment.webp` — hands setting a welding power source, in Access.
+
+Ten distinct photographs are in use. No image is repeated: the commencement
+photograph carries the Mission section, so it is deliberately not reused on the
+High schools card.
 
 Those three came from the client's own photography. Because they show
 identifiable people, confirm you hold their permission to use the images
