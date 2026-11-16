@@ -42,8 +42,10 @@ photograph appears; no code change is needed.
 - `approach-practice.webp` — a student welding at the bench, in Our Approach.
 - `pathways.webp` — an instructor with two students, in Career Pathways.
 - `access-equipment.webp` — hands setting a welding power source, in Access.
+- `closing.webp` — three welding students and their instructor, in the closing CTA.
+- `video/hero-poster.webp` — a student torch-cutting, the poster frame for the hero video.
 
-Ten distinct photographs are in use. No image is repeated: the commencement
+Thirteen distinct photographs are in use. No image is repeated: the commencement
 photograph carries the Mission section, so it is deliberately not reused on the
 High schools card.
 
