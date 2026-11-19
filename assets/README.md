@@ -227,8 +227,6 @@ that host is ever blocked for your audience, download the fonts into
 `assets/` and swap the `<link>` for a local `@font-face` block.
 
 ### Before going live
-1. Replace `https://example.com/` in `index.html` — it appears twice, in
-   `<link rel="canonical">` and in `og:url`. Link previews need the real domain.
-2. Add the HVAC and electrical photographs, or leave the labelled placeholders.
+1. Add the HVAC and electrical photographs, or leave the labelled placeholders.
 3. Confirm you have permission to publish photographs of identifiable students
    and staff.
