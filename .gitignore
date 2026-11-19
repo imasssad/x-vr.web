@@ -2,3 +2,5 @@ nextjs/node_modules/
 nextjs/.next/
 nextjs/dist/
 nextjs/.env.local
+nextjs/dist-static/
+nextjs/out/

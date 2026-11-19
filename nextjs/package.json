@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "bundle": "bash scripts/bundle.sh"
+    "bundle": "bash scripts/bundle.sh",
+    "bundle:static": "bash scripts/bundle-static.sh"
   },
   "dependencies": {
     "@types/nodemailer": "^8.0.2",

@@ -3,6 +3,10 @@ import { useState } from "react";
 
 type State = { kind: "idle" | "sending" | "sent" | "error"; msg?: string };
 
+/* The Node build posts to its own API route. The static build has no server,
+   so it posts to contact.php instead — set at build time. */
+const ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT || "/api/contact";
+
 export default function Contact() {
   const [s, setS] = useState<State>({ kind: "idle" });
   const [form, setForm] = useState({ name: "", email: "", message: "", company: "" });
@@ -13,7 +17,7 @@ export default function Contact() {
     e.preventDefault();
     setS({ kind: "sending" });
     try {
-      const r = await fetch("/api/contact", {
+      const r = await fetch(ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
