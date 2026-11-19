@@ -192,12 +192,43 @@ Then open `http://localhost:8000`. Any static server works
 
 ## 5. Deploying
 
-Upload `index.html` and the `assets/` folder, keeping the structure intact. It
-is a static site — Netlify, Vercel, Cloudflare Pages, GitHub Pages or ordinary
-shared hosting all work with no configuration.
+**This is a static site.** One HTML file and a folder of images. There is no
+build step, no database, no server code and no email.
 
-Before going live:
-1. Add the real photography and video listed in section 1.
-2. Set the production domain in `<link rel="canonical">` and `og:url`
-   (both currently `https://example.com/`).
-3. Add `og-image.jpg` so link previews render.
+That means the usual shared-hosting limits do not apply to it:
+
+| Host says | Does it matter |
+|---|---|
+| Python not supported | No. Nothing here uses Python. |
+| Node.js supported | Not needed. Node was never required to serve it. |
+| SSH, not VPS/bare metal | Fine. SSH is only used to copy the files up. |
+| Database | None required. |
+| Email service | **Not required.** No contact form, no mailto, no newsletter. The Starter Planner runs entirely in the visitor's browser and submits nothing. |
+
+### Uploading
+Copy `index.html`, the `assets/` folder and `.htaccess` into the web root —
+usually `public_html`, `htdocs` or `www`. Keep the folder structure exactly as
+it is, or the image paths break.
+
+```
+scp -r index.html assets .htaccess user@host:~/public_html/
+```
+
+SFTP or the host's file manager work just as well; drag the same three items in.
+
+`.htaccess` is optional. Apache and LiteSpeed read it, Nginx ignores it. It sets
+the correct MIME type for `.webp` (some shared hosts still serve those as
+plain text, which makes every photograph vanish), turns on compression, and
+caches images for six months while keeping the HTML always fresh.
+
+### The only outbound request
+The visitor's browser fetches the four fonts from `fonts.googleapis.com`. If
+that host is ever blocked for your audience, download the fonts into
+`assets/` and swap the `<link>` for a local `@font-face` block.
+
+### Before going live
+1. Replace `https://example.com/` in `index.html` — it appears twice, in
+   `<link rel="canonical">` and in `og:url`. Link previews need the real domain.
+2. Add the HVAC and electrical photographs, or leave the labelled placeholders.
+3. Confirm you have permission to publish photographs of identifiable students
+   and staff.
