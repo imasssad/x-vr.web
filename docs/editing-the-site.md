@@ -68,7 +68,7 @@ YouTube:
 4. Publish.
 
 The play button comes alive on its own. Until a slot has either a YouTube id
-or a file, it shows a greyed-out "Film to be added" marker, which is there on
+or a file, it shows a greyed-out "Film coming soon" marker, which is there on
 purpose — better than an empty gap.
 
 You can add more than three videos, or remove one, with the **Add** and

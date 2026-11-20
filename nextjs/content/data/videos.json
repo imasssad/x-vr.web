@@ -1,31 +1,31 @@
 {
   "videos": {
-    "eyebrow": "See it in action",
-    "headline": "Watch a lesson",
-    "headlineEm": "come together.",
-    "lede": "Short films from the workshop and the classroom. Each one shows a single idea: what the headset teaches, and what happens when a learner takes it to the bench.",
-    "note": "Video slots are ready. Drop a file into **public/assets/video/** and name it below, or paste a YouTube link — the player appears on its own.",
+    "eyebrow": "Watch",
+    "headline": "See what we are",
+    "headlineEm": "building.",
+    "lede": "A short look at the work — the technology, the people learning on it, and why the trades are worth this kind of investment.",
+    "note": "Three film slots are ready and waiting. Paste a YouTube link into any one of them and the player appears on its own — no rebuild, no developer.",
     "items": [
       {
-        "id": "intro",
-        "title": "What an immersive lesson looks like",
-        "blurb": "A walkthrough of one short VR lesson, from the learning objective to the discussion afterwards.",
+        "id": "story",
+        "title": "The TradeSkillApps story",
+        "blurb": "Why we started, who we build for, and what we want the next generation of tradespeople to walk into.",
         "file": "",
         "poster": "",
         "embed": ""
       },
       {
-        "id": "shop",
-        "title": "From headset to workbench",
-        "blurb": "A learner rehearses a sequence in VR, then performs the same steps on real equipment with an instructor.",
+        "id": "voices",
+        "title": "In their own words",
+        "blurb": "Learners and instructors on what changes when the training meets them where they already are.",
         "file": "",
         "poster": "",
         "embed": ""
       },
       {
-        "id": "educators",
-        "title": "Setting it up in your program",
-        "blurb": "How an instructor plans headset access, space and an alternative activity around one learning goal.",
+        "id": "inside",
+        "title": "Inside the headset",
+        "blurb": "Sixty seconds of the real thing — the tools, the environment, and the moment a skill starts to land.",
         "file": "",
         "poster": "",
         "embed": ""

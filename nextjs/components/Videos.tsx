@@ -41,12 +41,12 @@ export default function Videos() {
                     <button type="button" className="vcard__play"
                       onClick={() => ready && setPlaying(v.id)}
                       disabled={!ready}
-                      aria-label={ready ? `Play: ${v.title}` : `${v.title} — film not uploaded yet`}>
+                      aria-label={ready ? `Play: ${v.title}` : `${v.title} — film coming soon`}>
                       {v.poster && <img src={`/assets/video/${v.poster}`} alt="" aria-hidden="true" />}
                       <span className="vcard__icon" aria-hidden="true">
                         <svg viewBox="0 0 24 24"><use href="#i-play" /></svg>
                       </span>
-                      {!ready && <span className="vcard__pending">Film to be added</span>}
+                      {!ready && <span className="vcard__pending">Film coming soon</span>}
                     </button>
                   )}
                 </div>
