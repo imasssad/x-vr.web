@@ -54,6 +54,19 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable}`}>
+      <head>
+        {/* The hero photograph is the largest element above the fold. Without
+            this it queues behind five font preloads; with it the browser
+            starts fetching it in the first round. */}
+        <link
+          rel="preload"
+          as="image"
+          href="/assets/images/hero-vr-1448.webp"
+          imageSrcSet="/assets/images/hero-vr-800.webp 800w, /assets/images/hero-vr-1200.webp 1200w, /assets/images/hero-vr-1448.webp 1448w"
+          imageSizes="100vw"
+          fetchPriority="high"
+        />
+      </head>
       <body>
         <a className="skip" href="#main">Skip to main content</a>
         {children}
