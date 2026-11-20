@@ -10,17 +10,21 @@ addresses or domain ownership changes.
 
 ### Why the website is moving
 
-The Hostinger plan is shared hosting. It runs PHP well, which is what most
-traditional websites use. The new site is built with Next.js, which needs a
-Node.js process running continuously in the background — and shared hosting
-is not able to keep one running reliably. That is a limitation of the plan
-type, not a fault in the site or the host.
+The Hostinger plan does support Node.js, and the site was deployed there
+successfully. The problem is not capability — it is speed, and it was
+measured rather than assumed.
 
-There is a second reason, measured rather than assumed. Shared hosting means
-many websites share one machine. We timed the server's response eight times
-in a row and it ranged from 0.14 to 0.80 seconds for the same request,
-because the machine was busy with other customers' sites. Visitors feel that
-as the page hesitating before it appears.
+Shared hosting means many websites share one machine. We timed the server's
+response eight times in a row for the same request: it ranged from 0.14 to
+0.80 seconds, because the machine was busy serving other customers' sites.
+Visitors feel that variation as the page hesitating before it appears, and
+it is not something the site itself can fix.
+
+The version currently live on Hostinger is a simplified build that needs no
+Node process at all, which keeps it as fast as that machine allows. It also
+means the contact form runs through PHP and the new content editor cannot
+run there, because signing in needs two small server routes a plain static
+host has no way to provide.
 
 ### What Vercel changes
 
@@ -42,7 +46,8 @@ records are untouched, so mail keeps flowing throughout.
 
 ### What happens next
 
-1. A free Vercel account is created for the project.
+1. You create a free Vercel account for the project and connect it to the
+   code repository.
 2. The site is deployed there and tested on a temporary address.
 3. Once it is confirmed working, the DNS record is updated.
 4. The switch takes effect within the hour, with no downtime.
