@@ -11,12 +11,20 @@ cd ~
 git clone https://github.com/imasssad/x-vr.web.git      # first time only
 cd x-vr.web && git pull                                  # every time after
 
-# find the web root (one of these exists)
-ls -d ~/public_html ~/domains/tradeskillapps.com/public_html 2>/dev/null
+# the web root for THIS domain — use the explicit path
+WEB=~/domains/tradeskillapps.com/public_html
 
-# copy the built site into it — note the dot after static/
-cp -r deploy/static/. ~/public_html/
+# remove Hostinger's placeholder; PHP takes index priority over index.html
+rm -f $WEB/default.php
+
+# copy the built site in — note the dot after static/, which copies the
+# contents (including .htaccess) rather than the folder itself
+cp -r deploy/static/. $WEB/
 ```
+
+> **Do not use `~/public_html` on this account.** It resolves to
+> `~/domains/hypedpost.com/public_html`, a different site. Copying there
+> would overwrite it. Always name the tradeskillapps.com path in full.
 
 Then open https://tradeskillapps.com — it is live. Nothing runs in the
 background, so nothing can crash or need restarting.
@@ -26,7 +34,7 @@ background, so nothing can crash or need restarting.
 I rebuild and commit `deploy/static/`. You run:
 
 ```bash
-cd ~/x-vr.web && git pull && cp -r deploy/static/. ~/public_html/
+cd ~/x-vr.web && git pull && cp -r deploy/static/. ~/domains/tradeskillapps.com/public_html/
 ```
 
 ## The contact form
