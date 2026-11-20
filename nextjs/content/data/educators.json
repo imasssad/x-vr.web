@@ -1,0 +1,76 @@
+{
+  "educators": {
+    "eyebrow": "05 / For the people who teach",
+    "headline": "Great teaching.",
+    "headlineEm": "Very affordable access.",
+    "lede": "An education budget should open doors. Our goal is to make immersive trade learning a very affordable part of your teaching toolkit.",
+    "body": "Our deployment vision starts with your curriculum, your learners and your shop. Introduce immersive experiences where they serve a clear educational purpose, then connect them to instructor-led practice.",
+    "steps": [
+      {
+        "n": "01",
+        "title": "Choose a learning goal",
+        "body": "Identify one concept or procedure students need to understand more clearly.",
+        "image": {
+          "src": "/assets/images/educators-01.webp",
+          "alt": "An instructor and a student standing together in an engineering technology centre, with workbenches, parts bins and an emergency eye-wash station behind them"
+        }
+      },
+      {
+        "n": "02",
+        "title": "Prepare the learning environment",
+        "body": "Plan headset access, space, accessibility, instructor support, and an alternative learning activity.",
+        "image": {
+          "src": "/assets/images/educators-03.webp",
+          "alt": "A training classroom set up for a session, tables laid out with boxed auto-darkening welding helmets and hard hats racked on the wall"
+        }
+      },
+      {
+        "n": "03",
+        "title": "Connect virtual and practical work",
+        "body": "Use a short immersive lesson, a guided discussion, and supervised shop practice.",
+        "image": {
+          "src": "/assets/images/educators-02.webp",
+          "alt": "Two welding students at a training institute, one holding an auto-darkening welding helmet and gloves"
+        }
+      },
+      {
+        "n": "04",
+        "title": "Evaluate and improve",
+        "body": "Compare understanding and practical performance, then refine the experience.",
+        "image": {
+          "src": "/assets/images/educators-04.webp",
+          "alt": "Students in hard hats applying render to practice wall panels inside a training structure"
+        }
+      }
+    ],
+    "cta": {
+      "label": "Plan your learning experience",
+      "href": "#start"
+    }
+  },
+  "access": {
+    "eyebrow": "Built around access",
+    "headline": "Big possibilities.",
+    "headlineEm": "A very affordable way in.",
+    "lede": "High-quality trade education should be within reach of the people ready to learn — and the people ready to teach.",
+    "body": "TradeSkillApps puts affordability at the center of its educational vision. Our goal is to help individual learners, technical schools, and workforce programs bring immersive learning into their training without making cost the barrier. Repeatable virtual practice creates opportunities to revisit a lesson before using shop time and physical materials.",
+    "image": {
+      "src": "/assets/images/access-equipment.webp",
+      "alt": "A training shop floor lined with drill presses, bench grinders and welding machines"
+    },
+    "cells": [
+      {
+        "title": "Review before you consume",
+        "body": "Repeatable virtual practice creates opportunities to revisit a lesson before using shop time and physical materials."
+      },
+      {
+        "title": "Pricing",
+        "body": "Actual costs depend on the learning package, headsets, and deployment needs; specific pricing will be published separately."
+      }
+    ],
+    "cta": {
+      "label": "Explore your learning pathway",
+      "href": "#start"
+    }
+  }
+}

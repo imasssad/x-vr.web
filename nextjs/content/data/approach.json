@@ -1,0 +1,83 @@
+{
+  "approach": {
+    "eyebrow": "What makes this education?",
+    "headline": "A headset opens the door.",
+    "headlineEm": "The lesson builds the skill.",
+    "lede": "An immersive experience matters when it helps a student understand something they can use.",
+    "heroImage": {
+      "src": "/assets/images/hero-vr-1448.webp",
+      "srcSet": "/assets/images/hero-vr-800.webp 800w, /assets/images/hero-vr-1200.webp 1200w, /assets/images/hero-vr-1448.webp 1448w",
+      "alt": "Original artwork of young Black American students learning together with VR headsets in a skilled-trades classroom",
+      "caption": [
+        "Meta Quest 3",
+        "Real people. Real possibilities.",
+        "AI-generated learning scene"
+      ]
+    },
+    "body": [
+      "Our approach starts with a learning objective. Each experience should connect a technical concept to a practical task, give students a chance to make decisions, and lead to a discussion about what they learned.",
+      "For example, an HVAC learner can study a system, identify its components, trace the airflow, and explain what each part does. An instructor then connects that understanding to supervised work with real equipment."
+    ],
+    "lessonEyebrow": "Illustrative lesson / HVAC",
+    "lessonHeadline": "From “I see it” to",
+    "lessonHeadlineEm": "“I understand it.”",
+    "steps": [
+      {
+        "title": "Learn the concept.",
+        "body": "Understand how air moves through a system."
+      },
+      {
+        "title": "Explore the environment.",
+        "body": "Locate components and follow the airflow."
+      },
+      {
+        "title": "Explain the reasoning.",
+        "body": "Describe each component's purpose in your own words."
+      },
+      {
+        "title": "Apply and demonstrate.",
+        "body": "Identify the same components on real equipment with an instructor."
+      }
+    ],
+    "practiceImage": {
+      "src": "/assets/images/approach-practice.webp",
+      "alt": "An instructor in welding gear showing a student a finished weld coupon in the training shop",
+      "caption": [
+        "Where the learning lands.",
+        "Instructor-led review of real work"
+      ]
+    },
+    "note": "VR prepares and reinforces. **Supervised hands-on training develops and verifies practical competence.**"
+  },
+  "learningCycle": {
+    "eyebrow": "03 / Education drives the experience",
+    "headline": "More than seeing.",
+    "headlineEm": "Learning by doing.",
+    "items": [
+      {
+        "n": "01 / Learn",
+        "icon": "i-learn",
+        "title": "Build the foundation.",
+        "body": "Start with technical vocabulary, safety awareness, tool recognition, and the principles behind each task."
+      },
+      {
+        "n": "02 / Rehearse",
+        "icon": "i-rehearse",
+        "title": "Make the connection.",
+        "body": "Explore a virtual work environment. Follow a sequence, identify an issue, and explain your decisions."
+      },
+      {
+        "n": "03 / Reflect",
+        "icon": "i-reflect",
+        "title": "Understand your next step.",
+        "body": "Review the experience with an instructor, identify gaps, and set a focus for the next practice session."
+      },
+      {
+        "n": "04 / Apply",
+        "icon": "i-apply",
+        "title": "Take it into the real world.",
+        "body": "Reinforce learning through supervised shop work and practical assessment."
+      }
+    ]
+  }
+}

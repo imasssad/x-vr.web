@@ -1,0 +1,47 @@
+{
+  "hero": {
+    "eyebrow": "The next dimension of trade education",
+    "headline": "Learn the trade. Build the skill.",
+    "headlineEm": "Change your future.",
+    "lede": "TradeSkillApps brings technical lessons to life through immersive VR education — connecting what students need to know with what they need to do. Understand the tools. Practice the process. Prepare for hands-on work. All with very affordable access at the heart of our mission.",
+    "primaryCta": {
+      "label": "Find your trade",
+      "href": "#trades"
+    },
+    "secondaryCta": {
+      "label": "Explore the vision",
+      "href": "#purpose"
+    },
+    "strip": [
+      "Education first. Affordability at the core.",
+      "Experience that builds understanding."
+    ],
+    "image": {
+      "src": "/assets/images/hero-vr-1448.webp",
+      "srcSet": "/assets/images/hero-vr-800.webp 800w, /assets/images/hero-vr-1200.webp 1200w, /assets/images/hero-vr-1448.webp 1448w",
+      "alt": "Students wearing Meta Quest 3 headsets at desks in a skilled-trades classroom, holding controllers, with welding, HVAC, construction and manufacturing posters on the wall behind them"
+    },
+    "video": {
+      "poster": "/assets/video/hero-poster.webp",
+      "sources": [
+        {
+          "src": "/assets/video/hero-video.webm",
+          "type": "video/webm"
+        },
+        {
+          "src": "/assets/video/hero-video.mp4",
+          "type": "video/mp4"
+        }
+      ],
+      "label": "Students learning in a VR skilled-trades classroom"
+    }
+  },
+  "ticker": [
+    "Welding",
+    "HVAC",
+    "Electrical",
+    "Manufacturing",
+    "Construction",
+    "Emerging Technology"
+  ]
+}

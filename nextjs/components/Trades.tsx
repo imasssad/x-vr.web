@@ -52,9 +52,9 @@ export default function Trades() {
                 id={`panel-${t.slug}`} aria-labelledby={`tab-${t.slug}`} tabIndex={0}
                 hidden={active !== i}>
                 <figure className="frame tradepanel__media frame--zoom">
-                  {t.image
+                  {t.image?.src
                     ? <img src={t.image.src} alt={t.image.alt} loading="lazy" decoding="async"
-                        width={t.image.width} height={t.image.height} />
+                        />
                     : <Placeholder kind={t.slug} icon={t.icon} />}
                 </figure>
                 <div className="tradepanel__body">

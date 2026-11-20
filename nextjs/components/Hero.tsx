@@ -39,7 +39,7 @@ export default function Hero({ hasVideo = false }: { hasVideo?: boolean }) {
       <div className="hero__media">
         {/* the photograph is the default; a supplied video fades in over it */}
         <img id="heroPoster" src={hero.image.src} srcSet={hero.image.srcSet} sizes="100vw"
-          alt={hero.image.alt} width={hero.image.width} height={hero.image.height}
+          alt={hero.image.alt}
           decoding="async" fetchPriority="high" />
         {/* Rendered only when a video file is actually present. Otherwise the
             browser would still download the poster — 90 KB for nothing — and

@@ -1,0 +1,61 @@
+{
+  "purpose": {
+    "eyebrow": "01 / Our Purpose",
+    "headline": "Better education. Within reach.",
+    "headlineEm": "Within budget.",
+    "lede": "The case for better trade education is well established. The challenge has always been deployment — bringing effective instruction, equipment, practice and support to every learner who needs them.",
+    "body": "TradeSkillApps is built to close the gap between knowing about a trade and understanding how the work happens. Our educational vision combines technical instruction, immersive practice, instructor guidance and real-world application. Students explore tools and systems, connect each step to its purpose, and prepare to apply that understanding under supervision in the shop.",
+    "pillars": [
+      {
+        "n": "01",
+        "title": "Make learning affordable.",
+        "body": "Affordability is central to our vision, so more learners and training programs can access meaningful trade education."
+      },
+      {
+        "n": "02",
+        "title": "Teach the thinking.",
+        "body": "Help learners explain what they are doing, why the sequence matters, and how to recognize when something needs attention."
+      },
+      {
+        "n": "03",
+        "title": "Bring it to the shop.",
+        "body": "Turn learning into supervised practice with real tools and materials."
+      }
+    ]
+  },
+  "mission": {
+    "eyebrow": "Talent is everywhere. Opportunity should be too.",
+    "quote": "See yourself",
+    "quoteEm": "building what comes next.",
+    "body": [
+      "Black Americans belong at the center of the future of skilled trades — as technicians, craftspeople, instructors, innovators and business owners.",
+      "TradeSkillApps envisions an accessible path for learners from every background. Whether you are discovering a first career, changing direction, or strengthening an existing skill, the goal is the same: make meaningful education more affordable, more engaging, and easier to reach."
+    ],
+    "cta": {
+      "label": "Build your learning pathway",
+      "href": "#start"
+    },
+    "image": {
+      "src": "/assets/images/mission.webp",
+      "alt": "Graduates in blue caps and gowns gathered together before a commencement ceremony"
+    }
+  },
+  "closing": {
+    "chain": [
+      "Understanding",
+      "Practice",
+      "Proficiency",
+      "Opportunity"
+    ],
+    "headline": "The future takes skill.",
+    "headlineEm": "Let's build it.",
+    "cta": {
+      "label": "Build your pathway",
+      "href": "#start"
+    },
+    "image": {
+      "src": "/assets/images/closing.webp",
+      "alt": "Three welding students and their instructor in the shop, one holding a finished weld coupon"
+    }
+  }
+}

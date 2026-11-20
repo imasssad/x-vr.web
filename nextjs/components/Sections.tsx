@@ -5,15 +5,17 @@ import {
 import Note from "./Note";
 import Logo from "./Logo";
 
-type Img = { src: string; alt: string; width: number; height: number; srcSet?: string };
+type Img = { src: string; alt: string; srcSet?: string };
 
 function Figure({ img, ratio, caption, style, className = "" }:
   { img: Img; ratio: string; caption?: string[]; style?: React.CSSProperties; className?: string }) {
   return (
     <figure className={`frame frame--zoom rv ${className}`} style={{ aspectRatio: ratio, ...style }}>
-      <img src={img.src} srcSet={img.srcSet} alt={img.alt} loading="lazy" decoding="async"
-        width={img.width} height={img.height}
-        sizes={img.srcSet ? "(min-width:1280px) 1216px, 100vw" : undefined} />
+      {img.src
+        ? <img src={img.src} srcSet={img.srcSet || undefined} alt={img.alt}
+            loading="lazy" decoding="async"
+            sizes={img.srcSet ? "(min-width:1280px) 1216px, 100vw" : undefined} />
+        : <span className="frame__empty">Photograph to be supplied</span>}
       {caption && (
         <figcaption className="frame__cap">
           {caption.map((c, i) =>
@@ -168,8 +170,9 @@ export const Educators = () => (
         {educators.steps.map((s) => (
           <div className="alt__row rv" key={s.n}>
             <figure className="frame alt__media frame--zoom">
-              <img src={s.image.src} alt={s.image.alt} loading="lazy" decoding="async"
-                width={s.image.width} height={s.image.height} />
+              {s.image.src
+                ? <img src={s.image.src} alt={s.image.alt} loading="lazy" decoding="async" />
+                : <span className="frame__empty">Photograph to be supplied</span>}
             </figure>
             <div className="alt__body">
               <span className="alt__n" aria-hidden="true">{s.n}</span>
@@ -201,9 +204,10 @@ export const Levels = () => (
       <div className="bento">
         <article className="bento__card bento__card--light rv">
           <figure className="frame bento__media frame--zoom">
-            <img src={levels.highSchool.image.src} alt={levels.highSchool.image.alt}
-              loading="lazy" decoding="async"
-              width={levels.highSchool.image.width} height={levels.highSchool.image.height} />
+            {levels.highSchool.image.src
+              ? <img src={levels.highSchool.image.src} alt={levels.highSchool.image.alt}
+                  loading="lazy" decoding="async" />
+              : <span className="frame__empty">Photograph to be supplied</span>}
           </figure>
           <div className="bento__body">
             <span className="bento__eye">{levels.highSchool.eye}</span>
@@ -294,7 +298,7 @@ export const Footer = () => (
     <div className="wrap">
       <div className="foot__in">
         <div>
-          <a className="brand" href="#top"><Logo /><span className="brand__name">X-VR Skilled Trades</span></a>
+          <a className="brand" href="#top"><Logo /><span className="brand__name">Trade<span className="brand__accent">Skill</span>Apps</span></a>
           <p className="foot__tag">{footer.tagline}</p>
         </div>
         <nav aria-label="Footer">

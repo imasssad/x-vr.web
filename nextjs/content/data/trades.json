@@ -1,0 +1,125 @@
+{
+  "tradesSection": {
+    "eyebrow": "02 / Explore the Possibilities",
+    "headline": "Find the work",
+    "headlineEm": "that moves you.",
+    "lede": "Explore the trade areas shaping our educational vision. Select a field to see its foundations and a sample immersive learning experience.",
+    "note": "Learning experiences shown are **illustrative curriculum concepts**, not a catalog of currently available courses or certifications."
+  },
+  "trades": [
+    {
+      "slug": "welding",
+      "name": "Welding",
+      "icon": "i-weld",
+      "title": "Join materials. Build possibility.",
+      "desc": "Explore the science, preparation, and precision behind strong metal connections. Learn how process, technique, and inspection work together.",
+      "skills": [
+        "Safety & PPE",
+        "Joint preparation",
+        "MIG fundamentals",
+        "Blueprint reading"
+      ],
+      "goal": "Recognize common joint types and explain the purpose of joint preparation.",
+      "sample": "Explore a virtual welding workstation. Identify components, select the appropriate protective equipment, and explain the sequence for preparing a joint.",
+      "image": {
+        "src": "/assets/images/welding.webp",
+        "alt": "A welding student in a protective helmet and leather gloves welding a steel frame in a training shop, sparks coming off the arc"
+      }
+    },
+    {
+      "slug": "hvac",
+      "name": "HVAC",
+      "icon": "i-hvac",
+      "title": "Understand the systems behind comfort.",
+      "desc": "Explore heating, ventilation, and air conditioning through the relationships between airflow, heat transfer, and system components.",
+      "skills": [
+        "System components",
+        "Heat transfer",
+        "Airflow",
+        "Diagnostic thinking"
+      ],
+      "goal": "Identify major HVAC components and describe their roles in a system.",
+      "sample": "Trace airflow through a virtual system, identify major components, and explain how each contributes to indoor comfort.",
+      "image": {
+        "src": "",
+        "alt": ""
+      }
+    },
+    {
+      "slug": "electrical",
+      "name": "Electrical",
+      "icon": "i-elec",
+      "title": "Make the connection.",
+      "desc": "Build a foundation in circuit concepts, component recognition, diagrams, and safe work awareness before supervised practical instruction.",
+      "skills": [
+        "Circuit concepts",
+        "Diagram reading",
+        "Component recognition",
+        "Safety awareness"
+      ],
+      "goal": "Read a basic circuit diagram and identify its main components.",
+      "sample": "Explore a de-energized virtual circuit and trace the relationship between a source, protective device, switch, and load.",
+      "image": {
+        "src": "",
+        "alt": ""
+      }
+    },
+    {
+      "slug": "manufacturing",
+      "name": "Manufacturing",
+      "icon": "i-manu",
+      "title": "From an idea to a working process.",
+      "desc": "Explore how materials, machines, measurement, and people come together to produce consistent work.",
+      "skills": [
+        "Measurement",
+        "Process flow",
+        "Quality awareness",
+        "Automation concepts"
+      ],
+      "goal": "Describe a production sequence and identify where quality checks belong.",
+      "sample": "Walk through a virtual production sequence, identify inspection points, and explain how a measurement affects the next step.",
+      "image": {
+        "src": "/assets/images/manufacturing.webp",
+        "alt": "Hands checking a welded test coupon marked 3F SMAW against a gauge, with more finished coupons laid out on the steel bench"
+      }
+    },
+    {
+      "slug": "construction",
+      "name": "Construction",
+      "icon": "i-cons",
+      "title": "Shape the spaces around us.",
+      "desc": "Discover the craftsmanship behind carpentry, masonry, and building systems. Connect plans and measurement to materials and assembly.",
+      "skills": [
+        "Plan reading",
+        "Measurement",
+        "Materials",
+        "Assembly sequence"
+      ],
+      "goal": "Interpret basic plan dimensions and explain an assembly sequence.",
+      "sample": "Review a virtual room plan, identify dimensions and materials, and organize a basic assembly sequence for instructor discussion.",
+      "image": {
+        "src": "/assets/images/construction.webp",
+        "alt": "Students in hard hats laying concrete block in an outdoor masonry training yard"
+      }
+    },
+    {
+      "slug": "emerging-technology",
+      "name": "Emerging technology",
+      "icon": "i-tech",
+      "title": "Build skills for what comes next.",
+      "desc": "Explore the connections between skilled trades, robotics, drones, and digital systems, with an emphasis on foundational understanding.",
+      "skills": [
+        "System awareness",
+        "Robotics concepts",
+        "Sensors",
+        "Inspection planning"
+      ],
+      "goal": "Explain how sensors and digital tools can support a technician's work.",
+      "sample": "Explore a virtual inspection scenario, identify what information a sensor could collect, and discuss how a technician would use it.",
+      "image": {
+        "src": "/assets/images/emerging-technology.webp",
+        "alt": "Two students kneeling beside a humanoid robot and several wheeled rover robots on the floor of a technology lab"
+      }
+    }
+  ]
+}

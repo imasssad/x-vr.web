@@ -28,6 +28,11 @@ fallback.
    | `SMTP_USER` | the mailbox, e.g. `hello@tradeskillapps.com` |
    | `SMTP_PASS` | that mailbox's password |
    | `CONTACT_TO` | where enquiries should arrive |
+   | `GITHUB_CLIENT_ID` | from the GitHub OAuth App — see `docs/cms-setup.md` |
+   | `GITHUB_CLIENT_SECRET` | from the same place |
+
+   The last two power the content editor at `/admin`. Without them the site
+   runs normally and only the editor's sign-in is unavailable.
 
 4. Deploy. You get a `*.vercel.app` URL immediately.
 5. Settings → **Domains** → add `tradeskillapps.com`. Vercel shows the DNS
@@ -36,7 +41,12 @@ fallback.
 **Keep the mailbox on Hostinger.** Only the website moves; email, DNS and the
 domain registration stay where they are.
 
-After this, every `git push` to `main` deploys automatically.
+After this, every `git push` to `main` deploys automatically — including the
+commits the content editor makes, which is what lets a non-technical editor
+publish changes without anyone running a build.
+
+Then follow `docs/cms-setup.md` to create the GitHub OAuth App, and hand
+`docs/editing-the-site.md` to whoever will be editing the site.
 
 ---
 

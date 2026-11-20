@@ -57,10 +57,10 @@ export default function Nav() {
   return (
     <header className={`nav${stuck ? " is-stuck" : ""}`} id="nav">
       <div className="wrap nav__in">
-        <a className="brand" href="#top" aria-label={`X-VR Skilled Trades — home`}>
+        <a className="brand" href="#top" aria-label={`TradeSkillApps — home`}>
           <Logo />
           <span className="brand__name">
-            X&#8209;VR <span className="brand__rest">Skilled Trades</span>
+            Trade<span className="brand__accent">Skill</span>Apps
           </span>
         </a>
 

@@ -1,0 +1,60 @@
+{
+  "site": {
+    "domain": "https://tradeskillapps.com",
+    "name": "TradeSkillApps",
+    "title": "TradeSkillApps — Learn the trade. Build the skill. Change your future.",
+    "description": "TradeSkillApps brings technical lessons to life through immersive VR education — connecting what students need to know with what they need to do. Education first. Affordability at the core.",
+    "ogImage": "/assets/images/og-image.jpg"
+  },
+  "nav": [
+    {
+      "label": "Explore trades",
+      "href": "#trades"
+    },
+    {
+      "label": "Our approach",
+      "href": "#approach"
+    },
+    {
+      "label": "Career pathways",
+      "href": "#pathways"
+    },
+    {
+      "label": "For educators",
+      "href": "#educators"
+    }
+  ],
+  "drawerExtra": [
+    {
+      "label": "Trade terminology",
+      "href": "#language"
+    },
+    {
+      "label": "Access",
+      "href": "#access"
+    },
+    {
+      "label": "Questions",
+      "href": "#faq"
+    }
+  ],
+  "footer": {
+    "tagline": "Better Education. Very Affordable. Within Reach.",
+    "links": [
+      {
+        "label": "Trade terminology",
+        "href": "#language"
+      },
+      {
+        "label": "For educators",
+        "href": "#educators"
+      },
+      {
+        "label": "Get started →",
+        "href": "#start"
+      }
+    ],
+    "copyright": "© 2026 TradeSkillApps",
+    "strap": "Education first. Opportunity ahead."
+  }
+}

@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "bundle": "bash scripts/bundle.sh",
-    "bundle:static": "bash scripts/bundle-static.sh"
+    "bundle:static": "bash scripts/bundle-static.sh",
+    "prebuild": "node scripts/copy-cms.mjs"
   },
   "dependencies": {
     "@types/nodemailer": "^8.0.2",
@@ -21,6 +22,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "decap-cms": "^3.17.3",
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
     "typescript": "^5"

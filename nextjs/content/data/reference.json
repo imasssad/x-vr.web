@@ -1,0 +1,49 @@
+{
+  "glossary": {
+    "eyebrow": "06 / Know the language",
+    "headline": "Different terms.",
+    "headlineEm": "Shared purpose.",
+    "lede": "Specialized knowledge. Practical ability. Pride in the work.",
+    "items": [
+      {
+        "term": "Skilled trades",
+        "def": "Occupations centered on specialized practical skills, technical knowledge, and hands-on work—such as welding, electrical work, HVAC, carpentry, and masonry."
+      },
+      {
+        "term": "Skilled labor",
+        "def": "A broader economic term for workers with specialized training, knowledge, or experience. Skilled trades are one part of this wider category."
+      },
+      {
+        "term": "Craftsmanship / craft",
+        "def": "The care, judgment, precision, and practiced ability behind quality work. Craftsmanship is visible in how a tradesperson plans, executes, and finishes a task."
+      },
+      {
+        "term": "Vocational or technical careers",
+        "def": "Careers developed through applied education and occupational training, including technical schools, trade schools, apprenticeships, and employer programs. Educational routes can overlap with college study."
+      }
+    ]
+  },
+  "faq": {
+    "eyebrow": "A few things to know",
+    "headline": "Questions,",
+    "headlineEm": "answered.",
+    "items": [
+      {
+        "q": "Does VR replace hands-on training?",
+        "a": "No. Our vision uses VR to prepare for and reinforce instructor-led learning. Real tools, supervised shop work, and practical assessment remain essential."
+      },
+      {
+        "q": "Can I earn a license or certification here?",
+        "a": "This website introduces the TradeSkillApps vision and offers career exploration. It does not award credentials. Check requirements with the relevant training provider, licensing authority, or certifying organization."
+      },
+      {
+        "q": "Which products can I purchase today?",
+        "a": "Very affordable access is a core commitment of TradeSkillApps. Specific prices, packages, product availability, and technical requirements are not published here yet. The trade experiences illustrate our educational direction."
+      },
+      {
+        "q": "Where should a school start?",
+        "a": "Choose one clear learning objective, identify how an immersive activity would support it, and plan the accompanying instruction and hands-on assessment. Use the starter planner above to organize an initial lesson."
+      }
+    ]
+  }
+}

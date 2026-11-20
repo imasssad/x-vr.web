@@ -11,6 +11,10 @@ if [ -d app/api ]; then mv app/api .api-held; fi
 BUILD_TARGET=static NEXT_PUBLIC_CONTACT_ENDPOINT=/contact.php npx next build
 
 rm -rf dist-static && cp -r out dist-static
+
+# the content editor needs the GitHub login endpoints, which a static export
+# cannot host — drop it rather than ship a page that can only fail
+rm -rf dist-static/admin
 cp ../.htaccess dist-static/.htaccess 2>/dev/null || true
 
 echo

@@ -1,0 +1,35 @@
+{
+  "videos": {
+    "eyebrow": "See it in action",
+    "headline": "Watch a lesson",
+    "headlineEm": "come together.",
+    "lede": "Short films from the workshop and the classroom. Each one shows a single idea: what the headset teaches, and what happens when a learner takes it to the bench.",
+    "note": "Video slots are ready. Drop a file into **public/assets/video/** and name it below, or paste a YouTube link — the player appears on its own.",
+    "items": [
+      {
+        "id": "intro",
+        "title": "What an immersive lesson looks like",
+        "blurb": "A walkthrough of one short VR lesson, from the learning objective to the discussion afterwards.",
+        "file": "",
+        "poster": "",
+        "embed": ""
+      },
+      {
+        "id": "shop",
+        "title": "From headset to workbench",
+        "blurb": "A learner rehearses a sequence in VR, then performs the same steps on real equipment with an instructor.",
+        "file": "",
+        "poster": "",
+        "embed": ""
+      },
+      {
+        "id": "educators",
+        "title": "Setting it up in your program",
+        "blurb": "How an instructor plans headset access, space and an alternative activity around one learning goal.",
+        "file": "",
+        "poster": "",
+        "embed": ""
+      }
+    ]
+  }
+}

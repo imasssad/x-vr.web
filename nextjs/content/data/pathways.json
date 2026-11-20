@@ -1,0 +1,90 @@
+{
+  "pathways": {
+    "eyebrow": "04 / Careers built over time",
+    "headline": "A starting point.",
+    "headlineEm": "A path forward.",
+    "lede": "Skilled trades grow through education, practice and experience. Explore common stages — and the learning that supports each one.",
+    "image": {
+      "src": "/assets/images/pathways.webp",
+      "alt": "Two students in hard hats kneeling to finish a freshly poured concrete pad on a training site"
+    },
+    "stages": [
+      {
+        "n": "01",
+        "stage": "Explore & prepare",
+        "title": "Discover your direction.",
+        "body": "Start with interests, technical vocabulary, and an introduction to the work. Foundation learning can help you prepare for a training program or apprenticeship.",
+        "points": [
+          "Explore different trades and work environments.",
+          "Build safety awareness, measurement, and technical reading skills.",
+          "Compare local training programs and entry requirements."
+        ]
+      },
+      {
+        "n": "02",
+        "stage": "Apprentice",
+        "title": "Learn alongside experienced people.",
+        "body": "An apprentice learns through structured on-the-job experience and related instruction. Program design and entry requirements depend on the trade and provider.",
+        "points": [
+          "Develop foundational skills under qualified supervision.",
+          "Connect classroom learning with workplace practice.",
+          "Document progress against your program's requirements."
+        ]
+      },
+      {
+        "n": "03",
+        "stage": "Journeyman",
+        "title": "Develop independent competence.",
+        "body": "In trades that use this title, a journeyman has completed the required training and experience. Certification, licensing, and the scope of independent work vary.",
+        "points": [
+          "Strengthen diagnosis, judgment, and consistency.",
+          "Meet applicable qualification and continuing education requirements.",
+          "Support newer learners and deepen your specialty."
+        ]
+      },
+      {
+        "n": "04",
+        "stage": "Master / contractor",
+        "title": "Lead work. Grow your impact.",
+        "body": "Master-level practice and contracting are distinct paths that may overlap. Experienced tradespeople may lead complex work, supervise crews, or operate a business.",
+        "points": [
+          "Develop project planning, leadership, and quality oversight.",
+          "Build business and customer communication skills.",
+          "Verify any advanced licensing or contractor requirements."
+        ]
+      }
+    ],
+    "note": "Titles and requirements vary by occupation, employer and jurisdiction. Not every trade follows this sequence. **VR learning alone does not confer apprenticeship status, licensure or qualification.**"
+  },
+  "levels": {
+    "eyebrow": "From your classroom to your future",
+    "headline": "Start with curiosity.",
+    "headlineEm": "Grow into a craft.",
+    "lede": "Very affordable immersive education can help bring trade exploration into high schools and strengthen technical learning in trade schools.",
+    "highSchool": {
+      "eye": "High schools / Discover your direction",
+      "title": "See what you could become.",
+      "body": "Connect science, math and classroom learning to the work of technicians and craftspeople. Explore trade environments, learn the language of tools and systems, and discover interests worth pursuing.",
+      "points": [
+        "Career exploration before choosing a training pathway",
+        "Technical vocabulary and foundational concepts",
+        "Teacher-led reflection and a next-step learning plan"
+      ],
+      "image": {
+        "src": "/assets/images/high-schools.webp",
+        "alt": "A student standing in the corridor of a technician training institute, framed certificates and awards on the wall behind him"
+      }
+    },
+    "tradeSchool": {
+      "eye": "Trade schools / Build your foundation",
+      "title": "Turn interest into understanding.",
+      "body": "Connect immersive lessons to shop instruction. Revisit a process, explain a sequence, and identify where you need more guidance before demonstrating your learning with real equipment.",
+      "points": [
+        "Concept review alongside technical coursework",
+        "Purposeful repetition and instructor discussion",
+        "Preparation for supervised hands-on practice"
+      ]
+    },
+    "note": "Learning examples describe our educational vision. The original classroom artwork shows the youth-focused learning environment that inspires TradeSkillApps."
+  }
+}

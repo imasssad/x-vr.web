@@ -1,0 +1,397 @@
+# Content editor for tradeskillapps.com
+# Signing in uses GitHub: every save is a commit, and the site redeploys itself.
+backend:
+  name: github
+  repo: imasssad/x-vr.web
+  branch: main
+  base_url: https://tradeskillapps.com
+  auth_endpoint: api/auth
+  commit_messages:
+    update: 'Content: update {{collection}} “{{slug}}”'
+    uploadMedia: 'Content: upload {{path}}'
+    deleteMedia: 'Content: delete {{path}}'
+
+publish_mode: simple
+site_url: https://tradeskillapps.com
+display_url: https://tradeskillapps.com
+locale: en
+
+media_folder: nextjs/public/assets/images
+public_folder: /assets/images
+
+collections:
+  - name: content
+    label: Website content
+    label_singular: section
+    description: Every word and picture on the site. Pick a section, edit, then press Publish.
+    editor: { preview: false }
+    files:
+
+      - name: general
+        label: Site basics, menu and footer
+        file: nextjs/content/data/general.json
+        fields:
+          - { name: site, label: Site, widget: object, fields: [
+              { name: domain, label: Domain, widget: string },
+              { name: name, label: Site name, widget: string },
+              { name: title, label: Browser-tab title, widget: string },
+              { name: description, label: Search-engine description, widget: text },
+              { name: ogImage, label: Social-share image path, widget: string, required: false } ] }
+          - name: nav
+            label: Menu links
+            widget: list
+            summary: '{{fields.label}}'
+            fields: [ { name: label, label: Label, widget: string },
+                      { name: href, label: Links to, widget: string, hint: 'An anchor on this page, e.g. #trades' } ]
+          - name: drawerExtra
+            label: Extra links (mobile menu only)
+            widget: list
+            summary: '{{fields.label}}'
+            fields: [ { name: label, label: Label, widget: string },
+                      { name: href, label: Links to, widget: string } ]
+          - name: footer
+            label: Footer
+            widget: object
+            fields:
+              - { name: tagline, label: Tagline, widget: text }
+              - name: links
+                label: Footer links
+                widget: list
+                summary: '{{fields.label}}'
+                fields: [ { name: label, label: Label, widget: string },
+                          { name: href, label: Links to, widget: string } ]
+              - { name: copyright, label: Copyright line, widget: string }
+              - { name: strap, label: Closing strapline, widget: string }
+
+      - name: hero
+        label: Hero (top of the page)
+        file: nextjs/content/data/hero.json
+        fields:
+          - name: hero
+            label: Hero
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label above the headline, widget: string }
+              - { name: headline, label: Headline, widget: string }
+              - { name: headlineEm, label: Headline — highlighted part, widget: string, hint: 'Shown in blue italics on the next line' }
+              - { name: lede, label: Intro paragraph, widget: text }
+              - { name: primaryCta, label: Main button, widget: object, fields: [
+                  { name: label, label: Label, widget: string }, { name: href, label: Links to, widget: string } ] }
+              - { name: secondaryCta, label: Second button, widget: object, fields: [
+                  { name: label, label: Label, widget: string }, { name: href, label: Links to, widget: string } ] }
+              - { name: strip, label: Strip under the buttons, widget: list, field: { name: item, label: Line, widget: string } }
+              - name: image
+                label: Background picture
+                widget: object
+                hint: Used as the still background, and as the video poster.
+                fields:
+                  - { name: src, label: Picture, widget: image, required: false }
+                  - { name: srcSet, label: Responsive set, widget: string, required: false, hint: 'Generated. Clear this box if you replace the picture.' }
+                  - { name: alt, label: Description for screen readers, widget: string }
+              - name: video
+                label: Background video
+                widget: object
+                hint: Optional. The video only plays once a file exists at these paths.
+                fields:
+                  - { name: poster, label: Poster frame, widget: string, required: false }
+                  - name: sources
+                    label: Video files
+                    widget: list
+                    required: false
+                    summary: '{{fields.src}}'
+                    fields: [ { name: src, label: Path, widget: string },
+                              { name: type, label: Type, widget: string, hint: 'video/webm or video/mp4' } ]
+                  - { name: label, label: Label on the sound button, widget: string, required: false }
+          - { name: ticker, label: Scrolling words under the hero, widget: list, field: { name: item, label: Word, widget: string } }
+
+      - name: purpose
+        label: Why this exists, mission, closing
+        file: nextjs/content/data/purpose.json
+        fields:
+          - name: purpose
+            label: Why this exists
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label, widget: string }
+              - { name: headline, label: Headline, widget: string }
+              - { name: headlineEm, label: Headline — highlighted part, widget: string }
+              - { name: lede, label: Intro paragraph, widget: text }
+              - { name: body, label: Body paragraph, widget: text }
+              - name: pillars
+                label: The three points
+                widget: list
+                summary: '{{fields.n}} — {{fields.title}}'
+                fields: [ { name: n, label: Number, widget: string },
+                          { name: title, label: Title, widget: string },
+                          { name: body, label: Text, widget: text } ]
+          - name: mission
+            label: Mission band
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label, widget: string }
+              - { name: quote, label: Quote, widget: text }
+              - { name: quoteEm, label: Quote — highlighted part, widget: string }
+              - { name: body, label: Paragraphs, widget: list, field: { name: p, label: Paragraph, widget: text } }
+              - { name: cta, label: Button, widget: object, fields: [
+                  { name: label, label: Label, widget: string }, { name: href, label: Links to, widget: string } ] }
+              - { name: image, label: Picture, widget: object, fields: [
+                  { name: src, label: Picture, widget: image, required: false },
+                  { name: alt, label: Description for screen readers, widget: string } ] }
+          - name: closing
+            label: Closing band
+            widget: object
+            fields:
+              - { name: chain, label: Words in the chain, widget: list, field: { name: w, label: Word, widget: string } }
+              - { name: headline, label: Headline, widget: string }
+              - { name: headlineEm, label: Headline — highlighted part, widget: string }
+              - { name: cta, label: Button, widget: object, fields: [
+                  { name: label, label: Label, widget: string }, { name: href, label: Links to, widget: string } ] }
+              - { name: image, label: Picture, widget: object, fields: [
+                  { name: src, label: Picture, widget: image, required: false },
+                  { name: alt, label: Description for screen readers, widget: string } ] }
+
+      - name: trades
+        label: Trades
+        file: nextjs/content/data/trades.json
+        fields:
+          - name: tradesSection
+            label: Section heading
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label, widget: string }
+              - { name: headline, label: Headline, widget: string }
+              - { name: headlineEm, label: Headline — highlighted part, widget: string }
+              - { name: lede, label: Intro paragraph, widget: text }
+              - { name: note, label: Note below the cards, widget: text }
+          - name: trades
+            label: Trade cards
+            widget: list
+            summary: '{{fields.name}}'
+            fields:
+              - { name: slug, label: Short id, widget: string, hint: 'Lower-case, no spaces. Used in the page address — change with care.' }
+              - { name: name, label: Tab name, widget: string }
+              - { name: icon, label: Icon, widget: select, options: [i-weld, i-hvac, i-elec, i-manu, i-cons, i-tech] }
+              - { name: title, label: Title, widget: string }
+              - { name: desc, label: Description, widget: text }
+              - { name: skills, label: Skills practised, widget: list, field: { name: s, label: Skill, widget: string } }
+              - { name: goal, label: Learning goal, widget: text }
+              - { name: sample, label: Sample activity, widget: text }
+              - name: image
+                label: Picture
+                widget: object
+                hint: Leave the picture empty to show the illustrated placeholder instead.
+                fields:
+                  - { name: src, label: Picture, widget: image, required: false }
+                  - { name: alt, label: Description for screen readers, widget: string, required: false }
+
+      - name: approach
+        label: Our approach and the learning cycle
+        file: nextjs/content/data/approach.json
+        fields:
+          - name: approach
+            label: Our approach
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label, widget: string }
+              - { name: headline, label: Headline, widget: string }
+              - { name: headlineEm, label: Headline — highlighted part, widget: string }
+              - { name: lede, label: Intro paragraph, widget: text }
+              - name: heroImage
+                label: Large picture
+                widget: object
+                fields:
+                  - { name: src, label: Picture, widget: image, required: false }
+                  - { name: srcSet, label: Responsive set, widget: string, required: false, hint: 'Generated. Clear this box if you replace the picture.' }
+                  - { name: alt, label: Description for screen readers, widget: string }
+                  - { name: caption, label: Caption lines, widget: list, field: { name: c, label: Line, widget: string } }
+              - { name: body, label: Paragraphs, widget: list, field: { name: p, label: Paragraph, widget: text } }
+              - { name: lessonEyebrow, label: Lesson block — small label, widget: string }
+              - { name: lessonHeadline, label: Lesson block — headline, widget: string }
+              - { name: lessonHeadlineEm, label: Lesson block — highlighted part, widget: string }
+              - name: steps
+                label: Lesson steps
+                widget: list
+                summary: '{{fields.title}}'
+                fields: [ { name: title, label: Title, widget: string },
+                          { name: body, label: Text, widget: text } ]
+              - name: practiceImage
+                label: Second picture
+                widget: object
+                fields:
+                  - { name: src, label: Picture, widget: image, required: false }
+                  - { name: alt, label: Description for screen readers, widget: string }
+                  - { name: caption, label: Caption lines, widget: list, field: { name: c, label: Line, widget: string } }
+              - { name: note, label: Note, widget: text }
+          - name: learningCycle
+            label: Learning cycle
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label, widget: string }
+              - { name: headline, label: Headline, widget: string }
+              - { name: headlineEm, label: Headline — highlighted part, widget: string }
+              - name: items
+                label: Cycle steps
+                widget: list
+                summary: '{{fields.n}} — {{fields.title}}'
+                fields: [ { name: n, label: Number, widget: string },
+                          { name: icon, label: Icon, widget: select, options: [i-learn, i-rehearse, i-reflect, i-apply] },
+                          { name: title, label: Title, widget: string },
+                          { name: body, label: Text, widget: text } ]
+
+      - name: videos
+        label: Videos
+        file: nextjs/content/data/videos.json
+        fields:
+          - name: videos
+            label: Videos section
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label, widget: string }
+              - { name: headline, label: Headline, widget: string }
+              - { name: headlineEm, label: Headline — highlighted part, widget: string }
+              - { name: lede, label: Intro paragraph, widget: text }
+              - { name: note, label: Note below the videos, widget: text }
+              - name: items
+                label: Videos
+                widget: list
+                summary: '{{fields.title}}'
+                fields:
+                  - { name: id, label: Short id, widget: string }
+                  - { name: title, label: Title, widget: string }
+                  - { name: blurb, label: Description, widget: text }
+                  - { name: embed, label: YouTube video id, widget: string, required: false, hint: 'The part after v= in a YouTube address. Easiest option — leave the two boxes below empty.' }
+                  - { name: file, label: Video file name, widget: string, required: false, hint: 'Only if the film is uploaded to the site itself, e.g. lesson.mp4' }
+                  - { name: poster, label: Poster image file name, widget: string, required: false }
+
+      - name: pathways
+        label: Career pathways and levels
+        file: nextjs/content/data/pathways.json
+        fields:
+          - name: pathways
+            label: Career pathways
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label, widget: string }
+              - { name: headline, label: Headline, widget: string }
+              - { name: headlineEm, label: Headline — highlighted part, widget: string }
+              - { name: lede, label: Intro paragraph, widget: text }
+              - { name: image, label: Picture, widget: object, fields: [
+                  { name: src, label: Picture, widget: image, required: false },
+                  { name: alt, label: Description for screen readers, widget: string } ] }
+              - name: stages
+                label: Stages
+                widget: list
+                summary: '{{fields.n}} — {{fields.title}}'
+                fields: [ { name: n, label: Number, widget: string },
+                          { name: stage, label: Stage label, widget: string },
+                          { name: title, label: Title, widget: string },
+                          { name: body, label: Text, widget: text },
+                          { name: points, label: Bullet points, widget: list, field: { name: p, label: Point, widget: string } } ]
+              - { name: note, label: Note, widget: text }
+          - name: levels
+            label: Schools and colleges
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label, widget: string }
+              - { name: headline, label: Headline, widget: string }
+              - { name: headlineEm, label: Headline — highlighted part, widget: string }
+              - { name: lede, label: Intro paragraph, widget: text }
+              - name: highSchool
+                label: High schools card
+                widget: object
+                fields:
+                  - { name: eye, label: Small label, widget: string }
+                  - { name: title, label: Title, widget: string }
+                  - { name: body, label: Text, widget: text }
+                  - { name: points, label: Bullet points, widget: list, field: { name: p, label: Point, widget: string } }
+                  - { name: image, label: Picture, widget: object, fields: [
+                      { name: src, label: Picture, widget: image, required: false },
+                      { name: alt, label: Description for screen readers, widget: string } ] }
+              - name: tradeSchool
+                label: Trade schools card
+                widget: object
+                fields:
+                  - { name: eye, label: Small label, widget: string }
+                  - { name: title, label: Title, widget: string }
+                  - { name: body, label: Text, widget: text }
+                  - { name: points, label: Bullet points, widget: list, field: { name: p, label: Point, widget: string } }
+              - { name: note, label: Note, widget: text }
+
+      - name: educators
+        label: For educators and access
+        file: nextjs/content/data/educators.json
+        fields:
+          - name: educators
+            label: For educators
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label, widget: string }
+              - { name: headline, label: Headline, widget: string }
+              - { name: headlineEm, label: Headline — highlighted part, widget: string }
+              - { name: lede, label: Intro paragraph, widget: text }
+              - { name: body, label: Body paragraph, widget: text }
+              - name: steps
+                label: Steps
+                widget: list
+                summary: '{{fields.n}} — {{fields.title}}'
+                fields:
+                  - { name: n, label: Number, widget: string }
+                  - { name: title, label: Title, widget: string }
+                  - { name: body, label: Text, widget: text }
+                  - { name: image, label: Picture, widget: object, fields: [
+                      { name: src, label: Picture, widget: image, required: false },
+                      { name: alt, label: Description for screen readers, widget: string } ] }
+              - { name: cta, label: Button, widget: object, fields: [
+                  { name: label, label: Label, widget: string }, { name: href, label: Links to, widget: string } ] }
+          - name: access
+            label: Access and equipment
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label, widget: string }
+              - { name: headline, label: Headline, widget: string }
+              - { name: headlineEm, label: Headline — highlighted part, widget: string }
+              - { name: lede, label: Intro paragraph, widget: text }
+              - { name: body, label: Body paragraph, widget: text }
+              - { name: image, label: Picture, widget: object, fields: [
+                  { name: src, label: Picture, widget: image, required: false },
+                  { name: alt, label: Description for screen readers, widget: string } ] }
+              - name: cells
+                label: Points
+                widget: list
+                summary: '{{fields.title}}'
+                fields: [ { name: title, label: Title, widget: string },
+                          { name: body, label: Text, widget: text } ]
+              - { name: cta, label: Button, widget: object, fields: [
+                  { name: label, label: Label, widget: string }, { name: href, label: Links to, widget: string } ] }
+
+      - name: reference
+        label: Glossary and FAQ
+        file: nextjs/content/data/reference.json
+        fields:
+          - name: glossary
+            label: Glossary
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label, widget: string }
+              - { name: headline, label: Headline, widget: string }
+              - { name: headlineEm, label: Headline — highlighted part, widget: string }
+              - { name: lede, label: Intro paragraph, widget: text }
+              - name: items
+                label: Terms
+                widget: list
+                summary: '{{fields.term}}'
+                fields: [ { name: term, label: Term, widget: string },
+                          { name: def, label: Definition, widget: text } ]
+          - name: faq
+            label: FAQ
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label, widget: string }
+              - { name: headline, label: Headline, widget: string }
+              - { name: headlineEm, label: Headline — highlighted part, widget: string }
+              - name: items
+                label: Questions
+                widget: list
+                summary: '{{fields.q}}'
+                fields: [ { name: q, label: Question, widget: string },
+                          { name: a, label: Answer, widget: text } ]

@@ -25,6 +25,20 @@ const nextConfig: NextConfig = {
   experimental: { inlineCss: true },
   poweredByHeader: false,
   compress: true,
+  // /admin is a plain file in public/, and Next doesn't serve a directory's
+  // index.html by itself. The CMS routes internally on the hash, so these two
+  // entries are all it needs. Rewrites don't exist in a static export, where
+  // the CMS isn't available anyway (it needs the login endpoints).
+  ...(process.env.BUILD_TARGET === "static"
+    ? {}
+    : {
+        async rewrites() {
+          return [
+            { source: "/admin", destination: "/admin/index.html" },
+            { source: "/admin/", destination: "/admin/index.html" },
+          ];
+        },
+      }),
 };
 
 export default nextConfig;

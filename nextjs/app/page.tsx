@@ -4,6 +4,7 @@ import Icons from "@/components/Icons";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import Trades from "@/components/Trades";
+import Videos from "@/components/Videos";
 import Planner from "@/components/Planner";
 import Contact from "@/components/Contact";
 import Accordion from "@/components/Accordion";
@@ -32,6 +33,7 @@ export default function Page() {
         <Trades />
         <Approach />
         <LearningCycle />
+        <Videos />
         <Pathways />
         <Educators />
         <Levels />

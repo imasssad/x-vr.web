@@ -38,7 +38,7 @@ export async function POST(req: Request) {
       auth: { user: SMTP_USER, pass: SMTP_PASS },
     });
     await transport.sendMail({
-      from: `"X-VR Skilled Trades" <${SMTP_USER}>`,
+      from: `"TradeSkillApps" <${SMTP_USER}>`,
       to: CONTACT_TO,
       replyTo: `"${name}" <${email}>`,
       subject: `Enquiry from ${name}`,
