@@ -17,8 +17,13 @@ fallback.
 **Setup, once:**
 
 1. vercel.com → **Add New Project** → import `imasssad/x-vr.web`.
-2. Vercel reads `vercel.json` in the repo root and finds the app in `nextjs/`.
-   If it asks, set **Root Directory** to `nextjs`.
+2. Set **Root Directory** to `nextjs` (Settings → General). That is the only
+   path setting needed — Vercel then detects Next.js, and runs `npm install`
+   and `next build` inside that folder on its own.
+
+   There is deliberately **no `vercel.json`**. An earlier one carried
+   `cd nextjs && npm install`, which doubled the path once Root Directory was
+   set and failed every build with `cd: nextjs: No such file or directory`.
 3. Add these environment variables (Settings → Environment Variables):
 
    | Name | Value |
