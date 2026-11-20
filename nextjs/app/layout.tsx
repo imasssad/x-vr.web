@@ -8,7 +8,7 @@ import "./globals.css";
    shift, and the site keeps working if fonts.googleapis.com is unreachable. */
 const display = Barlow_Condensed({
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
+  weight: ["700", "800"],
   style: ["normal", "italic"],
   variable: "--font-display",
   display: "swap",

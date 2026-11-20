@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { hero } from "@/content/site";
 
-export default function Hero() {
+export default function Hero({ hasVideo = false }: { hasVideo?: boolean }) {
   const video = useRef<HTMLVideoElement>(null);
   const [ready, setReady] = useState(false);   // a real video file exists
   const [playing, setPlaying] = useState(true);
@@ -10,7 +10,7 @@ export default function Hero() {
 
   useEffect(() => {
     const v = video.current;
-    if (!v) return;
+    if (!v || !hasVideo) return;
     const onCanPlay = () => {
       setReady(true);
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -19,7 +19,7 @@ export default function Hero() {
     };
     v.addEventListener("canplay", onCanPlay, { once: true });
     return () => v.removeEventListener("canplay", onCanPlay);
-  }, []);
+  }, [hasVideo]);
 
   const togglePlay = () => {
     const v = video.current; if (!v) return;
@@ -41,11 +41,16 @@ export default function Hero() {
         <img id="heroPoster" src={hero.image.src} srcSet={hero.image.srcSet} sizes="100vw"
           alt={hero.image.alt} width={hero.image.width} height={hero.image.height}
           decoding="async" fetchPriority="high" />
-        <video ref={video} autoPlay muted loop playsInline preload="metadata"
-          poster={hero.video.poster} aria-label={hero.video.label}
-          style={{ position: "absolute", inset: 0, opacity: ready ? 1 : 0, transition: "opacity .6s ease" }}>
-          {hero.video.sources.map((s) => <source key={s.src} src={s.src} type={s.type} />)}
-        </video>
+        {/* Rendered only when a video file is actually present. Otherwise the
+            browser would still download the poster — 90 KB for nothing — and
+            fire two 404s chasing the missing sources. */}
+        {hasVideo && (
+          <video ref={video} autoPlay muted loop playsInline preload="metadata"
+            poster={hero.video.poster} aria-label={hero.video.label}
+            style={{ position: "absolute", inset: 0, opacity: ready ? 1 : 0, transition: "opacity .6s ease" }}>
+            {hero.video.sources.map((s) => <source key={s.src} src={s.src} type={s.type} />)}
+          </video>
+        )}
       </div>
       <div className="hero__scrim" aria-hidden="true" />
 

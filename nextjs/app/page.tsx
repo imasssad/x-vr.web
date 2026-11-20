@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import Icons from "@/components/Icons";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
@@ -11,6 +13,12 @@ import {
 } from "@/components/Sections";
 import { glossary, faq } from "@/content/site";
 
+/* Checked at build time: drop hero-video.mp4 into public/assets/video/ and
+   rebuild, and the hero starts playing it. No code or config change. */
+const hasVideo = ["hero-video.mp4", "hero-video.webm"].some((f) =>
+  fs.existsSync(path.join(process.cwd(), "public", "assets", "video", f))
+);
+
 export default function Page() {
   return (
     <>
@@ -18,7 +26,7 @@ export default function Page() {
       <Nav />
       <main id="main">
         <span id="top" />
-        <Hero />
+        <Hero hasVideo={hasVideo} />
         <Ticker />
         <Purpose />
         <Trades />
