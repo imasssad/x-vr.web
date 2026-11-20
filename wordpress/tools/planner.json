@@ -1,0 +1,109 @@
+{
+  "roles": [
+    "Learner",
+    "Instructor or training partner"
+  ],
+  "stages": [
+    "Exploring a new career",
+    "Building foundational skills",
+    "Developing existing skills"
+  ],
+  "tradeOptions": [
+    "Welding",
+    "HVAC",
+    "Electrical",
+    "Manufacturing",
+    "Construction",
+    "Emerging technology"
+  ],
+  "learner": {
+    "Exploring a new career": [
+      [
+        "Pick one concept to understand first",
+        "Start narrow. One concept or procedure in TRADE is enough for a first lesson."
+      ],
+      [
+        "Learn and explore in VR",
+        "Use a short immersive lesson to learn the concept, then locate components and follow how the work fits together."
+      ],
+      [
+        "Explain the reasoning",
+        "Describe what each part does and why the sequence matters, in your own words."
+      ],
+      [
+        "Compare local training programs",
+        "Look at entry requirements and how each program connects classroom learning to supervised shop practice."
+      ]
+    ],
+    "Building foundational skills": [
+      [
+        "Review the concept alongside your coursework",
+        "Match the immersive lesson to what your TRADE class is covering now."
+      ],
+      [
+        "Rehearse until the sequence is clear",
+        "Revisit the virtual practice as often as you need, before using shop time and physical materials."
+      ],
+      [
+        "Reflect with your instructor",
+        "Review the experience together, identify gaps, and set a focus for the next practice session."
+      ],
+      [
+        "Apply it under supervision",
+        "Demonstrate on real equipment with an instructor, through supervised shop work and practical assessment."
+      ]
+    ],
+    "Developing existing skills": [
+      [
+        "Target the gap, not the whole trade",
+        "Choose the one part of TRADE you want sharper and build the lesson around it."
+      ],
+      [
+        "Rehearse the decisions",
+        "Follow a sequence, identify an issue, and explain the decisions you made."
+      ],
+      [
+        "Strengthen judgment and consistency",
+        "Being able to recognize when something needs attention is part of the skill."
+      ],
+      [
+        "Apply and demonstrate",
+        "Confirm it on real equipment with supervision and practical assessment."
+      ]
+    ]
+  },
+  "instructor": [
+    [
+      "Choose a learning goal",
+      "Identify one concept or procedure in TRADE that students need to understand more clearly."
+    ],
+    [
+      "Prepare the learning environment",
+      "Plan headset access, space, accessibility, instructor support, and an alternative learning activity."
+    ],
+    [
+      "Connect virtual and practical work",
+      "Use a short immersive lesson, a guided discussion, and supervised shop practice."
+    ],
+    [
+      "Evaluate and improve",
+      "Compare understanding and practical performance, then refine the experience."
+    ]
+  ],
+  "closingStep": [
+    "Remember",
+    "VR prepares and reinforces. Supervised hands-on training develops and verifies practical competence, and no credential is awarded here."
+  ],
+  "plannerCopy": {
+    "eyebrow": "07 / Make your next move",
+    "headline": "Your interests.",
+    "headlineEm": "Your next chapter.",
+    "lede": "Build a starter learning plan for yourself or your classroom. Choose a trade and a goal to get practical next steps.",
+    "roleLabel": "I'm exploring as a",
+    "tradeLabel": "My trade interest",
+    "stageLabel": "My starting point",
+    "submit": "Create my starter plan",
+    "reset": "Reset",
+    "privacy": "This planner creates guidance on this page. It does not enroll you in a program or send your information."
+  }
+}
