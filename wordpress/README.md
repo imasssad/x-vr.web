@@ -109,6 +109,67 @@ and still works.
 
 ---
 
+## Elementor
+
+The theme works with Elementor, and does not need it. With Elementor absent
+none of this code runs; with it installed three things become available.
+
+### 1. Pages can be built in Elementor
+
+Edit any page with Elementor as usual. For a page that should control its own
+full width, set **Page Attributes → Template → Full width (for page
+builders)**; the header and footer stay, and the reading column is dropped.
+
+A page built in Elementor is no longer wrapped in the theme's reading column,
+so wide sections reach the edges of the screen the way they do on the home
+page.
+
+### 2. The site's own sections are draggable widgets
+
+The widget panel has a **TradeSkillApps** heading holding all seventeen
+sections of the home page — Hero, Trades, Videos, Career pathways, Starter
+planner, Contact form and the rest.
+
+These are the same sections the home page uses, not copies. Fixing one fixes
+both, and they cannot drift apart.
+
+Drop one onto a page and it arrives finished, carrying the wording it has on
+the home page. Each widget then offers the few fields worth changing per
+placement — the small label, the headline and its highlighted half, the intro
+paragraph. **Leave a box empty and the site-wide wording from the Customizer
+is used**, so the same section can appear on two pages and still be edited in
+one place.
+
+Anything typed into a widget applies to that placement only. It never changes
+the home page.
+
+### 3. Anything you build alongside them matches
+
+The theme's four colours and two typefaces are registered as Elementor's
+global colours and fonts, so a heading or button added next to a section
+inherits the site's look rather than Elementor's defaults. Elementor's stock
+widgets — headings, text, buttons, lists, dividers — are styled to match.
+
+Barlow Condensed and DM Sans are declared to Elementor as already present, so
+it does not fetch the same two families from Google on top of the copies the
+theme serves.
+
+### With Elementor Pro
+
+Theme Builder locations are registered for the header, footer, single and
+archive. Build a header in Theme Builder and it replaces the theme's; build
+none and the theme's is used. Nothing needs switching on.
+
+### What this does not do
+
+The home page is a PHP template, not an Elementor document. It is faster that
+way and it is what the Customizer edits. To rebuild it in Elementor instead,
+make a new page, set the full-width template, drag the seventeen section
+widgets onto it in order, and point **Settings → Reading** at that page. The
+Customizer keeps working either way.
+
+---
+
 ## Files
 
 ```
@@ -117,6 +178,7 @@ themes/tradeskillapps/
   functions.php          setup and asset loading
   front-page.php         the one-page site, in section order
   page.php single.php    standalone pages, same design
+  template-full-width.php  a page that controls its own layout
   index.php 404.php
   header.php footer.php
   template-parts/        one file per section
@@ -127,7 +189,11 @@ themes/tradeskillapps/
     post-types.php       trades, videos, FAQ, glossary
     contact.php          the enquiry form
     icons.php            the SVG sprite and placeholder art
+    elementor.php        Elementor support; does nothing without it
+    elementor/
+      class-section-widget.php   each section, as a draggable widget
   assets/
+    css/elementor.css    loaded only when Elementor is active
     fonts/               Barlow Condensed and DM Sans, self-hosted
     images/              the site's photography
     js/site.js           tabs, accordions, planner, videos, menu

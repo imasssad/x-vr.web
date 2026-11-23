@@ -2,6 +2,8 @@
 /** Fallback for any view that has no more specific template. */
 defined('ABSPATH') || exit;
 get_header();
+
+if (!tsa_do_location('archive')) :
 ?>
 <main id="main" class="band band--white">
 	<div class="wrap wrap--narrow">
@@ -28,4 +30,7 @@ get_header();
 		<?php endif; ?>
 	</div>
 </main>
-<?php get_footer(); ?>
+<?php
+endif;
+get_footer();
+

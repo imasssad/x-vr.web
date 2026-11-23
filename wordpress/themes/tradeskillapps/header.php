@@ -12,6 +12,11 @@
 <?php tsa_icon_sprite(); ?>
 <span id="top"></span>
 
+<?php
+// With Elementor Pro, a header built in Theme Builder takes over here.
+// Without it, or with none set, the theme's own header is used.
+if (tsa_do_location('header')) { return; }
+?>
 <header class="nav" id="nav">
 	<div class="wrap nav__in">
 		<?php tsa_brand(); ?>

@@ -1,0 +1,75 @@
+/*
+ * Loaded only when Elementor is active.
+ *
+ * Two jobs. First, stop Elementor's own layout fighting the sections, which
+ * are full-bleed and bring their own padding. Second, make Elementor's stock
+ * widgets - headings, text, buttons, lists - look like the rest of the site,
+ * so a page built in Elementor sits beside the home page without jarring.
+ */
+
+/* ---- the site's sections, placed as widgets -------------------------- */
+
+/* A section is a full-width band. Elementor's wrapper must not pad or
+   constrain it, or the band stops reaching the edges of the screen. */
+.elementor-widget.tsa-section-widget { width: 100%; }
+.elementor-widget.tsa-section-widget > .elementor-widget-container { margin: 0; padding: 0; }
+.tsa-section-widget .band,
+.tsa-section-widget .hero { margin-left: 0; margin-right: 0; }
+
+/* Inside the editor the section is shown in a frame; keep it from being
+   clipped by Elementor's overflow handling. */
+.elementor-editor-active .tsa-section-widget { overflow: visible; }
+
+/* ---- Elementor's own widgets, wearing the site's clothes ------------- */
+
+.elementor-widget-heading .elementor-heading-title {
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+.elementor-widget-heading .elementor-heading-title em { color: var(--blue); font-style: italic; }
+
+.elementor-widget-text-editor,
+.elementor-widget-theme-post-content {
+  font-family: var(--body);
+  color: var(--slate-aa);
+  line-height: 1.65;
+}
+.elementor-widget-text-editor a,
+.elementor-widget-theme-post-content a { color: var(--blue); }
+
+.elementor-widget-button .elementor-button {
+  font-family: var(--body);
+  font-weight: 500;
+  border-radius: 100px;
+  padding: 0.85rem 1.6rem;
+  background: var(--blue);
+  color: #fff;
+  transition: background-color .25s var(--ease), transform .25s var(--ease);
+}
+.elementor-widget-button .elementor-button:hover {
+  background: var(--blue-dark);
+  transform: translateY(-2px);
+}
+
+.elementor-widget-divider { --divider-color: var(--border); }
+
+.elementor-widget-icon-list .elementor-icon-list-text {
+  font-family: var(--body);
+  color: var(--slate-aa);
+}
+.elementor-widget-icon-list .elementor-icon-list-icon svg,
+.elementor-widget-icon-list .elementor-icon-list-icon i { color: var(--blue); }
+
+/* On a navy band, Elementor's defaults would be unreadable. */
+.on-navy .elementor-widget-heading .elementor-heading-title,
+.on-navy .elementor-widget-text-editor { color: #fff; }
+.on-navy .elementor-widget-text-editor a { color: var(--ice); }
+
+/* ---- pages built in Elementor ---------------------------------------- */
+
+/* The full-width page template drops the theme's reading column, so
+   Elementor controls the width itself. */
+.tsa-elementor-page .site-content { max-width: none; padding: 0; }

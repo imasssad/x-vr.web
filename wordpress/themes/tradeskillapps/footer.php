@@ -1,4 +1,11 @@
-<?php defined('ABSPATH') || exit; ?>
+<?php
+defined('ABSPATH') || exit;
+if (tsa_do_location('footer')) {
+	wp_footer();
+	echo '</body></html>';
+	return;
+}
+?>
 <footer class="foot">
 	<div class="wrap">
 		<div class="foot__in">

@@ -41,8 +41,27 @@ function tsa_default($path) {
 	return $node;
 }
 
+/**
+ * Values set for the duration of one render, used when a section is placed on
+ * a page by a page builder and given its own wording there. Empty otherwise.
+ */
+function &tsa_overrides() {
+	static $o = array();
+	return $o;
+}
+
+/** Replace the whole override set; returns what was there before. */
+function tsa_set_overrides($values) {
+	$o = &tsa_overrides();
+	$was = $o;
+	$o = is_array($values) ? array_filter($values, function ($v) { return $v !== '' && $v !== null; }) : array();
+	return $was;
+}
+
 /** A single editable string, escaped for text content. */
 function tsa_text($path) {
+	$o = &tsa_overrides();
+	if (isset($o[$path])) return (string) $o[$path];
 	$v = get_theme_mod(tsa_key($path), tsa_default($path));
 	return is_string($v) ? $v : '';
 }
@@ -64,7 +83,8 @@ function tsa_rich($path) {
  * owner adds or removes bullets by pressing Enter.
  */
 function tsa_lines($path) {
-	$saved = get_theme_mod(tsa_key($path), null);
+	$o = &tsa_overrides();
+	$saved = isset($o[$path]) ? $o[$path] : get_theme_mod(tsa_key($path), null);
 	if (is_string($saved) && trim($saved) !== '') {
 		$out = array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $saved)), 'strlen'));
 		if ($out) return $out;
@@ -75,7 +95,8 @@ function tsa_lines($path) {
 
 /** An image: returns array('src' => url, 'alt' => text). src is '' when cleared. */
 function tsa_image($path) {
-	$src = get_theme_mod(tsa_key($path . '.src'), null);
+	$o = &tsa_overrides();
+	$src = isset($o[$path . '.src']) ? $o[$path . '.src'] : get_theme_mod(tsa_key($path . '.src'), null);
 	if ($src === null) {
 		$d = tsa_default($path . '.src');
 		// defaults are paths from the old build; map them onto the theme folder
