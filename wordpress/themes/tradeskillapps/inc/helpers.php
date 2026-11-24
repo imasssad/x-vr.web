@@ -254,11 +254,11 @@ function tsa_count($path) {
 }
 
 /** The accordion used by the glossary and the FAQ. First item opens by default. */
-function tsa_accordion($posts, $prefix) {
-	if (!$posts) return;
+function tsa_accordion($rows, $prefix) {
+	if (!$rows) return;
 	$prefix .= tsa_uid('acc-' . $prefix);   // unique even when the section repeats on a page
 	echo '<div class="acc rv">';
-	foreach ($posts as $i => $post) {
+	foreach ($rows as $i => $row) {
 		$open = ($i === 0);
 		printf('<div class="acc__i">
 			<h3><button class="acc__btn" type="button" id="%1$s-b%2$d" aria-expanded="%3$s" aria-controls="%1$s-p%2$d">
@@ -270,8 +270,8 @@ function tsa_accordion($posts, $prefix) {
 		</div>',
 			esc_attr($prefix), $i,
 			$open ? 'true' : 'false',
-			esc_html($post->post_title),
-			esc_html(tsa_plain_text($post->post_content))
+			esc_html($row['q']),
+			esc_html($row['a'])
 		);
 	}
 	echo '</div>';

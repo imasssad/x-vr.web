@@ -259,11 +259,31 @@ Point **Settings → Reading** back at "Your latest posts" (or remove
 Elementor from that page) and the original template returns, exactly as it
 was. Nothing is lost either way.
 
-One thing to know before you choose: each widget exposes its pictures and
-its main headings, but the detailed text inside a section — the six trade
-cards, the four pathway stages, the FAQ answers — still comes from the
-Customizer and the admin menus. Elementor gives you the arrangement and the
-imagery; the Customizer keeps the fine print.
+#### Everything is editable from the builder
+
+Each section widget now carries **every** field that section has — not just
+its headline. Select a section and the panel holds:
+
+- **Wording** — all of its text, down to the individual pathway stages,
+  learning-cycle steps, educator steps, planner labels and footer lines.
+  Headings in the panel separate one block from the next.
+- **Pictures** — every photograph that section shows.
+- **A list**, where the section has one — Trade cards, Films, Questions or
+  Terms — with add, remove and reorder.
+
+Every box works the same way: **leave it empty and the site-wide value is
+used**; type in it and that applies to this placement only. The original
+wording is shown underneath each box, so putting it back is a copy away.
+
+That means the same content has two homes, which is deliberate:
+
+| | Best for |
+| --- | --- |
+| **Appearance → Customize** | Changing something once, everywhere it appears |
+| **Elementor** | Changing it on one page, or rearranging the page itself |
+| **Trades / Videos / FAQ / Glossary menus** | The master lists, used by every page that does not override them |
+
+Nothing is trapped in one place any more.
 
 ---
 

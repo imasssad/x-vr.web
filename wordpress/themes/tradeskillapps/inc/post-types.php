@@ -309,3 +309,82 @@ function tsa_video_items() {
 	}
 	return $rows;
 }
+
+/** Split a textarea into trimmed, non-empty lines. */
+function tsa_lines_of($raw) {
+	if (is_array($raw)) return array_values(array_filter(array_map('trim', $raw), 'strlen'));
+	return array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', (string) $raw)), 'strlen'));
+}
+
+/**
+ * The trade cards, from a page builder's own list if one was given for this
+ * placement, otherwise from Trades in the admin menu.
+ * Each row: slug, name, icon, title, desc, skills[], goal, sample, image.
+ */
+function tsa_trade_items() {
+	$o = &tsa_overrides();
+	$rows = array();
+
+	if (isset($o['trades.items']) && is_array($o['trades.items'])) {
+		foreach ($o['trades.items'] as $i => $row) {
+			if (!is_array($row)) continue;
+			$name = isset($row['name']) ? (string) $row['name'] : '';
+			$rows[] = array(
+				'slug'   => sanitize_title($name !== '' ? $name : 'trade-' . ($i + 1)),
+				'name'   => $name,
+				'icon'   => (isset($row['icon']) && array_key_exists($row['icon'], tsa_icon_choices())) ? $row['icon'] : 'i-weld',
+				'title'  => isset($row['title']) ? (string) $row['title'] : '',
+				'desc'   => isset($row['desc']) ? (string) $row['desc'] : '',
+				'skills' => tsa_lines_of(isset($row['skills']) ? $row['skills'] : ''),
+				'goal'   => isset($row['goal']) ? (string) $row['goal'] : '',
+				'sample' => isset($row['sample']) ? (string) $row['sample'] : '',
+				'image'  => array(
+					'src' => isset($row['image']) ? (string) $row['image'] : '',
+					'alt' => isset($row['alt']) ? (string) $row['alt'] : '',
+				),
+			);
+		}
+		return $rows;
+	}
+
+	foreach (tsa_items('tsa_trade') as $t) {
+		$rows[] = array(
+			'slug'   => $t->post_name,
+			'name'   => $t->post_title,
+			'icon'   => get_post_meta($t->ID, '_tsa_icon', true) ? get_post_meta($t->ID, '_tsa_icon', true) : 'i-weld',
+			'title'  => (string) get_post_meta($t->ID, '_tsa_title', true),
+			'desc'   => (string) get_post_meta($t->ID, '_tsa_desc', true),
+			'skills' => tsa_lines_of(get_post_meta($t->ID, '_tsa_skills', true)),
+			'goal'   => (string) get_post_meta($t->ID, '_tsa_goal', true),
+			'sample' => (string) get_post_meta($t->ID, '_tsa_sample', true),
+			'image'  => tsa_post_image($t->ID),
+		);
+	}
+	return $rows;
+}
+
+/**
+ * Question-and-answer rows for the FAQ or the glossary.
+ * $which is 'faq' or 'glossary'; each row: q, a.
+ */
+function tsa_qa_items($which) {
+	$o   = &tsa_overrides();
+	$key = $which . '.items';
+	$rows = array();
+
+	if (isset($o[$key]) && is_array($o[$key])) {
+		foreach ($o[$key] as $row) {
+			if (!is_array($row)) continue;
+			$rows[] = array(
+				'q' => isset($row['q']) ? (string) $row['q'] : '',
+				'a' => isset($row['a']) ? (string) $row['a'] : '',
+			);
+		}
+		return $rows;
+	}
+
+	foreach (tsa_items($which === 'faq' ? 'tsa_faq' : 'tsa_term') as $post) {
+		$rows[] = array('q' => $post->post_title, 'a' => tsa_plain_text($post->post_content));
+	}
+	return $rows;
+}

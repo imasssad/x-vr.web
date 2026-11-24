@@ -1,5 +1,5 @@
 <?php defined('ABSPATH') || exit;
-$sec_sfx = tsa_uid('sec-language'); $items = tsa_items('tsa_term'); ?>
+$sec_sfx = tsa_uid('sec-language'); $items = tsa_qa_items('glossary'); ?>
 <section class="band band--white" id="language<?php echo esc_attr($sec_sfx); ?>" aria-labelledby="language-h<?php echo esc_attr($sec_sfx); ?>">
 	<div class="wrap">
 		<div class="sec-head sec-head--split">

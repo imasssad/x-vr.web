@@ -55,7 +55,105 @@ class TSA_Section_Widget extends \Elementor\Widget_Base {
 		$this->register_text_controls();
 		$this->register_image_controls();
 		$this->register_video_controls();
+		$this->register_list_controls();
 		$this->register_posts_notice();
+	}
+
+	/**
+	 * The list sections - trades, FAQ entries, glossary terms - editable here
+	 * as well as in their admin menus. Same rule as everywhere: leave it
+	 * empty and the admin entries are used; add a row and this placement
+	 * shows its own list.
+	 */
+	private function register_list_controls() {
+		if (!class_exists('\Elementor\Repeater')) return;
+
+		$specs = array(
+			'trades' => array(
+				'label' => __('Trade cards', 'tradeskillapps'),
+				'menu'  => __('Trades', 'tradeskillapps'),
+				'title' => '{{{ name }}}',
+				'key'   => 'tsa_trades',
+				'rows'  => array(
+					array('name',   __('Tab name', 'tradeskillapps'), 'text'),
+					array('icon',   __('Icon', 'tradeskillapps'), 'icon'),
+					array('title',  __('Panel heading', 'tradeskillapps'), 'text'),
+					array('desc',   __('Description', 'tradeskillapps'), 'textarea'),
+					array('skills', __('Skills practised (one per line)', 'tradeskillapps'), 'textarea'),
+					array('goal',   __('Learning goal', 'tradeskillapps'), 'textarea'),
+					array('sample', __('Sample activity', 'tradeskillapps'), 'textarea'),
+					array('image',  __('Picture', 'tradeskillapps'), 'media'),
+					array('alt',    __('Picture description', 'tradeskillapps'), 'text'),
+				),
+			),
+			'faq' => array(
+				'label' => __('Questions', 'tradeskillapps'),
+				'menu'  => __('FAQ', 'tradeskillapps'),
+				'title' => '{{{ q }}}',
+				'key'   => 'tsa_faq',
+				'rows'  => array(
+					array('q', __('Question', 'tradeskillapps'), 'text'),
+					array('a', __('Answer', 'tradeskillapps'), 'textarea'),
+				),
+			),
+			'glossary' => array(
+				'label' => __('Terms', 'tradeskillapps'),
+				'menu'  => __('Glossary', 'tradeskillapps'),
+				'title' => '{{{ q }}}',
+				'key'   => 'tsa_glossary',
+				'rows'  => array(
+					array('q', __('Term', 'tradeskillapps'), 'text'),
+					array('a', __('Definition', 'tradeskillapps'), 'textarea'),
+				),
+			),
+		);
+
+		if (!isset($specs[$this->slug])) return;
+		$spec = $specs[$this->slug];
+
+		$this->start_controls_section('tsa_list', array('label' => $spec['label']));
+		$this->add_control('tsa_list_intro', array(
+			'type' => \Elementor\Controls_Manager::RAW_HTML,
+			'raw'  => sprintf(
+				/* translators: %s is an admin menu name */
+				esc_html__('Leave this empty to show the entries from %s in the main menu. Add one here and this section shows your list instead.', 'tradeskillapps'),
+				'<strong>' . esc_html($spec['menu']) . '</strong>'
+			),
+			'content_classes' => 'elementor-descriptor',
+		));
+
+		$row = new \Elementor\Repeater();
+		foreach ($spec['rows'] as $f) {
+			list($name, $label, $type) = $f;
+			if ($type === 'icon') {
+				$row->add_control($name, array(
+					'label'   => $label,
+					'type'    => \Elementor\Controls_Manager::SELECT,
+					'options' => tsa_icon_choices(),
+					'default' => 'i-weld',
+				));
+			} elseif ($type === 'media') {
+				$row->add_control($name, array('label' => $label, 'type' => \Elementor\Controls_Manager::MEDIA));
+			} else {
+				$row->add_control($name, array(
+					'label'       => $label,
+					'type'        => $type === 'textarea'
+						? \Elementor\Controls_Manager::TEXTAREA
+						: \Elementor\Controls_Manager::TEXT,
+					'rows'        => 3,
+					'label_block' => true,
+				));
+			}
+		}
+
+		$this->add_control($spec['key'], array(
+			'type'          => \Elementor\Controls_Manager::REPEATER,
+			'fields'        => $row->get_controls(),
+			'title_field'   => $spec['title'],
+			'default'       => array(),
+			'prevent_empty' => false,
+		));
+		$this->end_controls_section();
 	}
 
 	/**
@@ -122,7 +220,8 @@ class TSA_Section_Widget extends \Elementor\Widget_Base {
 	}
 
 	private function register_posts_notice() {
-		if (!$this->posts) return;
+		// Sections with a list of their own already explain the fall-back.
+		if (!$this->posts || in_array($this->slug, array('trades', 'faq', 'glossary', 'videos'), true)) return;
 		$this->start_controls_section('tsa_posts', array(
 			'label' => __('Entries', 'tradeskillapps'),
 		));
@@ -158,8 +257,50 @@ class TSA_Section_Widget extends \Elementor\Widget_Base {
 		$this->end_controls_section();
 	}
 
+	/**
+	 * Every editable string in this section, as a control.
+	 *
+	 * Built by walking the same content tree the Customizer walks, so the two
+	 * cannot drift: anything editable site-wide is editable here too, for
+	 * this placement. Returns relative path => spec.
+	 */
+	private function field_map() {
+		static $cache = array();
+		if (isset($cache[$this->group])) return $cache[$this->group];
+
+		$map = array();
+		$this->walk_fields(tsa_default($this->group), '', $map);
+		$cache[$this->group] = $map;
+		return $map;
+	}
+
+	private function walk_fields($node, $rel, &$map) {
+		if (is_array($node)) {
+			// pictures have their own panel
+			if (isset($node['src']) && array_key_exists('alt', $node)) return;
+			// a plain list of short strings edits as one-per-line
+			if ($node && array_keys($node) === range(0, count($node) - 1)
+				&& count(array_filter($node, 'is_string')) === count($node)) {
+				$map[$rel] = array('type' => 'lines', 'default' => implode("\n", $node));
+				return;
+			}
+			foreach ($node as $k => $v) {
+				$this->walk_fields($v, $rel === '' ? (string) $k : $rel . '.' . $k, $map);
+			}
+			return;
+		}
+		if (!is_string($node)) return;
+		$map[$rel] = array('type' => tsa_control_type($node), 'default' => $node);
+	}
+
+	/** 'stages.0.title' -> 'f_stages_0_title' (top-level keys keep 'f_title'). */
+	private function field_key($rel) {
+		return 'f_' . str_replace('.', '_', $rel);
+	}
+
 	private function register_text_controls() {
-		if (!$this->fields) {
+		$map = $this->field_map();
+		if (!$map) {
 			$this->start_controls_section('tsa_about', array(
 				'label' => __('Section', 'tradeskillapps'),
 			));
@@ -178,35 +319,42 @@ class TSA_Section_Widget extends \Elementor\Widget_Base {
 		$this->start_controls_section('tsa_content', array(
 			'label' => __('Wording', 'tradeskillapps'),
 		));
-
 		$this->add_control('tsa_intro', array(
 			'type' => \Elementor\Controls_Manager::RAW_HTML,
-			'raw'  => esc_html__('Leave a box empty to use the site-wide wording from the Customizer. Anything typed here applies to this placement only.', 'tradeskillapps'),
+			'raw'  => esc_html__('Leave a box empty to use the site-wide wording from the Customizer. Anything typed here applies to this placement only. The original is shown under each box.', 'tradeskillapps'),
 			'content_classes' => 'elementor-descriptor',
 		));
 
-		$labels = array(
-			'eyebrow'    => __('Small label above the headline', 'tradeskillapps'),
-			'headline'   => __('Headline', 'tradeskillapps'),
-			'headlineEm' => __('Headline - highlighted part', 'tradeskillapps'),
-			'quote'      => __('Quote', 'tradeskillapps'),
-			'quoteEm'    => __('Quote - highlighted part', 'tradeskillapps'),
-			'lede'       => __('Intro paragraph', 'tradeskillapps'),
-			'body'       => __('Body text', 'tradeskillapps'),
-			'note'       => __('Note', 'tradeskillapps'),
-		);
-		$multiline = array('lede', 'body', 'note', 'quote');
+		$group = '';
+		foreach ($map as $rel => $spec) {
+			$parts = explode('.', $rel);
+			$leaf  = array_pop($parts);
 
-		foreach ($this->fields as $field) {
-			$path = $this->group . '.' . $field;
-			$this->add_control('f_' . $field, array(
-				'label'       => isset($labels[$field]) ? $labels[$field] : ucfirst($field),
-				'type'        => in_array($field, $multiline, true)
-					? \Elementor\Controls_Manager::TEXTAREA
-					: \Elementor\Controls_Manager::TEXT,
+			// a heading whenever we move into a different block, so a long
+			// list of fields stays readable
+			$crumb = $parts ? implode(' ', array_map('tsa_label', $parts)) : '';
+			if ($crumb !== $group) {
+				$group = $crumb;
+				if ($crumb !== '') {
+					$this->add_control('h_' . str_replace('.', '_', implode('_', $parts)), array(
+						'type'      => \Elementor\Controls_Manager::HEADING,
+						'label'     => $crumb,
+						'separator' => 'before',
+					));
+				}
+			}
+
+			$this->add_control($this->field_key($rel), array(
+				'label'       => tsa_label($leaf),
+				'type'        => $spec['type'] === 'text'
+					? \Elementor\Controls_Manager::TEXT
+					: \Elementor\Controls_Manager::TEXTAREA,
 				'rows'        => 3,
 				'default'     => '',
-				'placeholder' => tsa_default($path),
+				'placeholder' => mb_substr((string) $spec['default'], 0, 120),
+				'description' => $spec['type'] === 'lines'
+					? __('One per line.', 'tradeskillapps')
+					: '',
 				'label_block' => true,
 			));
 		}
@@ -217,11 +365,10 @@ class TSA_Section_Widget extends \Elementor\Widget_Base {
 	protected function render() {
 		$settings  = $this->get_settings_for_display();
 		$overrides = array();
-		foreach ($this->fields as $field) {
-			$key = 'f_' . $field;
-			if (!empty($settings[$key])) {
-				$overrides[$this->group . '.' . $field] = $settings[$key];
-			}
+		foreach ($this->field_map() as $rel => $spec) {
+			$key = $this->field_key($rel);
+			if (empty($settings[$key])) continue;
+			$overrides[$this->group . '.' . $rel] = $settings[$key];
 		}
 
 		foreach ($this->images as $img) {
@@ -234,6 +381,20 @@ class TSA_Section_Widget extends \Elementor\Widget_Base {
 				$alt = get_post_meta((int) $settings[$key]['id'], '_wp_attachment_image_alt', true);
 				if ($alt !== '') $overrides[$img[1] . '.alt'] = $alt;
 			}
+		}
+
+		$lists = array('trades' => 'tsa_trades', 'faq' => 'tsa_faq', 'glossary' => 'tsa_glossary');
+		if (isset($lists[$this->slug]) && !empty($settings[$lists[$this->slug]])
+			&& is_array($settings[$lists[$this->slug]])) {
+			$rows = array();
+			foreach ($settings[$lists[$this->slug]] as $r) {
+				if (!is_array($r)) continue;
+				if (isset($r['image']) && is_array($r['image'])) {
+					$r['image'] = isset($r['image']['url']) ? $r['image']['url'] : '';
+				}
+				$rows[] = $r;
+			}
+			if ($rows) $overrides[$this->slug . '.items'] = $rows;
 		}
 
 		if ($this->slug === 'videos' && !empty($settings['tsa_films']) && is_array($settings['tsa_films'])) {

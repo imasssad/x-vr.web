@@ -1,5 +1,5 @@
 <?php defined('ABSPATH') || exit;
-$sec_sfx = tsa_uid('sec-faq'); $items = tsa_items('tsa_faq'); ?>
+$sec_sfx = tsa_uid('sec-faq'); $items = tsa_qa_items('faq'); ?>
 <section class="band band--white" id="faq<?php echo esc_attr($sec_sfx); ?>" aria-labelledby="faq-h<?php echo esc_attr($sec_sfx); ?>">
 	<div class="wrap">
 		<div class="sec-head">
