@@ -54,6 +54,15 @@ def main():
     # How the films are laid out: "feature" gives the first one the full
     # width of the column, "grid" makes them all the same size.
     data["videos"]["layout"] = "feature"
+    # The weld film supplied by the client ships with the theme, so the
+    # section has something real to lead with out of the box.
+    data["videos"]["items"][0].update({
+        "title": "Watch XVR Weld in action",
+        "blurb": "Learn the trades together in live, instructor-led multiplayer VR \u2014 see and "
+                 "hear your instructor and classmates as you practise.",
+        "file": "/assets/video/xvr-weld.mp4",
+        "poster": "/assets/video/xvr-weld-poster.webp",
+    })
     # og-image default path, editable in the Customizer and read by the theme.
     data["site"]["ogImage"] = "/assets/images/og-image.jpg"
 
@@ -70,6 +79,62 @@ def main():
     data["plannerSteps"] = {
         "learner": pl["learner"], "instructor": pl["instructor"], "closing": pl["closingStep"],
     }
+    # Two existing lines said pricing was not published yet. The licensing
+    # section below publishes the individual rate, so leaving them would make
+    # the page contradict itself. Reworded to stay true, not deleted.
+    data["access"]["cells"][1]["body"] = (
+        "The individual annual licence is published on this page. What a school or "
+        "workforce program pays depends on the learning package, headsets and "
+        "deployment needs, so site licences are quoted per school."
+    )
+    data["faq"]["items"][2]["a"] = (
+        "The individual annual licence is published on this page. Prices for schools and "
+        "programs depend on the package, headsets and deployment needs, and are quoted "
+        "per site. Very affordable access remains a core commitment."
+    )
+
+    # --- Sections taken from the client's XVR reference page -------------
+    # Live, instructor-led multiplayer VR: people share one virtual shop.
+    data["multiplayer"] = {
+        "eyebrow": "Live multiplayer instruction",
+        "headline": "Learn together",
+        "headlineEm": "inside the virtual shop.",
+        "lede": "Everyone joins the same virtual training space. You can see and hear your "
+                "instructor and classmates inside VR.",
+        "body": "Watch the instructor demonstrate a task, ask questions as they come up, and "
+                "hear the feedback your classmates receive as they practice.",
+        "steps": [
+            {"n": "01", "icon": "i-learn", "title": "Learn",
+             "body": "Watch the instructor demonstrate each step and explain why it matters."},
+            {"n": "02", "icon": "i-rehearse", "title": "Practice",
+             "body": "Try the procedure in VR and get feedback from your instructor as you work."},
+            {"n": "03", "icon": "i-apply", "title": "Apply",
+             "body": "Bring what you learned to the physical lab and practice with real tools."},
+        ],
+    }
+
+    # Annual licensing. The figure comes from the client's own page.
+    data["licensing"] = {
+        "eyebrow": "Annual licensing",
+        "headline": "What does it cost",
+        "headlineEm": "for schools?",
+        "lede": "Bring skilled trades education into your classroom with lessons, "
+                "instructor-led VR activities, and skills assessments in welding, HVAC, "
+                "advanced manufacturing, and drone technology.",
+        "individual": {
+            "label": "Individual",
+            "price": "$199.99",
+            "unit": "Per learner, per year",
+        },
+        "site": {
+            "label": "School site license",
+            "body": "Contact us for an annual quote covering unlimited users at one school site.",
+            "cta": {"label": "Request school pricing", "href": "#contact"},
+        },
+        "note": "Prices are per annual licence. Figures shown are the published individual "
+                "licence rate; site licences are quoted per school.",
+    }
+
     data["contact"] = {
         "eyebrow": "Get in touch",
         "headline": "Start a conversation.",

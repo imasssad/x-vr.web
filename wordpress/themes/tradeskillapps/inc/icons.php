@@ -34,6 +34,7 @@ function tsa_icon_sprite() {
 <symbol id="i-reflect" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5a2.3 2.3 0 0 1-2.3 2.3H8.2L3.6 21V5.6a2.3 2.3 0 0 1 2.3-2.3h12.8A2.3 2.3 0 0 1 21 5.6z"/><path d="M8.6 8.4h7.6M8.6 11.8h4.6"/></symbol>
 <symbol id="i-apply" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.1 3.4 4.8 13.2l-1.4 6.4 6.4-1.4L19.6 8.9a3.2 3.2 0 0 0 0-4.5l-.9-1a3.2 3.2 0 0 0-4.6 0z"/><path d="M12.2 5.4 17.6 10.8"/></symbol>
 <symbol id="i-reset" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.4 12a8.6 8.6 0 1 0 2.9-6.4"/><polyline points="3.1 3.6 3.1 8.4 7.9 8.4"/></symbol>
+<symbol id="i-drone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="6" height="6" rx="1.4"/><path d="M9.4 9.4 6 6M14.6 9.4 18 6M9.4 14.6 6 18M14.6 14.6 18 18"/><circle cx="4.6" cy="4.6" r="2.1"/><circle cx="19.4" cy="4.6" r="2.1"/><circle cx="4.6" cy="19.4" r="2.1"/><circle cx="19.4" cy="19.4" r="2.1"/></symbol>
 </defs>
 </svg>
 <?php }

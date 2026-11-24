@@ -98,6 +98,7 @@ function tsa_icon_choices() {
 		'i-manu' => __('Manufacturing', 'tradeskillapps'),
 		'i-cons' => __('Construction', 'tradeskillapps'),
 		'i-tech' => __('Emerging technology', 'tradeskillapps'),
+		'i-drone' => __('Drone technology', 'tradeskillapps'),
 	);
 }
 
@@ -291,8 +292,8 @@ function tsa_video_items() {
 				'title'  => isset($row['title']) ? (string) $row['title'] : '',
 				'blurb'  => isset($row['blurb']) ? (string) $row['blurb'] : '',
 				'embed'  => tsa_youtube_id(isset($row['embed']) ? $row['embed'] : ''),
-				'file'   => isset($row['file']) ? trim((string) $row['file']) : '',
-				'poster' => isset($row['poster']) ? (string) $row['poster'] : '',
+				'file'   => tsa_media_url(isset($row['file']) ? $row['file'] : ''),
+				'poster' => tsa_media_url(isset($row['poster']) ? $row['poster'] : ''),
 			);
 		}
 		return $rows;
@@ -303,8 +304,10 @@ function tsa_video_items() {
 			'title'  => $v->post_title,
 			'blurb'  => (string) get_post_meta($v->ID, '_tsa_blurb', true),
 			'embed'  => tsa_youtube_id(get_post_meta($v->ID, '_tsa_embed', true)),
-			'file'   => trim((string) get_post_meta($v->ID, '_tsa_file', true)),
-			'poster' => has_post_thumbnail($v->ID) ? get_the_post_thumbnail_url($v->ID, 'full') : '',
+			'file'   => tsa_media_url(get_post_meta($v->ID, '_tsa_file', true)),
+			'poster' => has_post_thumbnail($v->ID)
+				? get_the_post_thumbnail_url($v->ID, 'full')
+				: tsa_media_url(get_post_meta($v->ID, '_tsa_poster', true)),
 		);
 	}
 	return $rows;
@@ -387,4 +390,11 @@ function tsa_qa_items($which) {
 		$rows[] = array('q' => $post->post_title, 'a' => tsa_plain_text($post->post_content));
 	}
 	return $rows;
+}
+
+/** A media path: resolved against the theme when it ships with it. */
+function tsa_media_url($path) {
+	$path = trim((string) $path);
+	if ($path === '') return '';
+	return strpos($path, '/assets/') === 0 ? tsa_asset($path) : $path;
 }

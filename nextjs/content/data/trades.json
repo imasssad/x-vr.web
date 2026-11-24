@@ -120,6 +120,25 @@
         "src": "/assets/images/emerging-technology.webp",
         "alt": "Two students kneeling beside a humanoid robot and several wheeled rover robots on the floor of a technology lab"
       }
+    },
+    {
+      "slug": "drone-technology",
+      "name": "Drone technology",
+      "icon": "i-drone",
+      "title": "Uncrewed aircraft systems",
+      "desc": "Explore aircraft components, preflight checks and flight-planning fundamentals.",
+      "skills": [
+        "Aircraft components",
+        "Preflight checks",
+        "Flight planning",
+        "Airspace awareness"
+      ],
+      "goal": "Understand what an uncrewed aircraft is made of and what has to be checked before it leaves the ground.",
+      "sample": "Walk around a virtual airframe, identify each component, and work through a preflight checklist before planning a short flight.",
+      "image": {
+        "src": "",
+        "alt": ""
+      }
     }
   ]
 }

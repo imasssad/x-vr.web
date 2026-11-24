@@ -163,7 +163,7 @@ function tsa_defaults() {
 				),
 				array(
 					'title' => 'Pricing',
-					'body' => 'Actual costs depend on the learning package, headsets, and deployment needs; specific pricing will be published separately.',
+					'body' => 'The individual annual licence is published on this page. What a school or workforce program pays depends on the learning package, headsets and deployment needs, so site licences are quoted per school.',
 				),
 			),
 			'cta' => array(
@@ -460,7 +460,7 @@ function tsa_defaults() {
 				),
 				array(
 					'q' => 'Which products can I purchase today?',
-					'a' => 'Very affordable access is a core commitment of TradeSkillApps. Specific prices, packages, product availability, and technical requirements are not published here yet. The trade experiences illustrate our educational direction.',
+					'a' => 'The individual annual licence is published on this page. Prices for schools and programs depend on the package, headsets and deployment needs, and are quoted per site. Very affordable access remains a core commitment.',
 				),
 				array(
 					'q' => 'Where should a school start?',
@@ -590,6 +590,25 @@ function tsa_defaults() {
 					'alt' => 'Two students kneeling beside a humanoid robot and several wheeled rover robots on the floor of a technology lab',
 				),
 			),
+			array(
+				'slug' => 'drone-technology',
+				'name' => 'Drone technology',
+				'icon' => 'i-drone',
+				'title' => 'Uncrewed aircraft systems',
+				'desc' => 'Explore aircraft components, preflight checks and flight-planning fundamentals.',
+				'skills' => array(
+					'Aircraft components',
+					'Preflight checks',
+					'Flight planning',
+					'Airspace awareness',
+				),
+				'goal' => 'Understand what an uncrewed aircraft is made of and what has to be checked before it leaves the ground.',
+				'sample' => 'Walk around a virtual airframe, identify each component, and work through a preflight checklist before planning a short flight.',
+				'image' => array(
+					'src' => '',
+					'alt' => '',
+				),
+			),
 		),
 		'videos' => array(
 			'eyebrow' => 'Watch',
@@ -600,10 +619,10 @@ function tsa_defaults() {
 			'items' => array(
 				array(
 					'id' => 'story',
-					'title' => 'The TradeSkillApps story',
-					'blurb' => 'Why we started, who we build for, and what we want the next generation of tradespeople to walk into.',
-					'file' => '',
-					'poster' => '',
+					'title' => 'Watch XVR Weld in action',
+					'blurb' => 'Learn the trades together in live, instructor-led multiplayer VR — see and hear your instructor and classmates as you practise.',
+					'file' => '/assets/video/xvr-weld.mp4',
+					'poster' => '/assets/video/xvr-weld-poster.webp',
 					'embed' => '',
 				),
 				array(
@@ -742,6 +761,53 @@ function tsa_defaults() {
 				'Remember',
 				'VR prepares and reinforces. Supervised hands-on training develops and verifies practical competence, and no credential is awarded here.',
 			),
+		),
+		'multiplayer' => array(
+			'eyebrow' => 'Live multiplayer instruction',
+			'headline' => 'Learn together',
+			'headlineEm' => 'inside the virtual shop.',
+			'lede' => 'Everyone joins the same virtual training space. You can see and hear your instructor and classmates inside VR.',
+			'body' => 'Watch the instructor demonstrate a task, ask questions as they come up, and hear the feedback your classmates receive as they practice.',
+			'steps' => array(
+				array(
+					'n' => '01',
+					'icon' => 'i-learn',
+					'title' => 'Learn',
+					'body' => 'Watch the instructor demonstrate each step and explain why it matters.',
+				),
+				array(
+					'n' => '02',
+					'icon' => 'i-rehearse',
+					'title' => 'Practice',
+					'body' => 'Try the procedure in VR and get feedback from your instructor as you work.',
+				),
+				array(
+					'n' => '03',
+					'icon' => 'i-apply',
+					'title' => 'Apply',
+					'body' => 'Bring what you learned to the physical lab and practice with real tools.',
+				),
+			),
+		),
+		'licensing' => array(
+			'eyebrow' => 'Annual licensing',
+			'headline' => 'What does it cost',
+			'headlineEm' => 'for schools?',
+			'lede' => 'Bring skilled trades education into your classroom with lessons, instructor-led VR activities, and skills assessments in welding, HVAC, advanced manufacturing, and drone technology.',
+			'individual' => array(
+				'label' => 'Individual',
+				'price' => '$199.99',
+				'unit' => 'Per learner, per year',
+			),
+			'site' => array(
+				'label' => 'School site license',
+				'body' => 'Contact us for an annual quote covering unlimited users at one school site.',
+				'cta' => array(
+					'label' => 'Request school pricing',
+					'href' => '#contact',
+				),
+			),
+			'note' => 'Prices are per annual licence. Figures shown are the published individual licence rate; site licences are quoted per school.',
 		),
 		'contact' => array(
 			'eyebrow' => 'Get in touch',
