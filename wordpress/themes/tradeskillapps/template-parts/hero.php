@@ -3,7 +3,7 @@
 defined('ABSPATH') || exit;
 
 $img    = tsa_image('hero.image');
-$srcset = tsa_text('hero.image.srcSet');
+$srcset = tsa_srcset(tsa_text('hero.image.srcSet'));
 $strip  = tsa_lines('hero.strip');
 
 // Only render the <video> when a file is actually named, so the browser is

@@ -21,6 +21,29 @@ function tsa_asset($path) {
 	return get_template_directory_uri() . '/' . ltrim($path, '/');
 }
 
+/**
+ * A srcset whose candidates are shipped theme paths.
+ *
+ * The stored value looks like "/assets/images/x-800.webp 800w, ...", which is
+ * relative to the THEME, not the site root — WordPress serves the theme from
+ * /wp-content/themes/<name>/, so each candidate has to be resolved the same
+ * way a plain src is. Left raw, the browser prefers the srcset and every
+ * candidate 404s.
+ */
+function tsa_srcset($raw) {
+	if (!is_string($raw) || trim($raw) === '') return '';
+	$out = array();
+	foreach (explode(',', $raw) as $candidate) {
+		$candidate = trim($candidate);
+		if ($candidate === '') continue;
+		$bits = preg_split('/\s+/', $candidate, 2);
+		$url  = $bits[0];
+		if (strpos($url, '/assets/') === 0) $url = tsa_asset($url);
+		$out[] = isset($bits[1]) ? $url . ' ' . $bits[1] : $url;
+	}
+	return implode(', ', $out);
+}
+
 /** Is that shipped file actually present? */
 function tsa_asset_exists($path) {
 	return file_exists(get_template_directory() . '/' . ltrim($path, '/'));
@@ -177,7 +200,7 @@ function tsa_heading($base, $id = '', $class = '') {
 /** A framed picture, with the optional caption strip under it. */
 function tsa_figure($path, $ratio, $caption_path = null, $style = '', $class = '') {
 	$img    = tsa_image($path);
-	$srcset = tsa_text($path . '.srcSet');
+	$srcset = tsa_srcset(tsa_text($path . '.srcSet'));
 	$styles = 'aspect-ratio:' . $ratio . ($style ? ';' . $style : '');
 	printf('<figure class="frame frame--zoom rv %s" style="%s">', esc_attr($class), esc_attr($styles));
 
