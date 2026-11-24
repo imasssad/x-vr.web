@@ -762,6 +762,63 @@ function tsa_defaults() {
 				'VR prepares and reinforces. Supervised hands-on training develops and verifies practical competence, and no credential is awarded here.',
 			),
 		),
+		'curriculum' => array(
+			'eyebrow' => 'Manufacturing & automation / MAT-VR curriculum',
+			'headline' => 'Understand the systems.',
+			'headlineEm' => 'Build the technical foundation.',
+			'lede' => 'A structured learning pathway connecting electrical theory, mechanical technology, and industrial automation with practical projects and virtual MAT / safety labs.',
+			'stats' => array(
+				array(
+					'value' => '10',
+					'label' => 'courses',
+				),
+				array(
+					'value' => '140',
+					'label' => 'total hours',
+				),
+				array(
+					'value' => '14',
+					'label' => 'hours per course',
+				),
+				array(
+					'value' => '',
+					'label' => 'Virtual MAT / safety labs',
+				),
+			),
+			'body' => 'From understanding a circuit to troubleshooting an automated system, learners explore how manufacturing equipment works — and how technicians maintain it.',
+			'courses' => array(
+				array(
+					'codes' => 'MAT 001 · MAT 002 · MAT 005',
+					'title' => 'Electrical foundations & advanced AC',
+					'body' => 'Study direct and alternating current, circuit components, basic calculations, motors, relays, and resistors. Progress to three-phase circuits, transformers, electrical measurements, troubleshooting, and an introduction to NEC codes and standards.',
+				),
+				array(
+					'codes' => 'MAT 003',
+					'title' => 'Mechanical technology & shop fundamentals',
+					'body' => 'Explore manufacturing work, safety precautions, hand and power tools, fasteners, common mechanical components, and basic maintenance practices.',
+				),
+				array(
+					'codes' => 'MAT 004 · MAT 006 · MAT 007',
+					'title' => 'PLCs, programming & motor controls',
+					'body' => 'Build familiarity with programmable logic controllers, digital multimeters, and human-machine interfaces. Apply wiring, programming, assembly, and troubleshooting concepts through projects, then explore PLC diagrams and control of DC, AC, and three-phase motors.',
+				),
+				array(
+					'codes' => 'MAT 008 · MAT 009',
+					'title' => 'Heat transfer & system troubleshooting',
+					'body' => 'Learn conduction, convection, radiation, energy conversion, and industrial thermostat systems. Explore fluid-system troubleshooting and PLC systems that use HMI indicators and operator controls.',
+				),
+				array(
+					'codes' => 'MAT 010',
+					'title' => 'Industrial electronics & soldering',
+					'body' => 'Develop familiarity with electronic components, soldering tools, and printed circuit board projects that connect DC electrical concepts to industrial applications.',
+				),
+			),
+			'practiceEyebrow' => 'Education connected to practice',
+			'practiceHeadline' => 'Learn the concept.',
+			'practiceHeadlineEm' => 'Apply the process.',
+			'practiceBody' => 'The guide pairs technical instruction with project-based learning and lists a virtual MAT / safety lab for every course. Use immersive learning alongside instructor-guided practical work to strengthen understanding and prepare for further skill development.',
+			'note' => 'Summary of the supplied MAT-VR Curriculum Guide. The 140 hours are the sum of ten 14-hour courses. Course availability and delivery arrangements should be confirmed with the program; this outline does not promise a certification.',
+		),
 		'multiplayer' => array(
 			'eyebrow' => 'Live multiplayer instruction',
 			'headline' => 'Learn together',

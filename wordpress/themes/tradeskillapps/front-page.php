@@ -32,7 +32,7 @@ if ($tsa_owner_built) : ?>
 <main id="main">
 	<?php
 	foreach (array(
-		'hero', 'ticker', 'purpose', 'trades', 'approach', 'cycle', 'multiplayer',
+		'hero', 'ticker', 'purpose', 'trades', 'curriculum', 'approach', 'cycle', 'multiplayer',
 		'videos', 'pathways', 'educators', 'levels', 'mission', 'glossary',
 		'planner', 'access', 'licensing', 'faq', 'contact', 'closing',
 	) as $part) {

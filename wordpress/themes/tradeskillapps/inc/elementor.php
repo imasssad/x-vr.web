@@ -103,6 +103,8 @@ function tsa_elementor_sections() {
 			array('eyebrow','headline','headlineEm','lede','body'), array(), ''),
 		'trades'    => array('Trades', 'eicon-tabs', 'tradesSection',
 			array('eyebrow','headline','headlineEm','lede','note'), array(), 'Trades'),
+		'curriculum' => array('Curriculum (MAT-VR)', 'eicon-bullet-list', 'curriculum',
+			array('eyebrow','headline','headlineEm','lede','body','note'), array(), ''),
 		'approach'  => array('Our approach', 'eicon-text', 'approach',
 			array('eyebrow','headline','headlineEm','lede','note'),
 			array(array('Large picture', 'approach.heroImage'),

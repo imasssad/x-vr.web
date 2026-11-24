@@ -30,6 +30,7 @@ function tsa_customizer_sections() {
 		'ticker'        => __('Scrolling words', 'tradeskillapps'),
 		'purpose'       => __('Why this exists', 'tradeskillapps'),
 		'tradesSection' => __('Trades - section heading', 'tradeskillapps'),
+		'curriculum'    => __('Curriculum (MAT-VR)', 'tradeskillapps'),
 		'approach'      => __('Our approach', 'tradeskillapps'),
 		'learningCycle' => __('Learning cycle', 'tradeskillapps'),
 		'multiplayer'   => __('Learning together (multiplayer)', 'tradeskillapps'),
