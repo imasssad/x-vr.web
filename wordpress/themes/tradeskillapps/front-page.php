@@ -32,8 +32,8 @@ if ($tsa_owner_built) : ?>
 <main id="main">
 	<?php
 	foreach (array(
-		'hero', 'ticker', 'purpose', 'trades', 'curriculum', 'approach', 'cycle', 'multiplayer',
-		'videos', 'pathways', 'educators', 'levels', 'mission', 'glossary',
+		'hero', 'ticker', 'purpose', 'trades', 'videos', 'curriculum', 'approach',
+		'cycle', 'multiplayer', 'pathways', 'educators', 'levels', 'mission', 'glossary',
 		'planner', 'access', 'licensing', 'faq', 'contact', 'closing',
 	) as $part) {
 		get_template_part('template-parts/' . $part);
