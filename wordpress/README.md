@@ -184,13 +184,40 @@ none and the theme's is used. Nothing needs switching on.
 
 ### What this does not do
 
-The home page is a PHP template, not an Elementor document. It is faster that
-way and it is what the Customizer edits. To take the home page over in
-Elementor instead: build your page (the seventeen section widgets give you
-the same blocks), point **Settings → Reading → Homepage** at it, and edit it
-with Elementor — the theme notices the front page is Elementor-built and
-steps aside. Remove Elementor from that page (or point Reading elsewhere)
-and the original template comes straight back. Nothing is lost either way.
+The home page is a PHP template, not an Elementor document, and **it does
+not appear under Pages**. That is deliberate — it is why the page is fast,
+and it is what the Customizer edits. If you go looking for the home page in
+Pages you will not find it, and Elementor will not offer to edit it.
+
+### Where the home page's words actually are
+
+**Appearance → Customize → TradeSkillApps content.** Twenty-two sections in
+the order they appear down the page, every heading, paragraph, button and
+picture among them. Trades, Videos, FAQ and Glossary are in the main admin
+menu, because those are lists you add to and remove from.
+
+### Taking the home page over in Elementor
+
+If you would rather own the home page in the builder:
+
+1. **Pages → Add New**, call it `Home`, publish it empty.
+2. **Settings → Reading → Your homepage displays → A static page →
+   Homepage: Home.**
+3. Open that page and press **Edit with Elementor**. The theme stands aside
+   as soon as the editor opens, so you get an empty canvas to build on —
+   drag in the seventeen section widgets for the same blocks the old home
+   page used, in any order you like.
+4. Publish.
+
+Point **Settings → Reading** back at "Your latest posts" (or remove
+Elementor from that page) and the original template returns, exactly as it
+was. Nothing is lost either way.
+
+One thing to know before you choose: the section widgets let you place and
+reorder sections and override a few headline fields, but the detailed text
+inside them — the trade cards, the pathway stages, the FAQ — still comes
+from the Customizer and the admin menus. Elementor gives you the layout;
+the Customizer keeps the words.
 
 ---
 

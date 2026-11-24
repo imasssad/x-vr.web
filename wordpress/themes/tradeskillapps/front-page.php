@@ -15,7 +15,14 @@ $tsa_front_id = (int) get_option('page_on_front');
 $tsa_owner_built = 'page' === get_option('show_on_front')
 	&& $tsa_front_id
 	&& function_exists('tsa_built_with_elementor')
-	&& tsa_built_with_elementor($tsa_front_id);
+	&& (
+		tsa_built_with_elementor($tsa_front_id)
+		// ...or it is being built right now. Without this the Elementor
+		// editor would preview these sections instead of the page, leaving
+		// nowhere to drop a widget - a page could never become
+		// Elementor-built, so the handover could never happen.
+		|| tsa_elementor_editing($tsa_front_id)
+	);
 
 if ($tsa_owner_built) : ?>
 <main id="main" class="tsa-elementor-page">

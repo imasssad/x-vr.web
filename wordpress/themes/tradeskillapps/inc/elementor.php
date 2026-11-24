@@ -39,6 +39,28 @@ function tsa_built_with_elementor($post_id = null) {
 }
 
 /**
+ * Is Elementor's editor or its preview iframe loading this page right now?
+ *
+ * Read from the request, deliberately: Elementor's internal preview/editor
+ * classes have changed between versions and calling them from a template has
+ * been reported to throw and drop the editor into safe mode. These two
+ * parameters have been stable for years.
+ *
+ * This is what makes taking over the home page possible at all: until the
+ * page has Elementor content, is_built_with_elementor() is false, so without
+ * this the editor would keep previewing the theme's own sections and there
+ * would be nowhere to drop a widget.
+ */
+function tsa_elementor_editing($post_id = 0) {
+	if (isset($_GET['elementor-preview'])) {
+		$previewing = (int) $_GET['elementor-preview'];
+		if ($previewing && (!$post_id || $previewing === (int) $post_id)) return true;
+	}
+	if (isset($_GET['action']) && $_GET['action'] === 'elementor') return true;
+	return false;
+}
+
+/**
  * Lets Elementor Pro take over a region. Returns true when it did, so the
  * caller can skip its own markup. Always false without Pro.
  */
