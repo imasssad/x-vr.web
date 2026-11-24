@@ -167,7 +167,7 @@ class TSA_Section_Widget extends \Elementor\Widget_Base {
 	private function register_video_controls() {
 		if ($this->slug !== 'videos' || !class_exists('\Elementor\Repeater')) return;
 
-		$this->start_controls_section('tsa_films', array(
+		$this->start_controls_section('tsa_films_section', array(
 			'label' => __('Films', 'tradeskillapps'),
 		));
 
@@ -326,6 +326,7 @@ class TSA_Section_Widget extends \Elementor\Widget_Base {
 		));
 
 		$group = '';
+		$heading_n = 0;   // headings are numbered: a block's name can recur
 		foreach ($map as $rel => $spec) {
 			$parts = explode('.', $rel);
 			$leaf  = array_pop($parts);
@@ -336,7 +337,7 @@ class TSA_Section_Widget extends \Elementor\Widget_Base {
 			if ($crumb !== $group) {
 				$group = $crumb;
 				if ($crumb !== '') {
-					$this->add_control('h_' . str_replace('.', '_', implode('_', $parts)), array(
+					$this->add_control('h' . (++$heading_n) . '_' . str_replace('.', '_', implode('_', $parts)), array(
 						'type'      => \Elementor\Controls_Manager::HEADING,
 						'label'     => $crumb,
 						'separator' => 'before',
