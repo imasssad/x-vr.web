@@ -21,7 +21,7 @@ Activate it and the finished site is there.
 2. Choose `tradeskillapps.zip`
 3. **Install Now**, then **Activate**
 
-On activation the theme creates the six trades, three video slots, four FAQ
+On activation the theme creates the seven trades, three films, four FAQ
 entries and four glossary terms it ships with. That happens once; it never
 overwrites anything you have changed.
 
@@ -40,13 +40,14 @@ overwrites anything you have changed.
 | What | Where |
 | --- | --- |
 | Every heading, paragraph, button and picture | **Appearance → Customize → XVR Trade Skills content** |
-| The six trade cards | **Trades** in the main admin menu |
-| The three video slots | **Videos** |
+| The trade cards | **Trades** in the main admin menu |
+| The films | **Videos** |
 | Questions and answers | **FAQ** |
 | Glossary terms | **Glossary** |
+| Curriculum, licensing and multiplayer sections | **Customize → XVR Trade Skills content** |
 | Where enquiries are emailed | **Customize → Contact form → Send enquiries to** |
 
-The Customizer panel has 22 sections in the order they appear down the page,
+The Customizer panel lists every section in the order it appears down the page,
 so finding a piece of text means scrolling to roughly where you see it.
 
 Collections are posts because you add to and remove from them: a seventh
@@ -175,7 +176,7 @@ page.
 
 ### 2. The site's own sections are draggable widgets
 
-The widget panel has a **XVR Trade Skills** heading holding all seventeen
+The widget panel has an **XVR Trade Skills** heading holding every
 sections of the home page — Hero, Trades, Videos, Career pathways, Starter
 planner, Contact form and the rest.
 
@@ -229,7 +230,7 @@ One button does the whole thing:
 
 **Appearance → Home in Elementor → "Build my home page in Elementor"**
 
-It creates a page containing all seventeen sections already arranged in
+It creates a page containing every section already arranged in
 order, makes it the home page, and gives you an "Edit the home page with
 Elementor" link. Open that and you are looking at your finished site inside
 the builder — ready to swap pictures, reorder sections, or add anything
