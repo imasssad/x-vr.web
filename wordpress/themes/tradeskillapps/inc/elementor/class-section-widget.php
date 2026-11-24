@@ -173,6 +173,22 @@ class TSA_Section_Widget extends \Elementor\Widget_Base {
 		}
 
 		$previous = tsa_set_overrides($overrides);
+
+		// Inside the builder each section is one widget, and its edit handle
+		// sits at the far right of a full-width block where it is easy to
+		// miss - so the section says what it is and that it can be clicked.
+		// Never rendered on the live site.
+		if (function_exists('tsa_elementor_editing') && tsa_elementor_editing()) {
+			printf(
+				'<span class="tsa-edit-badge" aria-hidden="true">%s</span>',
+				esc_html(sprintf(
+					/* translators: %s is the name of a section, e.g. "Our approach" */
+					__('%s — click to edit this section', 'tradeskillapps'),
+					$this->label
+				))
+			);
+		}
+
 		get_template_part('template-parts/' . $this->slug);
 		tsa_set_overrides($previous);
 	}

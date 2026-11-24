@@ -208,6 +208,24 @@ Elementor" link. Open that and you are looking at your finished site inside
 the builder — ready to swap pictures, reorder sections, or add anything
 Elementor offers.
 
+#### Selecting a section in the builder
+
+Each website section is **one widget**. Clicking a section usually selects
+the *section wrapper* first — the panel then shows Layout, Content Width and
+Columns Gap, which are Elementor's own settings, not the content.
+
+To reach the content, select the widget inside it. Three ways:
+
+- Hover the section: it gets a dashed blue outline and a label reading
+  "<name> — click to edit this section". Click inside that outline.
+- Use the blue pencil handle at the **top-right corner** of the section.
+- Open the **Navigator** (the layers icon at the bottom of the panel, or
+  press `Cmd/Ctrl + I`) and click the section's widget in the tree. This is
+  the most reliable way, and it names every section.
+
+The panel then shows **Wording** and, where the section has photographs,
+**Pictures**.
+
 Pictures are editable right there: every section that shows a photograph has
 a **Pictures** panel in its widget settings, and choosing a new image also
 picks up that image's description from the Media Library, so the site stays
