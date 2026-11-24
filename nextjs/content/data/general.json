@@ -1,9 +1,9 @@
 {
   "site": {
     "domain": "https://tradeskillapps.com",
-    "name": "TradeSkillApps",
-    "title": "TradeSkillApps — Learn the trade. Build the skill. Change your future.",
-    "description": "TradeSkillApps brings technical lessons to life through immersive VR education — connecting what students need to know with what they need to do. Education first. Affordability at the core.",
+    "name": "XVR Trade Skills",
+    "title": "XVR Trade Skills — Learn the trade. Build the skill. Change your future.",
+    "description": "XVR Trade Skills brings technical lessons to life through immersive VR education — connecting what students need to know with what they need to do. Education first. Affordability at the core.",
     "ogImage": "/assets/images/og-image.jpg"
   },
   "nav": [
@@ -54,7 +54,7 @@
         "href": "#start"
       }
     ],
-    "copyright": "© 2026 TradeSkillApps",
+    "copyright": "© 2026 XVR Trade Skills",
     "strap": "Education first. Opportunity ahead."
   }
 }

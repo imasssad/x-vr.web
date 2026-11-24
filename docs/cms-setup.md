@@ -25,7 +25,7 @@ This is what lets the editor sign people in.
 
    | Field | Value |
    | --- | --- |
-   | Application name | `TradeSkillApps content editor` |
+   | Application name | `XVR Trade Skills content editor` |
    | Homepage URL | `https://tradeskillapps.com` |
    | Authorization callback URL | `https://tradeskillapps.com/api/callback` |
 

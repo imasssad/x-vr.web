@@ -88,7 +88,7 @@ function tsa_control_type($value) {
 
 function tsa_customize_register($wp_customize) {
 	$wp_customize->add_panel('tsa_content', array(
-		'title'       => __('TradeSkillApps content', 'tradeskillapps'),
+		'title'       => __('XVR Trade Skills content', 'tradeskillapps'),
 		'description' => __('Every word and picture on the page. Trades, videos, FAQ entries and glossary terms are edited as posts in the main menu instead, because you add and remove those. Note: clearing a text field leaves that spot empty on the page - it does not bring the original wording back. The original is shown underneath each field.', 'tradeskillapps'),
 		'priority'    => 20,
 	));

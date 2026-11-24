@@ -1,6 +1,6 @@
 <?php
 /**
- * TradeSkillApps theme.
+ * XVR Trade Skills theme.
  *
  * The page is assembled from template-parts/, its words come from the
  * Customizer (with the shipped copy as defaults), and its lists come from

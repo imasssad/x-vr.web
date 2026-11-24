@@ -10,7 +10,7 @@
  *  2. Theme Builder locations, so Elementor Pro can replace the header,
  *     footer, single or archive. Without Pro these do nothing and the theme's
  *     own templates are used.
- *  3. The site's own sections as draggable widgets, under a TradeSkillApps
+ *  3. The site's own sections as draggable widgets, under an XVR Trade Skills
  *     heading in the widget panel. This is the part that makes the design
  *     reusable: a page can be built from the same blocks the home page uses.
  *
@@ -78,7 +78,7 @@ add_action('elementor/theme/register_locations', function ($manager) {
 
 add_action('elementor/elements/categories_registered', function ($manager) {
 	$manager->add_category('tradeskillapps', array(
-		'title' => __('TradeSkillApps', 'tradeskillapps'),
+		'title' => __('XVR Trade Skills', 'tradeskillapps'),
 		'icon'  => 'eicon-parallax',
 	));
 });

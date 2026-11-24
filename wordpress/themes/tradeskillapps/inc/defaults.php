@@ -151,7 +151,7 @@ function tsa_defaults() {
 			'headline' => 'Big possibilities.',
 			'headlineEm' => 'A very affordable way in.',
 			'lede' => 'High-quality trade education should be within reach of the people ready to learn — and the people ready to teach.',
-			'body' => 'TradeSkillApps puts affordability at the center of its educational vision. Our goal is to help individual learners, technical schools, and workforce programs bring immersive learning into their training without making cost the barrier. Repeatable virtual practice creates opportunities to revisit a lesson before using shop time and physical materials.',
+			'body' => 'XVR Trade Skills puts affordability at the center of its educational vision. Our goal is to help individual learners, technical schools, and workforce programs bring immersive learning into their training without making cost the barrier. Repeatable virtual practice creates opportunities to revisit a lesson before using shop time and physical materials.',
 			'image' => array(
 				'src' => '/assets/images/access-equipment.webp',
 				'alt' => 'A training shop floor lined with drill presses, bench grinders and welding machines',
@@ -173,9 +173,9 @@ function tsa_defaults() {
 		),
 		'site' => array(
 			'domain' => 'https://tradeskillapps.com',
-			'name' => 'TradeSkillApps',
-			'title' => 'TradeSkillApps — Learn the trade. Build the skill. Change your future.',
-			'description' => 'TradeSkillApps brings technical lessons to life through immersive VR education — connecting what students need to know with what they need to do. Education first. Affordability at the core.',
+			'name' => 'XVR Trade Skills',
+			'title' => 'XVR Trade Skills — Learn the trade. Build the skill. Change your future.',
+			'description' => 'XVR Trade Skills brings technical lessons to life through immersive VR education — connecting what students need to know with what they need to do. Education first. Affordability at the core.',
 			'ogImage' => '/assets/images/og-image.jpg',
 		),
 		'nav' => array(
@@ -226,14 +226,14 @@ function tsa_defaults() {
 					'href' => '#start',
 				),
 			),
-			'copyright' => '© 2026 TradeSkillApps',
+			'copyright' => '© 2026 XVR Trade Skills',
 			'strap' => 'Education first. Opportunity ahead.',
 		),
 		'hero' => array(
 			'eyebrow' => 'The next dimension of trade education',
 			'headline' => 'Learn the trade. Build the skill.',
 			'headlineEm' => 'Change your future.',
-			'lede' => 'TradeSkillApps brings technical lessons to life through immersive VR education — connecting what students need to know with what they need to do. Understand the tools. Practice the process. Prepare for hands-on work. All with very affordable access at the heart of our mission.',
+			'lede' => 'XVR Trade Skills brings technical lessons to life through immersive VR education — connecting what students need to know with what they need to do. Understand the tools. Practice the process. Prepare for hands-on work. All with very affordable access at the heart of our mission.',
 			'primaryCta' => array(
 				'label' => 'Find your trade',
 				'href' => '#trades',
@@ -360,14 +360,14 @@ function tsa_defaults() {
 					'Preparation for supervised hands-on practice',
 				),
 			),
-			'note' => 'Learning examples describe our educational vision. The original classroom artwork shows the youth-focused learning environment that inspires TradeSkillApps.',
+			'note' => 'Learning examples describe our educational vision. The original classroom artwork shows the youth-focused learning environment that inspires XVR Trade Skills.',
 		),
 		'purpose' => array(
 			'eyebrow' => '01 / Our Purpose',
 			'headline' => 'Better education. Within reach.',
 			'headlineEm' => 'Within budget.',
 			'lede' => 'The case for better trade education is well established. The challenge has always been deployment — bringing effective instruction, equipment, practice and support to every learner who needs them.',
-			'body' => 'TradeSkillApps is built to close the gap between knowing about a trade and understanding how the work happens. Our educational vision combines technical instruction, immersive practice, instructor guidance and real-world application. Students explore tools and systems, connect each step to its purpose, and prepare to apply that understanding under supervision in the shop.',
+			'body' => 'XVR Trade Skills is built to close the gap between knowing about a trade and understanding how the work happens. Our educational vision combines technical instruction, immersive practice, instructor guidance and real-world application. Students explore tools and systems, connect each step to its purpose, and prepare to apply that understanding under supervision in the shop.',
 			'pillars' => array(
 				array(
 					'n' => '01',
@@ -392,7 +392,7 @@ function tsa_defaults() {
 			'quoteEm' => 'building what comes next.',
 			'body' => array(
 				'Black Americans belong at the center of the future of skilled trades — as technicians, craftspeople, instructors, innovators and business owners.',
-				'TradeSkillApps envisions an accessible path for learners from every background. Whether you are discovering a first career, changing direction, or strengthening an existing skill, the goal is the same: make meaningful education more affordable, more engaging, and easier to reach.',
+				'XVR Trade Skills envisions an accessible path for learners from every background. Whether you are discovering a first career, changing direction, or strengthening an existing skill, the goal is the same: make meaningful education more affordable, more engaging, and easier to reach.',
 			),
 			'cta' => array(
 				'label' => 'Build your learning pathway',
@@ -456,7 +456,7 @@ function tsa_defaults() {
 				),
 				array(
 					'q' => 'Can I earn a license or certification here?',
-					'a' => 'This website introduces the TradeSkillApps vision and offers career exploration. It does not award credentials. Check requirements with the relevant training provider, licensing authority, or certifying organization.',
+					'a' => 'This website introduces the XVR Trade Skills vision and offers career exploration. It does not award credentials. Check requirements with the relevant training provider, licensing authority, or certifying organization.',
 				),
 				array(
 					'q' => 'Which products can I purchase today?',

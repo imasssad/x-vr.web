@@ -1,4 +1,4 @@
-# TradeSkillApps — WordPress theme
+# XVR Trade Skills — WordPress theme
 
 `themes/tradeskillapps/` is the site as a self-contained WordPress theme. It
 carries the same design, the same words and the same pictures as the original
@@ -8,6 +8,12 @@ Nothing else is required: no page builder, no paid plugin, no setup wizard.
 Activate it and the finished site is there.
 
 ---
+
+> **The theme folder is still called `tradeskillapps`, on purpose.** WordPress
+> keeps every Customizer setting under a key derived from the folder name, so
+> renaming the folder would orphan all of the site's saved wording and
+> pictures. The folder name is invisible to visitors; the theme shows as
+> **XVR Trade Skills** everywhere a person looks.
 
 ## Installing
 
@@ -33,7 +39,7 @@ overwrites anything you have changed.
 
 | What | Where |
 | --- | --- |
-| Every heading, paragraph, button and picture | **Appearance → Customize → TradeSkillApps content** |
+| Every heading, paragraph, button and picture | **Appearance → Customize → XVR Trade Skills content** |
 | The six trade cards | **Trades** in the main admin menu |
 | The three video slots | **Videos** |
 | Questions and answers | **FAQ** |
@@ -163,7 +169,7 @@ page.
 
 ### 2. The site's own sections are draggable widgets
 
-The widget panel has a **TradeSkillApps** heading holding all seventeen
+The widget panel has a **XVR Trade Skills** heading holding all seventeen
 sections of the home page — Hero, Trades, Videos, Career pathways, Starter
 planner, Contact form and the rest.
 
@@ -206,7 +212,7 @@ Pages you will not find it, and Elementor will not offer to edit it.
 
 ### Where the home page's words actually are
 
-**Appearance → Customize → TradeSkillApps content.** Twenty-two sections in
+**Appearance → Customize → XVR Trade Skills content.** Twenty-two sections in
 the order they appear down the page, every heading, paragraph, button and
 picture among them. Trades, Videos, FAQ and Glossary are in the main admin
 menu, because those are lists you add to and remove from.
