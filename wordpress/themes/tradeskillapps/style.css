@@ -3,7 +3,7 @@ Theme Name: XVR Trade Skills
 Theme URI: https://tradeskillapps.com
 Author: XVR Trade Skills
 Description: The XVR Trade Skills single-page site as an editable WordPress theme. Every heading, paragraph, picture and video is editable from Appearance > Customize, and the trades, videos, FAQ and glossary are editable as normal WordPress posts. Ships with the finished copy already in place.
-Version: 1.11.0
+Version: 1.12.0
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 7.4
@@ -839,12 +839,14 @@ body.admin-bar .nav{top:32px}
    mark would and no wordmark beside it. */
 .brand--logo{display:inline-flex;align-items:center;gap:0}
 .brand__logo{display:block;width:auto;max-width:none}
-/* The header lockup has no strapline, so it can run taller and stay crisp. */
-.brand--nav .brand__logo{height:54px}
-@media(max-width:640px){.brand--nav .brand__logo{height:42px}}
+/* The header lockup has no strapline, so it stays readable small. The
+   width/height attributes on the image already set this; these rules only
+   handle the narrow screens. */
+.brand--nav .brand__logo{height:44px}
+@media(max-width:640px){.brand--nav .brand__logo{height:36px}}
 /* The footer shows the whole thing, strapline included. */
-.brand--full .brand__logo{height:78px}
-@media(max-width:640px){.brand--full .brand__logo{height:62px}}
+.brand--full .brand__logo{height:64px}
+@media(max-width:640px){.brand--full .brand__logo{height:52px}}
 /* On the navy bands the logo's black tagline would disappear, so it sits on
    a soft white plate rather than being recoloured. */
 .on-navy .brand__logo,.foot .brand__logo{

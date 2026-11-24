@@ -143,21 +143,33 @@ function tsa_brand($class = 'brand', $variant = 'nav') {
 		<?php if (has_custom_logo()) {
 			$id = get_theme_mod('custom_logo');
 			echo wp_get_attachment_image($id, 'full', false, array(
-				'class' => 'brand__logo', 'alt' => $name,
+				'class' => 'brand__logo',
+				'alt'   => $name,
+				// a ceiling that survives a stale stylesheet
+				'style' => 'height:' . ($variant === 'full' ? 64 : 44) . 'px;width:auto',
 			));
 		} else {
 			$base = get_template_directory_uri() . '/assets/brand';
 			// The navigation uses the lockup without the strapline: at the
 			// height a header allows, the strapline is a few pixels tall and
 			// reads as a smudge. The footer has room for the whole thing.
-			$file = $variant === 'full' ? 'xvr-logo' : 'xvr-logo-nav';
+			$full = ($variant === 'full');
+			$file = $full ? 'xvr-logo' : 'xvr-logo-nav';
+			// Real width and height attributes, at the size it is meant to
+			// appear. Without them the browser lays the file out at its own
+			// width, which is what a stale cached stylesheet produced: a
+			// logo several hundred pixels wide sprawling over the hero. With
+			// them the worst a missing stylesheet can do is nothing at all.
+			$h = $full ? 64 : 44;
+			$w = (int) round($h * ($full ? 1.931 : 2.143));
 			printf(
-				'<img class="brand__logo" src="%1$s/%2$s.png" srcset="%1$s/%2$s.png 1x, %1$s/%2$s@2x.png 2x" alt="%3$s" decoding="async" />',
+				'<img class="brand__logo" src="%1$s/%2$s.png" srcset="%1$s/%2$s.png 1x, %1$s/%2$s@2x.png 2x" width="%4$d" height="%5$d" alt="%3$s" decoding="async" />',
 				esc_url($base),
 				esc_attr($file),
-				esc_attr($variant === 'full'
+				esc_attr($full
 					? __('XVR Trades - Skilled Labor Trades to Apprenticeships', 'tradeskillapps')
-					: __('XVR Trades', 'tradeskillapps'))
+					: __('XVR Trades', 'tradeskillapps')),
+				$w, $h
 			);
 		} ?>
 	</a>
