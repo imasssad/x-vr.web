@@ -126,23 +126,40 @@ function tsa_note($path, $style = '') {
 	echo '</p></div>';
 }
 
-/** The brand mark and wordmark. */
-function tsa_brand($class = 'brand') {
+/**
+ * The brand lockup.
+ *
+ * The supplied logo carries the name inside it, so no separate wordmark is
+ * printed beside it - that would say "XVR" twice. A logo uploaded under
+ * Appearance > Customize > Site Identity replaces it.
+ */
+function tsa_brand($class = 'brand', $variant = 'nav') {
+	$home = home_url('/');
+	$name = tsa_text('site.name');
 	?>
-	<a class="<?php echo esc_attr($class); ?>" href="<?php echo esc_url(home_url('/')); ?>#top"
-	   aria-label="<?php echo esc_attr(sprintf(__('%s - home', 'tradeskillapps'), tsa_text('site.name'))); ?>">
+	<a class="<?php echo esc_attr($class); ?> brand--logo brand--<?php echo esc_attr($variant); ?>"
+	   href="<?php echo esc_url($home); ?>#top"
+	   aria-label="<?php echo esc_attr(sprintf(__('%s - home', 'tradeskillapps'), $name)); ?>">
 		<?php if (has_custom_logo()) {
 			$id = get_theme_mod('custom_logo');
-			echo wp_get_attachment_image($id, 'full', false, array('class' => 'brand__mark', 'alt' => ''));
-		} else { ?>
-			<svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true">
-				<polygon points="32.00,61.90 6.11,46.95 6.11,17.05 32.00,2.10 57.89,17.05 57.89,46.95"
-					fill="#15283F" stroke="#15283F" stroke-width="2.4" stroke-linejoin="round" />
-				<path d="M18.4 15.0 L25.6 15.0 L32.0 26.0 L38.4 15.0 L45.6 15.0 L35.6 31.0 L46.2 47.4 L38.9 47.4 L32.0 36.0 L25.1 47.4 L17.8 47.4 L28.4 31.0 Z"
-					fill="#FFFFFF" />
-			</svg>
-		<?php } ?>
-		<span class="brand__name"><span class="brand__accent">XVR</span> Trade Skills</span>
+			echo wp_get_attachment_image($id, 'full', false, array(
+				'class' => 'brand__logo', 'alt' => $name,
+			));
+		} else {
+			$base = get_template_directory_uri() . '/assets/brand';
+			// The navigation uses the lockup without the strapline: at the
+			// height a header allows, the strapline is a few pixels tall and
+			// reads as a smudge. The footer has room for the whole thing.
+			$file = $variant === 'full' ? 'xvr-logo' : 'xvr-logo-nav';
+			printf(
+				'<img class="brand__logo" src="%1$s/%2$s.png" srcset="%1$s/%2$s.png 1x, %1$s/%2$s@2x.png 2x" alt="%3$s" decoding="async" />',
+				esc_url($base),
+				esc_attr($file),
+				esc_attr($variant === 'full'
+					? __('XVR Trades - Skilled Labor Trades to Apprenticeships', 'tradeskillapps')
+					: __('XVR Trades', 'tradeskillapps'))
+			);
+		} ?>
 	</a>
 	<?php
 }

@@ -85,6 +85,7 @@ function tsa_meta_fields($type) {
 			'blurb' => array(__('Description', 'tradeskillapps'), 'textarea', ''),
 			'embed' => array(__('YouTube video id', 'tradeskillapps'), 'text', __('The part after v= in a YouTube address. Easiest option - leave the box below empty.', 'tradeskillapps')),
 			'file'  => array(__('Video file URL', 'tradeskillapps'), 'text', __('Only if the film is uploaded to this site instead.', 'tradeskillapps')),
+			'poster' => array(__('Still image URL', 'tradeskillapps'), 'text', __('Shown before the film plays. A featured image set above wins over this.', 'tradeskillapps')),
 		);
 	}
 	return array();
@@ -167,66 +168,110 @@ function tsa_items($type, $limit = 50) {
 }
 
 /**
- * First run: create the entries the site ships with, so the theme looks
- * finished immediately. Runs once; never overwrites anything already there.
+ * Keep the shipped entries in step with the theme.
+ *
+ * This used to run once and never again, which meant a site activated last
+ * month never received anything added since - a new trade stayed invisible,
+ * and a film added to the defaults never reached the video that was already
+ * there. It now runs whenever the theme version changes, and does two
+ * careful things:
+ *
+ *   1. Creates any shipped entry whose slug is missing.
+ *   2. Fills a field on an existing entry ONLY where that field is currently
+ *      empty and the theme now ships something for it.
+ *
+ * It never replaces a value the owner has written. Anything they typed, or
+ * deliberately cleared and then typed over, stays exactly as it is; a field
+ * they cleared and left empty may be refilled, which is the one trade-off
+ * and the reason the rule is "empty only".
  */
-function tsa_seed_content() {
-	if (get_option('tsa_seeded')) return;
-
+function tsa_sync_shipped_content() {
 	$d = tsa_defaults();
 
+	/* ---- trades ---- */
 	foreach ((isset($d['trades']) ? $d['trades'] : array()) as $i => $t) {
-		if (get_page_by_path($t['slug'], OBJECT, 'tsa_trade')) continue;
-		$id = wp_insert_post(array(
-			'post_type' => 'tsa_trade', 'post_status' => 'publish',
-			'post_title' => $t['name'], 'post_name' => $t['slug'], 'menu_order' => $i,
-		));
-		if (!$id || is_wp_error($id)) continue;
-		update_post_meta($id, '_tsa_title',  $t['title']);
-		update_post_meta($id, '_tsa_desc',   $t['desc']);
-		update_post_meta($id, '_tsa_skills', implode("\n", $t['skills']));
-		update_post_meta($id, '_tsa_goal',   $t['goal']);
-		update_post_meta($id, '_tsa_sample', $t['sample']);
-		update_post_meta($id, '_tsa_icon',   $t['icon']);
+		$meta = array(
+			'_tsa_title'  => $t['title'],
+			'_tsa_desc'   => $t['desc'],
+			'_tsa_skills' => implode("\n", $t['skills']),
+			'_tsa_goal'   => $t['goal'],
+			'_tsa_sample' => $t['sample'],
+			'_tsa_icon'   => $t['icon'],
+		);
 		if (!empty($t['image']['src'])) {
-			update_post_meta($id, '_tsa_shipped_image', $t['image']['src']);
-			update_post_meta($id, '_tsa_shipped_alt',   isset($t['image']['alt']) ? $t['image']['alt'] : '');
+			$meta['_tsa_shipped_image'] = $t['image']['src'];
+			$meta['_tsa_shipped_alt']   = isset($t['image']['alt']) ? $t['image']['alt'] : '';
 		}
+		tsa_upsert_shipped('tsa_trade', $t['slug'], $t['name'], '', $i, $meta);
 	}
 
+	/* ---- videos ---- */
 	foreach ((isset($d['videos']['items']) ? $d['videos']['items'] : array()) as $i => $v) {
-		if (get_page_by_path($v['id'], OBJECT, 'tsa_video')) continue;
-		$id = wp_insert_post(array(
-			'post_type' => 'tsa_video', 'post_status' => 'publish',
-			'post_title' => $v['title'], 'post_name' => $v['id'], 'menu_order' => $i,
+		tsa_upsert_shipped('tsa_video', $v['id'], $v['title'], '', $i, array(
+			'_tsa_blurb'  => $v['blurb'],
+			'_tsa_embed'  => $v['embed'],
+			'_tsa_file'   => $v['file'],
+			'_tsa_poster' => isset($v['poster']) ? $v['poster'] : '',
 		));
-		if (!$id || is_wp_error($id)) continue;
-		update_post_meta($id, '_tsa_blurb', $v['blurb']);
-		update_post_meta($id, '_tsa_embed', $v['embed']);
-		update_post_meta($id, '_tsa_file',  $v['file']);
 	}
 
+	/* ---- questions and terms ---- */
 	foreach ((isset($d['faq']['items']) ? $d['faq']['items'] : array()) as $i => $f) {
-		$slug = sanitize_title($f['q']);
-		if (get_page_by_path($slug, OBJECT, 'tsa_faq')) continue;
-		wp_insert_post(array(
-			'post_type' => 'tsa_faq', 'post_status' => 'publish', 'post_name' => $slug,
-			'post_title' => $f['q'], 'post_content' => $f['a'], 'menu_order' => $i,
-		));
+		tsa_upsert_shipped('tsa_faq', sanitize_title($f['q']), $f['q'], $f['a'], $i, array());
 	}
-
 	foreach ((isset($d['glossary']['items']) ? $d['glossary']['items'] : array()) as $i => $g) {
-		$slug = sanitize_title($g['term']);
-		if (get_page_by_path($slug, OBJECT, 'tsa_term')) continue;
-		wp_insert_post(array(
-			'post_type' => 'tsa_term', 'post_status' => 'publish', 'post_name' => $slug,
-			'post_title' => $g['term'], 'post_content' => $g['def'], 'menu_order' => $i,
-		));
+		tsa_upsert_shipped('tsa_term', sanitize_title($g['term']), $g['term'], $g['def'], $i, array());
 	}
 
 	update_option('tsa_seeded', 1);
+	update_option('tsa_shipped_version', TSA_VERSION);
 }
-add_action('after_switch_theme', 'tsa_seed_content');
+
+/**
+ * Create the entry if its slug is absent; otherwise fill only what is empty.
+ * Returns the post id, or 0.
+ */
+function tsa_upsert_shipped($type, $slug, $title, $content, $order, $meta) {
+	$existing = $slug ? get_page_by_path($slug, OBJECT, $type) : null;
+
+	if (!$existing) {
+		$id = wp_insert_post(array(
+			'post_type'    => $type,
+			'post_status'  => 'publish',
+			'post_title'   => $title,
+			'post_name'    => $slug,
+			'post_content' => $content,
+			'menu_order'   => $order,
+		));
+		if (!$id || is_wp_error($id)) return 0;
+		foreach ($meta as $k => $v) {
+			if ($v !== '') update_post_meta($id, $k, $v);
+		}
+		return $id;
+	}
+
+	// Already there: top up blanks, touch nothing else.
+	foreach ($meta as $k => $v) {
+		if ($v === '') continue;
+		$current = get_post_meta($existing->ID, $k, true);
+		if ($current === '' || $current === null) update_post_meta($existing->ID, $k, $v);
+	}
+	return $existing->ID;
+}
+
+add_action('after_switch_theme', 'tsa_sync_shipped_content');
+
+/**
+ * Also run after an update, since updating a theme does not switch to it.
+ * Comparing the stored version means this costs one option read per request
+ * and does nothing at all until the theme actually changes.
+ */
+function tsa_maybe_sync_shipped_content() {
+	if (!is_admin()) return;
+	if (get_option('tsa_shipped_version') === TSA_VERSION) return;
+	tsa_sync_shipped_content();
+}
+add_action('admin_init', 'tsa_maybe_sync_shipped_content');
 
 /** A trade's picture: the owner's featured image, else the one it shipped with. */
 function tsa_post_image($post_id) {
@@ -398,3 +443,7 @@ function tsa_media_url($path) {
 	if ($path === '') return '';
 	return strpos($path, '/assets/') === 0 ? tsa_asset($path) : $path;
 }
+
+
+/** Kept so anything calling the old name still works. */
+function tsa_seed_content() { tsa_sync_shipped_content(); }

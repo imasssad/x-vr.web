@@ -93,6 +93,12 @@ labels, headings and buttons are all in the Customizer; the generated steps
 themselves ship with the theme, and changing those is a (small) developer
 task.
 
+The site's logo is the supplied XVR Trades artwork. The header uses a
+version without the strapline, because at header height the strapline is a
+few pixels tall and reads as a smudge; the footer shows the whole lockup.
+To use a different logo, upload it at **Appearance → Customize → Site
+Identity** and it replaces both.
+
 Always fill in the screen-reader description. It is read aloud to people who
 cannot see the image, and search engines use it.
 
@@ -336,6 +342,23 @@ Run on the staging install before going live, logged in as an administrator:
 
 Anything that fails here is a bug — send it back to be fixed, do not work
 around it.
+
+## Shipped content tops itself up
+
+The trades, films, FAQ entries and glossary terms are posts, created the
+first time the theme is activated. That used to be the only time it ever
+ran, so a site activated last month never received anything added since.
+
+It now runs whenever the theme version changes, and it is careful:
+
+- An entry whose slug is missing is **created** — that is how a new trade
+  or a new film reaches a site that is already running.
+- A field on an existing entry is filled **only when it is currently empty**
+  and the theme now ships something for it.
+- Anything you have written is never replaced.
+
+The one trade-off: a field you cleared deliberately and left empty may be
+refilled by an update. If you want a field to stay blank, put a space in it.
 
 ## Updating the theme safely
 

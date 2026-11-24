@@ -10,7 +10,7 @@ if (tsa_do_location('footer')) {
 	<div class="wrap">
 		<div class="foot__in">
 			<div>
-				<?php tsa_brand(); ?>
+				<?php tsa_brand('brand', 'full'); ?>
 				<p class="foot__tag"><?php tsa_e('footer.tagline'); ?></p>
 			</div>
 			<nav aria-label="<?php esc_attr_e('Footer', 'tradeskillapps'); ?>">
