@@ -45,7 +45,6 @@ function tsa_assets() {
 	);
 	wp_localize_script('tradeskillapps', 'TSA', array(
 		'rest'    => esc_url_raw(rest_url('tsa/v1/contact')),
-		'nonce'   => wp_create_nonce('wp_rest'),
 		// the planner builds its guidance in the browser, so it needs the text
 		'planner' => array(
 			'roles'              => tsa_lines('planner.roles'),
@@ -72,7 +71,18 @@ add_action('wp_head', 'tsa_head_icons', 5);
 /** Social preview tags, using the Customizer values. */
 function tsa_head_meta() {
 	if (!is_front_page()) return;
-	$img = get_template_directory_uri() . '/assets/images/og-image.jpg';
+	// The social image honours the Customizer field; a theme path, an
+	// attachment id and a full URL all work. Falls back to the shipped file.
+	$set = tsa_text('site.ogImage');
+	if ($set !== '' && strpos($set, '/assets/') === 0) {
+		$img = tsa_asset($set);
+	} elseif (is_numeric($set) && wp_get_attachment_image_url((int) $set, 'full')) {
+		$img = wp_get_attachment_image_url((int) $set, 'full');
+	} elseif ($set !== '' && preg_match('#^https?://#', $set)) {
+		$img = $set;
+	} else {
+		$img = get_template_directory_uri() . '/assets/images/og-image.jpg';
+	}
 	printf('<meta name="description" content="%s" />' . "\n", esc_attr(tsa_text('site.description')));
 	printf('<meta property="og:title" content="%s" />' . "\n", esc_attr(tsa_text('site.title')));
 	printf('<meta property="og:description" content="%s" />' . "\n", esc_attr(tsa_text('site.description')));
@@ -96,7 +106,19 @@ function tsa_nav_fallback() {
 		$label = tsa_text('nav.' . $i . '.label');
 		$href  = tsa_text('nav.' . $i . '.href');
 		if ($label === '') continue;
-		printf('<li><a href="%s">%s</a></li>', esc_url($href), esc_html($label));
+		printf('<li><a href="%s">%s</a></li>', esc_url(tsa_href($href)), esc_html($label));
 	}
 	echo '</ul>';
+}
+
+/** The extra drawer-only links, as <li> markup for items_wrap. */
+function tsa_drawer_extra_items() {
+	$out = '';
+	foreach ((array) tsa_default('drawerExtra') as $i => $unused) {
+		$label = tsa_text('drawerExtra.' . $i . '.label');
+		$href  = tsa_text('drawerExtra.' . $i . '.href');
+		if ($label === '') continue;
+		$out .= '<li><a href="' . esc_url(tsa_href($href)) . '">' . esc_html($label) . '</a></li>';
+	}
+	return $out;
 }

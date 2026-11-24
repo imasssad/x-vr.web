@@ -14,7 +14,7 @@ defined('ABSPATH') || exit;
 
 /** Groups handled as posts, not Customizer fields. */
 function tsa_customizer_skip() {
-	return array('trades', 'videos.items', 'faq.items', 'glossary.items');
+	return array('trades', 'videos.items', 'faq.items', 'glossary.items', 'site.domain');
 }
 
 /** Section order and human titles. */
@@ -87,7 +87,7 @@ function tsa_control_type($value) {
 function tsa_customize_register($wp_customize) {
 	$wp_customize->add_panel('tsa_content', array(
 		'title'       => __('TradeSkillApps content', 'tradeskillapps'),
-		'description' => __('Every word and picture on the page. Trades, videos, FAQ entries and glossary terms are edited as posts in the main menu instead, because you add and remove those.', 'tradeskillapps'),
+		'description' => __('Every word and picture on the page. Trades, videos, FAQ entries and glossary terms are edited as posts in the main menu instead, because you add and remove those. Note: clearing a text field leaves that spot empty on the page - it does not bring the original wording back. The original is shown underneath each field.', 'tradeskillapps'),
 		'priority'    => 20,
 	));
 
@@ -177,12 +177,18 @@ function tsa_walk_node($wp_customize, $node, $path, $section, $skip, &$priority)
 
 	$wp_customize->add_setting(tsa_key($path), array(
 		'default'           => $node,
-		'sanitize_callback' => $type === 'textarea' ? 'wp_kses_post' : 'sanitize_text_field',
+		'sanitize_callback' => $type === 'textarea' ? 'sanitize_textarea_field' : 'sanitize_text_field',
 		'transport'         => 'refresh',
 	));
+	$desc = $crumb;
+	if (is_string($node) && $node !== '' && mb_strlen($node) <= 160) {
+		/* translators: %s is the text the site shipped with */
+		$orig = sprintf(__('Original: %s', 'tradeskillapps'), $node);
+		$desc = $desc === '' ? $orig : $desc . ' - ' . $orig;
+	}
 	$wp_customize->add_control(tsa_key($path), array(
 		'label'       => tsa_label($leaf),
-		'description' => $crumb,
+		'description' => $desc,
 		'section'     => $section,
 		'type'        => $type,
 		'priority'    => $priority++,

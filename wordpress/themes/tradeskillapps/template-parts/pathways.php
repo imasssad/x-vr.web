@@ -1,10 +1,11 @@
-<?php defined('ABSPATH') || exit; ?>
-<section class="band" id="pathways" aria-labelledby="pathways-h">
+<?php defined('ABSPATH') || exit;
+$sec_sfx = tsa_uid('sec-pathways'); ?>
+<section class="band" id="pathways<?php echo esc_attr($sec_sfx); ?>" aria-labelledby="pathways-h<?php echo esc_attr($sec_sfx); ?>">
 	<div class="wrap">
 		<div class="sec-head sec-head--split">
 			<div>
 				<p class="eyebrow rv"><?php tsa_e('pathways.eyebrow'); ?></p>
-				<?php tsa_heading('pathways', 'pathways-h'); ?>
+				<?php tsa_heading('pathways', 'pathways-h' . $sec_sfx); ?>
 			</div>
 			<p class="lede rv rv-d1"><?php tsa_e('pathways.lede'); ?></p>
 		</div>

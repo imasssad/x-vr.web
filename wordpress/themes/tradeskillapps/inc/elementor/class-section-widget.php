@@ -42,12 +42,6 @@ class TSA_Section_Widget extends \Elementor\Widget_Base {
 		return 'elementor-widget elementor-widget-' . $this->get_name() . ' tsa-section-widget';
 	}
 
-	/**
-	 * Elementor caches widget definitions, and ours are built at registration.
-	 * Re-reading on each request keeps a changed default from going stale.
-	 */
-	public function show_in_panel() { return true; }
-
 	protected function register_controls() {
 		if (!$this->fields) {
 			$this->start_controls_section('tsa_about', array(
@@ -119,6 +113,7 @@ class TSA_Section_Widget extends \Elementor\Widget_Base {
 		tsa_set_overrides($previous);
 	}
 
-	/** No JavaScript preview: the section is PHP, so the editor re-renders it. */
-	public function render_plain_content() {}
+	// render_plain_content() is deliberately NOT overridden: Elementor uses it
+	// on save to write the widget's text into post_content, which is what
+	// makes builder pages findable by WordPress search and excerpts.
 }

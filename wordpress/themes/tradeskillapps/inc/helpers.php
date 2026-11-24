@@ -26,6 +26,40 @@ function tsa_asset_exists($path) {
 	return file_exists(get_template_directory() . '/' . ltrim($path, '/'));
 }
 
+/**
+ * Links in the content are written as "#section" anchors. On the front page
+ * that is exactly right; on any other page a bare fragment is a dead link,
+ * so it is rooted to the home page where the sections live.
+ */
+function tsa_href($href) {
+	return (is_string($href) && isset($href[0]) && $href[0] === '#')
+		? home_url('/') . $href
+		: $href;
+}
+
+/**
+ * A page-unique id SUFFIX. Sections can now be placed on any page more than
+ * once (Elementor widgets), and ids must never collide. The first instance
+ * gets no suffix, so the home page's markup stays exactly as it always was;
+ * later instances get '-2', '-3', ...
+ */
+function tsa_uid($prefix) {
+	$n = &tsa_uid_store();
+	$n[$prefix] = isset($n[$prefix]) ? $n[$prefix] + 1 : 1;
+	return $n[$prefix] === 1 ? '' : '-' . $n[$prefix];
+}
+
+/** The counters behind tsa_uid; a function so tests can reset them. */
+function &tsa_uid_store() {
+	static $n = array();
+	return $n;
+}
+
+function tsa_uid_reset() {
+	$n = &tsa_uid_store();
+	$n = array();
+}
+
 /** The shipped value at a dot path, or null. */
 function tsa_default($path) {
 	$node = tsa_defaults();
@@ -69,15 +103,6 @@ function tsa_text($path) {
 /** Same, echoed and escaped. */
 function tsa_e($path) { echo esc_html(tsa_text($path)); }
 
-/** Same, but allows the small set of inline tags used in body copy. */
-function tsa_rich($path) {
-	echo wp_kses(tsa_text($path), array(
-		'strong' => array(), 'em' => array(), 'b' => array(), 'i' => array(),
-		'a' => array('href' => array(), 'rel' => array(), 'target' => array()),
-		'br' => array(),
-	));
-}
-
 /**
  * A list of short strings. Stored in the Customizer as one per line, so the
  * owner adds or removes bullets by pressing Enter.
@@ -106,6 +131,7 @@ function tsa_image($path) {
 		$url = wp_get_attachment_image_url((int) $src, 'full');
 		$src = $url ? $url : '';
 	}
+	if (!is_string($src)) $src = '';              // never let a stray array fatal the page
 	return array(
 		'src' => $src,
 		'alt' => tsa_text($path . '.alt'),
@@ -207,6 +233,7 @@ function tsa_count($path) {
 /** The accordion used by the glossary and the FAQ. First item opens by default. */
 function tsa_accordion($posts, $prefix) {
 	if (!$posts) return;
+	$prefix .= tsa_uid('acc-' . $prefix);   // unique even when the section repeats on a page
 	echo '<div class="acc rv">';
 	foreach ($posts as $i => $post) {
 		$open = ($i === 0);
@@ -221,13 +248,13 @@ function tsa_accordion($posts, $prefix) {
 			esc_attr($prefix), $i,
 			$open ? 'true' : 'false',
 			esc_html($post->post_title),
-			wp_kses_post(wpautop_strip($post->post_content))
+			esc_html(tsa_plain_text($post->post_content))
 		);
 	}
 	echo '</div>';
 }
 
 /** Answers are short; keep them as one paragraph rather than wrapping in <p>. */
-function wpautop_strip($content) {
+function tsa_plain_text($content) {
 	return trim(wp_strip_all_tags($content, false));
 }

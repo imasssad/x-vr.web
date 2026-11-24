@@ -1,21 +1,23 @@
 <?php
 /** The starter planner. Guidance is produced in the browser; nothing is sent. */
 defined('ABSPATH') || exit;
+$sec_sfx = tsa_uid('sec-start');
 $roles  = tsa_lines('planner.roles');
 $stages = tsa_lines('planner.stages');
 $opts   = tsa_lines('planner.tradeOptions');
+$sfx    = tsa_uid('planner');
 ?>
-<section class="band" id="start" aria-labelledby="start-h">
+<section class="band" id="start<?php echo esc_attr($sec_sfx); ?>" aria-labelledby="start-h<?php echo esc_attr($sec_sfx); ?>">
 	<div class="wrap">
 		<div class="sec-head sec-head--split">
 			<div>
 				<p class="eyebrow rv"><?php tsa_e('planner.eyebrow'); ?></p>
-				<?php tsa_heading('planner', 'start-h'); ?>
+				<?php tsa_heading('planner', 'start-h' . $sec_sfx); ?>
 			</div>
 			<p class="lede rv rv-d1"><?php tsa_e('planner.lede'); ?></p>
 		</div>
 
-		<div class="planner rv" id="planner">
+		<div class="planner rv" id="planner<?php echo esc_attr($sfx); ?>" data-tsa="planner">
 			<form novalidate>
 				<fieldset class="field">
 					<legend><?php tsa_e('planner.roleLabel'); ?></legend>
@@ -30,10 +32,10 @@ $opts   = tsa_lines('planner.tradeOptions');
 				</fieldset>
 
 				<div class="field">
-					<label for="tradeInput"><?php tsa_e('planner.tradeLabel'); ?></label>
-					<input class="textin" type="text" id="tradeInput" name="trade" autocomplete="off"
-						list="tradeOptions" placeholder="<?php echo esc_attr(tsa_text('planner.tradePlaceholder')); ?>" />
-					<datalist id="tradeOptions">
+					<label for="tradeInput<?php echo esc_attr($sfx); ?>"><?php tsa_e('planner.tradeLabel'); ?></label>
+					<input class="textin" type="text" id="tradeInput<?php echo esc_attr($sfx); ?>" name="trade" autocomplete="off"
+						list="tradeOptions<?php echo esc_attr($sfx); ?>" placeholder="<?php echo esc_attr(tsa_text('planner.tradePlaceholder')); ?>" />
+					<datalist id="tradeOptions<?php echo esc_attr($sfx); ?>">
 						<?php foreach ($opts as $o) : ?><option value="<?php echo esc_attr($o); ?>"></option><?php endforeach; ?>
 					</datalist>
 				</div>

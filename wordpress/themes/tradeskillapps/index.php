@@ -20,7 +20,7 @@ if (!tsa_do_location('archive')) :
 			<?php while (have_posts()) : the_post(); ?>
 				<article <?php post_class('card'); ?>>
 					<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-					<p><?php echo esc_html(get_the_excerpt()); ?></p>
+					<p><?php echo wp_kses_post(get_the_excerpt()); ?></p>
 				</article>
 			<?php endwhile; ?>
 			<div class="pagination"><?php the_posts_pagination(); ?></div>

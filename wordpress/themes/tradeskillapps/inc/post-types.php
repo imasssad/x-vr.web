@@ -43,6 +43,16 @@ function tsa_register_post_types() {
 		'menu_icon' => 'dashicons-book-alt',
 		'supports'  => array('title', 'editor', 'page-attributes'),
 	)));
+
+	// Where contact-form enquiries are kept. Read-only in spirit: entries are
+	// created by the form, not by hand, so "Add New" is switched off.
+	register_post_type('tsa_msg', array_merge($common, array(
+		'labels' => tsa_labels(__('Enquiry', 'tradeskillapps'), __('Enquiries', 'tradeskillapps')),
+		'menu_icon' => 'dashicons-email-alt',
+		'supports'  => array('title', 'editor'),
+		'capabilities' => array('create_posts' => 'do_not_allow'),
+		'map_meta_cap' => true,
+	)));
 }
 add_action('init', 'tsa_register_post_types');
 
@@ -132,6 +142,7 @@ function tsa_save_meta($post_id, $post) {
 		$id = 'tsa_' . $key;
 		if (!isset($_POST[$id])) continue;
 		$raw = wp_unslash($_POST[$id]);
+		if (!is_string($raw)) continue;   // an array here would fatal below and abort the save
 		if ($f[1] === 'textarea') {
 			$clean = sanitize_textarea_field($raw);
 		} elseif ($f[1] === 'icon') {
@@ -195,15 +206,19 @@ function tsa_seed_content() {
 	}
 
 	foreach ((isset($d['faq']['items']) ? $d['faq']['items'] : array()) as $i => $f) {
+		$slug = sanitize_title($f['q']);
+		if (get_page_by_path($slug, OBJECT, 'tsa_faq')) continue;
 		wp_insert_post(array(
-			'post_type' => 'tsa_faq', 'post_status' => 'publish',
+			'post_type' => 'tsa_faq', 'post_status' => 'publish', 'post_name' => $slug,
 			'post_title' => $f['q'], 'post_content' => $f['a'], 'menu_order' => $i,
 		));
 	}
 
 	foreach ((isset($d['glossary']['items']) ? $d['glossary']['items'] : array()) as $i => $g) {
+		$slug = sanitize_title($g['term']);
+		if (get_page_by_path($slug, OBJECT, 'tsa_term')) continue;
 		wp_insert_post(array(
-			'post_type' => 'tsa_term', 'post_status' => 'publish',
+			'post_type' => 'tsa_term', 'post_status' => 'publish', 'post_name' => $slug,
 			'post_title' => $g['term'], 'post_content' => $g['def'], 'menu_order' => $i,
 		));
 	}

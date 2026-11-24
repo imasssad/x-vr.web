@@ -22,8 +22,10 @@ overwrites anything you have changed.
 4. **Settings → Reading → Your homepage displays → A static page**, and pick a
    page (an empty one is fine — the theme supplies the content).
 
-> If the home page shows a list of blog posts instead of the site, step 4 is
-> the one that was missed.
+> The home page looks right even before step 4 — the theme's front-page
+> template always wins. The setting matters later: it gives the site a page
+> that Elementor can take over (see the Elementor section), and it keeps
+> future blog posts off the front of the site.
 
 ---
 
@@ -42,7 +44,8 @@ The Customizer panel has 22 sections in the order they appear down the page,
 so finding a piece of text means scrolling to roughly where you see it.
 
 Collections are posts because you add to and remove from them: a seventh
-trade is **Add Trade**, and dragging the **Order** field reorders them.
+trade is **Add Trade**, and the **Order** number on each entry sets the
+sequence (lower numbers first).
 
 ---
 
@@ -56,7 +59,9 @@ Two consequences worth knowing:
 
 - A fresh install already looks like the finished site. Nothing has to be
   imported or pasted in.
-- Clearing a field restores the original wording rather than leaving a gap.
+- Clearing a field leaves that spot empty on the page — useful for hiding a
+  note, say. It does **not** bring the original wording back; the original
+  is shown in grey under each field, so restoring it is a copy away.
 
 `inc/defaults.php` is generated. To rebuild it from the original content
 files:
@@ -75,6 +80,12 @@ so put the subject in the middle. Around 1600px wide is plenty.
 Clearing a picture does not break the layout — the frame shows a neutral
 "Photograph to be supplied" panel instead. Trades fall back to an illustrated
 placeholder drawn to match their icon.
+
+One thing is not editable in wp-admin: the step-by-step guidance the
+starter planner generates after a visitor presses its button. The planner's
+labels, headings and buttons are all in the Customizer; the generated steps
+themselves ship with the theme, and changing those is a (small) developer
+task.
 
 Always fill in the screen-reader description. It is read aloud to people who
 cannot see the image, and search engines use it.
@@ -99,10 +110,21 @@ Enquiries are sent with `wp_mail()`, so whatever the site already uses for
 email is what gets used. On shared hosting that is usually the host's mail
 service; an SMTP plugin, if one is installed, is picked up automatically.
 
+Every enquiry is also kept under **Enquiries** in the admin menu, saved
+before the mail is attempted — so if the mailbox is ever misconfigured, the
+message waits in wp-admin instead of vanishing.
+
 The form has a hidden field people never see and most bots fill in; a
 submission that fills it is quietly discarded. Messages are validated on the
-server, and the sender's name is stripped of anything that could tamper with
-the mail headers.
+server, the sender's name is stripped of anything that could tamper with the
+mail headers, and sending is rate-limited (five per hour per visitor, one
+hundred per hour site-wide) so a script cannot flood the mailbox or burn the
+host's mail quota.
+
+There is deliberately no security token on this form: tokens baked into
+cached pages expire and then reject real visitors, which on ordinary shared
+hosting with a page cache silently kills the form. The protections above are
+the ones that actually work for a public form.
 
 With JavaScript the form answers in place. Without it, the form still posts
 and still works.
@@ -163,10 +185,82 @@ none and the theme's is used. Nothing needs switching on.
 ### What this does not do
 
 The home page is a PHP template, not an Elementor document. It is faster that
-way and it is what the Customizer edits. To rebuild it in Elementor instead,
-make a new page, set the full-width template, drag the seventeen section
-widgets onto it in order, and point **Settings → Reading** at that page. The
-Customizer keeps working either way.
+way and it is what the Customizer edits. To take the home page over in
+Elementor instead: build your page (the seventeen section widgets give you
+the same blocks), point **Settings → Reading → Homepage** at it, and edit it
+with Elementor — the theme notices the front page is Elementor-built and
+steps aside. Remove Elementor from that page (or point Reading elsewhere)
+and the original template comes straight back. Nothing is lost either way.
+
+---
+
+## Going live
+
+The order matters; each step is reversible until the last one.
+
+1. **Back up first.** In Hostinger's panel take a full backup (files and
+   database) of whatever currently lives on the account.
+2. **Install WordPress** on the hosting account (Hostinger has a one-click
+   installer) — ideally at a temporary address or subdomain first, so the
+   current site stays up while you check the new one.
+3. **Upload and activate the theme**, then run the smoke test below.
+4. **Set the mail address**: Customize → Contact form → "Send enquiries
+   to", then submit the form yourself and confirm the mail arrives AND the
+   entry appears under Enquiries. If mail does not arrive, install an SMTP
+   plugin (e.g. WP Mail SMTP) pointed at the Hostinger mailbox — the theme
+   picks it up automatically.
+5. **Swap the site**: point the domain's web root (or DNS) at the WordPress
+   install. Email records are untouched, so mail keeps flowing.
+6. **After the swap**: load the site logged out, click every menu item,
+   submit the contact form once more from a phone.
+
+Keep the backup from step 1 for at least a month.
+
+## The ten-minute smoke test
+
+Run on the staging install before going live, logged in as an administrator:
+
+- [ ] Activate the theme: no error, and Trades (6), Videos (3), FAQ (4),
+      Glossary (4) appear in the admin menu already filled in.
+- [ ] The front page shows every section with pictures and icons.
+- [ ] Trade tabs switch by mouse and by arrow keys; FAQ items open and close.
+- [ ] The planner produces a plan; Reset clears it.
+- [ ] Submit the contact form empty → a polite error. Submit it filled →
+      a thank-you, a mail, and an entry under Enquiries.
+- [ ] Appearance → Customize: change the hero headline, publish, see it live.
+- [ ] Edit a trade: change its description, save, see it on the front page.
+- [ ] Create a draft post and a page: both display correctly.
+- [ ] On a phone-sized window: the menu drawer opens, closes with Escape,
+      and no section scrolls sideways.
+- [ ] If Elementor is installed: drop one section widget on a test page,
+      edit its headline, publish, view.
+
+Anything that fails here is a bug — send it back to be fixed, do not work
+around it.
+
+## Updating the theme safely
+
+Theme updates replace the theme folder, so **never edit theme files
+directly** on a live site — those edits are lost on the next update.
+
+- Wording and pictures → the Customizer (survives updates).
+- Extra CSS → Appearance → Customize → Additional CSS (survives updates).
+- Code changes → a child theme, or send them upstream to this repository so
+  the next zip carries them.
+
+The shipped content is seeded only once. If entries were deleted and the
+originals are wanted back, delete the `tsa_seeded` option (or ask a
+developer to) and re-activate the theme: only the missing shipped entries
+are recreated, and nothing you added or changed is touched.
+
+## The hero background video
+
+The hero is a still photograph until a video exists. To add one: upload an
+MP4 to **Media**, copy its URL, and paste it into **Customize → Hero →
+Background video → Video files → Path** (type `video/mp4`). A WebM copy in
+the second slot is nice for size but optional. The video autoplays muted,
+honours "reduce motion" settings, and the photograph remains the fallback
+and the poster.
 
 ---
 
@@ -187,14 +281,14 @@ themes/tradeskillapps/
     helpers.php          how templates read content
     customizer.php       the editing screen, generated from the defaults
     post-types.php       trades, videos, FAQ, glossary
-    contact.php          the enquiry form
+    contact.php          the enquiry form (rate-limited; stores Enquiries)
     icons.php            the SVG sprite and placeholder art
     elementor.php        Elementor support; does nothing without it
     elementor/
       class-section-widget.php   each section, as a draggable widget
   assets/
     css/elementor.css    loaded only when Elementor is active
-    fonts/               Barlow Condensed and DM Sans, self-hosted
+    fonts/               Barlow Condensed and DM Sans, self-hosted (OFL.txt)
     images/              the site's photography
     js/site.js           tabs, accordions, planner, videos, menu
 ```

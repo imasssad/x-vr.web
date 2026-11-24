@@ -1,10 +1,11 @@
-<?php defined('ABSPATH') || exit; $cta = tsa_link('educators.cta'); ?>
-<section class="band band--white" id="educators" aria-labelledby="educators-h">
+<?php defined('ABSPATH') || exit;
+$sec_sfx = tsa_uid('sec-educators'); $cta = tsa_link('educators.cta'); ?>
+<section class="band band--white" id="educators<?php echo esc_attr($sec_sfx); ?>" aria-labelledby="educators-h<?php echo esc_attr($sec_sfx); ?>">
 	<div class="wrap">
 		<div class="sec-head sec-head--split">
 			<div>
 				<p class="eyebrow rv"><?php tsa_e('educators.eyebrow'); ?></p>
-				<?php tsa_heading('educators', 'educators-h'); ?>
+				<?php tsa_heading('educators', 'educators-h' . $sec_sfx); ?>
 			</div>
 			<p class="lede rv rv-d1"><?php tsa_e('educators.lede'); ?></p>
 		</div>

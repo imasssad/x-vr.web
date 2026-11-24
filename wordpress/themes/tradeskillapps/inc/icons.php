@@ -8,7 +8,11 @@
  */
 defined('ABSPATH') || exit;
 
-function tsa_icon_sprite() { ?>
+function tsa_icon_sprite() {
+	static $done = false;            // once per page, whatever template runs
+	if ($done) return;
+	$done = true;
+?>
 <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
 <defs>
 <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12.5 9.5 18 20 6"/></symbol>
@@ -34,6 +38,11 @@ function tsa_icon_sprite() { ?>
 </svg>
 <?php }
 
+// Printed from the hook, not from header.php: Elementor's Canvas template
+// skips the theme header entirely but still fires wp_body_open, and without
+// the sprite every icon on such a page would silently vanish.
+add_action('wp_body_open', 'tsa_icon_sprite');
+
 /** Echo one icon. */
 function tsa_icon($id, $class = '') {
 	printf('<svg class="%s" aria-hidden="true" focusable="false"><use href="#%s" /></svg>',
@@ -50,7 +59,7 @@ function tsa_placeholder($kind, $icon) {
 		'manufacturing' => 'grid', 'construction' => 'grid', 'emerging-technology' => 'circuit',
 	);
 	$m    = isset($motifs[$kind]) ? $motifs[$kind] : 'grid';
-	$id   = 'ph-' . sanitize_html_class($kind);
+	$id   = 'ph-' . sanitize_html_class($kind) . tsa_uid('ph-' . $kind);
 	$blue = '#2864E8'; $navy = '#15283F'; $ice = '#B9D5F5';
 
 	$shapes = '';

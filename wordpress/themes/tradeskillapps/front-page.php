@@ -1,12 +1,27 @@
 <?php
 /**
- * The home page: one scroll, in the order the sections appear on screen.
- * Each part reads its own content, so a section can be removed from this
- * list without touching anything else.
+ * The home page.
+ *
+ * Normally the one-page site, assembled from template-parts/ in the order
+ * the sections appear on screen. But if the owner has set a static front
+ * page and built THAT page with Elementor, their page wins - that is the
+ * documented way to take ownership of the home page in the builder, and
+ * without this branch the template would silently override their work.
  */
 defined('ABSPATH') || exit;
 get_header();
-?>
+
+$tsa_front_id = (int) get_option('page_on_front');
+$tsa_owner_built = 'page' === get_option('show_on_front')
+	&& $tsa_front_id
+	&& function_exists('tsa_built_with_elementor')
+	&& tsa_built_with_elementor($tsa_front_id);
+
+if ($tsa_owner_built) : ?>
+<main id="main" class="tsa-elementor-page">
+	<?php while (have_posts()) : the_post(); the_content(); endwhile; ?>
+</main>
+<?php else : ?>
 <main id="main">
 	<?php
 	foreach (array(
@@ -18,4 +33,5 @@ get_header();
 	}
 	?>
 </main>
-<?php get_footer(); ?>
+<?php endif;
+get_footer();

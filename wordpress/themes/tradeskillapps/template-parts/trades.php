@@ -1,14 +1,16 @@
 <?php
 defined('ABSPATH') || exit;
+$sec_sfx = tsa_uid('sec-trades');
 $trades = tsa_items('tsa_trade');
 if (!$trades) return;
+$sfx = tsa_uid('trades');
 ?>
-<section class="band band--white" id="trades" aria-labelledby="trades-h">
+<section class="band band--white" id="trades<?php echo esc_attr($sec_sfx); ?>" aria-labelledby="trades-h<?php echo esc_attr($sec_sfx); ?>">
 	<div class="wrap">
 		<div class="sec-head sec-head--split">
 			<div>
 				<p class="eyebrow rv"><?php tsa_e('tradesSection.eyebrow'); ?></p>
-				<?php tsa_heading('tradesSection', 'trades-h'); ?>
+				<?php tsa_heading('tradesSection', 'trades-h' . $sec_sfx); ?>
 			</div>
 			<p class="lede rv rv-d1"><?php tsa_e('tradesSection.lede'); ?></p>
 		</div>
@@ -19,8 +21,8 @@ if (!$trades) return;
 					$slug = $t->post_name;
 					$icon = get_post_meta($t->ID, '_tsa_icon', true) ?: 'i-weld';
 				?>
-					<button class="tradebtn" role="tab" id="tab-<?php echo esc_attr($slug); ?>"
-						aria-controls="panel-<?php echo esc_attr($slug); ?>"
+					<button class="tradebtn" role="tab" id="tab-<?php echo esc_attr($slug . $sfx); ?>"
+						aria-controls="panel-<?php echo esc_attr($slug . $sfx); ?>"
 						aria-selected="<?php echo $i === 0 ? 'true' : 'false'; ?>"
 						tabindex="<?php echo $i === 0 ? '0' : '-1'; ?>" type="button">
 						<svg class="tradebtn__ico" aria-hidden="true"><use href="#<?php echo esc_attr($icon); ?>" /></svg>
@@ -39,8 +41,8 @@ if (!$trades) return;
 						preg_split('/\r\n|\r|\n/', (string) get_post_meta($t->ID, '_tsa_skills', true))), 'strlen'));
 				?>
 					<article class="tradepanel rv rv-d1" role="tabpanel"
-						id="panel-<?php echo esc_attr($slug); ?>"
-						aria-labelledby="tab-<?php echo esc_attr($slug); ?>" tabindex="0"
+						id="panel-<?php echo esc_attr($slug . $sfx); ?>"
+						aria-labelledby="tab-<?php echo esc_attr($slug . $sfx); ?>" tabindex="0"
 						<?php echo $i === 0 ? '' : 'hidden'; ?>>
 						<figure class="frame tradepanel__media frame--zoom">
 							<?php if ($img['src'] !== '') : ?>

@@ -1,10 +1,11 @@
-<?php defined('ABSPATH') || exit; ?>
-<section class="band" id="approach" aria-labelledby="approach-h">
+<?php defined('ABSPATH') || exit;
+$sec_sfx = tsa_uid('sec-approach'); ?>
+<section class="band" id="approach<?php echo esc_attr($sec_sfx); ?>" aria-labelledby="approach-h<?php echo esc_attr($sec_sfx); ?>">
 	<div class="wrap">
 		<div class="sec-head sec-head--split">
 			<div>
 				<p class="eyebrow rv"><?php tsa_e('approach.eyebrow'); ?></p>
-				<?php tsa_heading('approach', 'approach-h'); ?>
+				<?php tsa_heading('approach', 'approach-h' . $sec_sfx); ?>
 			</div>
 			<p class="lede rv rv-d1"><?php tsa_e('approach.lede'); ?></p>
 		</div>

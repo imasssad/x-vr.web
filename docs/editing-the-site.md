@@ -1,5 +1,9 @@
 # Editing the site
 
+> **Update (November 2026):** the project has since moved to WordPress.
+> This document describes the earlier Next.js/Vercel setup and is kept for
+> reference only. The current instructions live in `wordpress/README.md`.
+
 Everything on tradeskillapps.com — every heading, paragraph, picture and
 video — can be changed without touching code.
 

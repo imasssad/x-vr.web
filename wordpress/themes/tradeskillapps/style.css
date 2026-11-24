@@ -9,6 +9,8 @@ Tested up to: 6.7
 Requires PHP: 7.4
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+The bundled Barlow Condensed and DM Sans fonts are licensed separately under
+the SIL Open Font License 1.1 - see assets/fonts/OFL.txt.
 Text Domain: tradeskillapps
 */
 
@@ -48,13 +50,13 @@ Text Domain: tradeskillapps
  * 2. The site's design system, ported verbatim.
  * ------------------------------------------------------------------ */
 /* ============================================================
-   X-VR SKILLED TRADES — global stylesheet
+   TradeSkillApps — global stylesheet
    Ported from the static build; class names are unchanged so the
    components and these styles stay in step.
    ============================================================ */
 
 /* ============================================================
-   X-VR SKILLED TRADES
+   TradeSkillApps
    Electric Blue + Editorial Minimalism + Balanced Contrast
    ============================================================ */
 :root{
@@ -767,3 +769,15 @@ fieldset.field{border:0;padding:0;margin-inline:0}
   padding:1rem;background:var(--ice-wash);color:var(--slate-aa);
   font-size:var(--t-label);letter-spacing:.14em;text-transform:uppercase;font-weight:500;
 }
+
+
+/* ---------- WordPress chrome ---------- */
+/* The fixed site nav must sit below the admin bar when the owner is logged in. */
+body.admin-bar .nav{top:32px}
+@media(max-width:782px){body.admin-bar .nav{top:46px}}
+
+/* Collapsed accordion answers leave the accessibility tree as well as the
+   screen, so what a screen reader finds matches what the buttons announce.
+   The delay lets the close animation finish before the content vanishes. */
+.acc__panel[data-open="false"]>div{visibility:hidden;transition:visibility 0s .32s}
+.acc__panel[data-open="true"]>div{visibility:visible;transition:visibility 0s}

@@ -36,7 +36,7 @@ if (strpos($poster, '/assets/') === 0) {
 		<?php endif; ?>
 
 		<?php if ($sources) : ?>
-			<video id="heroVideo" autoplay muted loop playsinline preload="metadata"
+			<video id="heroVideo<?php echo esc_attr(tsa_uid('herov')); ?>" class="hero__video" autoplay muted loop playsinline preload="metadata"
 				poster="<?php echo esc_url($poster); ?>"
 				aria-label="<?php echo esc_attr(tsa_text('hero.video.label')); ?>"
 				style="position:absolute;inset:0;opacity:0;transition:opacity .6s ease">
@@ -49,7 +49,7 @@ if (strpos($poster, '/assets/') === 0) {
 	<div class="hero__scrim" aria-hidden="true"></div>
 
 	<?php if ($sources) : ?>
-		<div class="vidctl" id="vidctl" hidden>
+		<div class="vidctl" hidden>
 			<button type="button" data-act="play" aria-pressed="true">
 				<svg aria-hidden="true"><use href="#i-pause" /></svg><span><?php esc_html_e('Pause', 'tradeskillapps'); ?></span>
 			</button>

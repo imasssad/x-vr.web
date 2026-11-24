@@ -1,10 +1,11 @@
-<?php defined('ABSPATH') || exit; $videos = tsa_items('tsa_video'); ?>
-<section class="band band--white" id="videos" aria-labelledby="videos-h">
+<?php defined('ABSPATH') || exit;
+$sec_sfx = tsa_uid('sec-videos'); $videos = tsa_items('tsa_video'); ?>
+<section class="band band--white" id="videos<?php echo esc_attr($sec_sfx); ?>" aria-labelledby="videos-h<?php echo esc_attr($sec_sfx); ?>">
 	<div class="wrap">
 		<div class="sec-head sec-head--split">
 			<div>
 				<p class="eyebrow rv"><?php tsa_e('videos.eyebrow'); ?></p>
-				<?php tsa_heading('videos', 'videos-h'); ?>
+				<?php tsa_heading('videos', 'videos-h' . $sec_sfx); ?>
 			</div>
 			<p class="lede rv rv-d1"><?php tsa_e('videos.lede'); ?></p>
 		</div>

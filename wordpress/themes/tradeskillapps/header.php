@@ -9,7 +9,6 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <a class="skip" href="#main"><?php esc_html_e('Skip to main content', 'tradeskillapps'); ?></a>
-<?php tsa_icon_sprite(); ?>
 <span id="top"></span>
 
 <?php
@@ -38,7 +37,7 @@ if (tsa_do_location('header')) { return; }
 		</nav>
 
 		<?php $nav_cta = tsa_link('navCta'); ?>
-		<a class="btn btn--primary nav__cta" href="<?php echo esc_url($nav_cta['href']); ?>">
+		<a class="btn btn--primary nav__cta" href="<?php echo esc_url(tsa_href($nav_cta['href'])); ?>">
 			<?php echo esc_html($nav_cta['label']); ?>
 			<span class="arw" aria-hidden="true">&rarr;</span>
 		</a>
@@ -50,6 +49,16 @@ if (tsa_do_location('header')) { return; }
 	</div>
 
 	<div class="drawer" id="drawer">
+		<?php if (has_nav_menu('primary')) : ?>
+			<?php
+			// The drawer mirrors whatever menu the owner assigned, so phone
+			// and desktop never disagree; the extra links follow it.
+			wp_nav_menu(array(
+				'theme_location' => 'primary', 'container' => false, 'depth' => 1,
+				'items_wrap' => '<ul>%3$s' . tsa_drawer_extra_items() . '</ul>',
+			));
+			?>
+		<?php else : ?>
 		<ul>
 			<?php
 			$links = array();
@@ -63,11 +72,12 @@ if (tsa_do_location('header')) { return; }
 				}
 			}
 			foreach ($links as $l) {
-				printf('<li><a href="%s">%s</a></li>', esc_url($l[1]), esc_html($l[0]));
+				printf('<li><a href="%s">%s</a></li>', esc_url(tsa_href($l[1])), esc_html($l[0]));
 			}
 			?>
 		</ul>
-		<a class="btn btn--primary btn--block" href="<?php echo esc_url($nav_cta['href']); ?>">
+		<?php endif; ?>
+		<a class="btn btn--primary btn--block" href="<?php echo esc_url(tsa_href($nav_cta['href'])); ?>">
 			<?php echo esc_html($nav_cta['label']); ?>
 			<span class="arw" aria-hidden="true">&rarr;</span>
 		</a>

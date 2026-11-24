@@ -1,10 +1,11 @@
-<?php defined('ABSPATH') || exit; $hs = tsa_image('levels.highSchool.image'); ?>
-<section class="band" id="levels" aria-labelledby="levels-h">
+<?php defined('ABSPATH') || exit;
+$sec_sfx = tsa_uid('sec-levels'); $hs = tsa_image('levels.highSchool.image'); ?>
+<section class="band" id="levels<?php echo esc_attr($sec_sfx); ?>" aria-labelledby="levels-h<?php echo esc_attr($sec_sfx); ?>">
 	<div class="wrap">
 		<div class="sec-head sec-head--split">
 			<div>
 				<p class="eyebrow rv"><?php tsa_e('levels.eyebrow'); ?></p>
-				<?php tsa_heading('levels', 'levels-h'); ?>
+				<?php tsa_heading('levels', 'levels-h' . $sec_sfx); ?>
 			</div>
 			<p class="lede rv rv-d1"><?php tsa_e('levels.lede'); ?></p>
 		</div>

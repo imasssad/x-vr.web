@@ -1,10 +1,11 @@
-<?php defined('ABSPATH') || exit; $cta = tsa_link('closing.cta'); $chain = tsa_lines('closing.chain'); ?>
-<section class="band closing on-navy" aria-labelledby="closing-h">
+<?php defined('ABSPATH') || exit;
+$sec_sfx = tsa_uid('sec-closing'); $cta = tsa_link('closing.cta'); $chain = tsa_lines('closing.chain'); ?>
+<section class="band closing on-navy" aria-labelledby="closing-h<?php echo esc_attr($sec_sfx); ?>">
 	<div class="wrap closing__in">
 		<?php if ($chain) : ?>
 			<ul class="chain rv"><?php foreach ($chain as $c) : ?><li><?php echo esc_html($c); ?></li><?php endforeach; ?></ul>
 		<?php endif; ?>
-		<h2 id="closing-h" class="rv rv-d1"><?php tsa_e('closing.headline'); ?> <em><?php tsa_e('closing.headlineEm'); ?></em></h2>
+		<h2 id="closing-h<?php echo esc_attr($sec_sfx); ?>" class="rv rv-d1"><?php tsa_e('closing.headline'); ?> <em><?php tsa_e('closing.headlineEm'); ?></em></h2>
 		<a class="btn btn--primary rv rv-d2" href="<?php echo esc_url($cta['href']); ?>">
 			<?php echo esc_html($cta['label']); ?> <span class="arw" aria-hidden="true">&rarr;</span>
 		</a>

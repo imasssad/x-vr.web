@@ -47,6 +47,13 @@ def main():
     # Strings that were written into components instead of the content files.
     data["navCta"] = {"label": "Build your pathway", "href": "#start"}
 
+    # Theme-specific overrides. The videos note in the source content was a
+    # message to the site owner ("paste a YouTube link... no developer") and
+    # has no business on the public page; empty means the note is not shown.
+    data["videos"]["note"] = ""
+    # og-image default path, editable in the Customizer and read by the theme.
+    data["site"]["ogImage"] = "/assets/images/og-image.jpg"
+
     data["planner"] = dict(pl["plannerCopy"], **{
         "tradePlaceholder": "For example: welding, HVAC, electrical…",
         "roles": list(pl["roles"]),

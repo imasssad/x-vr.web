@@ -119,45 +119,46 @@ add_action('wp_enqueue_scripts', function () {
 	);
 }, 20);
 
-/** And inside the editor, so what is being built matches what ships. */
-add_action('elementor/editor/after_enqueue_styles', function () {
-	wp_enqueue_style('tradeskillapps', get_stylesheet_uri(), array(), TSA_VERSION);
-	wp_enqueue_style(
-		'tradeskillapps-elementor',
-		get_template_directory_uri() . '/assets/css/elementor.css',
-		array('tradeskillapps'),
-		TSA_VERSION
-	);
-});
-
 /**
- * The theme's palette and typefaces, offered to Elementor as global colours
- * and fonts so anything built alongside the sections matches them.
+ * The theme's palette and typefaces, written into Elementor's active kit so
+ * anything built alongside the sections matches them. Runs once: the owner's
+ * later changes in Site Settings are theirs and are never overwritten.
+ * (There is no filter for kit defaults - this goes through the kit document
+ * itself, which is the supported way.)
  */
-add_filter('elementor/kit/initial_settings', function ($settings) {
-	$settings['system_colors'] = array(
-		array('_id' => 'primary',   'title' => __('Blue', 'tradeskillapps'),  'color' => '#2864E8'),
-		array('_id' => 'secondary', 'title' => __('Navy', 'tradeskillapps'),  'color' => '#15283F'),
-		array('_id' => 'text',      'title' => __('Slate', 'tradeskillapps'), 'color' => '#64748B'),
-		array('_id' => 'accent',    'title' => __('Ice', 'tradeskillapps'),   'color' => '#B9D5F5'),
-	);
-	$settings['custom_colors'] = array(
-		array('_id' => 'tsawash',   'title' => __('Page wash', 'tradeskillapps'), 'color' => '#F5F8FC'),
-		array('_id' => 'tsawhite',  'title' => __('White', 'tradeskillapps'),     'color' => '#FFFFFF'),
-		array('_id' => 'tsaborder', 'title' => __('Border', 'tradeskillapps'),    'color' => '#E2E8F0'),
-	);
-	$settings['system_typography'] = array(
-		array('_id' => 'primary',   'title' => __('Headline', 'tradeskillapps'),
-			'typography_typography' => 'custom', 'typography_font_family' => 'Barlow Condensed', 'typography_font_weight' => '700'),
-		array('_id' => 'secondary', 'title' => __('Subheading', 'tradeskillapps'),
-			'typography_typography' => 'custom', 'typography_font_family' => 'Barlow Condensed', 'typography_font_weight' => '600'),
-		array('_id' => 'text',      'title' => __('Body', 'tradeskillapps'),
-			'typography_typography' => 'custom', 'typography_font_family' => 'DM Sans', 'typography_font_weight' => '400'),
-		array('_id' => 'accent',    'title' => __('Body emphasis', 'tradeskillapps'),
-			'typography_typography' => 'custom', 'typography_font_family' => 'DM Sans', 'typography_font_weight' => '500'),
-	);
-	return $settings;
-});
+add_action('elementor/init', function () {
+	if (get_option('tsa_kit_seeded')) return;
+	if (!class_exists('\Elementor\Plugin')) return;
+	$plugin = \Elementor\Plugin::$instance;
+	if (empty($plugin->kits_manager)) return;
+	$kit = $plugin->kits_manager->get_active_kit();
+	if (!$kit || !method_exists($kit, 'update_settings')) return;
+
+	$kit->update_settings(array(
+		'system_colors' => array(
+			array('_id' => 'primary',   'title' => __('Blue', 'tradeskillapps'),  'color' => '#2864E8'),
+			array('_id' => 'secondary', 'title' => __('Navy', 'tradeskillapps'),  'color' => '#15283F'),
+			array('_id' => 'text',      'title' => __('Slate', 'tradeskillapps'), 'color' => '#64748B'),
+			array('_id' => 'accent',    'title' => __('Ice', 'tradeskillapps'),   'color' => '#B9D5F5'),
+		),
+		'custom_colors' => array(
+			array('_id' => 'tsawash',   'title' => __('Page wash', 'tradeskillapps'), 'color' => '#F5F8FC'),
+			array('_id' => 'tsawhite',  'title' => __('White', 'tradeskillapps'),     'color' => '#FFFFFF'),
+			array('_id' => 'tsaborder', 'title' => __('Border', 'tradeskillapps'),    'color' => '#E2E8F0'),
+		),
+		'system_typography' => array(
+			array('_id' => 'primary',   'title' => __('Headline', 'tradeskillapps'),
+				'typography_typography' => 'custom', 'typography_font_family' => 'Barlow Condensed', 'typography_font_weight' => '700'),
+			array('_id' => 'secondary', 'title' => __('Subheading', 'tradeskillapps'),
+				'typography_typography' => 'custom', 'typography_font_family' => 'Barlow Condensed', 'typography_font_weight' => '600'),
+			array('_id' => 'text',      'title' => __('Body', 'tradeskillapps'),
+				'typography_typography' => 'custom', 'typography_font_family' => 'DM Sans', 'typography_font_weight' => '400'),
+			array('_id' => 'accent',    'title' => __('Body emphasis', 'tradeskillapps'),
+				'typography_typography' => 'custom', 'typography_font_family' => 'DM Sans', 'typography_font_weight' => '500'),
+		),
+	));
+	update_option('tsa_kit_seeded', 1);
+}, 20);
 
 /**
  * The theme self-hosts Barlow Condensed and DM Sans. Telling Elementor they

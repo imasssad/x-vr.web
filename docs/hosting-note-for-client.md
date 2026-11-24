@@ -1,5 +1,9 @@
 # Hosting arrangement — tradeskillapps.com
 
+> **Update (November 2026):** the project has since moved to WordPress.
+> This document describes the earlier Next.js/Vercel setup and is kept for
+> reference only. The current instructions live in `wordpress/README.md`.
+
 *A short note you can forward. Written to be read by someone non-technical.*
 
 ---

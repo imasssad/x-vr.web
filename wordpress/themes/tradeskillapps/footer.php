@@ -26,7 +26,7 @@ if (tsa_do_location('footer')) {
 						$label = tsa_text('footer.links.' . $i . '.label');
 						$href  = tsa_text('footer.links.' . $i . '.href');
 						if ($label === '') continue;
-						printf('<li><a href="%s">%s</a></li>', esc_url($href), esc_html($label));
+						printf('<li><a href="%s">%s</a></li>', esc_url(tsa_href($href)), esc_html($label));
 					}
 					echo '</ul>';
 				}

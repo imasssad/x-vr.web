@@ -1,5 +1,9 @@
 # Setting up the content editor
 
+> **Update (November 2026):** the project has since moved to WordPress.
+> This document describes the earlier Next.js/Vercel setup and is kept for
+> reference only. The current instructions live in `wordpress/README.md`.
+
 The site's words and pictures live in `nextjs/content/data/*.json`. The editor
 at **tradeskillapps.com/admin** edits those files through GitHub: every save is
 a commit to this repository, and Vercel redeploys the site automatically.

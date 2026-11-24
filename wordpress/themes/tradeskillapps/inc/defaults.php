@@ -596,7 +596,7 @@ function tsa_defaults() {
 			'headline' => 'See what we are',
 			'headlineEm' => 'building.',
 			'lede' => 'A short look at the work — the technology, the people learning on it, and why the trades are worth this kind of investment.',
-			'note' => 'Three film slots are ready and waiting. Paste a YouTube link into any one of them and the player appears on its own — no rebuild, no developer.',
+			'note' => '',
 			'items' => array(
 				array(
 					'id' => 'story',
