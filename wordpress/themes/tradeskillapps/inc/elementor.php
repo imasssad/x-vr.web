@@ -93,25 +93,58 @@ add_action('elementor/elements/categories_registered', function ($manager) {
  */
 function tsa_elementor_sections() {
 	return array(
-		'hero'      => array('Hero',                 'eicon-slides',        'hero',          array('eyebrow','headline','headlineEm','lede')),
-		'ticker'    => array('Scrolling words',      'eicon-animation-text','ticker',        array()),
-		'purpose'   => array('Why this exists',      'eicon-info-box',      'purpose',       array('eyebrow','headline','headlineEm','lede','body')),
-		'trades'    => array('Trades',               'eicon-tabs',          'tradesSection', array('eyebrow','headline','headlineEm','lede','note')),
-		'approach'  => array('Our approach',         'eicon-text',          'approach',      array('eyebrow','headline','headlineEm','lede','note')),
-		'cycle'     => array('Learning cycle',       'eicon-sync',          'learningCycle', array('eyebrow','headline','headlineEm')),
-		'videos'    => array('Videos',               'eicon-youtube',       'videos',        array('eyebrow','headline','headlineEm','lede','note')),
-		'pathways'  => array('Career pathways',      'eicon-time-line',     'pathways',      array('eyebrow','headline','headlineEm','lede','note')),
-		'educators' => array('For educators',        'eicon-person',        'educators',     array('eyebrow','headline','headlineEm','lede','body')),
-		'levels'    => array('Schools and colleges', 'eicon-gallery-grid',  'levels',        array('eyebrow','headline','headlineEm','lede','note')),
-		'mission'   => array('Mission',              'eicon-blockquote',    'mission',       array('eyebrow','quote','quoteEm')),
-		'glossary'  => array('Glossary',             'eicon-book-open',     'glossary',      array('eyebrow','headline','headlineEm','lede')),
-		'planner'   => array('Starter planner',      'eicon-form-horizontal','planner',      array('eyebrow','headline','headlineEm','lede')),
-		'access'    => array('Access and equipment', 'eicon-lock-user',     'access',        array('eyebrow','headline','headlineEm','lede','body')),
-		'faq'       => array('FAQ',                  'eicon-help-o',        'faq',           array('eyebrow','headline','headlineEm')),
-		'contact'   => array('Contact form',         'eicon-mail',          'contact',       array('eyebrow','headline','headlineEm','lede')),
-		'closing'   => array('Closing',              'eicon-call-to-action','closing',       array('headline','headlineEm')),
+		// slug => [ label, icon, content group, text fields, pictures, posts-menu hint ]
+		'hero'      => array('Hero', 'eicon-slides', 'hero',
+			array('eyebrow','headline','headlineEm','lede'),
+			array(array('Background picture', 'hero.image')), ''),
+		'ticker'    => array('Scrolling words', 'eicon-animation-text', 'ticker',
+			array(), array(), ''),
+		'purpose'   => array('Why this exists', 'eicon-info-box', 'purpose',
+			array('eyebrow','headline','headlineEm','lede','body'), array(), ''),
+		'trades'    => array('Trades', 'eicon-tabs', 'tradesSection',
+			array('eyebrow','headline','headlineEm','lede','note'), array(), 'Trades'),
+		'approach'  => array('Our approach', 'eicon-text', 'approach',
+			array('eyebrow','headline','headlineEm','lede','note'),
+			array(array('Large picture', 'approach.heroImage'),
+			      array('Second picture', 'approach.practiceImage')), ''),
+		'cycle'     => array('Learning cycle', 'eicon-sync', 'learningCycle',
+			array('eyebrow','headline','headlineEm'), array(), ''),
+		'videos'    => array('Videos', 'eicon-youtube', 'videos',
+			array('eyebrow','headline','headlineEm','lede','note'), array(), 'Videos'),
+		'pathways'  => array('Career pathways', 'eicon-time-line', 'pathways',
+			array('eyebrow','headline','headlineEm','lede','note'),
+			array(array('Picture', 'pathways.image')), ''),
+		'educators' => array('For educators', 'eicon-person', 'educators',
+			array('eyebrow','headline','headlineEm','lede','body'),
+			array(array('Step 1 picture', 'educators.steps.0.image'),
+			      array('Step 2 picture', 'educators.steps.1.image'),
+			      array('Step 3 picture', 'educators.steps.2.image'),
+			      array('Step 4 picture', 'educators.steps.3.image')), ''),
+		'levels'    => array('Schools and colleges', 'eicon-gallery-grid', 'levels',
+			array('eyebrow','headline','headlineEm','lede','note'),
+			array(array('High schools picture', 'levels.highSchool.image')), ''),
+		'mission'   => array('Mission', 'eicon-blockquote', 'mission',
+			array('eyebrow','quote','quoteEm'),
+			array(array('Picture', 'mission.image')), ''),
+		'glossary'  => array('Glossary', 'eicon-book-open', 'glossary',
+			array('eyebrow','headline','headlineEm','lede'), array(), 'Glossary'),
+		'planner'   => array('Starter planner', 'eicon-form-horizontal', 'planner',
+			array('eyebrow','headline','headlineEm','lede'), array(), ''),
+		'access'    => array('Access and equipment', 'eicon-lock-user', 'access',
+			array('eyebrow','headline','headlineEm','lede','body'),
+			array(array('Picture', 'access.image')), ''),
+		'faq'       => array('FAQ', 'eicon-help-o', 'faq',
+			array('eyebrow','headline','headlineEm'), array(), 'FAQ'),
+		'contact'   => array('Contact form', 'eicon-mail', 'contact',
+			array('eyebrow','headline','headlineEm','lede'), array(), ''),
+		'closing'   => array('Closing', 'eicon-call-to-action', 'closing',
+			array('headline','headlineEm'),
+			array(array('Picture', 'closing.image')), ''),
 	);
 }
+
+// The "build my home page in Elementor" screen under Appearance.
+require_once get_template_directory() . '/inc/elementor/page-builder.php';
 
 add_action('elementor/widgets/register', function ($widgets_manager) {
 	require_once get_template_directory() . '/inc/elementor/class-section-widget.php';
@@ -122,6 +155,8 @@ add_action('elementor/widgets/register', function ($widgets_manager) {
 			'tsa_icon'   => $spec[1],
 			'tsa_group'  => $spec[2],
 			'tsa_fields' => $spec[3],
+			'tsa_images' => isset($spec[4]) ? $spec[4] : array(),
+			'tsa_posts'  => isset($spec[5]) ? $spec[5] : '',
 		)));
 	}
 });

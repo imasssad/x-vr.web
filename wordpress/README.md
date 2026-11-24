@@ -198,26 +198,39 @@ menu, because those are lists you add to and remove from.
 
 ### Taking the home page over in Elementor
 
-If you would rather own the home page in the builder:
+One button does the whole thing:
 
-1. **Pages → Add New**, call it `Home`, publish it empty.
-2. **Settings → Reading → Your homepage displays → A static page →
-   Homepage: Home.**
-3. Open that page and press **Edit with Elementor**. The theme stands aside
-   as soon as the editor opens, so you get an empty canvas to build on —
-   drag in the seventeen section widgets for the same blocks the old home
-   page used, in any order you like.
-4. Publish.
+**Appearance → Home in Elementor → "Build my home page in Elementor"**
+
+It creates a page containing all seventeen sections already arranged in
+order, makes it the home page, and gives you an "Edit the home page with
+Elementor" link. Open that and you are looking at your finished site inside
+the builder — ready to swap pictures, reorder sections, or add anything
+Elementor offers.
+
+Pictures are editable right there: every section that shows a photograph has
+a **Pictures** panel in its widget settings, and choosing a new image also
+picks up that image's description from the Media Library, so the site stays
+readable to screen readers. Twelve pictures across eight sections.
+
+The lists — trades, videos, FAQ entries, glossary terms — stay in the main
+admin menu, because you add to and remove from those. Each widget says so in
+its own settings panel. Changes there appear on the page immediately.
+
+(If you would rather assemble it yourself: make a page, set it as the
+homepage under **Settings → Reading**, and press Edit with Elementor — the
+theme stands aside as soon as the editor opens, so you get an empty canvas
+and can drag in whichever sections you want.)
 
 Point **Settings → Reading** back at "Your latest posts" (or remove
 Elementor from that page) and the original template returns, exactly as it
 was. Nothing is lost either way.
 
-One thing to know before you choose: the section widgets let you place and
-reorder sections and override a few headline fields, but the detailed text
-inside them — the trade cards, the pathway stages, the FAQ — still comes
-from the Customizer and the admin menus. Elementor gives you the layout;
-the Customizer keeps the words.
+One thing to know before you choose: each widget exposes its pictures and
+its main headings, but the detailed text inside a section — the six trade
+cards, the four pathway stages, the FAQ answers — still comes from the
+Customizer and the admin menus. Elementor gives you the arrangement and the
+imagery; the Customizer keeps the fine print.
 
 ---
 
@@ -313,6 +326,7 @@ themes/tradeskillapps/
     elementor.php        Elementor support; does nothing without it
     elementor/
       class-section-widget.php   each section, as a draggable widget
+      page-builder.php           builds the home page as an Elementor page
   assets/
     css/elementor.css    loaded only when Elementor is active
     fonts/               Barlow Condensed and DM Sans, self-hosted (OFL.txt)
