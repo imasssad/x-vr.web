@@ -244,3 +244,68 @@ function tsa_post_image($post_id) {
 	}
 	return array('src' => '', 'alt' => '');
 }
+
+/**
+ * A YouTube id from whatever was pasted.
+ *
+ * People paste the whole address far more often than the bare id, so accept
+ * watch links, youtu.be links, embed and shorts URLs, and an id on its own.
+ * Returns '' if it cannot find one, which is what keeps a mistyped value
+ * from becoming a broken player.
+ */
+function tsa_youtube_id($raw) {
+	$raw = trim((string) $raw);
+	if ($raw === '') return '';
+
+	// already a bare id
+	if (preg_match('#^[A-Za-z0-9_-]{11}$#', $raw)) return $raw;
+
+	$patterns = array(
+		'#[?&]v=([A-Za-z0-9_-]{11})#',        // watch?v=ID
+		'#youtu\.be/([A-Za-z0-9_-]{11})#',    // youtu.be/ID
+		'#/embed/([A-Za-z0-9_-]{11})#',       // /embed/ID
+		'#/shorts/([A-Za-z0-9_-]{11})#',      // /shorts/ID
+		'#/live/([A-Za-z0-9_-]{11})#',        // /live/ID
+	);
+	foreach ($patterns as $re) {
+		if (preg_match($re, $raw, $m)) return $m[1];
+	}
+	return '';
+}
+
+/**
+ * The videos to show, in one shape whatever they came from.
+ *
+ * A page builder can override the whole list for one placement; otherwise
+ * the entries under Videos in the admin menu are used.
+ * Each row: title, blurb, embed (a bare YouTube id), file, poster.
+ */
+function tsa_video_items() {
+	$o = &tsa_overrides();
+	$rows = array();
+
+	if (isset($o['videos.items']) && is_array($o['videos.items'])) {
+		foreach ($o['videos.items'] as $row) {
+			if (!is_array($row)) continue;
+			$rows[] = array(
+				'title'  => isset($row['title']) ? (string) $row['title'] : '',
+				'blurb'  => isset($row['blurb']) ? (string) $row['blurb'] : '',
+				'embed'  => tsa_youtube_id(isset($row['embed']) ? $row['embed'] : ''),
+				'file'   => isset($row['file']) ? trim((string) $row['file']) : '',
+				'poster' => isset($row['poster']) ? (string) $row['poster'] : '',
+			);
+		}
+		return $rows;
+	}
+
+	foreach (tsa_items('tsa_video') as $v) {
+		$rows[] = array(
+			'title'  => $v->post_title,
+			'blurb'  => (string) get_post_meta($v->ID, '_tsa_blurb', true),
+			'embed'  => tsa_youtube_id(get_post_meta($v->ID, '_tsa_embed', true)),
+			'file'   => trim((string) get_post_meta($v->ID, '_tsa_file', true)),
+			'poster' => has_post_thumbnail($v->ID) ? get_the_post_thumbnail_url($v->ID, 'full') : '',
+		);
+	}
+	return $rows;
+}

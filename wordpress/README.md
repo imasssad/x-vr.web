@@ -94,13 +94,28 @@ cannot see the image, and search engines use it.
 
 ## Videos
 
-Each video slot takes **either** a YouTube id **or** a file URL. The YouTube
-route is easier: copy the part of the address after `v=` and paste it in.
-Until a slot has one or the other it shows a "Film coming soon" marker, which
-is deliberate — better than an empty rectangle.
+**Videos** in the main admin menu holds one entry per film: a title, a
+description, a still image, and the film itself.
 
-Nothing is embedded until a visitor presses play, so an unplayed video costs
-nothing.
+For the film, **paste the whole YouTube address** — the one in the browser's
+address bar. Watch links, `youtu.be` links and Shorts links all work, extra
+bits like `&t=30` and playlist ids are ignored. (A bare video id still works
+too.) If a film is uploaded to this site instead of YouTube, use the file
+field underneath.
+
+The first film is shown **large**, running the full width of the page with
+its description beside it, so an introduction film gets the presence it
+deserves. The rest follow underneath at card size. To make them all the same
+size instead: **Customize → Videos — section heading → Layout**.
+
+Until a slot has a film it shows a "Film coming soon" marker, which is
+deliberate — better than an empty rectangle. Nothing is embedded until a
+visitor presses play, so an unplayed film costs nothing.
+
+**In Elementor**, the Videos section has a **Films** panel of its own. Leave
+it empty and the entries from the Videos menu are used. Add a film there and
+that page shows your list instead — handy for a landing page that needs its
+own set.
 
 ---
 

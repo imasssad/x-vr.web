@@ -14,7 +14,7 @@ defined('ABSPATH') || exit;
 
 /** Groups handled as posts, not Customizer fields. */
 function tsa_customizer_skip() {
-	return array('trades', 'videos.items', 'faq.items', 'glossary.items', 'site.domain');
+	return array('trades', 'videos.items', 'faq.items', 'glossary.items', 'site.domain', 'videos.layout');
 }
 
 /** Section order and human titles. */
@@ -104,6 +104,25 @@ function tsa_customize_register($wp_customize) {
 
 		$priority = 10;
 		tsa_walk_node($wp_customize, $defaults[$group], $group, 'tsa_' . strtolower($group), $skip, $priority);
+
+		// A choice, not a sentence, so it gets a proper dropdown instead of
+		// the text box the generic walk would produce.
+		if ($group === 'videos') {
+			$wp_customize->add_setting(tsa_key('videos.layout'), array(
+				'default'           => tsa_default('videos.layout'),
+				'sanitize_callback' => 'tsa_sanitize_video_layout',
+				'transport'         => 'refresh',
+			));
+			$wp_customize->add_control(tsa_key('videos.layout'), array(
+				'label'       => __('Layout', 'tradeskillapps'),
+				'description' => __('How the films are arranged.', 'tradeskillapps'),
+				'section'     => $section, 'type' => 'select', 'priority' => $priority++,
+				'choices'     => array(
+					'feature' => __('First film large, the rest beneath', 'tradeskillapps'),
+					'grid'    => __('All the same size', 'tradeskillapps'),
+				),
+			));
+		}
 
 		// Where enquiries are delivered. Not part of the page text, so it is
 		// added by hand rather than generated.
@@ -210,4 +229,9 @@ function tsa_path_hint($path) {
 function tsa_sanitize_media($value) {
 	if ($value === '' || $value === null) return '';
 	return is_numeric($value) ? (string) absint($value) : esc_url_raw($value);
+}
+
+/** Only the two layouts the template knows how to draw. */
+function tsa_sanitize_video_layout($value) {
+	return in_array($value, array('feature', 'grid'), true) ? $value : 'feature';
 }

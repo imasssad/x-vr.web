@@ -3,7 +3,7 @@ Theme Name: TradeSkillApps
 Theme URI: https://tradeskillapps.com
 Author: TradeSkillApps
 Description: The TradeSkillApps single-page site as an editable WordPress theme. Every heading, paragraph, picture and video is editable from Appearance > Customize, and the trades, videos, FAQ and glossary are editable as normal WordPress posts. Ships with the finished copy already in place.
-Version: 1.4.0
+Version: 1.5.0
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 7.4
@@ -781,3 +781,30 @@ body.admin-bar .nav{top:32px}
    The delay lets the close animation finish before the content vanishes. */
 .acc__panel[data-open="false"]>div{visibility:hidden;transition:visibility 0s .32s}
 .acc__panel[data-open="true"]>div{visibility:visible;transition:visibility 0s}
+
+/* ---------- the lead film ---------- */
+/* The first video runs the full width of the column, so an intro film gets
+   the same presence as the big photographs elsewhere on the page. The rest
+   follow underneath at card size. */
+.videos__feature{margin:0 0 clamp(1rem,2.4vw,1.6rem)}
+.vcard--feature{border-color:var(--ice)}
+.vcard--feature .vcard__icon{width:76px;height:76px}
+.vcard--feature .vcard__icon svg{width:30px;height:30px;margin-left:4px}
+.vcard--feature .vcard__body{padding:clamp(1.3rem,3vw,2.1rem)}
+.vcard--feature .vcard__body h3{font-size:var(--t-sub)}
+.vcard--feature .vcard__body p{font-size:1rem;max-width:68ch}
+.vcard--feature .vcard__pending{bottom:1.4rem}
+
+/* With a lead film above, the remainder share the row evenly however many
+   there are - two, three or more. */
+@media(min-width:760px){
+  .videos--rest{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+}
+
+@media(min-width:1000px){
+  /* Side by side once there is room: the film leads, its description sits
+     beside it rather than stacking into a tall block. */
+  .vcard--feature{display:grid;grid-template-columns:1.55fr 1fr;align-items:stretch}
+  .vcard--feature .vcard__media{height:100%}
+  .vcard--feature .vcard__body{display:flex;flex-direction:column;justify-content:center}
+}

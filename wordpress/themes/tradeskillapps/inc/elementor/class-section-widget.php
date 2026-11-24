@@ -54,7 +54,71 @@ class TSA_Section_Widget extends \Elementor\Widget_Base {
 	protected function register_controls() {
 		$this->register_text_controls();
 		$this->register_image_controls();
+		$this->register_video_controls();
 		$this->register_posts_notice();
+	}
+
+	/**
+	 * The films, editable here as well as under Videos in the admin menu.
+	 *
+	 * Left empty, the Videos entries are used, so the section keeps working
+	 * and nothing has to be copied over. Add a row and this placement uses
+	 * the list typed here instead - which is what makes a page built in the
+	 * editor self-contained.
+	 */
+	private function register_video_controls() {
+		if ($this->slug !== 'videos' || !class_exists('\Elementor\Repeater')) return;
+
+		$this->start_controls_section('tsa_films', array(
+			'label' => __('Films', 'tradeskillapps'),
+		));
+
+		$this->add_control('tsa_films_intro', array(
+			'type' => \Elementor\Controls_Manager::RAW_HTML,
+			'raw'  => esc_html__('Leave this empty to show the entries from Videos in the main menu. Add a film here and this section shows your list instead. The first film is shown large unless the layout is set to an even grid.', 'tradeskillapps'),
+			'content_classes' => 'elementor-descriptor',
+		));
+
+		$row = new \Elementor\Repeater();
+		$row->add_control('title', array(
+			'label' => __('Title', 'tradeskillapps'),
+			'type'  => \Elementor\Controls_Manager::TEXT,
+			'label_block' => true,
+			'default' => __('New film', 'tradeskillapps'),
+		));
+		$row->add_control('blurb', array(
+			'label' => __('Description', 'tradeskillapps'),
+			'type'  => \Elementor\Controls_Manager::TEXTAREA,
+			'rows'  => 3,
+		));
+		$row->add_control('embed', array(
+			'label'       => __('YouTube link', 'tradeskillapps'),
+			'type'        => \Elementor\Controls_Manager::TEXT,
+			'label_block' => true,
+			'placeholder' => 'https://www.youtube.com/watch?v=...',
+			'description' => __('Paste the whole address from the browser - a watch, youtu.be or Shorts link all work.', 'tradeskillapps'),
+		));
+		$row->add_control('file', array(
+			'label'       => __('...or a video file', 'tradeskillapps'),
+			'type'        => \Elementor\Controls_Manager::MEDIA,
+			'media_types' => array('video'),
+			'description' => __('Only if the film is uploaded to this site rather than YouTube.', 'tradeskillapps'),
+		));
+		$row->add_control('poster', array(
+			'label' => __('Still image', 'tradeskillapps'),
+			'type'  => \Elementor\Controls_Manager::MEDIA,
+			'description' => __('Shown before the film is played. Optional.', 'tradeskillapps'),
+		));
+
+		$this->add_control('tsa_films', array(
+			'type'        => \Elementor\Controls_Manager::REPEATER,
+			'fields'      => $row->get_controls(),
+			'title_field' => '{{{ title }}}',
+			'default'     => array(),
+			'prevent_empty' => false,
+		));
+
+		$this->end_controls_section();
 	}
 
 	private function register_posts_notice() {
@@ -170,6 +234,20 @@ class TSA_Section_Widget extends \Elementor\Widget_Base {
 				$alt = get_post_meta((int) $settings[$key]['id'], '_wp_attachment_image_alt', true);
 				if ($alt !== '') $overrides[$img[1] . '.alt'] = $alt;
 			}
+		}
+
+		if ($this->slug === 'videos' && !empty($settings['tsa_films']) && is_array($settings['tsa_films'])) {
+			$films = array();
+			foreach ($settings['tsa_films'] as $row) {
+				$films[] = array(
+					'title'  => isset($row['title']) ? $row['title'] : '',
+					'blurb'  => isset($row['blurb']) ? $row['blurb'] : '',
+					'embed'  => isset($row['embed']) ? $row['embed'] : '',
+					'file'   => isset($row['file']['url']) ? $row['file']['url'] : '',
+					'poster' => isset($row['poster']['url']) ? $row['poster']['url'] : '',
+				);
+			}
+			if ($films) $overrides['videos.items'] = $films;
 		}
 
 		$previous = tsa_set_overrides($overrides);

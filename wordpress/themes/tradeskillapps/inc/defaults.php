@@ -623,6 +623,7 @@ function tsa_defaults() {
 					'embed' => '',
 				),
 			),
+			'layout' => 'feature',
 		),
 		'navCta' => array(
 			'label' => 'Build your pathway',

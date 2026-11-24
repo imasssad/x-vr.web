@@ -51,6 +51,9 @@ def main():
     # message to the site owner ("paste a YouTube link... no developer") and
     # has no business on the public page; empty means the note is not shown.
     data["videos"]["note"] = ""
+    # How the films are laid out: "feature" gives the first one the full
+    # width of the column, "grid" makes them all the same size.
+    data["videos"]["layout"] = "feature"
     # og-image default path, editable in the Customizer and read by the theme.
     data["site"]["ogImage"] = "/assets/images/og-image.jpg"
 
