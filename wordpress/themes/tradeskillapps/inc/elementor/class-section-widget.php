@@ -51,6 +51,33 @@ class TSA_Section_Widget extends \Elementor\Widget_Base {
 		return 'img_' . str_replace('.', '_', $path);
 	}
 
+	/**
+	 * Fields that are a choice, not a sentence. The generic walk would give
+	 * each of these a free text box, where anything the owner typed that was
+	 * not one of the accepted words would silently fall back to the default.
+	 * They get a dropdown instead, and are kept out of the text walk.
+	 */
+	private static function choice_fields() {
+		return array(
+			'hero.layout' => array(
+				'label'   => __('Layout', 'tradeskillapps'),
+				'desc'    => __('How the opening screen is built.', 'tradeskillapps'),
+				'options' => array(
+					'split'   => __('Words left, photograph right, on a dark band', 'tradeskillapps'),
+					'overlay' => __('One full-width photograph with the words over it', 'tradeskillapps'),
+				),
+			),
+			'videos.layout' => array(
+				'label'   => __('Layout', 'tradeskillapps'),
+				'desc'    => __('How the films are arranged.', 'tradeskillapps'),
+				'options' => array(
+					'feature' => __('First film large, the rest beneath', 'tradeskillapps'),
+					'grid'    => __('All the same size', 'tradeskillapps'),
+				),
+			),
+		);
+	}
+
 	protected function register_controls() {
 		$this->register_text_controls();
 		$this->register_image_controls();
@@ -290,6 +317,7 @@ class TSA_Section_Widget extends \Elementor\Widget_Base {
 			return;
 		}
 		if (!is_string($node)) return;
+		if (isset(self::choice_fields()[$this->group . '.' . $rel])) return;   // has a dropdown instead
 		$map[$rel] = array('type' => tsa_control_type($node), 'default' => $node);
 	}
 
@@ -324,6 +352,20 @@ class TSA_Section_Widget extends \Elementor\Widget_Base {
 			'raw'  => esc_html__('Leave a box empty to use the site-wide wording from the Customizer. Anything typed here applies to this placement only. The original is shown under each box.', 'tradeskillapps'),
 			'content_classes' => 'elementor-descriptor',
 		));
+
+		foreach (self::choice_fields() as $path => $c) {
+			if (strpos($path, $this->group . '.') !== 0) continue;
+			$rel = substr($path, strlen($this->group) + 1);
+			$this->add_control($this->field_key($rel), array(
+				'label'       => $c['label'],
+				'description' => $c['desc'],
+				'type'        => \Elementor\Controls_Manager::SELECT,
+				'default'     => '',
+				// blank first, so this placement follows the Customizer unless
+				// it is deliberately set - the same contract as the text boxes
+				'options'     => array('' => __('Use the site-wide setting', 'tradeskillapps')) + $c['options'],
+			));
+		}
 
 		$group = '';
 		$heading_n = 0;   // headings are numbered: a block's name can recur
@@ -366,6 +408,16 @@ class TSA_Section_Widget extends \Elementor\Widget_Base {
 	protected function render() {
 		$settings  = $this->get_settings_for_display();
 		$overrides = array();
+
+		// the dropdowns, which are kept out of field_map() so they do not
+		// also appear as free text boxes
+		foreach (self::choice_fields() as $path => $c) {
+			if (strpos($path, $this->group . '.') !== 0) continue;
+			$key = $this->field_key(substr($path, strlen($this->group) + 1));
+			if (empty($settings[$key]) || !isset($c['options'][$settings[$key]])) continue;
+			$overrides[$path] = $settings[$key];
+		}
+
 		foreach ($this->field_map() as $rel => $spec) {
 			$key = $this->field_key($rel);
 			if (empty($settings[$key])) continue;

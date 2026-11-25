@@ -1,7 +1,19 @@
 <?php
-/** The opening screen. A still photograph by default; a video fades in over it. */
+/**
+ * The opening screen.
+ *
+ * Two layouts, chosen in the Customizer (Hero > Layout) or on the widget:
+ *
+ *   split    - the client's reference layout. A dark band: the words on the
+ *              left, the photograph bleeding off the right edge, and the
+ *              weld film offered underneath the copy.
+ *   overlay  - the original. One full-bleed photograph with the words over
+ *              it, and the film playing silently behind them.
+ */
 defined('ABSPATH') || exit;
 
+$layout = tsa_text('hero.layout') === 'overlay' ? 'overlay' : 'split';
+$uid    = tsa_uid('hero');
 $img    = tsa_image('hero.image');
 $srcset = tsa_srcset(tsa_text('hero.image.srcSet'));
 $strip  = tsa_lines('hero.strip');
@@ -24,8 +36,51 @@ $poster = tsa_text('hero.video.poster');
 if (strpos($poster, '/assets/') === 0) {
 	$poster = tsa_asset_exists($poster) ? tsa_asset($poster) : '';
 }
+
+// Built once and placed differently by each layout: inside the text column
+// for the overlay (where it sat before), beneath both columns for the split.
+$strip_html = '';
+if ($strip) {
+	ob_start(); ?>
+	<div class="hero__strip rv rv-d3">
+		<?php foreach ($strip as $i => $line) : ?>
+			<?php if ($i) : ?><span class="dot" aria-hidden="true"></span><?php endif; ?>
+			<p><?php echo esc_html($line); ?></p>
+		<?php endforeach; ?>
+	</div>
+	<?php $strip_html = ob_get_clean();
+}
+
+// The film offered under the copy in the split layout. Its own fields,
+// because hero.video above is the silent background film of the overlay
+// layout and its files were never supplied.
+$film = array('src' => '', 'poster' => '');
+$fsrc = tsa_text('hero.film.src');
+if ($fsrc !== '') {
+	if (strpos($fsrc, '/assets/') === 0) {
+		$fsrc = tsa_asset_exists($fsrc) ? tsa_asset($fsrc) : '';
+	}
+	if ($fsrc !== '') {
+		$fposter = tsa_text('hero.film.poster');
+		if (strpos($fposter, '/assets/') === 0) {
+			$fposter = tsa_asset_exists($fposter) ? tsa_asset($fposter) : '';
+		}
+		$film = array(
+			'src'    => $fsrc,
+			'type'   => tsa_text('hero.film.type'),
+			'poster' => $fposter,
+			'label'  => tsa_text('hero.film.label'),
+		);
+	}
+}
+
+$vheading = tsa_text('hero.videoHeading');
+$p = tsa_link('hero.primaryCta');
+$s = tsa_link('hero.secondaryCta');
 ?>
-<section class="hero" aria-labelledby="hero-h">
+<section class="hero hero--<?php echo esc_attr($layout); ?><?php echo $layout === 'split' ? ' on-navy' : ''; ?>" aria-labelledby="hero-h<?php echo esc_attr($uid); ?>">
+
+<?php if ($layout === 'overlay') : ?>
 	<div class="hero__media">
 		<?php if ($img['src'] !== '') : ?>
 			<img id="heroPoster" src="<?php echo esc_url($img['src']); ?>"
@@ -40,8 +95,8 @@ if (strpos($poster, '/assets/') === 0) {
 				poster="<?php echo esc_url($poster); ?>"
 				aria-label="<?php echo esc_attr(tsa_text('hero.video.label')); ?>"
 				style="position:absolute;inset:0;opacity:0;transition:opacity .6s ease">
-				<?php foreach ($sources as $s) : ?>
-					<source src="<?php echo esc_url($s[0]); ?>" type="<?php echo esc_attr($s[1]); ?>" />
+				<?php foreach ($sources as $src) : ?>
+					<source src="<?php echo esc_url($src[0]); ?>" type="<?php echo esc_attr($src[1]); ?>" />
 				<?php endforeach; ?>
 			</video>
 		<?php endif; ?>
@@ -58,29 +113,66 @@ if (strpos($poster, '/assets/') === 0) {
 			</button>
 		</div>
 	<?php endif; ?>
+<?php endif; ?>
 
 	<div class="wrap hero__in">
-		<p class="eyebrow rv"><?php tsa_e('hero.eyebrow'); ?></p>
-		<h1 id="hero-h" class="rv rv-d1">
-			<?php tsa_e('hero.headline'); ?> <em><?php tsa_e('hero.headlineEm'); ?></em>
-		</h1>
-		<p class="lede rv rv-d2"><?php tsa_e('hero.lede'); ?></p>
-		<div class="hero__actions rv rv-d3">
-			<?php $p = tsa_link('hero.primaryCta'); $s = tsa_link('hero.secondaryCta'); ?>
-			<a class="btn btn--primary" href="<?php echo esc_url($p['href']); ?>">
-				<?php echo esc_html($p['label']); ?> <span class="arw" aria-hidden="true">&rarr;</span>
-			</a>
-			<a class="btn btn--ghost" href="<?php echo esc_url($s['href']); ?>">
-				<?php echo esc_html($s['label']); ?> <span class="arw" aria-hidden="true">&rarr;</span>
-			</a>
+		<div class="hero__text">
+			<p class="eyebrow rv"><?php tsa_e('hero.eyebrow'); ?></p>
+			<h1 id="hero-h<?php echo esc_attr($uid); ?>" class="rv rv-d1">
+				<?php tsa_e('hero.headline'); ?> <em><?php tsa_e('hero.headlineEm'); ?></em>
+			</h1>
+			<p class="lede rv rv-d2"><?php tsa_e('hero.lede'); ?></p>
+			<div class="hero__actions rv rv-d3">
+				<a class="btn btn--primary" href="<?php echo esc_url($p['href']); ?>">
+					<?php echo esc_html($p['label']); ?> <span class="arw" aria-hidden="true">&rarr;</span>
+				</a>
+				<a class="btn btn--ghost" href="<?php echo esc_url($s['href']); ?>">
+					<?php echo esc_html($s['label']); ?> <span class="arw" aria-hidden="true">&rarr;</span>
+				</a>
+			</div>
+
+			<?php if ($layout === 'split' && $film['src'] !== '') : ?>
+				<div class="hero__film rv rv-d3">
+					<?php if ($vheading !== '') : ?>
+						<p class="hero__film-h" id="hero-film-h<?php echo esc_attr($uid); ?>"><?php echo esc_html($vheading); ?></p>
+					<?php endif; ?>
+					<?php // the same card the films section uses, so the existing
+					      // play-on-click behaviour applies with no new script ?>
+					<article class="vcard vcard--hero" data-embed=""
+						data-file="<?php echo esc_url($film['src']); ?>"
+						data-poster="<?php echo esc_url($film['poster']); ?>">
+						<div class="vcard__media">
+							<button type="button" class="vcard__play"
+								aria-label="<?php echo esc_attr(sprintf(
+									/* translators: %s is the name of a film */
+									__('Play: %s', 'tradeskillapps'),
+									$vheading !== '' ? $vheading : $film['label']
+								)); ?>">
+								<?php if ($film['poster'] !== '') : ?>
+									<img src="<?php echo esc_url($film['poster']); ?>" alt="" aria-hidden="true" loading="lazy" />
+								<?php endif; ?>
+								<span class="vcard__icon" aria-hidden="true"><svg><use href="#i-play" /></svg></span>
+							</button>
+						</div>
+					</article>
+				</div>
+			<?php endif; ?>
+
+			<?php if ($layout === 'overlay') echo $strip_html; ?>
 		</div>
-		<?php if ($strip) : ?>
-			<div class="hero__strip rv rv-d3">
-				<?php foreach ($strip as $i => $line) : ?>
-					<?php if ($i) : ?><span class="dot" aria-hidden="true"></span><?php endif; ?>
-					<p><?php echo esc_html($line); ?></p>
-				<?php endforeach; ?>
+
+		<?php if ($layout === 'split' && $img['src'] !== '') : ?>
+			<div class="hero__shot rv rv-d2">
+				<img src="<?php echo esc_url($img['src']); ?>"
+					<?php if ($srcset && strpos($img['src'], '/assets/') !== false) : ?>
+						srcset="<?php echo esc_attr($srcset); ?>" sizes="(max-width:900px) 100vw, 55vw"
+					<?php endif; ?>
+					alt="<?php echo esc_attr($img['alt']); ?>" decoding="async" fetchpriority="high" />
 			</div>
 		<?php endif; ?>
 	</div>
+
+	<?php if ($layout === 'split' && $strip_html !== '') : ?>
+		<div class="wrap hero__strip-wrap"><?php echo $strip_html; ?></div>
+	<?php endif; ?>
 </section>

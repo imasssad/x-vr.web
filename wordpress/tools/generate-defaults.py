@@ -50,6 +50,23 @@ def main():
     # Theme-specific overrides. The videos note in the source content was a
     # message to the site owner ("paste a YouTube link... no developer") and
     # has no business on the public page; empty means the note is not shown.
+    # How the opening screen is built. "split" is the layout the client's own
+    # reference uses: a dark band with the words on the left, the photograph
+    # bleeding off the right edge, and the weld film offered underneath.
+    # "overlay" is the original - one full-bleed photograph with the words
+    # over it. Both are kept, because the choice is the owner's.
+    data["hero"]["layout"] = "split"
+    data["hero"]["videoHeading"] = "Watch XVR Weld in action"
+    # The film offered under the copy in the split hero. This is the weld
+    # film the client supplied, which ships with the theme - not the
+    # hero.video above, whose files were never supplied and so never render.
+    data["hero"]["film"] = {
+        "src": "/assets/video/xvr-weld.mp4",
+        "type": "video/mp4",
+        "poster": "/assets/video/xvr-weld-poster.webp",
+        "label": "XVR Weld: students welding together in instructor-led multiplayer VR",
+    }
+
     data["videos"]["note"] = ""
     # How the films are laid out: "feature" gives the first one the full
     # width of the column, "grid" makes them all the same size.

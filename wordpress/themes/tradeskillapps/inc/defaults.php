@@ -265,6 +265,14 @@ function tsa_defaults() {
 				),
 				'label' => 'Students learning in a VR skilled-trades classroom',
 			),
+			'layout' => 'split',
+			'videoHeading' => 'Watch XVR Weld in action',
+			'film' => array(
+				'src' => '/assets/video/xvr-weld.mp4',
+				'type' => 'video/mp4',
+				'poster' => '/assets/video/xvr-weld-poster.webp',
+				'label' => 'XVR Weld: students welding together in instructor-led multiplayer VR',
+			),
 		),
 		'ticker' => array(
 			'Welding',

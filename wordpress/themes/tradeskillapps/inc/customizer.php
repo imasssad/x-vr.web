@@ -14,7 +14,7 @@ defined('ABSPATH') || exit;
 
 /** Groups handled as posts, not Customizer fields. */
 function tsa_customizer_skip() {
-	return array('trades', 'videos.items', 'faq.items', 'glossary.items', 'site.domain', 'videos.layout');
+	return array('trades', 'videos.items', 'faq.items', 'glossary.items', 'site.domain', 'videos.layout', 'hero.layout');
 }
 
 /** Section order and human titles. */
@@ -110,8 +110,25 @@ function tsa_customize_register($wp_customize) {
 		$priority = 10;
 		tsa_walk_node($wp_customize, $defaults[$group], $group, $section, $skip, $priority);
 
-		// A choice, not a sentence, so it gets a proper dropdown instead of
-		// the text box the generic walk would produce.
+		// Choices, not sentences, so they get proper dropdowns instead of the
+		// text boxes the generic walk would produce.
+		if ($group === 'hero') {
+			$wp_customize->add_setting(tsa_key('hero.layout'), array(
+				'default'           => tsa_default('hero.layout'),
+				'sanitize_callback' => 'tsa_sanitize_hero_layout',
+				'transport'         => 'refresh',
+			));
+			$wp_customize->add_control(tsa_key('hero.layout'), array(
+				'label'       => __('Layout', 'tradeskillapps'),
+				'description' => __('How the opening screen is built.', 'tradeskillapps'),
+				'section'     => $section, 'type' => 'select', 'priority' => $priority++,
+				'choices'     => array(
+					'split'   => __('Words left, photograph right, on a dark band', 'tradeskillapps'),
+					'overlay' => __('One full-width photograph with the words over it', 'tradeskillapps'),
+				),
+			));
+		}
+
 		if ($group === 'videos') {
 			$wp_customize->add_setting(tsa_key('videos.layout'), array(
 				'default'           => tsa_default('videos.layout'),
@@ -234,6 +251,11 @@ function tsa_path_hint($path) {
 function tsa_sanitize_media($value) {
 	if ($value === '' || $value === null) return '';
 	return is_numeric($value) ? (string) absint($value) : esc_url_raw($value);
+}
+
+/** Only the two hero layouts the template knows how to draw. */
+function tsa_sanitize_hero_layout($value) {
+	return in_array($value, array('split', 'overlay'), true) ? $value : 'split';
 }
 
 /** Only the two layouts the template knows how to draw. */

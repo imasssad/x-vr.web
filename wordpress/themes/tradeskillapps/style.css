@@ -3,7 +3,7 @@ Theme Name: XVR Trade Skills
 Theme URI: https://tradeskillapps.com
 Author: XVR Trade Skills
 Description: The XVR Trade Skills single-page site as an editable WordPress theme. Every heading, paragraph, picture and video is editable from Appearance > Customize, and the trades, videos, FAQ and glossary are editable as normal WordPress posts. Ships with the finished copy already in place.
-Version: 1.16.0
+Version: 1.17.0
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 7.4
@@ -217,13 +217,16 @@ p{margin:0}
 .btn--block{width:100%}
 
 /* ---------- sticky nav ---------- */
+/* A solid band, as on the client's reference. It used to be transparent and
+   only solidify on scroll, which worked over the old full-bleed photograph
+   but would leave dark links on the dark band the split hero opens with. */
 .nav{
   position:fixed;inset:0 0 auto 0;z-index:100;
-  background:transparent;border-bottom:1px solid transparent;
+  background:var(--cloud);border-bottom:1px solid var(--border);
   transition:background-color .35s var(--ease),border-color .35s var(--ease),box-shadow .35s var(--ease);
 }
 .nav.is-stuck{
-  background:rgba(255,255,255,.82);
+  background:rgba(248,246,240,.9);
   backdrop-filter:blur(16px) saturate(150%);
   -webkit-backdrop-filter:blur(16px) saturate(150%);
   border-bottom-color:var(--border);
@@ -351,6 +354,85 @@ p{margin:0}
 }
 .hero__strip p{font-size:var(--t-label);font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--navy)}
 .hero__strip .dot{width:6px;height:6px;border-radius:50%;background:var(--blue);flex:none}
+
+/* ---- split hero: the client's reference layout ----
+   A dark band, the words on the left, the photograph bleeding off the right
+   edge of the viewport. The overlay hero above is untouched and still
+   available from Hero > Layout. */
+.hero--split{min-height:0;background:var(--navy)}
+.hero--split .hero__in{
+  display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(2rem,5vw,3.5rem);
+  min-height:0;align-items:center;justify-content:initial;
+  padding-top:clamp(6.5rem,13vh,9rem);padding-bottom:0;
+}
+.hero--split .hero__text{min-width:0}
+/* a shade smaller than the full-bleed hero: it shares the row with the
+   photograph rather than having the window to itself */
+.hero--split h1{
+  max-width:16ch;margin-bottom:1.35rem;color:#fff;
+  font-size:clamp(2.6rem,1.4rem + 4.2vw,4.5rem);
+}
+.hero--split h1 em{color:var(--accent)}
+.hero--split .lede{max-width:56ch;margin-bottom:2rem}
+.hero--split .hero__actions{margin-bottom:clamp(1.5rem,3.5vw,2.25rem)}
+
+/* the photograph: contained on small screens, reaching the right edge on
+   wide ones, where the grid gives it its own column */
+.hero--split .hero__shot{min-width:0;border-radius:var(--r-lg);overflow:hidden}
+.hero--split .hero__shot img{display:block;width:100%;height:100%;object-fit:cover;aspect-ratio:4/3}
+
+/* the film offered under the copy, as on the reference */
+.hero__film{margin-bottom:clamp(1.5rem,4vw,2.25rem);max-width:205px}
+.hero__film-h{
+  font-size:var(--t-label);font-weight:700;letter-spacing:.06em;
+  color:#fff;margin:0 0 .6rem;
+}
+/* The film the client supplied is shot portrait, and the next one may not
+   be, so the poster's own proportions set the height rather than a ratio
+   written here - no black bars either way. */
+.vcard--hero{border:0;background:none;box-shadow:none}
+.vcard--hero .vcard__media{
+  aspect-ratio:auto;border-radius:var(--r-sm);
+  border:1px solid rgba(255,255,255,.18);background:#000;
+}
+.vcard--hero .vcard__play{position:relative;inset:auto;height:auto;background:none}
+.vcard--hero .vcard__play img{position:static;display:block;width:100%;height:auto}
+.vcard--hero .vcard__icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.hero__strip-wrap{padding-bottom:clamp(1.75rem,4vh,3rem)}
+.hero--split .hero__strip{
+  background:var(--navy-2);border-color:rgba(255,255,255,.16);
+  backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;
+}
+.hero--split .hero__strip p{color:#F0E9DC}
+.hero--split .hero__strip .dot{background:var(--accent)}
+
+@media(min-width:901px){
+  /* The photograph runs to the edge of the window, as on the reference.
+     Rather than pulling it out of the centred wrap with a negative margin -
+     which only cancels the gutter, not the centring - this row drops the
+     wrap's width limit and pads the left side to where the wrap's content
+     would have started. The padding is a percentage of the section, not
+     100vw, so a visible scrollbar cannot push the row sideways. */
+  .hero--split .hero__in{
+    width:100%;max-width:none;margin-inline:0;
+    grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
+    padding-left:max(var(--gut),calc((100% - var(--maxw)) / 2 + var(--gut)));
+    padding-right:0;
+    padding-bottom:clamp(2rem,5vh,3.5rem);
+  }
+  /* Sized from its own proportions and centred in the band. Stretching it
+     to the full height of the words beside it cropped the classroom down to
+     one face. */
+  .hero--split .hero__shot{border-radius:var(--r-lg) 0 0 var(--r-lg)}
+  .hero--split .hero__shot img{aspect-ratio:auto;height:clamp(26rem,58vh,36rem)}
+  /* the strip below lines up with the words above it, which means dropping
+     the wrap's centring here too rather than padding on top of it */
+  .hero--split .hero__strip-wrap{
+    width:100%;max-width:none;margin-inline:0;
+    padding-left:max(var(--gut),calc((100% - var(--maxw)) / 2 + var(--gut)));
+  }
+}
+
 /* video controls */
 .vidctl{
   position:absolute;z-index:4;right:var(--gut);bottom:clamp(1.5rem,4vh,2.5rem);
