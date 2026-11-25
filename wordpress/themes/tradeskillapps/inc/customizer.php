@@ -100,13 +100,15 @@ function tsa_customize_register($wp_customize) {
 	foreach (tsa_customizer_sections() as $group => $title) {
 		if (!isset($defaults[$group])) continue;
 
-		$wp_customize->add_section('tsa_' . strtolower($group), array(
+		$section = 'tsa_' . strtolower($group);
+
+		$wp_customize->add_section($section, array(
 			'title' => $title,
 			'panel' => 'tsa_content',
 		));
 
 		$priority = 10;
-		tsa_walk_node($wp_customize, $defaults[$group], $group, 'tsa_' . strtolower($group), $skip, $priority);
+		tsa_walk_node($wp_customize, $defaults[$group], $group, $section, $skip, $priority);
 
 		// A choice, not a sentence, so it gets a proper dropdown instead of
 		// the text box the generic walk would produce.

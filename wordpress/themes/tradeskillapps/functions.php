@@ -8,7 +8,12 @@
  */
 defined('ABSPATH') || exit;
 
-define('TSA_VERSION', '1.0.0');
+// Read from the stylesheet header rather than repeated here, because the two
+// had already drifted: the header said 1.15.0 while this said 1.0.0. That
+// number is the cache-buster on style.css and site.js, and it is what decides
+// whether an existing install tops up its shipped content - so a stale copy
+// means an updated theme ships no updated CSS and no new sections.
+define('TSA_VERSION', wp_get_theme(get_template())->get('Version') ?: '1.0.0');
 
 require_once get_template_directory() . '/inc/defaults.php';
 require_once get_template_directory() . '/inc/helpers.php';

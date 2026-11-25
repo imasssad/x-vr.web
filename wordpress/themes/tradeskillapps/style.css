@@ -3,7 +3,7 @@ Theme Name: XVR Trade Skills
 Theme URI: https://tradeskillapps.com
 Author: XVR Trade Skills
 Description: The XVR Trade Skills single-page site as an editable WordPress theme. Every heading, paragraph, picture and video is editable from Appearance > Customize, and the trades, videos, FAQ and glossary are editable as normal WordPress posts. Ships with the finished copy already in place.
-Version: 1.15.0
+Version: 1.16.0
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 7.4
@@ -60,19 +60,29 @@ Text Domain: tradeskillapps
    Electric Blue + Editorial Minimalism + Balanced Contrast
    ============================================================ */
 :root{
-  /* ---- colour system ---- */
-  --cloud:#F5F8FC;          /* primary background */
+  /* ---- colour system ----
+     Taken from the brand reference: cream page, near-black bands, amber
+     accent. The amber is a FILL, never text on a light background - it
+     measures 1.54:1 on the cream, which is unreadable. Where the accent has
+     to be read as text it uses the dark amber below, which measures 6.1:1.
+     The names are unchanged so the whole stylesheet follows automatically. */
+  --cloud:#F8F6F0;          /* primary background, warm cream */
   --white:#FFFFFF;          /* secondary background, cards */
-  --navy:#15283F;           /* primary text + dark surfaces */
-  --navy-2:#1E3550;         /* raised surface on a navy band */
-  --blue:#2864E8;           /* primary accent */
-  --blue-dark:#1C4FC2;      /* accent, pressed / hover */
-  --ice:#B9D5F5;            /* secondary accent — fills, connectors, text on navy */
-  --ice-wash:#EDF3FD;       /* soft blue background treatment */
-  --slate:#64748B;          /* supporting text (on white) */
-  --slate-aa:#5C6B82;       /* supporting text on --cloud, see assets/README.md */
-  --border:#E2E8F0;
-  --border-strong:#C8D4E4;
+  --ink:#10232C;            /* primary text */
+  --navy:#10232C;           /* primary text + dark surfaces */
+  --navy-2:#18363D;         /* raised surface on a dark band, deep teal */
+  --blue:#87500B;           /* the accent where it must be READ: 6.1:1 on cream */
+  --blue-dark:#6B3F08;      /* accent, pressed / hover */
+  --blue-soft:#FFBC58;      /* the accent on a dark band: 9.7:1 */
+  --accent:#FFBC58;         /* the accent as a FILL */
+  --accent-ink:#10232C;     /* text sitting on an accent fill: 9.7:1 */
+  --ice:#F0D7A6;            /* soft warm accent — connectors, hover borders */
+  --ice-wash:#FBF3E4;       /* soft warm background treatment */
+  --slate:#46555B;          /* supporting text, 7.2:1 on cream */
+  --slate-aa:#46555B;       /* supporting text on --cloud */
+  --border:#E7E2D7;
+  --border-strong:#D4CCBC;
+  --r-pill:100px;
 
   /* ---- type ---- */
   --display:var(--font-display),"Barlow Condensed","Arial Narrow",Arial,sans-serif;
@@ -92,8 +102,8 @@ Text Domain: tradeskillapps
   --r-lg:20px;
   --r-card:18px;
   --r-sm:12px;
-  --sh-1:0 1px 2px rgba(21,40,63,.04),0 6px 20px rgba(21,40,63,.05);
-  --sh-2:0 2px 4px rgba(21,40,63,.05),0 16px 40px rgba(21,40,63,.09);
+  --sh-1:0 1px 2px rgba(16,35,44,.04),0 6px 20px rgba(16,35,44,.05);
+  --sh-2:0 2px 4px rgba(16,35,44,.05),0 16px 40px rgba(16,35,44,.09);
   --ease:cubic-bezier(.22,.61,.36,1);
 }
 
@@ -197,8 +207,8 @@ p{margin:0}
 }
 .btn .arw{transition:transform .3s var(--ease)}
 .btn:hover .arw{transform:translateX(4px)}
-.btn--primary{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 6px 18px rgba(40,100,232,.24)}
-.btn--primary:hover{background:var(--blue-dark);border-color:var(--blue-dark);color:#fff;transform:translateY(-2px);box-shadow:0 10px 26px rgba(40,100,232,.3)}
+.btn--primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);box-shadow:0 6px 18px rgba(135,80,11,.22)}
+.btn--primary:hover{background:#F0A835;border-color:#F0A835;color:var(--accent-ink);transform:translateY(-2px);box-shadow:0 10px 26px rgba(135,80,11,.28)}
 .btn--ghost{background:transparent;color:var(--navy);border-color:var(--border-strong)}
 .btn--ghost:hover{background:var(--navy);color:#fff;border-color:var(--navy);transform:translateY(-2px)}
 .on-navy .btn--primary{border-color:var(--ice)}
@@ -217,7 +227,7 @@ p{margin:0}
   backdrop-filter:blur(16px) saturate(150%);
   -webkit-backdrop-filter:blur(16px) saturate(150%);
   border-bottom-color:var(--border);
-  box-shadow:0 2px 20px rgba(21,40,63,.05);
+  box-shadow:0 2px 20px rgba(16,35,44,.05);
 }
 .nav__in{display:flex;align-items:center;gap:1.25rem;min-height:74px}
 .brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;margin-right:auto;flex:none}
@@ -289,7 +299,7 @@ p{margin:0}
   display:flex;flex-wrap:wrap;align-items:center;gap:.55rem;
   padding:3rem 1.15rem 1.05rem;
   font-size:var(--t-label);font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#fff;
-  background:linear-gradient(to top,rgba(21,40,63,.92),rgba(21,40,63,.4) 60%,transparent);
+  background:linear-gradient(to top,rgba(16,35,44,.92),rgba(16,35,44,.4) 60%,transparent);
 }
 .frame__cap strong{color:var(--ice);font-weight:700}
 .chip-label{
@@ -298,7 +308,7 @@ p{margin:0}
   padding:.3rem .65rem;border-radius:100px;
   background:var(--ice-wash);color:var(--blue);border:1px solid var(--ice);
 }
-.chip-label--solid{background:var(--blue);color:#fff;border-color:var(--blue)}
+.chip-label--solid{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 .frame__cap .chip-label{background:rgba(255,255,255,.14);color:#fff;border-color:rgba(255,255,255,.45)}
 /* a placeholder frame says so, rather than pretending to be a photograph */
 .frame .art::after{
@@ -355,7 +365,7 @@ p{margin:0}
   backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:var(--sh-1);
   transition:background-color .25s var(--ease),color .25s var(--ease);
 }
-.vidctl button:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+.vidctl button:hover{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 .vidctl svg{width:15px;height:15px;flex:none}
 
 /* ---------- ticker ---------- */
@@ -642,7 +652,7 @@ fieldset.field{border:0;padding:0;margin-inline:0}
 }
 .textin::placeholder{color:#8795AA}
 .textin:hover{border-color:var(--border-strong)}
-.textin:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(40,100,232,.18)}
+.textin:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(135,80,11,.18)}
 .planner__actions{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
 .btn--quiet{background:transparent;color:var(--slate);border-color:var(--border)}
 .btn--quiet:hover{color:var(--navy);border-color:var(--border-strong);background:var(--cloud)}
@@ -749,11 +759,11 @@ fieldset.field{border:0;padding:0;margin-inline:0}
 .vcard__icon{
   position:relative;display:grid;place-items:center;
   width:56px;height:56px;border-radius:50%;
-  background:var(--blue);box-shadow:0 6px 18px rgba(40,100,232,.3);
+  background:var(--accent);box-shadow:0 6px 18px rgba(135,80,11,.28);
   transition:transform .25s var(--ease),background-color .25s var(--ease);
 }
-.vcard__icon svg{width:22px;height:22px;color:#fff;margin-left:3px}
-.vcard__play:hover:not([disabled]) .vcard__icon{transform:scale(1.08);background:var(--blue-dark)}
+.vcard__icon svg{width:22px;height:22px;color:var(--accent-ink);margin-left:3px}
+.vcard__play:hover:not([disabled]) .vcard__icon{transform:scale(1.08);background:#F0A835}
 .vcard__play[disabled] .vcard__icon{background:var(--border-strong);box-shadow:none}
 .vcard__pending{
   position:absolute;left:50%;bottom:.9rem;transform:translateX(-50%);
@@ -913,3 +923,13 @@ body.admin-bar .nav{top:32px}
 /* With a mouse the generous target is unnecessary, so it relaxes on wider
    screens where the pointer is precise. */
 @media(min-width:800px){.foot__links a{padding:.45rem 0}.foot__links{gap:.25rem}}
+
+
+/* ---------- the accent on dark bands ----------
+   On the near-black bands the bright amber is legible (9.7:1), so the
+   accent does not have to fall back to the dark variant it uses on cream. */
+.on-navy .eyebrow,.on-navy .bento__eye,.foot .brand__accent{color:var(--blue-soft)}
+.on-navy .eyebrow::before{background:var(--blue-soft)}
+.on-navy h2 em,.on-navy h3 em,.on-navy blockquote em{color:var(--blue-soft)}
+.on-navy .btn--primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.on-navy .ticks svg{color:var(--blue-soft)}
