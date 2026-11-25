@@ -108,6 +108,121 @@ function tsa_build_elementor_home() {
 	return $id;
 }
 
+/** The TSA sections a built page already contains, as slugs. */
+function tsa_elementor_home_present($post_id) {
+	$raw = get_post_meta($post_id, '_elementor_data', true);
+	if (!$raw) return array();
+	$data = is_string($raw) ? json_decode($raw, true) : $raw;
+	if (!is_array($data)) return array();
+
+	$found = array();
+	$walk = function ($nodes) use (&$walk, &$found) {
+		foreach ((array) $nodes as $n) {
+			if (!is_array($n)) continue;
+			if (isset($n['widgetType']) && strpos($n['widgetType'], 'tsa-') === 0) {
+				$found[] = substr($n['widgetType'], 4);
+			}
+			if (!empty($n['elements'])) $walk($n['elements']);
+		}
+	};
+	$walk($data);
+	return array_values(array_unique($found));
+}
+
+/** Sections the theme offers that the built page has not got. */
+function tsa_elementor_home_missing($post_id) {
+	$present = tsa_elementor_home_present($post_id);
+	return array_values(array_diff(array_keys(tsa_elementor_sections()), $present));
+}
+
+/**
+ * Add the sections a built page is missing, without disturbing it.
+ *
+ * A page built from these widgets freezes at whatever sections existed that
+ * day: adding one to the theme does not add it to a page already made. This
+ * walks the theme's section order and keeps every element the page already
+ * has - settings, styling, edits and all - inserting only the ones that are
+ * absent, each in its proper place. Anything the owner added themselves is
+ * kept and moved to the end rather than discarded.
+ */
+function tsa_update_elementor_home($post_id) {
+	$raw  = get_post_meta($post_id, '_elementor_data', true);
+	$data = $raw ? json_decode(is_string($raw) ? $raw : wp_json_encode($raw), true) : array();
+	if (!is_array($data)) $data = array();
+
+	// index the page's top-level blocks by the TSA section they carry
+	$byslug = array();
+	$theirs = array();
+	foreach ($data as $node) {
+		$slug = null;
+		$probe = function ($n) use (&$probe, &$slug) {
+			if ($slug !== null || !is_array($n)) return;
+			if (isset($n['widgetType']) && strpos($n['widgetType'], 'tsa-') === 0) { $slug = substr($n['widgetType'], 4); return; }
+			foreach ((array) (isset($n['elements']) ? $n['elements'] : array()) as $c) $probe($c);
+		};
+		$probe($node);
+		if ($slug !== null && !isset($byslug[$slug])) $byslug[$slug] = $node;
+		elseif ($slug === null) $theirs[] = $node;     // the owner's own block
+	}
+
+	$fresh = tsa_elementor_home_elements();
+	$freshby = array();
+	foreach ($fresh as $node) {
+		$t = $node['elements'][0]['elements'][0]['widgetType'];
+		$freshby[substr($t, 4)] = $node;
+	}
+
+	$out = array();
+	$added = array();
+	foreach (array_keys(tsa_elementor_sections()) as $slug) {
+		if (isset($byslug[$slug])) { $out[] = $byslug[$slug]; }
+		elseif (isset($freshby[$slug])) { $out[] = $freshby[$slug]; $added[] = $slug; }
+	}
+	foreach ($theirs as $node) $out[] = $node;        // keep what they built
+
+	update_post_meta($post_id, '_elementor_data', wp_slash(wp_json_encode($out)));
+	delete_post_meta($post_id, '_elementor_css');
+	if (class_exists('\Elementor\Plugin') && !empty(\Elementor\Plugin::$instance->files_manager)) {
+		\Elementor\Plugin::$instance->files_manager->clear_cache();
+	}
+	return $added;
+}
+
+/** Say so in the admin when the home page has fallen behind the theme. */
+add_action('admin_notices', function () {
+	if (!current_user_can('edit_theme_options') || !tsa_elementor_active()) return;
+	$id = tsa_elementor_home_page();
+	if (!$id) return;
+	$missing = tsa_elementor_home_missing($id);
+	if (!$missing) return;
+	printf(
+		'<div class="notice notice-warning"><p><strong>%s</strong> %s</p><p>%s</p><p><a class="button button-primary" href="%s">%s</a></p></div>',
+		esc_html__('Your home page is missing sections.', 'tradeskillapps'),
+		esc_html(sprintf(
+			/* translators: %s is a list of section names */
+			__('The theme now provides these, but the page was built before they existed: %s.', 'tradeskillapps'),
+			implode(', ', array_map(function ($s) {
+				$all = tsa_elementor_sections();
+				return isset($all[$s]) ? $all[$s][0] : $s;
+			}, $missing))
+		)),
+		esc_html__('Adding them keeps everything already on the page exactly as it is.', 'tradeskillapps'),
+		esc_url(admin_url('themes.php?page=tsa-elementor-home')),
+		esc_html__('Add the missing sections', 'tradeskillapps')
+	);
+});
+
+add_action('admin_post_tsa_update_home', function () {
+	if (!current_user_can('edit_theme_options')) {
+		wp_die(esc_html__('You do not have permission to do that.', 'tradeskillapps'), '', array('response' => 403));
+	}
+	check_admin_referer('tsa_update_home', 'tsa_update_home_nonce');
+	$id = tsa_elementor_home_page();
+	$added = $id ? tsa_update_elementor_home($id) : array();
+	wp_safe_redirect(add_query_arg(array('page' => 'tsa-elementor-home', 'added' => count($added)), admin_url('themes.php')));
+	exit;
+});
+
 /* ------------------------------------------------------------------ *
  * The screen
  * ------------------------------------------------------------------ */
@@ -146,9 +261,37 @@ function tsa_elementor_home_screen() {
 			<?php esc_html_e('This button creates a real page containing the same seventeen sections, already arranged in order, and makes it the home page. You can then open it in Elementor and change pictures, reorder sections or add anything else, with the site in front of you.', 'tradeskillapps'); ?>
 		</p>
 
-		<?php if ($existing) : ?>
+		<?php if (isset($_GET['added'])) : ?>
+			<div class="notice notice-success"><p><?php
+				$n = (int) $_GET['added'];
+				echo esc_html($n
+					? sprintf(_n('%d section added to the home page.', '%d sections added to the home page.', $n, 'tradeskillapps'), $n)
+					: __('The home page was already up to date.', 'tradeskillapps'));
+			?></p></div>
+		<?php endif; ?>
+
+		<?php if ($existing) : $missing = tsa_elementor_home_missing($existing); ?>
+			<?php if ($missing) : ?>
+				<div class="notice notice-warning inline"><p>
+					<strong><?php esc_html_e('This page is missing sections the theme now provides:', 'tradeskillapps'); ?></strong>
+					<?php
+					$all = tsa_elementor_sections();
+					echo esc_html(implode(', ', array_map(function ($m) use ($all) {
+						return isset($all[$m]) ? $all[$m][0] : $m;
+					}, $missing)));
+					?>
+				</p></div>
+				<form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+					<input type="hidden" name="action" value="tsa_update_home" />
+					<?php wp_nonce_field('tsa_update_home', 'tsa_update_home_nonce'); ?>
+					<p><button type="submit" class="button button-primary">
+						<?php esc_html_e('Add the missing sections', 'tradeskillapps'); ?>
+					</button>
+					<span class="description"><?php esc_html_e('Everything already on the page stays exactly as it is.', 'tradeskillapps'); ?></span></p>
+				</form>
+			<?php endif; ?>
 			<p>
-				<a class="button button-primary" href="<?php echo esc_url(admin_url('post.php?post=' . $existing . '&action=elementor')); ?>">
+				<a class="button" href="<?php echo esc_url(admin_url('post.php?post=' . $existing . '&action=elementor')); ?>">
 					<?php esc_html_e('Edit the home page with Elementor', 'tradeskillapps'); ?>
 				</a>
 				<a class="button" href="<?php echo esc_url(get_permalink($existing)); ?>">
