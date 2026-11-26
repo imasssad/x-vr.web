@@ -227,10 +227,29 @@ def main():
     # header and footer; everything else this theme can draw now lives on
     # inner pages. The wording below is theirs, transcribed from the page.
 
-    # Their menu is four anchors on the one page.
+    # Three sections used an anchor that was not their slug (#start for the
+    # planner, #language for the glossary, #learning for the cycle). The
+    # templates now use the slug, so any link that pointed at the old name
+    # has to follow, or it lands nowhere.
+    def _fix(node):
+        if isinstance(node, dict):
+            for k, v in node.items():
+                if k == "href" and isinstance(v, str):
+                    node[k] = {"#start": "#planner", "#language": "#glossary",
+                               "#learning": "#cycle"}.get(v, v)
+                else:
+                    _fix(v)
+        elif isinstance(node, list):
+            for v in node:
+                _fix(v)
+    _fix(data)
+
+    # The menu merges both references: the newer page's labels, plus the
+    # Curriculum entry the older page carried.
     data["nav"] = [
         {"label": "Programs", "href": "#trades"},
         {"label": "How it works", "href": "#multiplayer"},
+        {"label": "Curriculum", "href": "#curriculum"},
         {"label": "Licensing", "href": "#licensing"},
     ]
     data["navCta"] = {"label": "For partners", "href": "#partners"}
@@ -279,9 +298,15 @@ def main():
     data["tradesSection"]["eyebrow"] = "Training pathways"
     data["tradesSection"]["headline"] = "Explore"
     data["tradesSection"]["headlineEm"] = "the trades."
-    data["tradesSection"]["lede"] = ""
-    data["tradesSection"]["layout"] = "cards"
-    data["tradesSection"]["limit"] = "4"
+    # Merged: the newer page's wording and subtitles, on the older page's
+    # tabbed explorer, which carries the photography. "cards" is still a
+    # dropdown away for the four-card grid of the newer page.
+    data["tradesSection"]["layout"] = "tabs"
+    data["tradesSection"]["limit"] = "0"
+    data["tradesSection"]["lede"] = (
+        "Explore the trade areas shaping our educational vision. Select a field to see "
+        "its foundations and a sample immersive learning experience."
+    )
 
     # Their four cards, in their order, with their subtitles and wording.
     REF_TRADES = {
@@ -330,10 +355,10 @@ def main():
     # longer on the front page. They now point at the pages those sections
     # moved to; page.php resolves each slug to a real permalink.
     data["drawerExtra"] = [
-        {"label": "How we teach", "href": "page:how-we-teach"},
-        {"label": "Curriculum", "href": "page:curriculum"},
-        {"label": "For educators", "href": "page:for-educators"},
-        {"label": "Questions", "href": "page:questions-contact"},
+        {"label": "Career pathways", "href": "#pathways"},
+        {"label": "For educators", "href": "#educators"},
+        {"label": "Trade terminology", "href": "#glossary"},
+        {"label": "Questions", "href": "#faq"},
     ]
 
     # Their footer names the institute.

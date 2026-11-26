@@ -2,8 +2,8 @@
 Theme Name: XVR Trade Skills
 Theme URI: https://tradeskillapps.com
 Author: XVR Trade Skills
-Description: The XVR Trade Skills site as an editable WordPress theme. The home page is the six sections of the client's reference page; the rest of the material lives on inner pages (About XVR, How we teach, Curriculum and pathways, For educators, Plan your pathway, Questions and contact).
-Version: 2.0.1
+Description: The XVR Trade Skills site as an editable WordPress theme. One page merging both of the client's reference designs: the full narrative of the earlier page (purpose, trades, curriculum, approach, pathways, educators, mission, glossary, planner, access, FAQ, closing) with the later page's hero, multiplayer section, published pricing and partners close.
+Version: 2.1.0
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 7.4
@@ -143,8 +143,13 @@ a:hover{color:var(--blue-dark)}
 .wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
 .wrap--wide{max-width:1480px}
 section{position:relative}
-.band{padding-block:clamp(4rem,9vw,7.5rem)}
-.band--tight{padding-block:clamp(3rem,6.5vw,5rem)}
+/* Both of the client's reference pages are considerably denser than this
+   theme was: their sections average about 700px, ours were nearer 1,100.
+   With every section from both pages now on one page that difference is
+   what made it feel endless, so the band rhythm is tightened here rather
+   than by dropping any of their content. */
+.band{padding-block:clamp(3rem,6vw,5.25rem)}
+.band--tight{padding-block:clamp(2.25rem,4.5vw,3.5rem)}
 section[id],#top,#main{scroll-margin-top:clamp(80px,9vh,100px)}
 a[href],button,input,summary,label,[role="tab"],[role="tabpanel"],details,:target{scroll-margin-top:clamp(80px,9vh,100px)}
 .band--white{background:var(--white)}
@@ -200,7 +205,7 @@ p{margin:0}
 }
 .eyebrow::before{content:"";width:clamp(20px,3.5vw,34px);height:2px;background:var(--blue);flex:none}
 .eyebrow--plain::before{display:none}
-.sec-head{display:grid;gap:clamp(1.25rem,3.5vw,3rem);margin-bottom:clamp(2.25rem,5vw,3.75rem)}
+.sec-head{display:grid;gap:clamp(1.1rem,3vw,2.5rem);margin-bottom:clamp(1.75rem,3.75vw,2.75rem)}
 @media(min-width:900px){
   .sec-head--split{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:end}
 }

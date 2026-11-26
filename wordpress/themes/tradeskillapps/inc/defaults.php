@@ -143,7 +143,7 @@ function tsa_defaults() {
 			),
 			'cta' => array(
 				'label' => 'Plan your learning experience',
-				'href' => '#start',
+				'href' => '#planner',
 			),
 		),
 		'access' => array(
@@ -168,7 +168,7 @@ function tsa_defaults() {
 			),
 			'cta' => array(
 				'label' => 'Explore your learning pathway',
-				'href' => '#start',
+				'href' => '#planner',
 			),
 		),
 		'site' => array(
@@ -189,26 +189,30 @@ function tsa_defaults() {
 				'href' => '#multiplayer',
 			),
 			array(
+				'label' => 'Curriculum',
+				'href' => '#curriculum',
+			),
+			array(
 				'label' => 'Licensing',
 				'href' => '#licensing',
 			),
 		),
 		'drawerExtra' => array(
 			array(
-				'label' => 'How we teach',
-				'href' => 'page:how-we-teach',
-			),
-			array(
-				'label' => 'Curriculum',
-				'href' => 'page:curriculum',
+				'label' => 'Career pathways',
+				'href' => '#pathways',
 			),
 			array(
 				'label' => 'For educators',
-				'href' => 'page:for-educators',
+				'href' => '#educators',
+			),
+			array(
+				'label' => 'Trade terminology',
+				'href' => '#glossary',
 			),
 			array(
 				'label' => 'Questions',
-				'href' => 'page:questions-contact',
+				'href' => '#faq',
 			),
 		),
 		'footer' => array(
@@ -389,7 +393,7 @@ function tsa_defaults() {
 			),
 			'cta' => array(
 				'label' => 'Build your learning pathway',
-				'href' => '#start',
+				'href' => '#planner',
 			),
 			'image' => array(
 				'src' => '/assets/images/mission.webp',
@@ -407,7 +411,7 @@ function tsa_defaults() {
 			'headlineEm' => 'Let\'s build it.',
 			'cta' => array(
 				'label' => 'Build your pathway',
-				'href' => '#start',
+				'href' => '#planner',
 			),
 			'image' => array(
 				'src' => '/assets/images/closing.webp',
@@ -465,10 +469,10 @@ function tsa_defaults() {
 			'eyebrow' => 'Training pathways',
 			'headline' => 'Explore',
 			'headlineEm' => 'the trades.',
-			'lede' => '',
+			'lede' => 'Explore the trade areas shaping our educational vision. Select a field to see its foundations and a sample immersive learning experience.',
 			'note' => 'Learning experiences shown are **illustrative curriculum concepts**, not a catalog of currently available courses or certifications.',
-			'layout' => 'cards',
-			'limit' => '4',
+			'layout' => 'tabs',
+			'limit' => '0',
 		),
 		'trades' => array(
 			array(

@@ -2,64 +2,65 @@
 /**
  * Which sections go where.
  *
- * The client's reference page is six sections. Everything else this theme
- * can draw is still here - it moved onto the inner pages below rather than
- * being deleted. This file is the single list both the front page and the
- * Elementor page builder read, so the two cannot drift apart.
+ * The client supplied two reference pages and asked for both merged. This
+ * file is the single list that front-page.php and the Elementor page
+ * builder both read, so the page and the builder cannot drift apart.
  */
 defined('ABSPATH') || exit;
 
-/** The front page, in order: the client's reference page. */
+/**
+ * The front page, in order.
+ *
+ * Both of the client's reference pages, merged - not a third design.
+ *
+ *   The OLDER page (x-vr-skilled-trades) is the full narrative: purpose,
+ *   trades, curriculum, approach, learning cycle, pathways, educators,
+ *   youth, mission, glossary, planner, access, FAQ, closing. It is the
+ *   site this theme was first built from, and it carries the photography.
+ *
+ *   The NEWER page (xvr-skilled-trades) brought the rebrand: the "Train
+ *   for the work ahead" hero with the weld film, the multiplayer section,
+ *   the trade-knowledge band, published pricing, and the partners close.
+ *
+ * The order below follows the older page, because that is the flow the
+ * client approved, with the newer page's sections placed where they read
+ * naturally. Everything from both is here; nothing was invented.
+ */
 function tsa_front_sections() {
-	return array('hero', 'multiplayer', 'knowledge', 'trades', 'licensing', 'partners');
+	return array(
+		'hero',          // newer: Train for the work ahead
+		'purpose',       // older: 01 / Our purpose
+		'multiplayer',   // newer: Learn together inside the virtual shop
+		'trades',        // both:  Explore the trades
+		'videos',        // ours:  the films the client supplied
+		'curriculum',    // older: MAT-VR curriculum
+		'approach',      // older: A headset opens the door
+		'cycle',         // older: 03 / More than seeing. Learning by doing
+		'knowledge',     // newer: Build expert trade knowledge
+		'pathways',      // older: 04 / A starting point. A path forward
+		'educators',     // older: 05 / Great teaching
+		'levels',        // older: Start with curiosity. Grow into a craft
+		'mission',       // older: See yourself building what comes next
+		'licensing',     // newer: What does XVR cost for schools?
+		'glossary',      // older: 06 / Know the language
+		'planner',       // older: 07 / Make your next move
+		'access',        // older: Big possibilities. A very affordable way in
+		'faq',           // older: Questions, answered
+		'partners',      // newer: Bring XVR to your training program
+		'contact',       // ours:  the enquiry form
+		'closing',       // older: The future takes skill. Let's build it
+	);
 }
 
 /**
- * The inner pages. slug => title, the sections each one carries, and any
- * per-page field overrides (the trades explorer, for instance, shows every
- * trade with its tabs here, while the front page shows four plain cards).
+ * No inner pages: both references are a single page, and every section is
+ * now on it. The machinery below still works, so a page can be added here
+ * whenever something genuinely does not belong on the home page. Pages
+ * created by an earlier version are left alone - they are not deleted,
+ * only no longer created or linked.
  */
 function tsa_inner_pages() {
-	return array(
-		'about-xvr' => array(
-			'title'     => __('About XVR', 'tradeskillapps'),
-			'sections'  => array('purpose', 'mission', 'closing'),
-			'overrides' => array(),
-		),
-		'how-we-teach' => array(
-			'title'     => __('How we teach', 'tradeskillapps'),
-			'sections'  => array('approach', 'cycle', 'levels', 'videos'),
-			'overrides' => array(),
-		),
-		'curriculum' => array(
-			'title'     => __('Curriculum and pathways', 'tradeskillapps'),
-			'sections'  => array('curriculum', 'trades', 'pathways'),
-			'overrides' => array(
-				// the full explorer, every trade, as the theme shipped it
-				'tradesSection.layout'   => 'tabs',
-				'tradesSection.limit'    => '0',
-				'tradesSection.eyebrow'  => '02 / Explore the Possibilities',
-				'tradesSection.headline' => 'Find the work',
-				'tradesSection.headlineEm' => 'that moves you.',
-				'tradesSection.lede'     => 'Explore the trade areas shaping our educational vision. Select a field to see its foundations and a sample immersive learning experience.',
-			),
-		),
-		'for-educators' => array(
-			'title'     => __('For educators', 'tradeskillapps'),
-			'sections'  => array('educators', 'access'),
-			'overrides' => array(),
-		),
-		'plan-your-pathway' => array(
-			'title'     => __('Plan your pathway', 'tradeskillapps'),
-			'sections'  => array('planner', 'glossary'),
-			'overrides' => array(),
-		),
-		'questions-contact' => array(
-			'title'     => __('Questions and contact', 'tradeskillapps'),
-			'sections'  => array('faq', 'contact'),
-			'overrides' => array(),
-		),
-	);
+	return array();
 }
 
 /** Every section this theme can draw, front page and inner pages together. */

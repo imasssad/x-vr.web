@@ -7,17 +7,17 @@ $stages = tsa_lines('planner.stages');
 $opts   = tsa_lines('planner.tradeOptions');
 $sfx    = tsa_uid('planner');
 ?>
-<section class="band" id="start<?php echo esc_attr($sec_sfx); ?>" aria-labelledby="start-h<?php echo esc_attr($sec_sfx); ?>">
+<section class="band" id="planner<?php echo esc_attr($sec_sfx); ?>" aria-labelledby="planner-h<?php echo esc_attr($sec_sfx); ?>">
 	<div class="wrap">
 		<div class="sec-head sec-head--split">
 			<div>
 				<p class="eyebrow rv"><?php tsa_e('planner.eyebrow'); ?></p>
-				<?php tsa_heading('planner', 'start-h' . $sec_sfx); ?>
+				<?php tsa_heading('planner', 'planner-h' . $sec_sfx); ?>
 			</div>
 			<p class="lede rv rv-d1"><?php tsa_e('planner.lede'); ?></p>
 		</div>
 
-		<div class="planner rv" id="planner<?php echo esc_attr($sfx); ?>" data-tsa="planner">
+		<div class="planner rv" id="plannerbox<?php echo esc_attr($sfx); ?>" data-tsa="planner">
 			<form novalidate>
 				<fieldset class="field">
 					<legend><?php tsa_e('planner.roleLabel'); ?></legend>

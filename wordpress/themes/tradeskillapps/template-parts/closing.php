@@ -1,6 +1,6 @@
 <?php defined('ABSPATH') || exit;
 $sec_sfx = tsa_uid('sec-closing'); $cta = tsa_link('closing.cta'); $chain = tsa_lines('closing.chain'); ?>
-<section class="band closing on-navy" aria-labelledby="closing-h<?php echo esc_attr($sec_sfx); ?>">
+<section class="band closing on-navy" id="closing<?php echo esc_attr($sec_sfx); ?>" aria-labelledby="closing-h<?php echo esc_attr($sec_sfx); ?>">
 	<div class="wrap closing__in">
 		<?php if ($chain) : ?>
 			<ul class="chain rv"><?php foreach ($chain as $c) : ?><li><?php echo esc_html($c); ?></li><?php endforeach; ?></ul>

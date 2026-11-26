@@ -1,11 +1,11 @@
 <?php defined('ABSPATH') || exit;
 $sec_sfx = tsa_uid('sec-learning'); ?>
-<section class="band on-navy" id="learning<?php echo esc_attr($sec_sfx); ?>" aria-labelledby="learning-h<?php echo esc_attr($sec_sfx); ?>">
+<section class="band on-navy" id="cycle<?php echo esc_attr($sec_sfx); ?>" aria-labelledby="cycle-h<?php echo esc_attr($sec_sfx); ?>">
 	<div class="wrap">
 		<div class="sec-head">
 			<div>
 				<p class="eyebrow rv"><?php tsa_e('learningCycle.eyebrow'); ?></p>
-				<?php tsa_heading('learningCycle', 'learning-h' . $sec_sfx); ?>
+				<?php tsa_heading('learningCycle', 'cycle-h' . $sec_sfx); ?>
 			</div>
 		</div>
 		<div class="cycle">
