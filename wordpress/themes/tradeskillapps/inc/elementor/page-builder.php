@@ -223,6 +223,70 @@ function tsa_update_elementor_home($post_id, $drop_extra = false) {
 	return $drop_extra ? array('added' => $added, 'removed' => $removed) : $added;
 }
 
+/**
+ * Sections on the built page whose widget the theme no longer registers.
+ *
+ * Elementor cannot draw a widget type that is gone, so each of these is
+ * an empty band on the live site. A page built against an older version
+ * of this theme is full of them.
+ */
+function tsa_elementor_home_dead($post_id) {
+	$known = array_keys(tsa_elementor_sections());
+	return array_values(array_diff(tsa_elementor_home_present($post_id), $known));
+}
+
+/**
+ * Repair the home page once, after the theme is updated.
+ *
+ * This runs only when the Elementor home page carries widgets the theme
+ * no longer has - which is a page that is already broken: those bands
+ * render empty, and the sections that replaced them are not on the page
+ * at all. Removing a widget that cannot draw anything loses nothing, so
+ * the repair is safe, and leaving it alone is not: it is the difference
+ * between the site the client approved and a page with four of its six
+ * sections missing.
+ *
+ * Blocks the owner added themselves are kept, as always. What it did is
+ * recorded so the admin can say so rather than changing things silently.
+ */
+function tsa_repair_elementor_home() {
+	if (!is_admin() || !tsa_elementor_active()) return;
+	if (get_option('tsa_home_repaired') === TSA_VERSION) return;
+
+	$id = tsa_elementor_home_page();
+	if (!$id) { update_option('tsa_home_repaired', TSA_VERSION); return; }
+
+	$dead = tsa_elementor_home_dead($id);
+	if (!$dead) { update_option('tsa_home_repaired', TSA_VERSION); return; }
+
+	$r = tsa_update_elementor_home($id, true);
+	update_option('tsa_home_repaired', TSA_VERSION);
+	update_option('tsa_home_repair_report', array(
+		'removed' => $r['removed'],
+		'added'   => $r['added'],
+		'when'    => time(),
+	));
+}
+add_action('admin_init', 'tsa_repair_elementor_home', 20);
+
+/** Say what the repair did, once. */
+add_action('admin_notices', function () {
+	if (!current_user_can('edit_theme_options')) return;
+	$rep = get_option('tsa_home_repair_report');
+	if (!is_array($rep) || empty($rep['removed'])) return;
+	delete_option('tsa_home_repair_report');
+	printf(
+		'<div class="notice notice-success is-dismissible"><p><strong>%s</strong></p><p>%s</p><p>%s</p></div>',
+		esc_html__('Your home page has been brought back in line with the design.', 'tradeskillapps'),
+		esc_html(sprintf(
+			/* translators: 1: number removed, 2: number added */
+			__('It was built in Elementor against an older version of this theme. %1$d empty section(s) whose content no longer exists were taken off it, and %2$d section(s) of the current design were added.', 'tradeskillapps'),
+			count($rep['removed']), count($rep['added'])
+		)),
+		esc_html__('Anything you added to the page yourself was kept. You can rearrange it in Elementor as usual.', 'tradeskillapps')
+	);
+});
+
 /** Say so in the admin when the home page has fallen behind the theme. */
 add_action('admin_notices', function () {
 	if (!current_user_can('edit_theme_options') || !tsa_elementor_active()) return;
