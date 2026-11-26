@@ -29,17 +29,28 @@ $em    = tsa_text('hero.headlineEm');
 			if ($em !== '') echo '<span>' . esc_html($em) . '</span>';
 		?></h1>
 		<p class="lead"><?php tsa_e('hero.lede'); ?></p>
-		<?php if ($film !== '') : ?>
-			<figure class="hero-video">
-				<?php if ($cap !== '') : ?>
-					<figcaption id="weld-video-title<?php echo esc_attr($uid); ?>"><?php echo esc_html($cap); ?></figcaption>
-				<?php endif; ?>
-				<video controls playsinline preload="metadata" width="512" height="910"
-					<?php if ($cap !== '') : ?>aria-labelledby="weld-video-title<?php echo esc_attr($uid); ?>"<?php endif; ?>
-					poster="<?php echo esc_url($post); ?>" src="<?php echo esc_url($film); ?>">
-					<?php esc_html_e('Your browser does not support embedded video.', 'tradeskillapps'); ?>
-				</video>
-			</figure>
+		<?php if ($film !== '') : $label = tsa_text('hero.discoverLabel'); ?>
+			<?php // The client asked for a button that opens the film rather
+			      // than the film sitting in the page. Without <dialog> or
+			      // without script this is still a working link to the film,
+			      // so the film is never unreachable. ?>
+			<a class="button discover" href="<?php echo esc_url($film); ?>" data-tsa-discover
+			   aria-haspopup="dialog"><?php echo esc_html($label !== '' ? $label : __('Discover', 'tradeskillapps')); ?></a>
+
+			<dialog id="tsa-filmbox" class="filmbox"
+				<?php if ($cap !== '') : ?>aria-labelledby="weld-video-title<?php echo esc_attr($uid); ?>"<?php endif; ?>>
+				<div class="filmbox__panel">
+					<?php if ($cap !== '') : ?>
+						<p class="filmbox__title" id="weld-video-title<?php echo esc_attr($uid); ?>"><?php echo esc_html($cap); ?></p>
+					<?php endif; ?>
+					<video controls playsinline preload="metadata" width="512" height="910"
+						poster="<?php echo esc_url($post); ?>" src="<?php echo esc_url($film); ?>">
+						<?php esc_html_e('Your browser does not support embedded video.', 'tradeskillapps'); ?>
+					</video>
+					<button type="button" class="filmbox__close" data-tsa-close
+						aria-label="<?php esc_attr_e('Close the film', 'tradeskillapps'); ?>">&times;</button>
+				</div>
+			</dialog>
 		<?php endif; ?>
 	</div>
 </section>

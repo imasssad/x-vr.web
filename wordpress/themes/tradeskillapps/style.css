@@ -3,7 +3,7 @@ Theme Name: XVR Trade Skills
 Theme URI: https://tradeskillapps.com
 Author: XVR Trade Skills
 Description: The XVR Skilled Trades page as a WordPress theme. Section for section, word for word, the same as xvr-skilled-trades.shermanmcleod.chatgpt.site - the stylesheet below is that site's own, unchanged. Every heading, paragraph, picture and film is editable from Appearance > Customize, and the four trades are editable as posts.
-Version: 3.0.0
+Version: 3.1.0
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 7.4
@@ -147,3 +147,40 @@ img,video{max-width:100%}
 /* the Elementor editor outlines each widget; keep that from shifting the
    layout it is previewing */
 .elementor-widget-container>section{margin:0}
+
+/* ==========================================================================
+   Asked for by the client, on top of the reference page: a Discover
+   button in the hero that opens the weld film in a popup, instead of the
+   film sitting in the page. Kept in its own block so the stylesheet
+   above stays the reference page's, untouched.
+   ========================================================================== */
+
+.discover{margin-top:.4rem}
+
+.filmbox{
+  width:min(92vw,30rem);
+  padding:0;border:0;background:transparent;
+  color:white;overflow:visible;
+}
+.filmbox::backdrop{background:rgb(8 14 19 / 82%)}
+.filmbox__panel{position:relative;background:#0c1721;border-radius:.5rem;padding:1.1rem}
+.filmbox__title{margin:0 2rem .7rem 0;font-weight:700;font-size:1rem}
+.filmbox video{
+  display:block;width:100%;height:auto;max-height:72vh;
+  aspect-ratio:512/910;background:#101010;border-radius:.4rem;
+}
+.filmbox__close{
+  position:absolute;top:.5rem;right:.55rem;
+  width:2.1rem;height:2.1rem;line-height:1;
+  display:grid;place-items:center;
+  font-size:1.5rem;cursor:pointer;
+  background:var(--amber);color:#19242a;
+  border:0;border-radius:.25rem;
+}
+.filmbox__close:hover{background:#ffd694}
+
+/* a portrait film in a short window is taller than it is wide; give the
+   box the height instead of letting the video overflow */
+@media(max-height:620px){
+  .filmbox video{aspect-ratio:auto;max-height:66vh}
+}

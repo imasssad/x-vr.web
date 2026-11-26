@@ -47,6 +47,7 @@ work ahead',
 			'headlineEm' => '.',
 			'lede' => 'Learn the trades together in live, instructor-led multiplayer VR. See and hear your instructor, classmates and learn the skills to get into apprenticeships as you practice, ask questions and prepare for mastery.',
 			'videoHeading' => 'Watch XVR Weld in action',
+			'discoverLabel' => 'Discover',
 			'image' => array(
 				'src' => '/assets/images/xvr-shop-angle-grinder.webp',
 				'srcSet' => '',

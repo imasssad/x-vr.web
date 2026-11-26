@@ -246,6 +246,8 @@ def main():
                 "hear your instructor, classmates and learn the skills to get into "
                 "apprenticeships as you practice, ask questions and prepare for mastery.",
         "videoHeading": "Watch XVR Weld in action",
+        # the client asked for a button that pops the film open
+        "discoverLabel": "Discover",
         "image": {
             "src": "/assets/images/xvr-shop-angle-grinder.webp",
             "srcSet": "",
