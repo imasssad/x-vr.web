@@ -146,6 +146,18 @@ function tsa_elementor_home_missing($post_id) {
 }
 
 /**
+ * Sections on the built page that are no longer part of the home page -
+ * the ones that moved onto the inner pages. A page built against an older
+ * version of this theme is full of them, which is why installing the new
+ * theme can appear to change nothing: front-page.php hands over to this
+ * page, and this page still holds the old layout.
+ */
+function tsa_elementor_home_extra($post_id) {
+	$present = tsa_elementor_home_present($post_id);
+	return array_values(array_diff($present, tsa_front_sections()));
+}
+
+/**
  * Add the sections a built page is missing, without disturbing it.
  *
  * A page built from these widgets freezes at whatever sections existed that
@@ -155,7 +167,7 @@ function tsa_elementor_home_missing($post_id) {
  * absent, each in its proper place. Anything the owner added themselves is
  * kept and moved to the end rather than discarded.
  */
-function tsa_update_elementor_home($post_id) {
+function tsa_update_elementor_home($post_id, $drop_extra = false) {
 	$raw  = get_post_meta($post_id, '_elementor_data', true);
 	$data = $raw ? json_decode(is_string($raw) ? $raw : wp_json_encode($raw), true) : array();
 	if (!is_array($data)) $data = array();
@@ -188,6 +200,19 @@ function tsa_update_elementor_home($post_id) {
 		if (isset($byslug[$slug])) { $out[] = $byslug[$slug]; }
 		elseif (isset($freshby[$slug])) { $out[] = $freshby[$slug]; $added[] = $slug; }
 	}
+
+	// Sections that are no longer part of the home page. By default they
+	// are KEPT, because this function's button promises that nothing on
+	// the page is touched. They are only removed when the owner has asked
+	// for the home page to be rebuilt as the client's page, and even then
+	// the content itself is not lost - it is on the inner pages.
+	$removed = array();
+	foreach (tsa_front_sections() as $slug) unset($byslug[$slug]);
+	foreach ($byslug as $slug => $node) {
+		if ($drop_extra) { $removed[] = $slug; continue; }
+		$out[] = $node;
+	}
+
 	foreach ($theirs as $node) $out[] = $node;        // keep what they built
 
 	update_post_meta($post_id, '_elementor_data', wp_slash(wp_json_encode($out)));
@@ -195,7 +220,7 @@ function tsa_update_elementor_home($post_id) {
 	if (class_exists('\Elementor\Plugin') && !empty(\Elementor\Plugin::$instance->files_manager)) {
 		\Elementor\Plugin::$instance->files_manager->clear_cache();
 	}
-	return $added;
+	return $drop_extra ? array('added' => $added, 'removed' => $removed) : $added;
 }
 
 /** Say so in the admin when the home page has fallen behind the theme. */
@@ -204,6 +229,27 @@ add_action('admin_notices', function () {
 	$id = tsa_elementor_home_page();
 	if (!$id) return;
 	$missing = tsa_elementor_home_missing($id);
+	$extra   = tsa_elementor_home_extra($id);
+
+	// The common case after upgrading: the page still holds the old layout,
+	// so the site looks unchanged even though the theme is new.
+	if ($extra) {
+		printf(
+			'<div class="notice notice-warning"><p><strong>%s</strong> %s</p><p>%s</p><p><a class="button button-primary" href="%s">%s</a></p></div>',
+			esc_html__('Your home page is still the old layout.', 'tradeskillapps'),
+			esc_html(sprintf(
+				/* translators: %d is a number of sections */
+				_n('It was built in Elementor before this theme was rebuilt, and still carries %d section that has moved to one of the inner pages. Because the page wins over the theme, the site can look unchanged after updating.',
+				   'It was built in Elementor before this theme was rebuilt, and still carries %d sections that have moved to the inner pages. Because the page wins over the theme, the site can look unchanged after updating.',
+				   count($extra), 'tradeskillapps'),
+				count($extra)
+			)),
+			esc_html__('You can snap it back to the six sections of the home page in one click. Nothing is lost - those sections are on the inner pages and in their own admin menus.', 'tradeskillapps'),
+			esc_url(admin_url('themes.php?page=tsa-elementor-home')),
+			esc_html__('Fix the home page', 'tradeskillapps')
+		);
+	}
+
 	if (!$missing) return;
 	printf(
 		'<div class="notice notice-warning"><p><strong>%s</strong> %s</p><p>%s</p><p><a class="button button-primary" href="%s">%s</a></p></div>',
@@ -230,6 +276,28 @@ add_action('admin_post_tsa_update_home', function () {
 	$id = tsa_elementor_home_page();
 	$added = $id ? tsa_update_elementor_home($id) : array();
 	wp_safe_redirect(add_query_arg(array('page' => 'tsa-elementor-home', 'added' => count($added)), admin_url('themes.php')));
+	exit;
+});
+
+/**
+ * Rebuild the home page as the client's page: the six sections, in order,
+ * and nothing else of ours. Sections that moved to the inner pages are
+ * taken off THIS page only - their content lives on those pages and in
+ * their own admin menus, so nothing is lost. Blocks the owner added
+ * themselves are kept.
+ */
+add_action('admin_post_tsa_reset_home', function () {
+	if (!current_user_can('edit_theme_options')) {
+		wp_die(esc_html__('You do not have permission to do that.', 'tradeskillapps'), '', array('response' => 403));
+	}
+	check_admin_referer('tsa_reset_home', 'tsa_reset_home_nonce');
+	$id = tsa_elementor_home_page();
+	$r  = $id ? tsa_update_elementor_home($id, true) : array('added' => array(), 'removed' => array());
+	wp_safe_redirect(add_query_arg(array(
+		'page'    => 'tsa-elementor-home',
+		'reset'   => count($r['added']),
+		'removed' => count($r['removed']),
+	), admin_url('themes.php')));
 	exit;
 });
 
@@ -278,6 +346,45 @@ function tsa_elementor_home_screen() {
 					? sprintf(_n('%d section added to the home page.', '%d sections added to the home page.', $n, 'tradeskillapps'), $n)
 					: __('The home page was already up to date.', 'tradeskillapps'));
 			?></p></div>
+		<?php endif; ?>
+
+		<?php if (isset($_GET['reset'])) : ?>
+			<div class="notice notice-success"><p><?php
+				$rm = isset($_GET['removed']) ? (int) $_GET['removed'] : 0;
+				echo esc_html(sprintf(
+					/* translators: %d is a number of sections */
+					_n('Home page rebuilt. %d section that had moved to an inner page was taken off it.',
+					   'Home page rebuilt. %d sections that had moved to the inner pages were taken off it.',
+					   $rm, 'tradeskillapps'),
+					$rm
+				));
+			?></p></div>
+		<?php endif; ?>
+
+		<?php if ($existing) : $extra = tsa_elementor_home_extra($existing); ?>
+			<?php if ($extra) : ?>
+				<div class="notice notice-warning inline"><p>
+					<strong><?php esc_html_e('This page is still the old layout.', 'tradeskillapps'); ?></strong>
+					<?php
+					$all = tsa_elementor_sections();
+					echo esc_html(sprintf(
+						/* translators: %s is a list of section names */
+						__('It carries sections that have moved to the inner pages: %s. While they are here, the home page does not match the design.', 'tradeskillapps'),
+						implode(', ', array_map(function ($m) use ($all) {
+							return isset($all[$m]) ? $all[$m][0] : $m;
+						}, $extra))
+					));
+					?>
+				</p></div>
+				<form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+					<input type="hidden" name="action" value="tsa_reset_home" />
+					<?php wp_nonce_field('tsa_reset_home', 'tsa_reset_home_nonce'); ?>
+					<p><button type="submit" class="button button-primary">
+						<?php esc_html_e('Rebuild the home page to the six sections', 'tradeskillapps'); ?>
+					</button>
+					<span class="description"><?php esc_html_e('Those sections come off this page only. Their content stays on the inner pages and in their admin menus, and any block you added yourself is kept.', 'tradeskillapps'); ?></span></p>
+				</form>
+			<?php endif; ?>
 		<?php endif; ?>
 
 		<?php if ($existing) : $missing = tsa_elementor_home_missing($existing); ?>
