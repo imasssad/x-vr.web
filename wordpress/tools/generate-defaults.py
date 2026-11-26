@@ -244,6 +244,28 @@ def main():
                 _fix(v)
     _fix(data)
 
+    # Photography the client's demos do not have.
+    #
+    # In the older demo the "A headset opens the door", "Great teaching"
+    # and "Start with curiosity" sections are text only - the whole page
+    # carries one picture, in the hero. The galleries this theme put in
+    # them were ours, and they tripled those sections' height. The fields
+    # stay, so a picture can be dropped in from the Customizer or the
+    # builder whenever the client supplies one; they just ship empty, and
+    # an empty slot now draws nothing at all.
+    for _p in ("approach.heroImage", "approach.practiceImage", "levels.highSchool.image"):
+        _grp, _rest = _p.split(".", 1)
+        _node = data[_grp]
+        _keys = _rest.split(".")
+        for _k in _keys[:-1]:
+            _node = _node[_k]
+        _node[_keys[-1]]["src"] = ""
+        _node[_keys[-1]]["srcSet"] = ""
+    for _step in data["educators"]["steps"]:
+        if "image" in _step:
+            _step["image"]["src"] = ""
+            _step["image"]["srcSet"] = ""
+
     # The menu merges both references: the newer page's labels, plus the
     # Curriculum entry the older page carried.
     data["nav"] = [

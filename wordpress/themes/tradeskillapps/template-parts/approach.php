@@ -10,7 +10,7 @@ $sec_sfx = tsa_uid('sec-approach'); ?>
 			<p class="lede rv rv-d1"><?php tsa_e('approach.lede'); ?></p>
 		</div>
 
-		<?php tsa_figure('approach.heroImage', '16/7', 'approach.heroImage.caption', 'margin:0 0 clamp(2rem,5vw,3.25rem)'); ?>
+		<?php tsa_figure('approach.heroImage', '16/7', 'approach.heroImage.caption', 'margin:0 0 clamp(2rem,5vw,3.25rem)', '', true); ?>
 
 		<?php foreach (tsa_lines('approach.body') as $i => $b) : ?>
 			<p class="copy rv" style="margin-bottom:<?php echo $i === 0 ? '1rem' : 'clamp(2.25rem,5vw,3.25rem)'; ?>"><?php echo esc_html($b); ?></p>
@@ -30,7 +30,7 @@ $sec_sfx = tsa_uid('sec-approach'); ?>
 			<?php endfor; ?>
 		</ol>
 
-		<?php tsa_figure('approach.practiceImage', '16/7', 'approach.practiceImage.caption', 'margin:clamp(2rem,5vw,3rem) 0 0'); ?>
+		<?php tsa_figure('approach.practiceImage', '16/7', 'approach.practiceImage.caption', 'margin:clamp(2rem,5vw,3rem) 0 0', '', true); ?>
 		<?php tsa_note('approach.note', 'max-width:80ch'); ?>
 	</div>
 </section>

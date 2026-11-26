@@ -11,13 +11,11 @@ $sec_sfx = tsa_uid('sec-levels'); $hs = tsa_image('levels.highSchool.image'); ?>
 		</div>
 		<div class="bento">
 			<article class="bento__card bento__card--light rv">
-				<figure class="frame bento__media frame--zoom">
-					<?php if ($hs['src'] !== '') : ?>
+				<?php if ($hs['src'] !== '') : ?>
+					<figure class="frame bento__media frame--zoom">
 						<img src="<?php echo esc_url($hs['src']); ?>" alt="<?php echo esc_attr($hs['alt']); ?>" loading="lazy" decoding="async" />
-					<?php else : ?>
-						<span class="frame__empty"><?php esc_html_e('Photograph to be supplied', 'tradeskillapps'); ?></span>
-					<?php endif; ?>
-				</figure>
+					</figure>
+				<?php endif; ?>
 				<div class="bento__body">
 					<span class="bento__eye"><?php tsa_e('levels.highSchool.eye'); ?></span>
 					<h3><?php tsa_e('levels.highSchool.title'); ?></h3>

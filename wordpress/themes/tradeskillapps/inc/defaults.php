@@ -22,8 +22,8 @@ function tsa_defaults() {
 			'headlineEm' => 'The lesson builds the skill.',
 			'lede' => 'An immersive experience matters when it helps a student understand something they can use.',
 			'heroImage' => array(
-				'src' => '/assets/images/hero-vr-1448.webp',
-				'srcSet' => '/assets/images/hero-vr-800.webp 800w, /assets/images/hero-vr-1200.webp 1200w, /assets/images/hero-vr-1448.webp 1448w',
+				'src' => '',
+				'srcSet' => '',
 				'alt' => 'Original artwork of young Black American students learning together with VR headsets in a skilled-trades classroom',
 				'caption' => array(
 					'Meta Quest 3',
@@ -57,12 +57,13 @@ function tsa_defaults() {
 				),
 			),
 			'practiceImage' => array(
-				'src' => '/assets/images/approach-practice.webp',
+				'src' => '',
 				'alt' => 'An instructor in welding gear showing a student a finished weld coupon in the training shop',
 				'caption' => array(
 					'Where the learning lands.',
 					'Instructor-led review of real work',
 				),
+				'srcSet' => '',
 			),
 			'note' => 'VR prepares and reinforces. **Supervised hands-on training develops and verifies practical competence.**',
 		),
@@ -109,8 +110,9 @@ function tsa_defaults() {
 					'title' => 'Choose a learning goal',
 					'body' => 'Identify one concept or procedure students need to understand more clearly.',
 					'image' => array(
-						'src' => '/assets/images/educators-01.webp',
+						'src' => '',
 						'alt' => 'An instructor and a student standing together in an engineering technology centre, with workbenches, parts bins and an emergency eye-wash station behind them',
+						'srcSet' => '',
 					),
 				),
 				array(
@@ -118,8 +120,9 @@ function tsa_defaults() {
 					'title' => 'Prepare the learning environment',
 					'body' => 'Plan headset access, space, accessibility, instructor support, and an alternative learning activity.',
 					'image' => array(
-						'src' => '/assets/images/educators-03.webp',
+						'src' => '',
 						'alt' => 'A training classroom set up for a session, tables laid out with boxed auto-darkening welding helmets and hard hats racked on the wall',
+						'srcSet' => '',
 					),
 				),
 				array(
@@ -127,8 +130,9 @@ function tsa_defaults() {
 					'title' => 'Connect virtual and practical work',
 					'body' => 'Use a short immersive lesson, a guided discussion, and supervised shop practice.',
 					'image' => array(
-						'src' => '/assets/images/educators-02.webp',
+						'src' => '',
 						'alt' => 'Two welding students at a training institute, one holding an auto-darkening welding helmet and gloves',
+						'srcSet' => '',
 					),
 				),
 				array(
@@ -136,8 +140,9 @@ function tsa_defaults() {
 					'title' => 'Evaluate and improve',
 					'body' => 'Compare understanding and practical performance, then refine the experience.',
 					'image' => array(
-						'src' => '/assets/images/educators-04.webp',
+						'src' => '',
 						'alt' => 'Students in hard hats applying render to practice wall panels inside a training structure',
+						'srcSet' => '',
 					),
 				),
 			),
@@ -343,8 +348,9 @@ function tsa_defaults() {
 					'Teacher-led reflection and a next-step learning plan',
 				),
 				'image' => array(
-					'src' => '/assets/images/high-schools.webp',
+					'src' => '',
 					'alt' => 'A student standing in the corridor of a technician training institute, framed certificates and awards on the wall behind him',
+					'srcSet' => '',
 				),
 			),
 			'tradeSchool' => array(

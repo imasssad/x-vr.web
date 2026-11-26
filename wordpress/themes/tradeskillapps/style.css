@@ -3,7 +3,7 @@ Theme Name: XVR Trade Skills
 Theme URI: https://tradeskillapps.com
 Author: XVR Trade Skills
 Description: The XVR Trade Skills site as an editable WordPress theme. One page merging both of the client's reference designs: the full narrative of the earlier page (purpose, trades, curriculum, approach, pathways, educators, mission, glossary, planner, access, FAQ, closing) with the later page's hero, multiplayer section, published pricing and partners close.
-Version: 2.1.0
+Version: 2.1.1
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 7.4
@@ -675,6 +675,13 @@ p{margin:0}
 
 /* ---------- educators: alternating rows ---------- */
 .alt{display:grid;gap:clamp(1.5rem,4vw,3.5rem)}
+/* With no picture - which is how the client's demo has these steps - the
+   row is text only, so it stops reserving a media column and the four
+   steps sit as a compact grid instead of four tall bands. */
+.alt:has(.alt__row--text){gap:clamp(1rem,2.4vw,1.6rem);grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))}
+.alt__row--text{display:block}
+.alt__row--text .alt__body{max-width:none}
+.alt__row--text .alt__body p{max-width:none}
 .alt__row{display:grid;gap:clamp(1.25rem,3vw,2.5rem);align-items:center}
 @media(min-width:900px){
   .alt__row{grid-template-columns:1fr 1fr}

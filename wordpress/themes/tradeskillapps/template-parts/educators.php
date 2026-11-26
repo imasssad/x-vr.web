@@ -12,14 +12,12 @@ $sec_sfx = tsa_uid('sec-educators'); $cta = tsa_link('educators.cta'); ?>
 		<p class="copy rv" style="margin-bottom:clamp(2.25rem,5vw,3.5rem)"><?php tsa_e('educators.body'); ?></p>
 		<div class="alt">
 			<?php for ($i = 0; $i < tsa_count('educators.steps'); $i++) : $p = 'educators.steps.' . $i; $img = tsa_image($p . '.image'); ?>
-				<div class="alt__row rv">
-					<figure class="frame alt__media frame--zoom">
-						<?php if ($img['src'] !== '') : ?>
+				<div class="alt__row<?php echo $img['src'] === '' ? ' alt__row--text' : ''; ?> rv">
+					<?php if ($img['src'] !== '') : ?>
+						<figure class="frame alt__media frame--zoom">
 							<img src="<?php echo esc_url($img['src']); ?>" alt="<?php echo esc_attr($img['alt']); ?>" loading="lazy" decoding="async" />
-						<?php else : ?>
-							<span class="frame__empty"><?php esc_html_e('Photograph to be supplied', 'tradeskillapps'); ?></span>
-						<?php endif; ?>
-					</figure>
+						</figure>
+					<?php endif; ?>
 					<div class="alt__body">
 						<span class="alt__n" aria-hidden="true"><?php tsa_e($p . '.n'); ?></span>
 						<h3><?php tsa_e($p . '.title'); ?></h3>

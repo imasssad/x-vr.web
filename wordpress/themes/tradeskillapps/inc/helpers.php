@@ -215,8 +215,15 @@ function tsa_heading($base, $id = '', $class = '') {
 }
 
 /** A framed picture, with the optional caption strip under it. */
-function tsa_figure($path, $ratio, $caption_path = null, $style = '', $class = '') {
+/**
+ * $optional: when the owner has supplied no picture, draw nothing at all
+ * rather than a "Photograph to be supplied" placeholder. The client's own
+ * demos carry no photography in these sections, so an empty slot there is
+ * the intended state, not a gap waiting to be filled.
+ */
+function tsa_figure($path, $ratio, $caption_path = null, $style = '', $class = '', $optional = false) {
 	$img    = tsa_image($path);
+	if ($optional && $img['src'] === '') return;
 	$srcset = tsa_srcset(tsa_text($path . '.srcSet'));
 	$styles = 'aspect-ratio:' . $ratio . ($style ? ';' . $style : '');
 	printf('<figure class="frame frame--zoom rv %s" style="%s">', esc_attr($class), esc_attr($styles));
