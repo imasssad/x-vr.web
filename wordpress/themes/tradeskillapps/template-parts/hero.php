@@ -78,7 +78,7 @@ $vheading = tsa_text('hero.videoHeading');
 $p = tsa_link('hero.primaryCta');
 $s = tsa_link('hero.secondaryCta');
 ?>
-<section class="hero hero--<?php echo esc_attr($layout); ?><?php echo $layout === 'split' ? ' on-navy' : ''; ?>" aria-labelledby="hero-h<?php echo esc_attr($uid); ?>">
+<section class="hero hero--<?php echo esc_attr($layout); ?><?php echo $layout === 'split' ? ' on-navy' : ''; ?>" id="hero<?php echo esc_attr($uid); ?>" aria-labelledby="hero-h<?php echo esc_attr($uid); ?>">
 
 <?php if ($layout === 'overlay') : ?>
 	<div class="hero__media">
@@ -117,19 +117,31 @@ $s = tsa_link('hero.secondaryCta');
 
 	<div class="wrap hero__in">
 		<div class="hero__text">
-			<p class="eyebrow rv"><?php tsa_e('hero.eyebrow'); ?></p>
-			<h1 id="hero-h<?php echo esc_attr($uid); ?>" class="rv rv-d1">
-				<?php tsa_e('hero.headline'); ?> <em><?php tsa_e('hero.headlineEm'); ?></em>
-			</h1>
+			<?php if (tsa_text('hero.eyebrow') !== '') : ?>
+				<p class="eyebrow rv"><?php tsa_e('hero.eyebrow'); ?></p>
+			<?php endif; ?>
+			<?php $h_em = tsa_text('hero.headlineEm'); ?>
+			<h1 id="hero-h<?php echo esc_attr($uid); ?>" class="rv rv-d1"><?php
+				tsa_e('hero.headline');
+				if ($h_em !== '') {
+					echo tsa_em_gap($h_em) . '<em>' . esc_html($h_em) . '</em>';
+				}
+			?></h1>
 			<p class="lede rv rv-d2"><?php tsa_e('hero.lede'); ?></p>
-			<div class="hero__actions rv rv-d3">
-				<a class="btn btn--primary" href="<?php echo esc_url($p['href']); ?>">
-					<?php echo esc_html($p['label']); ?> <span class="arw" aria-hidden="true">&rarr;</span>
-				</a>
-				<a class="btn btn--ghost" href="<?php echo esc_url($s['href']); ?>">
-					<?php echo esc_html($s['label']); ?> <span class="arw" aria-hidden="true">&rarr;</span>
-				</a>
-			</div>
+			<?php if ($p['label'] !== '' || $s['label'] !== '') : ?>
+				<div class="hero__actions rv rv-d3">
+					<?php if ($p['label'] !== '') : ?>
+						<a class="btn btn--primary" href="<?php echo esc_url($p['href']); ?>">
+							<?php echo esc_html($p['label']); ?> <span class="arw" aria-hidden="true">&rarr;</span>
+						</a>
+					<?php endif; ?>
+					<?php if ($s['label'] !== '') : ?>
+						<a class="btn btn--ghost" href="<?php echo esc_url($s['href']); ?>">
+							<?php echo esc_html($s['label']); ?> <span class="arw" aria-hidden="true">&rarr;</span>
+						</a>
+					<?php endif; ?>
+				</div>
+			<?php endif; ?>
 
 			<?php if ($layout === 'split' && $film['src'] !== '') : ?>
 				<div class="hero__film rv rv-d3">

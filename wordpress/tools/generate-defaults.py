@@ -221,6 +221,125 @@ def main():
         "sending": "Sending…",
     }
 
+    # --- The front page the client asked for ----------------------------
+    # The client supplied xvr-skilled-trades.shermanmcleod.chatgpt.site as
+    # "exactly what I wanted". That page is six sections between a white
+    # header and footer; everything else this theme can draw now lives on
+    # inner pages. The wording below is theirs, transcribed from the page.
+
+    # Their menu is four anchors on the one page.
+    data["nav"] = [
+        {"label": "Programs", "href": "#trades"},
+        {"label": "How it works", "href": "#multiplayer"},
+        {"label": "Licensing", "href": "#licensing"},
+    ]
+    data["navCta"] = {"label": "For partners", "href": "#partners"}
+
+    # Hero: no eyebrow, no buttons, no strip - the headline, the lede and
+    # the weld film, exactly as on their page. The accent falls on the full
+    # stop, which is how their headline is set.
+    data["hero"]["eyebrow"] = ""
+    data["hero"]["headline"] = "Train for the work ahead"
+    data["hero"]["headlineEm"] = "."
+    data["hero"]["lede"] = (
+        "Learn the trades together in live, instructor-led multiplayer VR. See and hear "
+        "your instructor, classmates and learn the skills to get into apprenticeships as "
+        "you practice, ask questions and prepare for mastery."
+    )
+    data["hero"]["primaryCta"] = {"label": "", "href": ""}
+    data["hero"]["secondaryCta"] = {"label": "", "href": ""}
+    data["hero"]["strip"] = []
+
+    # A short statement band, which this theme did not have.
+    data["knowledge"] = {
+        # empty, but present, so the Customizer and the widget both offer it
+        "eyebrow": "",
+        "headline": "Build expert",
+        "headlineEm": "trade knowledge.",
+        "body": "Build your trade skills in live, instructor-led VR classes. Prepare to "
+                "enter a pre-apprenticeship, apply for a registered apprenticeship, get "
+                "credentialed and/or continue your education or earn a workforce career "
+                "opportunity.",
+    }
+
+    # The closing band, likewise new.
+    data["partners"] = {
+        "eyebrow": "Schools, employers and workforce partners",
+        "headline": "Bring XVR to",
+        "headlineEm": "your training program.",
+        "body": "Give high school students, trade school learners and adult career changers "
+                "a place to explore the trades and practice the fundamentals before "
+                "entering the lab.",
+        "cta": {"label": "Contact us", "href": "#contact"},
+    }
+
+    # Their trades block is four plain cards, not the tabbed explorer this
+    # theme shipped. The explorer is kept and moves to the inner page, so
+    # the section grew a layout choice rather than losing anything.
+    data["tradesSection"]["eyebrow"] = "Training pathways"
+    data["tradesSection"]["headline"] = "Explore"
+    data["tradesSection"]["headlineEm"] = "the trades."
+    data["tradesSection"]["lede"] = ""
+    data["tradesSection"]["layout"] = "cards"
+    data["tradesSection"]["limit"] = "4"
+
+    # Their four cards, in their order, with their subtitles and wording.
+    REF_TRADES = {
+        "welding": ("VRWeld",
+                    "Build familiarity with shop safety, joint preparation, blueprint "
+                    "reading and groove and fillet welds in multiple positions."),
+        "hvac": ("Heating and cooling",
+                 "Identify system components, study the refrigeration cycle and work "
+                 "through installation and service procedures."),
+        "manufacturing": ("Production and automation",
+                                   "Explore shop measurement, production workflows and the "
+                                   "role of automation in manufacturing."),
+        "drone-technology": ("Uncrewed aircraft systems",
+                             "Explore aircraft components, preflight checks and "
+                             "flight-planning fundamentals."),
+    }
+    # their card calls it "Advanced manufacturing"; ours said "Manufacturing"
+    REF_NAMES = {"manufacturing": "Advanced manufacturing"}
+    order = list(REF_TRADES.keys())
+    for t in data["trades"]:
+        if t["slug"] in REF_TRADES:
+            t["title"], t["desc"] = REF_TRADES[t["slug"]]
+        if t["slug"] in REF_NAMES:
+            t["name"] = REF_NAMES[t["slug"]]
+    data["trades"].sort(
+        key=lambda t: order.index(t["slug"]) if t["slug"] in order else len(order)
+    )
+
+    # Their pricing block names the product; ours did not.
+    data["licensing"]["headline"] = "What does XVR cost"
+    data["licensing"]["headlineEm"] = "for schools?"
+    data["licensing"]["lede"] = (
+        "Bring skilled trades education into your classroom with XVR Trades lessons, "
+        "instructor-led VR activities, and skills assessments in welding, HVAC, advanced "
+        "manufacturing, and drone technology."
+    )
+    data["licensing"]["site"]["cta"]["href"] = "#partners"
+
+    # The reference sets its headings in sentence case. This theme set
+    # every h1 and h2 in condensed capitals. Which one is right is the
+    # client's call, not a decision to bury in the stylesheet, so it is a
+    # setting - and it defaults to the reference.
+    data["site"]["headingStyle"] = "sentence"
+
+    # The mobile drawer's extra links pointed at sections that are no
+    # longer on the front page. They now point at the pages those sections
+    # moved to; page.php resolves each slug to a real permalink.
+    data["drawerExtra"] = [
+        {"label": "How we teach", "href": "page:how-we-teach"},
+        {"label": "Curriculum", "href": "page:curriculum"},
+        {"label": "For educators", "href": "page:for-educators"},
+        {"label": "Questions", "href": "page:questions-contact"},
+    ]
+
+    # Their footer names the institute.
+    data["footer"]["tagline"] = "Philadelphia Technician Training Institute"
+    data["footer"]["links"] = []
+
     OUT.write_text("""<?php
 /**
  * Every string the site ships with.

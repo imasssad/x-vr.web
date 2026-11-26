@@ -12,6 +12,10 @@
  */
 defined('ABSPATH') || exit;
 
+// The list of sections the home page carries. Required here as well as
+// from functions.php so this file does not depend on load order.
+require_once get_template_directory() . '/inc/pages.php';
+
 /**
  * The page's Elementor document: one full-width section per website
  * section, each holding one of the theme's widgets.
@@ -23,7 +27,13 @@ function tsa_elementor_home_elements() {
 	$zero = array('unit' => 'px', 'top' => '0', 'right' => '0', 'bottom' => '0', 'left' => '0', 'isLinked' => true);
 	$out  = array();
 
-	foreach (tsa_elementor_sections() as $slug => $spec) {
+	// The home page the builder offers is the front page, section for
+	// section - not every section the theme can draw. The rest live on the
+	// inner pages and are still available as widgets in the panel.
+	$sections = tsa_elementor_sections();
+	foreach (tsa_front_sections() as $slug) {
+		if (!isset($sections[$slug])) continue;
+		$spec = $sections[$slug];
 		$out[] = array(
 			'id'       => substr(md5('tsa-section-' . $slug), 0, 7),
 			'elType'   => 'section',
@@ -132,7 +142,7 @@ function tsa_elementor_home_present($post_id) {
 /** Sections the theme offers that the built page has not got. */
 function tsa_elementor_home_missing($post_id) {
 	$present = tsa_elementor_home_present($post_id);
-	return array_values(array_diff(array_keys(tsa_elementor_sections()), $present));
+	return array_values(array_diff(tsa_front_sections(), $present));
 }
 
 /**
@@ -174,7 +184,7 @@ function tsa_update_elementor_home($post_id) {
 
 	$out = array();
 	$added = array();
-	foreach (array_keys(tsa_elementor_sections()) as $slug) {
+	foreach (tsa_front_sections() as $slug) {
 		if (isset($byslug[$slug])) { $out[] = $byslug[$slug]; }
 		elseif (isset($freshby[$slug])) { $out[] = $freshby[$slug]; $added[] = $slug; }
 	}

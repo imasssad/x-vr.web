@@ -223,8 +223,44 @@ function tsa_sync_shipped_content() {
 		tsa_upsert_shipped('tsa_term', sanitize_title($g['term']), $g['term'], $g['def'], $i, array());
 	}
 
+	tsa_sync_inner_pages();
+
 	update_option('tsa_seeded', 1);
 	update_option('tsa_shipped_version', TSA_VERSION);
+}
+
+/**
+ * The inner pages that carry the sections which are not on the front page.
+ * Created once, by slug; an existing page is left exactly as it is, so a
+ * page the owner has rewritten or rebuilt in Elementor is never touched.
+ * A page the owner deletes stays deleted - the slug going to the trash
+ * does not count as missing, or it would come straight back.
+ */
+function tsa_sync_inner_pages() {
+	if (!function_exists('tsa_inner_pages')) return;
+
+	foreach (tsa_inner_pages() as $slug => $spec) {
+		if (get_page_by_path($slug, OBJECT, 'page')) continue;
+		if (get_posts(array(
+			'post_type'        => 'page',
+			'name'             => $slug,
+			'post_status'      => array('draft', 'pending', 'private', 'trash', 'future'),
+			'posts_per_page'   => 1,
+			'fields'           => 'ids',
+			'suppress_filters' => true,
+		))) continue;
+
+		wp_insert_post(array(
+			'post_type'    => 'page',
+			'post_status'  => 'publish',
+			'post_title'   => $spec['title'],
+			'post_name'    => $slug,
+			// The sections are drawn by page.php from the theme's own list,
+			// so the body is deliberately empty. Typing something here would
+			// make page.php hand over to the editor content instead.
+			'post_content' => '',
+		));
+	}
 }
 
 /**

@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <?php wp_head(); ?>
 </head>
-<body <?php body_class(); ?>>
+<body <?php body_class(tsa_text('site.headingStyle') === 'caps' ? 'tsa-caps' : 'tsa-sentence'); ?>>
 <?php wp_body_open(); ?>
 <a class="skip" href="#main"><?php esc_html_e('Skip to main content', 'tradeskillapps'); ?></a>
 <span id="top"></span>

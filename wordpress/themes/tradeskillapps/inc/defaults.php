@@ -177,75 +177,60 @@ function tsa_defaults() {
 			'title' => 'XVR Trade Skills — Learn the trade. Build the skill. Change your future.',
 			'description' => 'XVR Trade Skills brings technical lessons to life through immersive VR education — connecting what students need to know with what they need to do. Education first. Affordability at the core.',
 			'ogImage' => '/assets/images/og-image.jpg',
+			'headingStyle' => 'sentence',
 		),
 		'nav' => array(
 			array(
-				'label' => 'Explore trades',
+				'label' => 'Programs',
 				'href' => '#trades',
 			),
 			array(
-				'label' => 'Our approach',
-				'href' => '#approach',
+				'label' => 'How it works',
+				'href' => '#multiplayer',
 			),
 			array(
-				'label' => 'Career pathways',
-				'href' => '#pathways',
-			),
-			array(
-				'label' => 'For educators',
-				'href' => '#educators',
+				'label' => 'Licensing',
+				'href' => '#licensing',
 			),
 		),
 		'drawerExtra' => array(
 			array(
-				'label' => 'Trade terminology',
-				'href' => '#language',
+				'label' => 'How we teach',
+				'href' => 'page:how-we-teach',
 			),
 			array(
-				'label' => 'Access',
-				'href' => '#access',
+				'label' => 'Curriculum',
+				'href' => 'page:curriculum',
+			),
+			array(
+				'label' => 'For educators',
+				'href' => 'page:for-educators',
 			),
 			array(
 				'label' => 'Questions',
-				'href' => '#faq',
+				'href' => 'page:questions-contact',
 			),
 		),
 		'footer' => array(
-			'tagline' => 'Better Education. Very Affordable. Within Reach.',
-			'links' => array(
-				array(
-					'label' => 'Trade terminology',
-					'href' => '#language',
-				),
-				array(
-					'label' => 'For educators',
-					'href' => '#educators',
-				),
-				array(
-					'label' => 'Get started →',
-					'href' => '#start',
-				),
-			),
+			'tagline' => 'Philadelphia Technician Training Institute',
+			'links' => array(),
 			'copyright' => '© 2026 XVR Trade Skills',
 			'strap' => 'Education first. Opportunity ahead.',
 		),
 		'hero' => array(
-			'eyebrow' => 'The next dimension of trade education',
-			'headline' => 'Learn the trade. Build the skill.',
-			'headlineEm' => 'Change your future.',
-			'lede' => 'XVR Trade Skills brings technical lessons to life through immersive VR education — connecting what students need to know with what they need to do. Understand the tools. Practice the process. Prepare for hands-on work. All with very affordable access at the heart of our mission.',
+			'eyebrow' => '',
+			'headline' => 'Train for the work ahead',
+			'headlineEm' => '.',
+			'lede' => 'Learn the trades together in live, instructor-led multiplayer VR. See and hear your instructor, classmates and learn the skills to get into apprenticeships as you practice, ask questions and prepare for mastery.',
 			'primaryCta' => array(
-				'label' => 'Find your trade',
-				'href' => '#trades',
+				'label' => '',
+				'href' => '',
 			),
 			'secondaryCta' => array(
-				'label' => 'Explore the vision',
-				'href' => '#purpose',
+				'label' => '',
+				'href' => '',
 			),
-			'strip' => array(
-				'Education first. Affordability at the core.',
-				'Experience that builds understanding.',
-			),
+			'strip' => array(),
 			'image' => array(
 				'src' => '/assets/images/hero-vr-1448.webp',
 				'srcSet' => '/assets/images/hero-vr-800.webp 800w, /assets/images/hero-vr-1200.webp 1200w, /assets/images/hero-vr-1448.webp 1448w',
@@ -477,19 +462,21 @@ function tsa_defaults() {
 			),
 		),
 		'tradesSection' => array(
-			'eyebrow' => '02 / Explore the Possibilities',
-			'headline' => 'Find the work',
-			'headlineEm' => 'that moves you.',
-			'lede' => 'Explore the trade areas shaping our educational vision. Select a field to see its foundations and a sample immersive learning experience.',
+			'eyebrow' => 'Training pathways',
+			'headline' => 'Explore',
+			'headlineEm' => 'the trades.',
+			'lede' => '',
 			'note' => 'Learning experiences shown are **illustrative curriculum concepts**, not a catalog of currently available courses or certifications.',
+			'layout' => 'cards',
+			'limit' => '4',
 		),
 		'trades' => array(
 			array(
 				'slug' => 'welding',
 				'name' => 'Welding',
 				'icon' => 'i-weld',
-				'title' => 'Join materials. Build possibility.',
-				'desc' => 'Explore the science, preparation, and precision behind strong metal connections. Learn how process, technique, and inspection work together.',
+				'title' => 'VRWeld',
+				'desc' => 'Build familiarity with shop safety, joint preparation, blueprint reading and groove and fillet welds in multiple positions.',
 				'skills' => array(
 					'Safety & PPE',
 					'Joint preparation',
@@ -507,8 +494,8 @@ function tsa_defaults() {
 				'slug' => 'hvac',
 				'name' => 'HVAC',
 				'icon' => 'i-hvac',
-				'title' => 'Understand the systems behind comfort.',
-				'desc' => 'Explore heating, ventilation, and air conditioning through the relationships between airflow, heat transfer, and system components.',
+				'title' => 'Heating and cooling',
+				'desc' => 'Identify system components, study the refrigeration cycle and work through installation and service procedures.',
 				'skills' => array(
 					'System components',
 					'Heat transfer',
@@ -517,6 +504,44 @@ function tsa_defaults() {
 				),
 				'goal' => 'Identify major HVAC components and describe their roles in a system.',
 				'sample' => 'Trace airflow through a virtual system, identify major components, and explain how each contributes to indoor comfort.',
+				'image' => array(
+					'src' => '',
+					'alt' => '',
+				),
+			),
+			array(
+				'slug' => 'manufacturing',
+				'name' => 'Advanced manufacturing',
+				'icon' => 'i-manu',
+				'title' => 'Production and automation',
+				'desc' => 'Explore shop measurement, production workflows and the role of automation in manufacturing.',
+				'skills' => array(
+					'Measurement',
+					'Process flow',
+					'Quality awareness',
+					'Automation concepts',
+				),
+				'goal' => 'Describe a production sequence and identify where quality checks belong.',
+				'sample' => 'Walk through a virtual production sequence, identify inspection points, and explain how a measurement affects the next step.',
+				'image' => array(
+					'src' => '/assets/images/manufacturing.webp',
+					'alt' => 'Hands checking a welded test coupon marked 3F SMAW against a gauge, with more finished coupons laid out on the steel bench',
+				),
+			),
+			array(
+				'slug' => 'drone-technology',
+				'name' => 'Drone technology',
+				'icon' => 'i-drone',
+				'title' => 'Uncrewed aircraft systems',
+				'desc' => 'Explore aircraft components, preflight checks and flight-planning fundamentals.',
+				'skills' => array(
+					'Aircraft components',
+					'Preflight checks',
+					'Flight planning',
+					'Airspace awareness',
+				),
+				'goal' => 'Understand what an uncrewed aircraft is made of and what has to be checked before it leaves the ground.',
+				'sample' => 'Walk around a virtual airframe, identify each component, and work through a preflight checklist before planning a short flight.',
 				'image' => array(
 					'src' => '',
 					'alt' => '',
@@ -539,25 +564,6 @@ function tsa_defaults() {
 				'image' => array(
 					'src' => '',
 					'alt' => '',
-				),
-			),
-			array(
-				'slug' => 'manufacturing',
-				'name' => 'Manufacturing',
-				'icon' => 'i-manu',
-				'title' => 'From an idea to a working process.',
-				'desc' => 'Explore how materials, machines, measurement, and people come together to produce consistent work.',
-				'skills' => array(
-					'Measurement',
-					'Process flow',
-					'Quality awareness',
-					'Automation concepts',
-				),
-				'goal' => 'Describe a production sequence and identify where quality checks belong.',
-				'sample' => 'Walk through a virtual production sequence, identify inspection points, and explain how a measurement affects the next step.',
-				'image' => array(
-					'src' => '/assets/images/manufacturing.webp',
-					'alt' => 'Hands checking a welded test coupon marked 3F SMAW against a gauge, with more finished coupons laid out on the steel bench',
 				),
 			),
 			array(
@@ -598,25 +604,6 @@ function tsa_defaults() {
 					'alt' => 'Two students kneeling beside a humanoid robot and several wheeled rover robots on the floor of a technology lab',
 				),
 			),
-			array(
-				'slug' => 'drone-technology',
-				'name' => 'Drone technology',
-				'icon' => 'i-drone',
-				'title' => 'Uncrewed aircraft systems',
-				'desc' => 'Explore aircraft components, preflight checks and flight-planning fundamentals.',
-				'skills' => array(
-					'Aircraft components',
-					'Preflight checks',
-					'Flight planning',
-					'Airspace awareness',
-				),
-				'goal' => 'Understand what an uncrewed aircraft is made of and what has to be checked before it leaves the ground.',
-				'sample' => 'Walk around a virtual airframe, identify each component, and work through a preflight checklist before planning a short flight.',
-				'image' => array(
-					'src' => '',
-					'alt' => '',
-				),
-			),
 		),
 		'videos' => array(
 			'eyebrow' => 'Watch',
@@ -653,8 +640,8 @@ function tsa_defaults() {
 			'layout' => 'feature',
 		),
 		'navCta' => array(
-			'label' => 'Build your pathway',
-			'href' => '#start',
+			'label' => 'For partners',
+			'href' => '#partners',
 		),
 		'planner' => array(
 			'eyebrow' => '07 / Make your next move',
@@ -856,9 +843,9 @@ function tsa_defaults() {
 		),
 		'licensing' => array(
 			'eyebrow' => 'Annual licensing',
-			'headline' => 'What does it cost',
+			'headline' => 'What does XVR cost',
 			'headlineEm' => 'for schools?',
-			'lede' => 'Bring skilled trades education into your classroom with lessons, instructor-led VR activities, and skills assessments in welding, HVAC, advanced manufacturing, and drone technology.',
+			'lede' => 'Bring skilled trades education into your classroom with XVR Trades lessons, instructor-led VR activities, and skills assessments in welding, HVAC, advanced manufacturing, and drone technology.',
 			'individual' => array(
 				'label' => 'Individual',
 				'price' => '$199.99',
@@ -869,7 +856,7 @@ function tsa_defaults() {
 				'body' => 'Contact us for an annual quote covering unlimited users at one school site.',
 				'cta' => array(
 					'label' => 'Request school pricing',
-					'href' => '#contact',
+					'href' => '#partners',
 				),
 			),
 			'note' => 'Prices are per annual licence. Figures shown are the published individual licence rate; site licences are quoted per school.',
@@ -884,6 +871,22 @@ function tsa_defaults() {
 			'messageLabel' => 'Message',
 			'submit' => 'Send message',
 			'sending' => 'Sending…',
+		),
+		'knowledge' => array(
+			'eyebrow' => '',
+			'headline' => 'Build expert',
+			'headlineEm' => 'trade knowledge.',
+			'body' => 'Build your trade skills in live, instructor-led VR classes. Prepare to enter a pre-apprenticeship, apply for a registered apprenticeship, get credentialed and/or continue your education or earn a workforce career opportunity.',
+		),
+		'partners' => array(
+			'eyebrow' => 'Schools, employers and workforce partners',
+			'headline' => 'Bring XVR to',
+			'headlineEm' => 'your training program.',
+			'body' => 'Give high school students, trade school learners and adult career changers a place to explore the trades and practice the fundamentals before entering the lab.',
+			'cta' => array(
+				'label' => 'Contact us',
+				'href' => '#contact',
+			),
 		),
 	);
 	return $d;

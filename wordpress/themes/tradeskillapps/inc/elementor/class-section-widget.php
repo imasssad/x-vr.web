@@ -67,6 +67,14 @@ class TSA_Section_Widget extends \Elementor\Widget_Base {
 					'overlay' => __('One full-width photograph with the words over it', 'tradeskillapps'),
 				),
 			),
+			'tradesSection.layout' => array(
+				'label'   => __('Layout', 'tradeskillapps'),
+				'desc'    => __('How the trades are shown.', 'tradeskillapps'),
+				'options' => array(
+					'cards' => __('Plain cards', 'tradeskillapps'),
+					'tabs'  => __('Tabbed explorer, with skills and a sample experience', 'tradeskillapps'),
+				),
+			),
 			'videos.layout' => array(
 				'label'   => __('Layout', 'tradeskillapps'),
 				'desc'    => __('How the films are arranged.', 'tradeskillapps'),
@@ -420,8 +428,14 @@ class TSA_Section_Widget extends \Elementor\Widget_Base {
 
 		foreach ($this->field_map() as $rel => $spec) {
 			$key = $this->field_key($rel);
-			if (empty($settings[$key])) continue;
-			$overrides[$this->group . '.' . $rel] = $settings[$key];
+			// Blank means "use the site-wide wording". Tested against the
+			// empty string rather than with empty(), which also discards
+			// "0" - and "0" is a real value here: it is how the trades
+			// limit says "show every one of them".
+			if (!isset($settings[$key])) continue;
+			$v = $settings[$key];
+			if (!is_array($v) && (string) $v === '') continue;
+			$overrides[$this->group . '.' . $rel] = $v;
 		}
 
 		foreach ($this->images as $img) {

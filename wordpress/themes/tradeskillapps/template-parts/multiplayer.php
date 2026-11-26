@@ -2,12 +2,12 @@
 defined('ABSPATH') || exit;
 $sec_sfx = tsa_uid('sec-multiplayer');
 ?>
-<section class="band band--wash" id="together<?php echo esc_attr($sec_sfx); ?>" aria-labelledby="together-h<?php echo esc_attr($sec_sfx); ?>">
+<section class="band band--wash" id="multiplayer<?php echo esc_attr($sec_sfx); ?>" aria-labelledby="multiplayer-h<?php echo esc_attr($sec_sfx); ?>">
 	<div class="wrap">
 		<div class="sec-head sec-head--split">
 			<div>
 				<p class="eyebrow rv"><?php tsa_e('multiplayer.eyebrow'); ?></p>
-				<?php tsa_heading('multiplayer', 'together-h' . $sec_sfx); ?>
+				<?php tsa_heading('multiplayer', 'multiplayer-h' . $sec_sfx); ?>
 			</div>
 			<p class="lede rv rv-d1"><?php tsa_e('multiplayer.lede'); ?></p>
 		</div>

@@ -35,6 +35,8 @@ function tsa_customizer_sections() {
 		'approach'      => __('Our approach', 'tradeskillapps'),
 		'learningCycle' => __('Learning cycle', 'tradeskillapps'),
 		'multiplayer'   => __('Learning together (multiplayer)', 'tradeskillapps'),
+		'knowledge'     => __('Trade knowledge (statement)', 'tradeskillapps'),
+		'partners'      => __('For partners (closing)', 'tradeskillapps'),
 		'pathways'      => __('Career pathways', 'tradeskillapps'),
 		'educators'     => __('For educators', 'tradeskillapps'),
 		'levels'        => __('Schools and colleges', 'tradeskillapps'),

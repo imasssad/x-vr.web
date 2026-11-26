@@ -55,9 +55,17 @@ function tsa_asset_exists($path) {
  * so it is rooted to the home page where the sections live.
  */
 function tsa_href($href) {
-	return (is_string($href) && isset($href[0]) && $href[0] === '#')
-		? home_url('/') . $href
-		: $href;
+	if (!is_string($href) || $href === '') return $href;
+
+	// "page:some-slug" resolves to that page's permalink, so a menu entry
+	// can point at one of the theme's own inner pages without the slug
+	// being hard-coded as a path that breaks under a different permalink
+	// setting. An absent page falls back to the home page.
+	if (strpos($href, 'page:') === 0) {
+		return tsa_page_url(substr($href, 5), home_url('/'));
+	}
+
+	return $href[0] === '#' ? home_url('/') . $href : $href;
 }
 
 /**
@@ -186,6 +194,15 @@ function tsa_link($path) {
 }
 
 /** Heading with its highlighted second half, the two-tone pattern used throughout. */
+/**
+ * The gap between a headline and its accented tail. Normally a space, but
+ * nothing when the tail opens with punctuation - the client's hero sets
+ * only the full stop in the accent colour, and "work ahead ." is wrong.
+ */
+function tsa_em_gap($em) {
+	return ($em !== '' && preg_match('/^[.,;:!?\x{2019}\x{201D}]/u', $em)) ? '' : ' ';
+}
+
 function tsa_heading($base, $id = '', $class = '') {
 	$a = tsa_text($base . '.headline');
 	$b = tsa_text($base . '.headlineEm');
@@ -193,7 +210,7 @@ function tsa_heading($base, $id = '', $class = '') {
 		$id ? ' id="' . esc_attr($id) . '"' : '',
 		esc_attr($class),
 		esc_html($a),
-		$b !== '' ? ' <em>' . esc_html($b) . '</em>' : ''
+		$b !== '' ? tsa_em_gap($b) . '<em>' . esc_html($b) . '</em>' : ''
 	);
 }
 

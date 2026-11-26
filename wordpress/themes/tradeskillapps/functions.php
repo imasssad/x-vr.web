@@ -17,6 +17,7 @@ define('TSA_VERSION', wp_get_theme(get_template())->get('Version') ?: '1.0.0');
 
 require_once get_template_directory() . '/inc/defaults.php';
 require_once get_template_directory() . '/inc/helpers.php';
+require_once get_template_directory() . '/inc/pages.php';
 require_once get_template_directory() . '/inc/icons.php';
 require_once get_template_directory() . '/inc/post-types.php';
 require_once get_template_directory() . '/inc/customizer.php';

@@ -28,6 +28,15 @@ if (tsa_do_location('footer')) {
 						if ($label === '') continue;
 						printf('<li><a href="%s">%s</a></li>', esc_url(tsa_href($href)), esc_html($label));
 					}
+					// The pages carrying the sections that are not on the
+					// front page. Listed here so none of them is reachable
+					// only by typing its address. A page the owner has
+					// deleted simply does not appear.
+					foreach (tsa_inner_pages() as $slug => $spec) {
+						$url = tsa_page_url($slug, '');
+						if ($url === '') continue;
+						printf('<li><a href="%s">%s</a></li>', esc_url($url), esc_html($spec['title']));
+					}
 					echo '</ul>';
 				}
 				?>
