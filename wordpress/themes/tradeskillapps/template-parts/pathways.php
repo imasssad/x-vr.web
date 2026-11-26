@@ -9,7 +9,7 @@ $sec_sfx = tsa_uid('sec-pathways'); ?>
 			</div>
 			<p class="lede rv rv-d1"><?php tsa_e('pathways.lede'); ?></p>
 		</div>
-		<?php tsa_figure('pathways.image', '16/7', null, 'margin:0 0 clamp(2.25rem,5vw,3.25rem)'); ?>
+		<?php tsa_figure('pathways.image', '16/7', null, 'margin:0 0 clamp(2.25rem,5vw,3.25rem)', '', true); ?>
 		<ol class="timeline">
 			<?php for ($i = 0; $i < tsa_count('pathways.stages'); $i++) : $p = 'pathways.stages.' . $i; ?>
 				<li class="tl <?php echo esc_attr(tsa_rv($i)); ?>">

@@ -158,8 +158,9 @@ function tsa_defaults() {
 			'lede' => 'High-quality trade education should be within reach of the people ready to learn — and the people ready to teach.',
 			'body' => 'XVR Trade Skills puts affordability at the center of its educational vision. Our goal is to help individual learners, technical schools, and workforce programs bring immersive learning into their training without making cost the barrier. Repeatable virtual practice creates opportunities to revisit a lesson before using shop time and physical materials.',
 			'image' => array(
-				'src' => '/assets/images/access-equipment.webp',
+				'src' => '',
 				'alt' => 'A training shop floor lined with drill presses, bench grinders and welding machines',
+				'srcSet' => '',
 			),
 			'cells' => array(
 				array(
@@ -282,8 +283,9 @@ function tsa_defaults() {
 			'headlineEm' => 'A path forward.',
 			'lede' => 'Skilled trades grow through education, practice and experience. Explore common stages — and the learning that supports each one.',
 			'image' => array(
-				'src' => '/assets/images/pathways.webp',
+				'src' => '',
 				'alt' => 'Two students in hard hats kneeling to finish a freshly poured concrete pad on a training site',
+				'srcSet' => '',
 			),
 			'stages' => array(
 				array(
@@ -402,8 +404,9 @@ function tsa_defaults() {
 				'href' => '#planner',
 			),
 			'image' => array(
-				'src' => '/assets/images/mission.webp',
+				'src' => '',
 				'alt' => 'Graduates in blue caps and gowns gathered together before a commencement ceremony',
+				'srcSet' => '',
 			),
 		),
 		'closing' => array(
@@ -420,8 +423,9 @@ function tsa_defaults() {
 				'href' => '#planner',
 			),
 			'image' => array(
-				'src' => '/assets/images/closing.webp',
+				'src' => '',
 				'alt' => 'Three welding students and their instructor in the shop, one holding a finished weld coupon',
+				'srcSet' => '',
 			),
 		),
 		'glossary' => array(
@@ -496,8 +500,9 @@ function tsa_defaults() {
 				'goal' => 'Recognize common joint types and explain the purpose of joint preparation.',
 				'sample' => 'Explore a virtual welding workstation. Identify components, select the appropriate protective equipment, and explain the sequence for preparing a joint.',
 				'image' => array(
-					'src' => '/assets/images/welding.webp',
+					'src' => '',
 					'alt' => 'A welding student in a protective helmet and leather gloves welding a steel frame in a training shop, sparks coming off the arc',
+					'srcSet' => '',
 				),
 			),
 			array(
@@ -517,6 +522,7 @@ function tsa_defaults() {
 				'image' => array(
 					'src' => '',
 					'alt' => '',
+					'srcSet' => '',
 				),
 			),
 			array(
@@ -534,8 +540,9 @@ function tsa_defaults() {
 				'goal' => 'Describe a production sequence and identify where quality checks belong.',
 				'sample' => 'Walk through a virtual production sequence, identify inspection points, and explain how a measurement affects the next step.',
 				'image' => array(
-					'src' => '/assets/images/manufacturing.webp',
+					'src' => '',
 					'alt' => 'Hands checking a welded test coupon marked 3F SMAW against a gauge, with more finished coupons laid out on the steel bench',
+					'srcSet' => '',
 				),
 			),
 			array(
@@ -555,6 +562,7 @@ function tsa_defaults() {
 				'image' => array(
 					'src' => '',
 					'alt' => '',
+					'srcSet' => '',
 				),
 			),
 			array(
@@ -574,6 +582,7 @@ function tsa_defaults() {
 				'image' => array(
 					'src' => '',
 					'alt' => '',
+					'srcSet' => '',
 				),
 			),
 			array(
@@ -591,8 +600,9 @@ function tsa_defaults() {
 				'goal' => 'Interpret basic plan dimensions and explain an assembly sequence.',
 				'sample' => 'Review a virtual room plan, identify dimensions and materials, and organize a basic assembly sequence for instructor discussion.',
 				'image' => array(
-					'src' => '/assets/images/construction.webp',
+					'src' => '',
 					'alt' => 'Students in hard hats laying concrete block in an outdoor masonry training yard',
+					'srcSet' => '',
 				),
 			),
 			array(
@@ -610,8 +620,9 @@ function tsa_defaults() {
 				'goal' => 'Explain how sensors and digital tools can support a technician\'s work.',
 				'sample' => 'Explore a virtual inspection scenario, identify what information a sensor could collect, and discuss how a technician would use it.',
 				'image' => array(
-					'src' => '/assets/images/emerging-technology.webp',
+					'src' => '',
 					'alt' => 'Two students kneeling beside a humanoid robot and several wheeled rover robots on the floor of a technology lab',
+					'srcSet' => '',
 				),
 			),
 		),

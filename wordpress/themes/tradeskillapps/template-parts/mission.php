@@ -15,6 +15,6 @@ $sec_sfx = tsa_uid('sec-mission'); $cta = tsa_link('mission.cta'); ?>
 				</a>
 			</p>
 		</div>
-		<?php tsa_figure('mission.image', '4/3', null, '', 'mission__media rv-d1'); ?>
+		<?php tsa_figure('mission.image', '4/3', null, '', 'mission__media rv-d1', true); ?>
 	</div>
 </section>

@@ -72,15 +72,17 @@ $lede = tsa_text('tradesSection.lede');
 					$img    = $t['image'];
 					$skills = $t['skills'];
 				?>
-					<article class="tradepanel rv rv-d1" role="tabpanel"
+					<article class="tradepanel<?php echo $img['src'] === '' ? ' tradepanel--text' : ''; ?> rv rv-d1" role="tabpanel"
 						id="panel-<?php echo esc_attr($slug . $sfx); ?>"
 						aria-labelledby="tab-<?php echo esc_attr($slug . $sfx); ?>" tabindex="0"
 						<?php echo $i === 0 ? '' : 'hidden'; ?>>
-						<figure class="frame tradepanel__media frame--zoom">
-							<?php if ($img['src'] !== '') : ?>
+						<?php // no photograph, no frame - the client's demo has none, and an
+						      // illustrated placeholder here read as an unfinished page ?>
+						<?php if ($img['src'] !== '') : ?>
+							<figure class="frame tradepanel__media frame--zoom">
 								<img src="<?php echo esc_url($img['src']); ?>" alt="<?php echo esc_attr($img['alt']); ?>" loading="lazy" decoding="async" />
-							<?php else : tsa_placeholder($slug, $icon); endif; ?>
-						</figure>
+							</figure>
+						<?php endif; ?>
 						<div class="tradepanel__body">
 							<span class="chip-label chip-label--solid"><?php
 								printf(esc_html__('Trade focus / %s', 'tradeskillapps'), esc_html($t['name'])); ?></span>

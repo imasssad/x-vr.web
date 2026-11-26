@@ -10,7 +10,7 @@ $sec_sfx = tsa_uid('sec-access'); $cta = tsa_link('access.cta'); ?>
 			<p class="lede rv rv-d1"><?php tsa_e('access.lede'); ?></p>
 		</div>
 		<p class="copy rv"><?php tsa_e('access.body'); ?></p>
-		<?php tsa_figure('access.image', '16/7', null, 'margin:clamp(1.75rem,4vw,2.5rem) 0 0'); ?>
+		<?php tsa_figure('access.image', '16/7', null, 'margin:clamp(1.75rem,4vw,2.5rem) 0 0', '', true); ?>
 		<div class="access__fig">
 			<?php for ($i = 0; $i < tsa_count('access.cells'); $i++) : ?>
 				<div class="access__cell <?php echo esc_attr(tsa_rv($i)); ?>">

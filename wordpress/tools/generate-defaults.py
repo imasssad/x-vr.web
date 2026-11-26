@@ -266,6 +266,17 @@ def main():
             _step["image"]["src"] = ""
             _step["image"]["srcSet"] = ""
 
+    # Same again for the other five the demos do not have: the trade
+    # explorer's panels, pathways, mission, access and the closing band.
+    for _p in ("pathways.image", "mission.image", "access.image", "closing.image"):
+        _grp, _k = _p.split(".", 1)
+        data[_grp][_k]["src"] = ""
+        data[_grp][_k]["srcSet"] = ""
+    for _t in data["trades"]:
+        if "image" in _t:
+            _t["image"]["src"] = ""
+            _t["image"]["srcSet"] = ""
+
     # The menu merges both references: the newer page's labels, plus the
     # Curriculum entry the older page carried.
     data["nav"] = [
