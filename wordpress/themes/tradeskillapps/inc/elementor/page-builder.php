@@ -67,12 +67,28 @@ function tsa_elementor_home_elements() {
 	return $out;
 }
 
-/** The page this tool made last time, if it is still there. */
+/**
+ * The page WordPress actually serves as the home page, if it is a page.
+ *
+ * This used to return only the page THIS TOOL had made, remembered in an
+ * option. front-page.php, meanwhile, hands over on page_on_front. So a
+ * home page the owner had set up any other way was invisible here: the
+ * repair looked for a page, found none, and recorded itself as done
+ * while the live site went on serving the broken one. The static front
+ * page comes first now, and the remembered id is only the fallback, so
+ * the template, the repair and the admin screen all mean the same page.
+ */
 function tsa_elementor_home_page() {
-	$id = (int) get_option('tsa_elementor_home_id');
-	if (!$id) return 0;
-	$post = get_post($id);
-	return ($post && $post->post_type === 'page' && $post->post_status !== 'trash') ? $id : 0;
+	$ids = array();
+	if ('page' === get_option('show_on_front')) $ids[] = (int) get_option('page_on_front');
+	$ids[] = (int) get_option('tsa_elementor_home_id');
+
+	foreach ($ids as $id) {
+		if (!$id) continue;
+		$post = get_post($id);
+		if ($post && $post->post_type === 'page' && $post->post_status !== 'trash') return $id;
+	}
+	return 0;
 }
 
 /**
