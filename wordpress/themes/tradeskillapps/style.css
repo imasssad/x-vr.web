@@ -3,7 +3,7 @@ Theme Name: XVR Trade Skills
 Theme URI: https://tradeskillapps.com
 Author: XVR Trade Skills
 Description: The XVR Trade Skills site as an editable WordPress theme. One page merging both of the client's reference designs: the full narrative of the earlier page (purpose, trades, curriculum, approach, pathways, educators, mission, glossary, planner, access, FAQ, closing) with the later page's hero, multiplayer section, published pricing and partners close.
-Version: 2.2.0
+Version: 2.2.1
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 7.4
@@ -77,7 +77,7 @@ Text Domain: tradeskillapps
   --accent:#FFBC58;         /* the accent as a FILL */
   --accent-ink:#10232C;     /* text sitting on an accent fill: 9.7:1 */
   --ice:#F0D7A6;            /* soft warm accent — connectors, hover borders */
-  --ice-wash:#FBF3E4;       /* soft warm background treatment */
+  --ice-wash:#E8EEED;       /* his pale tint, from both demos */
   --slate:#46555B;          /* supporting text, 7.2:1 on cream */
   --slate-aa:#46555B;       /* supporting text on --cloud */
   --border:#E7E2D7;
@@ -152,13 +152,16 @@ section{position:relative}
 .band--tight{padding-block:clamp(2.25rem,4.5vw,3.5rem)}
 section[id],#top,#main{scroll-margin-top:clamp(80px,9vh,100px)}
 a[href],button,input,summary,label,[role="tab"],[role="tabpanel"],details,:target{scroll-margin-top:clamp(80px,9vh,100px)}
-.band--white{background:var(--white)}
+/* His light sections are the cream page itself, alternating with the pale
+   tint - not pure white. Ours had 7,665px of #FFFFFF, which is in neither
+   demo. The class name is kept so no template has to change. */
+.band--white{background:var(--cloud)}
 .band--wash{background:var(--ice-wash)}
 /* the pale tint the reference uses behind the trades */
 .band--pale{background:#E8EEED}
 
 /* dark surfaces — roughly 20% of the page */
-.on-navy{background:var(--navy);color:#DCE6F4}
+.on-navy{background:var(--navy);color:#D6E0DE}
 .on-navy h2,.on-navy h3,.on-navy h4,.on-navy blockquote,.on-navy .lede{color:#fff}
 .on-navy .eyebrow{color:var(--ice)}
 .on-navy .eyebrow::before{background:var(--ice)}
@@ -195,7 +198,7 @@ p{margin:0}
 }
 .copy{max-width:66ch;color:var(--slate-aa)}
 .band--white .copy,.card .copy{color:var(--slate)}
-.on-navy .copy{color:#C6D4E8}
+.on-navy .copy{color:#C4D1CE}
 
 .eyebrow{
   font-family:var(--body);font-weight:500;
@@ -538,7 +541,7 @@ p{margin:0}
 .ticks{list-style:none;margin:0;padding:0;display:grid;gap:.7rem}
 .ticks li{display:flex;gap:.65rem;font-size:var(--t-sm);line-height:1.5;color:var(--slate-aa)}
 .ticks svg{width:18px;height:18px;flex:none;margin-top:.2em;color:var(--blue)}
-.on-navy .ticks li{color:#C6D4E8}
+.on-navy .ticks li{color:#C4D1CE}
 .on-navy .ticks svg{color:var(--ice)}
 
 .note{
@@ -549,7 +552,7 @@ p{margin:0}
 }
 .note svg{width:18px;height:18px;flex:none;margin-top:.15em;color:var(--blue)}
 .note strong{color:var(--navy)}
-.on-navy .note{background:var(--navy-2);border-color:rgba(255,255,255,.2);border-left-color:var(--ice);color:#C6D4E8}
+.on-navy .note{background:var(--navy-2);border-color:rgba(255,255,255,.2);border-left-color:var(--ice);color:#C4D1CE}
 .on-navy .note svg{color:var(--ice)}
 .on-navy .note strong{color:#fff}
 
@@ -629,7 +632,7 @@ p{margin:0}
 .band--white .process p{color:var(--slate)}
 .on-navy .process li::before{background:var(--navy);color:var(--ice);border-color:var(--ice)}
 .on-navy .process li::after{background:linear-gradient(to right,var(--ice),rgba(185,213,245,.25))}
-.on-navy .process p{color:#C6D4E8}
+.on-navy .process p{color:#C4D1CE}
 
 /* ---------- learning cycle ---------- */
 .cycle{display:grid;gap:1rem;margin-top:clamp(2rem,4.5vw,3rem)}
@@ -710,9 +713,9 @@ p{margin:0}
 }
 .bento__card:hover{box-shadow:var(--sh-2);transform:translateY(-4px)}
 .bento__card--light{background:var(--white);border:1px solid var(--border)}
-.bento__card--navy{background:var(--navy);color:#DCE6F4}
+.bento__card--navy{background:var(--navy);color:#D6E0DE}
 .bento__card--navy h3{color:#fff}
-.bento__card--navy .ticks li{color:#C6D4E8}
+.bento__card--navy .ticks li{color:#C4D1CE}
 .bento__card--navy .ticks svg{color:var(--ice)}
 .bento__card--navy .bento__eye{color:var(--ice)}
 .bento__media{aspect-ratio:16/9;border:0;border-radius:0}
