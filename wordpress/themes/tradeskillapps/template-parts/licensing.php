@@ -1,37 +1,29 @@
 <?php
+/** "What does XVR cost for schools?" - the two plans on the right. */
 defined('ABSPATH') || exit;
-$sec_sfx = tsa_uid('sec-licensing');
+$uid = tsa_uid('sec-pricing');
 $cta = tsa_link('licensing.site.cta');
 ?>
-<section class="band" id="licensing<?php echo esc_attr($sec_sfx); ?>" aria-labelledby="licensing-h<?php echo esc_attr($sec_sfx); ?>">
-	<div class="wrap">
-		<div class="sec-head sec-head--split">
+<section id="pricing<?php echo esc_attr($uid); ?>" class="pricing">
+	<div class="wrap split">
+		<div>
+			<p class="eyebrow"><?php tsa_e('licensing.eyebrow'); ?></p>
+			<h2><?php tsa_e('licensing.headline'); ?></h2>
+			<p><?php tsa_e('licensing.lede'); ?></p>
+		</div>
+		<div class="plans">
 			<div>
-				<p class="eyebrow rv"><?php tsa_e('licensing.eyebrow'); ?></p>
-				<?php tsa_heading('licensing', 'licensing-h' . $sec_sfx); ?>
+				<h3><?php tsa_e('licensing.individual.label'); ?></h3>
+				<p class="price"><?php tsa_e('licensing.individual.price'); ?></p>
+				<p><?php tsa_e('licensing.individual.unit'); ?></p>
 			</div>
-			<p class="lede rv rv-d1"><?php tsa_e('licensing.lede'); ?></p>
-		</div>
-
-		<div class="price">
-			<article class="price__card rv">
-				<span class="price__label"><?php tsa_e('licensing.individual.label'); ?></span>
-				<p class="price__figure"><?php tsa_e('licensing.individual.price'); ?></p>
-				<p class="price__unit"><?php tsa_e('licensing.individual.unit'); ?></p>
-			</article>
-
-			<article class="price__card price__card--quote on-navy rv rv-d1">
-				<span class="price__label"><?php tsa_e('licensing.site.label'); ?></span>
-				<p class="price__body"><?php tsa_e('licensing.site.body'); ?></p>
+			<div>
+				<h3><?php tsa_e('licensing.site.label'); ?></h3>
+				<p><?php tsa_e('licensing.site.body'); ?></p>
 				<?php if ($cta['label'] !== '') : ?>
-					<a class="btn btn--primary" href="<?php echo esc_url(tsa_href($cta['href'])); ?>">
-						<?php echo esc_html($cta['label']); ?>
-						<span class="arw" aria-hidden="true">&rarr;</span>
-					</a>
+					<p><a class="button small" href="<?php echo esc_url(tsa_href($cta['href'])); ?>"><?php echo esc_html($cta['label']); ?></a></p>
 				<?php endif; ?>
-			</article>
+			</div>
 		</div>
-
-		<?php tsa_note('licensing.note', 'max-width:82ch'); ?>
 	</div>
 </section>

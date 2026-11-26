@@ -16,847 +16,132 @@ function tsa_defaults() {
 	static $d = null;
 	if ($d !== null) return $d;
 	$d = array(
-		'approach' => array(
-			'eyebrow' => 'What makes this education?',
-			'headline' => 'A headset opens the door.',
-			'headlineEm' => 'The lesson builds the skill.',
-			'lede' => 'An immersive experience matters when it helps a student understand something they can use.',
-			'heroImage' => array(
-				'src' => '',
-				'srcSet' => '',
-				'alt' => 'Original artwork of young Black American students learning together with VR headsets in a skilled-trades classroom',
-				'caption' => array(
-					'Meta Quest 3',
-					'Real people. Real possibilities.',
-					'AI-generated learning scene',
-				),
-			),
-			'body' => array(
-				'Our approach starts with a learning objective. Each experience should connect a technical concept to a practical task, give students a chance to make decisions, and lead to a discussion about what they learned.',
-				'For example, an HVAC learner can study a system, identify its components, trace the airflow, and explain what each part does. An instructor then connects that understanding to supervised work with real equipment.',
-			),
-			'lessonEyebrow' => 'Illustrative lesson / HVAC',
-			'lessonHeadline' => 'From “I see it” to',
-			'lessonHeadlineEm' => '“I understand it.”',
-			'steps' => array(
-				array(
-					'title' => 'Learn the concept.',
-					'body' => 'Understand how air moves through a system.',
-				),
-				array(
-					'title' => 'Explore the environment.',
-					'body' => 'Locate components and follow the airflow.',
-				),
-				array(
-					'title' => 'Explain the reasoning.',
-					'body' => 'Describe each component\'s purpose in your own words.',
-				),
-				array(
-					'title' => 'Apply and demonstrate.',
-					'body' => 'Identify the same components on real equipment with an instructor.',
-				),
-			),
-			'practiceImage' => array(
-				'src' => '',
-				'alt' => 'An instructor in welding gear showing a student a finished weld coupon in the training shop',
-				'caption' => array(
-					'Where the learning lands.',
-					'Instructor-led review of real work',
-				),
-				'srcSet' => '',
-			),
-			'note' => 'VR prepares and reinforces. **Supervised hands-on training develops and verifies practical competence.**',
-		),
-		'learningCycle' => array(
-			'eyebrow' => '03 / Education drives the experience',
-			'headline' => 'More than seeing.',
-			'headlineEm' => 'Learning by doing.',
-			'items' => array(
-				array(
-					'n' => '01 / Learn',
-					'icon' => 'i-learn',
-					'title' => 'Build the foundation.',
-					'body' => 'Start with technical vocabulary, safety awareness, tool recognition, and the principles behind each task.',
-				),
-				array(
-					'n' => '02 / Rehearse',
-					'icon' => 'i-rehearse',
-					'title' => 'Make the connection.',
-					'body' => 'Explore a virtual work environment. Follow a sequence, identify an issue, and explain your decisions.',
-				),
-				array(
-					'n' => '03 / Reflect',
-					'icon' => 'i-reflect',
-					'title' => 'Understand your next step.',
-					'body' => 'Review the experience with an instructor, identify gaps, and set a focus for the next practice session.',
-				),
-				array(
-					'n' => '04 / Apply',
-					'icon' => 'i-apply',
-					'title' => 'Take it into the real world.',
-					'body' => 'Reinforce learning through supervised shop work and practical assessment.',
-				),
-			),
-		),
-		'educators' => array(
-			'eyebrow' => '05 / For the people who teach',
-			'headline' => 'Great teaching.',
-			'headlineEm' => 'Very affordable access.',
-			'lede' => 'An education budget should open doors. Our goal is to make immersive trade learning a very affordable part of your teaching toolkit.',
-			'body' => 'Our deployment vision starts with your curriculum, your learners and your shop. Introduce immersive experiences where they serve a clear educational purpose, then connect them to instructor-led practice.',
-			'steps' => array(
-				array(
-					'n' => '01',
-					'title' => 'Choose a learning goal',
-					'body' => 'Identify one concept or procedure students need to understand more clearly.',
-					'image' => array(
-						'src' => '',
-						'alt' => 'An instructor and a student standing together in an engineering technology centre, with workbenches, parts bins and an emergency eye-wash station behind them',
-						'srcSet' => '',
-					),
-				),
-				array(
-					'n' => '02',
-					'title' => 'Prepare the learning environment',
-					'body' => 'Plan headset access, space, accessibility, instructor support, and an alternative learning activity.',
-					'image' => array(
-						'src' => '',
-						'alt' => 'A training classroom set up for a session, tables laid out with boxed auto-darkening welding helmets and hard hats racked on the wall',
-						'srcSet' => '',
-					),
-				),
-				array(
-					'n' => '03',
-					'title' => 'Connect virtual and practical work',
-					'body' => 'Use a short immersive lesson, a guided discussion, and supervised shop practice.',
-					'image' => array(
-						'src' => '',
-						'alt' => 'Two welding students at a training institute, one holding an auto-darkening welding helmet and gloves',
-						'srcSet' => '',
-					),
-				),
-				array(
-					'n' => '04',
-					'title' => 'Evaluate and improve',
-					'body' => 'Compare understanding and practical performance, then refine the experience.',
-					'image' => array(
-						'src' => '',
-						'alt' => 'Students in hard hats applying render to practice wall panels inside a training structure',
-						'srcSet' => '',
-					),
-				),
-			),
-			'cta' => array(
-				'label' => 'Plan your learning experience',
-				'href' => '#planner',
-			),
-		),
-		'access' => array(
-			'eyebrow' => 'Built around access',
-			'headline' => 'Big possibilities.',
-			'headlineEm' => 'A very affordable way in.',
-			'lede' => 'High-quality trade education should be within reach of the people ready to learn — and the people ready to teach.',
-			'body' => 'XVR Trade Skills puts affordability at the center of its educational vision. Our goal is to help individual learners, technical schools, and workforce programs bring immersive learning into their training without making cost the barrier. Repeatable virtual practice creates opportunities to revisit a lesson before using shop time and physical materials.',
-			'image' => array(
-				'src' => '',
-				'alt' => 'A training shop floor lined with drill presses, bench grinders and welding machines',
-				'srcSet' => '',
-			),
-			'cells' => array(
-				array(
-					'title' => 'Review before you consume',
-					'body' => 'Repeatable virtual practice creates opportunities to revisit a lesson before using shop time and physical materials.',
-				),
-				array(
-					'title' => 'Pricing',
-					'body' => 'The individual annual licence is published on this page. What a school or workforce program pays depends on the learning package, headsets and deployment needs, so site licences are quoted per school.',
-				),
-			),
-			'cta' => array(
-				'label' => 'Explore your learning pathway',
-				'href' => '#planner',
-			),
-		),
 		'site' => array(
 			'domain' => 'https://tradeskillapps.com',
 			'name' => 'XVR Trade Skills',
-			'title' => 'XVR Trade Skills — Learn the trade. Build the skill. Change your future.',
-			'description' => 'XVR Trade Skills brings technical lessons to life through immersive VR education — connecting what students need to know with what they need to do. Education first. Affordability at the core.',
+			'title' => 'XVR Skilled Trades | Train for the work ahead',
+			'description' => 'Explore XVR Skilled Trades virtual reality curriculum for welding, HVAC, advanced manufacturing and drone technology.',
 			'ogImage' => '/assets/images/og-image.jpg',
-			'headingStyle' => 'sentence',
+			'logoAlt' => 'XVR Trades — Skilled Labor Trades to Apprenticeships',
 		),
 		'nav' => array(
 			array(
 				'label' => 'Programs',
-				'href' => '#trades',
+				'href' => '#programs',
 			),
 			array(
 				'label' => 'How it works',
-				'href' => '#multiplayer',
-			),
-			array(
-				'label' => 'Curriculum',
-				'href' => '#curriculum',
+				'href' => '#learning',
 			),
 			array(
 				'label' => 'Licensing',
-				'href' => '#licensing',
-			),
-		),
-		'drawerExtra' => array(
-			array(
-				'label' => 'Career pathways',
-				'href' => '#pathways',
-			),
-			array(
-				'label' => 'For educators',
-				'href' => '#educators',
-			),
-			array(
-				'label' => 'Trade terminology',
-				'href' => '#glossary',
-			),
-			array(
-				'label' => 'Questions',
-				'href' => '#faq',
+				'href' => '#pricing',
 			),
 		),
 		'footer' => array(
 			'tagline' => 'Philadelphia Technician Training Institute',
-			'links' => array(),
-			'copyright' => '© 2026 XVR Trade Skills',
-			'strap' => 'Education first. Opportunity ahead.',
 		),
 		'hero' => array(
-			'eyebrow' => '',
-			'headline' => 'Train for the work ahead',
+			'headline' => 'Train for the
+work ahead',
 			'headlineEm' => '.',
 			'lede' => 'Learn the trades together in live, instructor-led multiplayer VR. See and hear your instructor, classmates and learn the skills to get into apprenticeships as you practice, ask questions and prepare for mastery.',
-			'primaryCta' => array(
-				'label' => '',
-				'href' => '',
-			),
-			'secondaryCta' => array(
-				'label' => '',
-				'href' => '',
-			),
-			'strip' => array(),
-			'image' => array(
-				'src' => '/assets/images/hero-vr-1448.webp',
-				'srcSet' => '/assets/images/hero-vr-800.webp 800w, /assets/images/hero-vr-1200.webp 1200w, /assets/images/hero-vr-1448.webp 1448w',
-				'alt' => 'Students wearing Meta Quest 3 headsets at desks in a skilled-trades classroom, holding controllers, with welding, HVAC, construction and manufacturing posters on the wall behind them',
-			),
-			'video' => array(
-				'poster' => '/assets/video/hero-poster.webp',
-				'sources' => array(
-					array(
-						'src' => '/assets/video/hero-video.webm',
-						'type' => 'video/webm',
-					),
-					array(
-						'src' => '/assets/video/hero-video.mp4',
-						'type' => 'video/mp4',
-					),
-				),
-				'label' => 'Students learning in a VR skilled-trades classroom',
-			),
-			'layout' => 'split',
 			'videoHeading' => 'Watch XVR Weld in action',
+			'image' => array(
+				'src' => '/assets/images/xvr-shop-angle-grinder.webp',
+				'srcSet' => '',
+				'alt' => 'A wall-mounted smart screen displays Trades Curriculum, with Theory, Measurement, Tools, Blueprints, Fabrication and Apprenticeship. Below it, a man measures a welded steel model with a cordless handheld angle grinder resting on the workbench to his right. A woman in VR holds a sparking MIG gun at the stairs. A tool labeled LASER projects a green line across the columns.',
+			),
 			'film' => array(
 				'src' => '/assets/video/xvr-weld.mp4',
-				'type' => 'video/mp4',
 				'poster' => '/assets/video/xvr-weld-poster.webp',
-				'label' => 'XVR Weld: students welding together in instructor-led multiplayer VR',
-			),
-		),
-		'ticker' => array(
-			'Welding',
-			'HVAC',
-			'Electrical',
-			'Manufacturing',
-			'Construction',
-			'Emerging Technology',
-		),
-		'pathways' => array(
-			'eyebrow' => '04 / Careers built over time',
-			'headline' => 'A starting point.',
-			'headlineEm' => 'A path forward.',
-			'lede' => 'Skilled trades grow through education, practice and experience. Explore common stages — and the learning that supports each one.',
-			'image' => array(
-				'src' => '',
-				'alt' => 'Two students in hard hats kneeling to finish a freshly poured concrete pad on a training site',
-				'srcSet' => '',
-			),
-			'stages' => array(
-				array(
-					'n' => '01',
-					'stage' => 'Explore & prepare',
-					'title' => 'Discover your direction.',
-					'body' => 'Start with interests, technical vocabulary, and an introduction to the work. Foundation learning can help you prepare for a training program or apprenticeship.',
-					'points' => array(
-						'Explore different trades and work environments.',
-						'Build safety awareness, measurement, and technical reading skills.',
-						'Compare local training programs and entry requirements.',
-					),
-				),
-				array(
-					'n' => '02',
-					'stage' => 'Apprentice',
-					'title' => 'Learn alongside experienced people.',
-					'body' => 'An apprentice learns through structured on-the-job experience and related instruction. Program design and entry requirements depend on the trade and provider.',
-					'points' => array(
-						'Develop foundational skills under qualified supervision.',
-						'Connect classroom learning with workplace practice.',
-						'Document progress against your program\'s requirements.',
-					),
-				),
-				array(
-					'n' => '03',
-					'stage' => 'Journeyman',
-					'title' => 'Develop independent competence.',
-					'body' => 'In trades that use this title, a journeyman has completed the required training and experience. Certification, licensing, and the scope of independent work vary.',
-					'points' => array(
-						'Strengthen diagnosis, judgment, and consistency.',
-						'Meet applicable qualification and continuing education requirements.',
-						'Support newer learners and deepen your specialty.',
-					),
-				),
-				array(
-					'n' => '04',
-					'stage' => 'Master / contractor',
-					'title' => 'Lead work. Grow your impact.',
-					'body' => 'Master-level practice and contracting are distinct paths that may overlap. Experienced tradespeople may lead complex work, supervise crews, or operate a business.',
-					'points' => array(
-						'Develop project planning, leadership, and quality oversight.',
-						'Build business and customer communication skills.',
-						'Verify any advanced licensing or contractor requirements.',
-					),
-				),
-			),
-			'note' => 'Titles and requirements vary by occupation, employer and jurisdiction. Not every trade follows this sequence. **VR learning alone does not confer apprenticeship status, licensure or qualification.**',
-		),
-		'levels' => array(
-			'eyebrow' => 'From your classroom to your future',
-			'headline' => 'Start with curiosity.',
-			'headlineEm' => 'Grow into a craft.',
-			'lede' => 'Very affordable immersive education can help bring trade exploration into high schools and strengthen technical learning in trade schools.',
-			'highSchool' => array(
-				'eye' => 'High schools / Discover your direction',
-				'title' => 'See what you could become.',
-				'body' => 'Connect science, math and classroom learning to the work of technicians and craftspeople. Explore trade environments, learn the language of tools and systems, and discover interests worth pursuing.',
-				'points' => array(
-					'Career exploration before choosing a training pathway',
-					'Technical vocabulary and foundational concepts',
-					'Teacher-led reflection and a next-step learning plan',
-				),
-				'image' => array(
-					'src' => '',
-					'alt' => 'A student standing in the corridor of a technician training institute, framed certificates and awards on the wall behind him',
-					'srcSet' => '',
-				),
-			),
-			'tradeSchool' => array(
-				'eye' => 'Trade schools / Build your foundation',
-				'title' => 'Turn interest into understanding.',
-				'body' => 'Connect immersive lessons to shop instruction. Revisit a process, explain a sequence, and identify where you need more guidance before demonstrating your learning with real equipment.',
-				'points' => array(
-					'Concept review alongside technical coursework',
-					'Purposeful repetition and instructor discussion',
-					'Preparation for supervised hands-on practice',
-				),
-			),
-			'note' => 'Learning examples describe our educational vision. The original classroom artwork shows the youth-focused learning environment that inspires XVR Trade Skills.',
-		),
-		'purpose' => array(
-			'eyebrow' => '01 / Our Purpose',
-			'headline' => 'Better education. Within reach.',
-			'headlineEm' => 'Within budget.',
-			'lede' => 'The case for better trade education is well established. The challenge has always been deployment — bringing effective instruction, equipment, practice and support to every learner who needs them.',
-			'body' => 'XVR Trade Skills is built to close the gap between knowing about a trade and understanding how the work happens. Our educational vision combines technical instruction, immersive practice, instructor guidance and real-world application. Students explore tools and systems, connect each step to its purpose, and prepare to apply that understanding under supervision in the shop.',
-			'pillars' => array(
-				array(
-					'n' => '01',
-					'title' => 'Make learning affordable.',
-					'body' => 'Affordability is central to our vision, so more learners and training programs can access meaningful trade education.',
-				),
-				array(
-					'n' => '02',
-					'title' => 'Teach the thinking.',
-					'body' => 'Help learners explain what they are doing, why the sequence matters, and how to recognize when something needs attention.',
-				),
-				array(
-					'n' => '03',
-					'title' => 'Bring it to the shop.',
-					'body' => 'Turn learning into supervised practice with real tools and materials.',
-				),
-			),
-		),
-		'mission' => array(
-			'eyebrow' => 'Talent is everywhere. Opportunity should be too.',
-			'quote' => 'See yourself',
-			'quoteEm' => 'building what comes next.',
-			'body' => array(
-				'Black Americans belong at the center of the future of skilled trades — as technicians, craftspeople, instructors, innovators and business owners.',
-				'XVR Trade Skills envisions an accessible path for learners from every background. Whether you are discovering a first career, changing direction, or strengthening an existing skill, the goal is the same: make meaningful education more affordable, more engaging, and easier to reach.',
-			),
-			'cta' => array(
-				'label' => 'Build your learning pathway',
-				'href' => '#planner',
-			),
-			'image' => array(
-				'src' => '',
-				'alt' => 'Graduates in blue caps and gowns gathered together before a commencement ceremony',
-				'srcSet' => '',
-			),
-		),
-		'closing' => array(
-			'chain' => array(
-				'Understanding',
-				'Practice',
-				'Proficiency',
-				'Opportunity',
-			),
-			'headline' => 'The future takes skill.',
-			'headlineEm' => 'Let\'s build it.',
-			'cta' => array(
-				'label' => 'Build your pathway',
-				'href' => '#planner',
-			),
-			'image' => array(
-				'src' => '',
-				'alt' => 'Three welding students and their instructor in the shop, one holding a finished weld coupon',
-				'srcSet' => '',
-			),
-		),
-		'glossary' => array(
-			'eyebrow' => '06 / Know the language',
-			'headline' => 'Different terms.',
-			'headlineEm' => 'Shared purpose.',
-			'lede' => 'Specialized knowledge. Practical ability. Pride in the work.',
-			'items' => array(
-				array(
-					'term' => 'Skilled trades',
-					'def' => 'Occupations centered on specialized practical skills, technical knowledge, and hands-on work—such as welding, electrical work, HVAC, carpentry, and masonry.',
-				),
-				array(
-					'term' => 'Skilled labor',
-					'def' => 'A broader economic term for workers with specialized training, knowledge, or experience. Skilled trades are one part of this wider category.',
-				),
-				array(
-					'term' => 'Craftsmanship / craft',
-					'def' => 'The care, judgment, precision, and practiced ability behind quality work. Craftsmanship is visible in how a tradesperson plans, executes, and finishes a task.',
-				),
-				array(
-					'term' => 'Vocational or technical careers',
-					'def' => 'Careers developed through applied education and occupational training, including technical schools, trade schools, apprenticeships, and employer programs. Educational routes can overlap with college study.',
-				),
-			),
-		),
-		'faq' => array(
-			'eyebrow' => 'A few things to know',
-			'headline' => 'Questions,',
-			'headlineEm' => 'answered.',
-			'items' => array(
-				array(
-					'q' => 'Does VR replace hands-on training?',
-					'a' => 'No. Our vision uses VR to prepare for and reinforce instructor-led learning. Real tools, supervised shop work, and practical assessment remain essential.',
-				),
-				array(
-					'q' => 'Can I earn a license or certification here?',
-					'a' => 'This website introduces the XVR Trade Skills vision and offers career exploration. It does not award credentials. Check requirements with the relevant training provider, licensing authority, or certifying organization.',
-				),
-				array(
-					'q' => 'Which products can I purchase today?',
-					'a' => 'The individual annual licence is published on this page. Prices for schools and programs depend on the package, headsets and deployment needs, and are quoted per site. Very affordable access remains a core commitment.',
-				),
-				array(
-					'q' => 'Where should a school start?',
-					'a' => 'Choose one clear learning objective, identify how an immersive activity would support it, and plan the accompanying instruction and hands-on assessment. Use the starter planner above to organize an initial lesson.',
-				),
 			),
 		),
 		'tradesSection' => array(
 			'eyebrow' => 'Training pathways',
-			'headline' => 'Explore',
-			'headlineEm' => 'the trades.',
-			'lede' => 'Explore the trade areas shaping our educational vision. Select a field to see its foundations and a sample immersive learning experience.',
-			'note' => 'Learning experiences shown are **illustrative curriculum concepts**, not a catalog of currently available courses or certifications.',
-			'layout' => 'tabs',
-			'limit' => '0',
+			'headline' => 'Explore the trades.',
+			'limit' => '4',
 		),
 		'trades' => array(
 			array(
 				'slug' => 'welding',
 				'name' => 'Welding',
-				'icon' => 'i-weld',
 				'title' => 'VRWeld',
 				'desc' => 'Build familiarity with shop safety, joint preparation, blueprint reading and groove and fillet welds in multiple positions.',
-				'skills' => array(
-					'Safety & PPE',
-					'Joint preparation',
-					'MIG fundamentals',
-					'Blueprint reading',
-				),
-				'goal' => 'Recognize common joint types and explain the purpose of joint preparation.',
-				'sample' => 'Explore a virtual welding workstation. Identify components, select the appropriate protective equipment, and explain the sequence for preparing a joint.',
+				'icon' => 'i-weld',
+				'skills' => array(),
+				'goal' => '',
+				'sample' => '',
 				'image' => array(
 					'src' => '',
-					'alt' => 'A welding student in a protective helmet and leather gloves welding a steel frame in a training shop, sparks coming off the arc',
 					'srcSet' => '',
+					'alt' => '',
 				),
 			),
 			array(
 				'slug' => 'hvac',
 				'name' => 'HVAC',
-				'icon' => 'i-hvac',
 				'title' => 'Heating and cooling',
 				'desc' => 'Identify system components, study the refrigeration cycle and work through installation and service procedures.',
-				'skills' => array(
-					'System components',
-					'Heat transfer',
-					'Airflow',
-					'Diagnostic thinking',
-				),
-				'goal' => 'Identify major HVAC components and describe their roles in a system.',
-				'sample' => 'Trace airflow through a virtual system, identify major components, and explain how each contributes to indoor comfort.',
+				'icon' => 'i-weld',
+				'skills' => array(),
+				'goal' => '',
+				'sample' => '',
 				'image' => array(
 					'src' => '',
-					'alt' => '',
 					'srcSet' => '',
+					'alt' => '',
 				),
 			),
 			array(
 				'slug' => 'manufacturing',
 				'name' => 'Advanced manufacturing',
-				'icon' => 'i-manu',
 				'title' => 'Production and automation',
 				'desc' => 'Explore shop measurement, production workflows and the role of automation in manufacturing.',
-				'skills' => array(
-					'Measurement',
-					'Process flow',
-					'Quality awareness',
-					'Automation concepts',
-				),
-				'goal' => 'Describe a production sequence and identify where quality checks belong.',
-				'sample' => 'Walk through a virtual production sequence, identify inspection points, and explain how a measurement affects the next step.',
+				'icon' => 'i-weld',
+				'skills' => array(),
+				'goal' => '',
+				'sample' => '',
 				'image' => array(
 					'src' => '',
-					'alt' => 'Hands checking a welded test coupon marked 3F SMAW against a gauge, with more finished coupons laid out on the steel bench',
 					'srcSet' => '',
+					'alt' => '',
 				),
 			),
 			array(
 				'slug' => 'drone-technology',
 				'name' => 'Drone technology',
-				'icon' => 'i-drone',
 				'title' => 'Uncrewed aircraft systems',
 				'desc' => 'Explore aircraft components, preflight checks and flight-planning fundamentals.',
-				'skills' => array(
-					'Aircraft components',
-					'Preflight checks',
-					'Flight planning',
-					'Airspace awareness',
-				),
-				'goal' => 'Understand what an uncrewed aircraft is made of and what has to be checked before it leaves the ground.',
-				'sample' => 'Walk around a virtual airframe, identify each component, and work through a preflight checklist before planning a short flight.',
+				'icon' => 'i-weld',
+				'skills' => array(),
+				'goal' => '',
+				'sample' => '',
 				'image' => array(
 					'src' => '',
+					'srcSet' => '',
 					'alt' => '',
-					'srcSet' => '',
 				),
 			),
-			array(
-				'slug' => 'electrical',
-				'name' => 'Electrical',
-				'icon' => 'i-elec',
-				'title' => 'Make the connection.',
-				'desc' => 'Build a foundation in circuit concepts, component recognition, diagrams, and safe work awareness before supervised practical instruction.',
-				'skills' => array(
-					'Circuit concepts',
-					'Diagram reading',
-					'Component recognition',
-					'Safety awareness',
-				),
-				'goal' => 'Read a basic circuit diagram and identify its main components.',
-				'sample' => 'Explore a de-energized virtual circuit and trace the relationship between a source, protective device, switch, and load.',
-				'image' => array(
-					'src' => '',
-					'alt' => '',
-					'srcSet' => '',
-				),
-			),
-			array(
-				'slug' => 'construction',
-				'name' => 'Construction',
-				'icon' => 'i-cons',
-				'title' => 'Shape the spaces around us.',
-				'desc' => 'Discover the craftsmanship behind carpentry, masonry, and building systems. Connect plans and measurement to materials and assembly.',
-				'skills' => array(
-					'Plan reading',
-					'Measurement',
-					'Materials',
-					'Assembly sequence',
-				),
-				'goal' => 'Interpret basic plan dimensions and explain an assembly sequence.',
-				'sample' => 'Review a virtual room plan, identify dimensions and materials, and organize a basic assembly sequence for instructor discussion.',
-				'image' => array(
-					'src' => '',
-					'alt' => 'Students in hard hats laying concrete block in an outdoor masonry training yard',
-					'srcSet' => '',
-				),
-			),
-			array(
-				'slug' => 'emerging-technology',
-				'name' => 'Emerging technology',
-				'icon' => 'i-tech',
-				'title' => 'Build skills for what comes next.',
-				'desc' => 'Explore the connections between skilled trades, robotics, drones, and digital systems, with an emphasis on foundational understanding.',
-				'skills' => array(
-					'System awareness',
-					'Robotics concepts',
-					'Sensors',
-					'Inspection planning',
-				),
-				'goal' => 'Explain how sensors and digital tools can support a technician\'s work.',
-				'sample' => 'Explore a virtual inspection scenario, identify what information a sensor could collect, and discuss how a technician would use it.',
-				'image' => array(
-					'src' => '',
-					'alt' => 'Two students kneeling beside a humanoid robot and several wheeled rover robots on the floor of a technology lab',
-					'srcSet' => '',
-				),
-			),
-		),
-		'videos' => array(
-			'eyebrow' => 'Watch',
-			'headline' => 'See what we are',
-			'headlineEm' => 'building.',
-			'lede' => 'A short look at the work — the technology, the people learning on it, and why the trades are worth this kind of investment.',
-			'note' => '',
-			'items' => array(
-				array(
-					'id' => 'story',
-					'title' => 'Watch XVR Weld in action',
-					'blurb' => 'Learn the trades together in live, instructor-led multiplayer VR — see and hear your instructor and classmates as you practise.',
-					'file' => '/assets/video/xvr-weld.mp4',
-					'poster' => '/assets/video/xvr-weld-poster.webp',
-					'embed' => '',
-				),
-				array(
-					'id' => 'voices',
-					'title' => 'In their own words',
-					'blurb' => 'Learners and instructors on what changes when the training meets them where they already are.',
-					'file' => '',
-					'poster' => '',
-					'embed' => '',
-				),
-				array(
-					'id' => 'inside',
-					'title' => 'Inside the headset',
-					'blurb' => 'Sixty seconds of the real thing — the tools, the environment, and the moment a skill starts to land.',
-					'file' => '',
-					'poster' => '',
-					'embed' => '',
-				),
-			),
-			'layout' => 'feature',
 		),
 		'navCta' => array(
 			'label' => 'For partners',
 			'href' => '#partners',
 		),
-		'planner' => array(
-			'eyebrow' => '07 / Make your next move',
-			'headline' => 'Your interests.',
-			'headlineEm' => 'Your next chapter.',
-			'lede' => 'Build a starter learning plan for yourself or your classroom. Choose a trade and a goal to get practical next steps.',
-			'roleLabel' => 'I\'m exploring as a',
-			'tradeLabel' => 'My trade interest',
-			'stageLabel' => 'My starting point',
-			'submit' => 'Create my starter plan',
-			'reset' => 'Reset',
-			'privacy' => 'This planner creates guidance on this page. It does not enroll you in a program or send your information.',
-			'tradePlaceholder' => 'For example: welding, HVAC, electrical…',
-			'roles' => array(
-				'Learner',
-				'Instructor or training partner',
-			),
-			'stages' => array(
-				'Exploring a new career',
-				'Building foundational skills',
-				'Developing existing skills',
-			),
-			'tradeOptions' => array(
-				'Welding',
-				'HVAC',
-				'Electrical',
-				'Manufacturing',
-				'Construction',
-				'Emerging technology',
-			),
-			'learnerTitle' => 'Your starter plan — ',
-			'instructorTitle' => 'Your program starting point — ',
-			'fallbackTrade' => 'your trade',
-			'fallbackTradeArea' => 'your trade area',
-		),
-		'plannerSteps' => array(
-			'learner' => array(
-				'Exploring a new career' => array(
-					array(
-						'Pick one concept to understand first',
-						'Start narrow. One concept or procedure in TRADE is enough for a first lesson.',
-					),
-					array(
-						'Learn and explore in VR',
-						'Use a short immersive lesson to learn the concept, then locate components and follow how the work fits together.',
-					),
-					array(
-						'Explain the reasoning',
-						'Describe what each part does and why the sequence matters, in your own words.',
-					),
-					array(
-						'Compare local training programs',
-						'Look at entry requirements and how each program connects classroom learning to supervised shop practice.',
-					),
-				),
-				'Building foundational skills' => array(
-					array(
-						'Review the concept alongside your coursework',
-						'Match the immersive lesson to what your TRADE class is covering now.',
-					),
-					array(
-						'Rehearse until the sequence is clear',
-						'Revisit the virtual practice as often as you need, before using shop time and physical materials.',
-					),
-					array(
-						'Reflect with your instructor',
-						'Review the experience together, identify gaps, and set a focus for the next practice session.',
-					),
-					array(
-						'Apply it under supervision',
-						'Demonstrate on real equipment with an instructor, through supervised shop work and practical assessment.',
-					),
-				),
-				'Developing existing skills' => array(
-					array(
-						'Target the gap, not the whole trade',
-						'Choose the one part of TRADE you want sharper and build the lesson around it.',
-					),
-					array(
-						'Rehearse the decisions',
-						'Follow a sequence, identify an issue, and explain the decisions you made.',
-					),
-					array(
-						'Strengthen judgment and consistency',
-						'Being able to recognize when something needs attention is part of the skill.',
-					),
-					array(
-						'Apply and demonstrate',
-						'Confirm it on real equipment with supervision and practical assessment.',
-					),
-				),
-			),
-			'instructor' => array(
-				array(
-					'Choose a learning goal',
-					'Identify one concept or procedure in TRADE that students need to understand more clearly.',
-				),
-				array(
-					'Prepare the learning environment',
-					'Plan headset access, space, accessibility, instructor support, and an alternative learning activity.',
-				),
-				array(
-					'Connect virtual and practical work',
-					'Use a short immersive lesson, a guided discussion, and supervised shop practice.',
-				),
-				array(
-					'Evaluate and improve',
-					'Compare understanding and practical performance, then refine the experience.',
-				),
-			),
-			'closing' => array(
-				'Remember',
-				'VR prepares and reinforces. Supervised hands-on training develops and verifies practical competence, and no credential is awarded here.',
-			),
-		),
-		'curriculum' => array(
-			'eyebrow' => 'Manufacturing & automation / MAT-VR curriculum',
-			'headline' => 'Understand the systems.',
-			'headlineEm' => 'Build the technical foundation.',
-			'lede' => 'A structured learning pathway connecting electrical theory, mechanical technology, and industrial automation with practical projects and virtual MAT / safety labs.',
-			'stats' => array(
-				array(
-					'value' => '10',
-					'label' => 'courses',
-				),
-				array(
-					'value' => '140',
-					'label' => 'total hours',
-				),
-				array(
-					'value' => '14',
-					'label' => 'hours per course',
-				),
-				array(
-					'value' => '',
-					'label' => 'Virtual MAT / safety labs',
-				),
-			),
-			'body' => 'From understanding a circuit to troubleshooting an automated system, learners explore how manufacturing equipment works — and how technicians maintain it.',
-			'courses' => array(
-				array(
-					'codes' => 'MAT 001 · MAT 002 · MAT 005',
-					'title' => 'Electrical foundations & advanced AC',
-					'body' => 'Study direct and alternating current, circuit components, basic calculations, motors, relays, and resistors. Progress to three-phase circuits, transformers, electrical measurements, troubleshooting, and an introduction to NEC codes and standards.',
-				),
-				array(
-					'codes' => 'MAT 003',
-					'title' => 'Mechanical technology & shop fundamentals',
-					'body' => 'Explore manufacturing work, safety precautions, hand and power tools, fasteners, common mechanical components, and basic maintenance practices.',
-				),
-				array(
-					'codes' => 'MAT 004 · MAT 006 · MAT 007',
-					'title' => 'PLCs, programming & motor controls',
-					'body' => 'Build familiarity with programmable logic controllers, digital multimeters, and human-machine interfaces. Apply wiring, programming, assembly, and troubleshooting concepts through projects, then explore PLC diagrams and control of DC, AC, and three-phase motors.',
-				),
-				array(
-					'codes' => 'MAT 008 · MAT 009',
-					'title' => 'Heat transfer & system troubleshooting',
-					'body' => 'Learn conduction, convection, radiation, energy conversion, and industrial thermostat systems. Explore fluid-system troubleshooting and PLC systems that use HMI indicators and operator controls.',
-				),
-				array(
-					'codes' => 'MAT 010',
-					'title' => 'Industrial electronics & soldering',
-					'body' => 'Develop familiarity with electronic components, soldering tools, and printed circuit board projects that connect DC electrical concepts to industrial applications.',
-				),
-			),
-			'practiceEyebrow' => 'Education connected to practice',
-			'practiceHeadline' => 'Learn the concept.',
-			'practiceHeadlineEm' => 'Apply the process.',
-			'practiceBody' => 'The guide pairs technical instruction with project-based learning and lists a virtual MAT / safety lab for every course. Use immersive learning alongside instructor-guided practical work to strengthen understanding and prepare for further skill development.',
-			'note' => 'Summary of the supplied MAT-VR Curriculum Guide. The 140 hours are the sum of ten 14-hour courses. Course availability and delivery arrangements should be confirmed with the program; this outline does not promise a certification.',
-		),
 		'multiplayer' => array(
 			'eyebrow' => 'Live multiplayer instruction',
-			'headline' => 'Learn together',
-			'headlineEm' => 'inside the virtual shop.',
-			'lede' => 'Everyone joins the same virtual training space. You can see and hear your instructor and classmates inside VR.',
-			'body' => 'Watch the instructor demonstrate a task, ask questions as they come up, and hear the feedback your classmates receive as they practice.',
+			'headline' => 'Learn together inside the virtual shop.',
+			'lede' => 'Everyone joins the same virtual training space. You can see and hear your instructor and classmates inside VR. Watch the instructor demonstrate a task, ask questions as they come up, and hear the feedback your classmates receive as they practice.',
 			'steps' => array(
 				array(
-					'n' => '01',
-					'icon' => 'i-learn',
 					'title' => 'Learn',
 					'body' => 'Watch the instructor demonstrate each step and explain why it matters.',
 				),
 				array(
-					'n' => '02',
-					'icon' => 'i-rehearse',
 					'title' => 'Practice',
 					'body' => 'Try the procedure in VR and get feedback from your instructor as you work.',
 				),
 				array(
-					'n' => '03',
-					'icon' => 'i-apply',
 					'title' => 'Apply',
 					'body' => 'Bring what you learned to the physical lab and practice with real tools.',
 				),
@@ -864,8 +149,7 @@ function tsa_defaults() {
 		),
 		'licensing' => array(
 			'eyebrow' => 'Annual licensing',
-			'headline' => 'What does XVR cost',
-			'headlineEm' => 'for schools?',
+			'headline' => 'What does XVR cost for schools?',
 			'lede' => 'Bring skilled trades education into your classroom with XVR Trades lessons, instructor-led VR activities, and skills assessments in welding, HVAC, advanced manufacturing, and drone technology.',
 			'individual' => array(
 				'label' => 'Individual',
@@ -877,36 +161,21 @@ function tsa_defaults() {
 				'body' => 'Contact us for an annual quote covering unlimited users at one school site.',
 				'cta' => array(
 					'label' => 'Request school pricing',
-					'href' => '#partners',
+					'href' => 'https://xvrtradeskills.com/',
 				),
 			),
-			'note' => 'Prices are per annual licence. Figures shown are the published individual licence rate; site licences are quoted per school.',
-		),
-		'contact' => array(
-			'eyebrow' => 'Get in touch',
-			'headline' => 'Start a conversation.',
-			'headlineEm' => 'We will reply.',
-			'lede' => 'Whether you are a learner, an instructor or a training program, tell us what you are trying to build and we will come back to you.',
-			'nameLabel' => 'Your name',
-			'emailLabel' => 'Email',
-			'messageLabel' => 'Message',
-			'submit' => 'Send message',
-			'sending' => 'Sending…',
 		),
 		'knowledge' => array(
-			'eyebrow' => '',
-			'headline' => 'Build expert',
-			'headlineEm' => 'trade knowledge.',
+			'headline' => 'Build expert trade knowledge.',
 			'body' => 'Build your trade skills in live, instructor-led VR classes. Prepare to enter a pre-apprenticeship, apply for a registered apprenticeship, get credentialed and/or continue your education or earn a workforce career opportunity.',
 		),
 		'partners' => array(
 			'eyebrow' => 'Schools, employers and workforce partners',
-			'headline' => 'Bring XVR to',
-			'headlineEm' => 'your training program.',
+			'headline' => 'Bring XVR to your training program.',
 			'body' => 'Give high school students, trade school learners and adult career changers a place to explore the trades and practice the fundamentals before entering the lab.',
 			'cta' => array(
 				'label' => 'Contact us',
-				'href' => '#contact',
+				'href' => 'https://xvrtradeskills.com/',
 			),
 		),
 	);

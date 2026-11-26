@@ -1,28 +1,21 @@
 <?php
+/** "Learn together inside the virtual shop." - eyebrow and heading left, the three steps right. */
 defined('ABSPATH') || exit;
-$sec_sfx = tsa_uid('sec-multiplayer');
+$uid = tsa_uid('sec-learning');
 ?>
-<section class="band band--wash" id="multiplayer<?php echo esc_attr($sec_sfx); ?>" aria-labelledby="multiplayer-h<?php echo esc_attr($sec_sfx); ?>">
-	<div class="wrap">
-		<div class="sec-head sec-head--split">
-			<div>
-				<p class="eyebrow rv"><?php tsa_e('multiplayer.eyebrow'); ?></p>
-				<?php tsa_heading('multiplayer', 'multiplayer-h' . $sec_sfx); ?>
-			</div>
-			<p class="lede rv rv-d1"><?php tsa_e('multiplayer.lede'); ?></p>
+<section class="intro" id="learning<?php echo esc_attr($uid); ?>">
+	<div class="wrap split">
+		<div>
+			<p class="eyebrow"><?php tsa_e('multiplayer.eyebrow'); ?></p>
+			<h2><?php tsa_e('multiplayer.headline'); ?></h2>
 		</div>
-
-		<p class="copy rv" style="margin-bottom:clamp(2.25rem,5vw,3.25rem)"><?php tsa_e('multiplayer.body'); ?></p>
-
-		<div class="cycle">
-			<?php for ($i = 0; $i < tsa_count('multiplayer.steps'); $i++) : $p = 'multiplayer.steps.' . $i; ?>
-				<article class="cycle__i <?php echo esc_attr(tsa_rv($i)); ?>">
-					<svg aria-hidden="true"><use href="#<?php echo esc_attr(tsa_text($p . '.icon')); ?>" /></svg>
-					<span class="cycle__n"><?php tsa_e($p . '.n'); ?></span>
-					<h4><?php tsa_e($p . '.title'); ?></h4>
-					<p><?php tsa_e($p . '.body'); ?></p>
-				</article>
-			<?php endfor; ?>
+		<div class="process">
+			<p><?php tsa_e('multiplayer.lede'); ?></p>
+			<ol>
+				<?php for ($i = 0; $i < tsa_count('multiplayer.steps'); $i++) : $p = 'multiplayer.steps.' . $i; ?>
+					<li><strong><?php tsa_e($p . '.title'); ?></strong><span><?php tsa_e($p . '.body'); ?></span></li>
+				<?php endfor; ?>
+			</ol>
 		</div>
 	</div>
 </section>

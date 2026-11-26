@@ -26,33 +26,11 @@ function tsa_register_post_types() {
 		'supports'  => array('title', 'thumbnail', 'page-attributes'),
 	)));
 
-	register_post_type('tsa_video', array_merge($common, array(
-		'labels' => tsa_labels(__('Video', 'tradeskillapps'), __('Videos', 'tradeskillapps')),
-		'menu_icon' => 'dashicons-video-alt3',
-		'supports'  => array('title', 'thumbnail', 'page-attributes'),
-	)));
 
-	register_post_type('tsa_faq', array_merge($common, array(
-		'labels' => tsa_labels(__('FAQ entry', 'tradeskillapps'), __('FAQ', 'tradeskillapps')),
-		'menu_icon' => 'dashicons-editor-help',
-		'supports'  => array('title', 'editor', 'page-attributes'),
-	)));
 
-	register_post_type('tsa_term', array_merge($common, array(
-		'labels' => tsa_labels(__('Glossary term', 'tradeskillapps'), __('Glossary', 'tradeskillapps')),
-		'menu_icon' => 'dashicons-book-alt',
-		'supports'  => array('title', 'editor', 'page-attributes'),
-	)));
 
 	// Where contact-form enquiries are kept. Read-only in spirit: entries are
 	// created by the form, not by hand, so "Add New" is switched off.
-	register_post_type('tsa_msg', array_merge($common, array(
-		'labels' => tsa_labels(__('Enquiry', 'tradeskillapps'), __('Enquiries', 'tradeskillapps')),
-		'menu_icon' => 'dashicons-email-alt',
-		'supports'  => array('title', 'editor'),
-		'capabilities' => array('create_posts' => 'do_not_allow'),
-		'map_meta_cap' => true,
-	)));
 }
 add_action('init', 'tsa_register_post_types');
 
@@ -80,14 +58,6 @@ function tsa_meta_fields($type) {
 			'icon'   => array(__('Icon', 'tradeskillapps'), 'icon', __('Drawn to match the set - pick the closest.', 'tradeskillapps')),
 		);
 	}
-	if ($type === 'tsa_video') {
-		return array(
-			'blurb' => array(__('Description', 'tradeskillapps'), 'textarea', ''),
-			'embed' => array(__('YouTube video id', 'tradeskillapps'), 'text', __('The part after v= in a YouTube address. Easiest option - leave the box below empty.', 'tradeskillapps')),
-			'file'  => array(__('Video file URL', 'tradeskillapps'), 'text', __('Only if the film is uploaded to this site instead.', 'tradeskillapps')),
-			'poster' => array(__('Still image URL', 'tradeskillapps'), 'text', __('Shown before the film plays. A featured image set above wins over this.', 'tradeskillapps')),
-		);
-	}
 	return array();
 }
 
@@ -104,7 +74,7 @@ function tsa_icon_choices() {
 }
 
 function tsa_add_meta_boxes() {
-	foreach (array('tsa_trade', 'tsa_video') as $type) {
+	foreach (array('tsa_trade') as $type) {
 		add_meta_box('tsa_fields', __('Details', 'tradeskillapps'), 'tsa_render_meta_box', $type, 'normal', 'high');
 	}
 }
@@ -206,67 +176,12 @@ function tsa_sync_shipped_content() {
 	}
 
 	/* ---- videos ---- */
-	foreach ((isset($d['videos']['items']) ? $d['videos']['items'] : array()) as $i => $v) {
-		tsa_upsert_shipped('tsa_video', $v['id'], $v['title'], '', $i, array(
-			'_tsa_blurb'  => $v['blurb'],
-			'_tsa_embed'  => $v['embed'],
-			'_tsa_file'   => $v['file'],
-			'_tsa_poster' => isset($v['poster']) ? $v['poster'] : '',
-		));
-	}
 
-	/* ---- questions and terms ---- */
-	foreach ((isset($d['faq']['items']) ? $d['faq']['items'] : array()) as $i => $f) {
-		tsa_upsert_shipped('tsa_faq', sanitize_title($f['q']), $f['q'], $f['a'], $i, array());
-	}
-	foreach ((isset($d['glossary']['items']) ? $d['glossary']['items'] : array()) as $i => $g) {
-		tsa_upsert_shipped('tsa_term', sanitize_title($g['term']), $g['term'], $g['def'], $i, array());
-	}
-
-	tsa_sync_inner_pages();
 
 	update_option('tsa_seeded', 1);
 	update_option('tsa_shipped_version', TSA_VERSION);
 }
 
-/**
- * The inner pages that carry the sections which are not on the front page.
- * Created once, by slug; an existing page is left exactly as it is, so a
- * page the owner has rewritten or rebuilt in Elementor is never touched.
- * A page the owner deletes stays deleted - the slug going to the trash
- * does not count as missing, or it would come straight back.
- */
-function tsa_sync_inner_pages() {
-	if (!function_exists('tsa_inner_pages')) return;
-
-	foreach (tsa_inner_pages() as $slug => $spec) {
-		if (get_page_by_path($slug, OBJECT, 'page')) continue;
-		if (get_posts(array(
-			'post_type'        => 'page',
-			'name'             => $slug,
-			'post_status'      => array('draft', 'pending', 'private', 'trash', 'future'),
-			'posts_per_page'   => 1,
-			'fields'           => 'ids',
-			'suppress_filters' => true,
-		))) continue;
-
-		wp_insert_post(array(
-			'post_type'    => 'page',
-			'post_status'  => 'publish',
-			'post_title'   => $spec['title'],
-			'post_name'    => $slug,
-			// The sections are drawn by page.php from the theme's own list,
-			// so the body is deliberately empty. Typing something here would
-			// make page.php hand over to the editor content instead.
-			'post_content' => '',
-		));
-	}
-}
-
-/**
- * Create the entry if its slug is absent; otherwise fill only what is empty.
- * Returns the post id, or 0.
- */
 function tsa_upsert_shipped($type, $slug, $title, $content, $order, $meta) {
 	$existing = $slug ? get_page_by_path($slug, OBJECT, $type) : null;
 
@@ -327,74 +242,6 @@ function tsa_post_image($post_id) {
 	return array('src' => '', 'alt' => '');
 }
 
-/**
- * A YouTube id from whatever was pasted.
- *
- * People paste the whole address far more often than the bare id, so accept
- * watch links, youtu.be links, embed and shorts URLs, and an id on its own.
- * Returns '' if it cannot find one, which is what keeps a mistyped value
- * from becoming a broken player.
- */
-function tsa_youtube_id($raw) {
-	$raw = trim((string) $raw);
-	if ($raw === '') return '';
-
-	// already a bare id
-	if (preg_match('#^[A-Za-z0-9_-]{11}$#', $raw)) return $raw;
-
-	$patterns = array(
-		'#[?&]v=([A-Za-z0-9_-]{11})#',        // watch?v=ID
-		'#youtu\.be/([A-Za-z0-9_-]{11})#',    // youtu.be/ID
-		'#/embed/([A-Za-z0-9_-]{11})#',       // /embed/ID
-		'#/shorts/([A-Za-z0-9_-]{11})#',      // /shorts/ID
-		'#/live/([A-Za-z0-9_-]{11})#',        // /live/ID
-	);
-	foreach ($patterns as $re) {
-		if (preg_match($re, $raw, $m)) return $m[1];
-	}
-	return '';
-}
-
-/**
- * The videos to show, in one shape whatever they came from.
- *
- * A page builder can override the whole list for one placement; otherwise
- * the entries under Videos in the admin menu are used.
- * Each row: title, blurb, embed (a bare YouTube id), file, poster.
- */
-function tsa_video_items() {
-	$o = &tsa_overrides();
-	$rows = array();
-
-	if (isset($o['videos.items']) && is_array($o['videos.items'])) {
-		foreach ($o['videos.items'] as $row) {
-			if (!is_array($row)) continue;
-			$rows[] = array(
-				'title'  => isset($row['title']) ? (string) $row['title'] : '',
-				'blurb'  => isset($row['blurb']) ? (string) $row['blurb'] : '',
-				'embed'  => tsa_youtube_id(isset($row['embed']) ? $row['embed'] : ''),
-				'file'   => tsa_media_url(isset($row['file']) ? $row['file'] : ''),
-				'poster' => tsa_media_url(isset($row['poster']) ? $row['poster'] : ''),
-			);
-		}
-		return $rows;
-	}
-
-	foreach (tsa_items('tsa_video') as $v) {
-		$rows[] = array(
-			'title'  => $v->post_title,
-			'blurb'  => (string) get_post_meta($v->ID, '_tsa_blurb', true),
-			'embed'  => tsa_youtube_id(get_post_meta($v->ID, '_tsa_embed', true)),
-			'file'   => tsa_media_url(get_post_meta($v->ID, '_tsa_file', true)),
-			'poster' => has_post_thumbnail($v->ID)
-				? get_the_post_thumbnail_url($v->ID, 'full')
-				: tsa_media_url(get_post_meta($v->ID, '_tsa_poster', true)),
-		);
-	}
-	return $rows;
-}
-
-/** Split a textarea into trimmed, non-empty lines. */
 function tsa_lines_of($raw) {
 	if (is_array($raw)) return array_values(array_filter(array_map('trim', $raw), 'strlen'));
 	return array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', (string) $raw)), 'strlen'));
@@ -447,39 +294,4 @@ function tsa_trade_items() {
 	return $rows;
 }
 
-/**
- * Question-and-answer rows for the FAQ or the glossary.
- * $which is 'faq' or 'glossary'; each row: q, a.
- */
-function tsa_qa_items($which) {
-	$o   = &tsa_overrides();
-	$key = $which . '.items';
-	$rows = array();
-
-	if (isset($o[$key]) && is_array($o[$key])) {
-		foreach ($o[$key] as $row) {
-			if (!is_array($row)) continue;
-			$rows[] = array(
-				'q' => isset($row['q']) ? (string) $row['q'] : '',
-				'a' => isset($row['a']) ? (string) $row['a'] : '',
-			);
-		}
-		return $rows;
-	}
-
-	foreach (tsa_items($which === 'faq' ? 'tsa_faq' : 'tsa_term') as $post) {
-		$rows[] = array('q' => $post->post_title, 'a' => tsa_plain_text($post->post_content));
-	}
-	return $rows;
-}
-
-/** A media path: resolved against the theme when it ships with it. */
-function tsa_media_url($path) {
-	$path = trim((string) $path);
-	if ($path === '') return '';
-	return strpos($path, '/assets/') === 0 ? tsa_asset($path) : $path;
-}
-
-
-/** Kept so anything calling the old name still works. */
 function tsa_seed_content() { tsa_sync_shipped_content(); }

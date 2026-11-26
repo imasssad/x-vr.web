@@ -2,1080 +2,148 @@
 Theme Name: XVR Trade Skills
 Theme URI: https://tradeskillapps.com
 Author: XVR Trade Skills
-Description: The XVR Trade Skills site as an editable WordPress theme. One page merging both of the client's reference designs: the full narrative of the earlier page (purpose, trades, curriculum, approach, pathways, educators, mission, glossary, planner, access, FAQ, closing) with the later page's hero, multiplayer section, published pricing and partners close.
-Version: 2.2.1
+Description: The XVR Skilled Trades page as a WordPress theme. Section for section, word for word, the same as xvr-skilled-trades.shermanmcleod.chatgpt.site - the stylesheet below is that site's own, unchanged. Every heading, paragraph, picture and film is editable from Appearance > Customize, and the four trades are editable as posts.
+Version: 3.0.0
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 7.4
 License: GNU General Public License v2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
-The bundled Barlow Condensed and DM Sans fonts are licensed separately under
-the SIL Open Font License 1.1 - see assets/fonts/OFL.txt.
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: tradeskillapps
 */
 
-/* ------------------------------------------------------------------ *
- * 1. Typefaces, self-hosted. No request leaves the site for a font,
- *    so the page still renders correctly with no outside connection.
- * ------------------------------------------------------------------ */
-@font-face{font-family:Barlow Condensed;font-style:italic;font-weight:700;font-display:swap;src:url(assets/fonts/bb6ac904f1a58ad1-s.03rjxozyto5ov.woff2)format("woff2");unicode-range:U+102-103,U+110-111,U+128-129,U+168-169,U+1A0-1A1,U+1AF-1B0,U+300-301,U+303-304,U+308-309,U+323,U+329,U+1EA0-1EF9,U+20AB}
-@font-face{font-family:Barlow Condensed;font-style:italic;font-weight:700;font-display:swap;src:url(assets/fonts/e33cbc4d80272611-s.22btp1s6p9ykz.woff2)format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:Barlow Condensed;font-style:italic;font-weight:700;font-display:swap;src:url(assets/fonts/fe4dd336abb0f76d-s.p.161_jydx6c0ui.woff2)format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:Barlow Condensed;font-style:italic;font-weight:800;font-display:swap;src:url(assets/fonts/48ebb20104f1ccd8-s.041jehe91orie.woff2)format("woff2");unicode-range:U+102-103,U+110-111,U+128-129,U+168-169,U+1A0-1A1,U+1AF-1B0,U+300-301,U+303-304,U+308-309,U+323,U+329,U+1EA0-1EF9,U+20AB}
-@font-face{font-family:Barlow Condensed;font-style:italic;font-weight:800;font-display:swap;src:url(assets/fonts/17910fdec8db2029-s.2obrzta-l0mxk.woff2)format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:Barlow Condensed;font-style:italic;font-weight:800;font-display:swap;src:url(assets/fonts/4bc6656de1d7db7b-s.p.2ux8js4lqnjxb.woff2)format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:Barlow Condensed;font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/31d568f801a64fa3-s.2dbbbbabmw4n4.woff2)format("woff2");unicode-range:U+102-103,U+110-111,U+128-129,U+168-169,U+1A0-1A1,U+1AF-1B0,U+300-301,U+303-304,U+308-309,U+323,U+329,U+1EA0-1EF9,U+20AB}
-@font-face{font-family:Barlow Condensed;font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/c0a0872b54d5f580-s.1oqo1buse5xew.woff2)format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:Barlow Condensed;font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/2da4f60ed3b00b11-s.p.0xxdg0o7uh536.woff2)format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:Barlow Condensed;font-style:normal;font-weight:800;font-display:swap;src:url(assets/fonts/3653761fae724bb1-s.0i8had3keju7i.woff2)format("woff2");unicode-range:U+102-103,U+110-111,U+128-129,U+168-169,U+1A0-1A1,U+1AF-1B0,U+300-301,U+303-304,U+308-309,U+323,U+329,U+1EA0-1EF9,U+20AB}
-@font-face{font-family:Barlow Condensed;font-style:normal;font-weight:800;font-display:swap;src:url(assets/fonts/7fe56aac9cb73d5c-s.24oj26lcm6-u8.woff2)format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:Barlow Condensed;font-style:normal;font-weight:800;font-display:swap;src:url(assets/fonts/26cfda139e115385-s.p.2oeto2j5aaelm.woff2)format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:Barlow Condensed Fallback;src:local(Arial);ascent-override:130.73%;descent-override:26.15%;line-gap-override:0.0%;size-adjust:76.49%}
-@font-face{font-family:DM Sans;font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/47faf0e9117ce2e3-s.3z_x6eowsw16y.woff2)format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:DM Sans;font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/660acf689794c992-s.p.2_mbdogr7ni8i.woff2)format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:DM Sans;font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/47faf0e9117ce2e3-s.3z_x6eowsw16y.woff2)format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:DM Sans;font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/660acf689794c992-s.p.2_mbdogr7ni8i.woff2)format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:DM Sans;font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/47faf0e9117ce2e3-s.3z_x6eowsw16y.woff2)format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:DM Sans;font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/660acf689794c992-s.p.2_mbdogr7ni8i.woff2)format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:DM Sans Fallback;src:local(Arial);ascent-override:94.9%;descent-override:29.66%;line-gap-override:0.0%;size-adjust:104.53%}
+/* ==========================================================================
+   The reference site's own stylesheet, copied as it is served.
+   Nothing below this line was written here: it is site.css from
+   https://xvr-skilled-trades.shermanmcleod.chatgpt.site/, so the page
+   cannot drift from the design the client approved. WordPress-specific
+   rules are added in the block at the end, kept separate on purpose.
+   ========================================================================== */
 
-/* The stylesheet below is the original build's, unchanged. It refers to
-   two variables that the framework used to supply; they are set here. */
-:root{
-  --font-display:"Barlow Condensed";
-  --font-body:"DM Sans";
+:root{color-scheme:light;--ink:#10232c;--night:#0d1a22;--amber:#ffbc58;--paper:#f8f6f0;--muted:#46555b}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.6 Arial,sans-serif}
+a{color:inherit;text-underline-offset:.25em}
+a:focus-visible,summary:focus-visible{outline:3px solid #d17417;outline-offset:5px}
+.skip{position:absolute;top:-5rem;background:white;color:var(--ink);padding:.7rem;z-index:5}
+.skip:focus{top:0}
+.wrap{width:min(1150px,calc(100% - 3rem));margin-inline:auto}
+.nav,.foot{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding-block:1rem}
+.brand{display:block;flex-shrink:0;line-height:0;text-decoration:none}
+.brand img{display:block;width:100%;height:auto}
+.nav .brand{width:clamp(13rem,24vw,19rem)}
+.foot .brand{width:15rem;max-width:100%}
+header,footer{background:white;color:var(--ink)}
+.hero h1 span{color:var(--amber)}
+.links{display:flex;gap:clamp(1rem,4vw,3rem);font-weight:bold}
+.links a{text-decoration:none}
+.links a:hover,.foot a:hover{text-decoration:underline}
+.button{display:inline-flex;justify-content:center;align-items:center;text-decoration:none;background:var(--amber);color:#19242a;padding:.85rem 1.4rem;border-radius:.25rem;font-weight:800}
+.button:hover{background:#ffd694}
+.small{padding:.55rem 1rem}
+.hero{display:grid;align-items:center;min-height:clamp(520px,73vh,740px);color:white;background:#0c1721;position:relative;isolation:isolate}
+.hero-art{position:relative}
+.hero-photo{display:block;width:100%;height:auto}
+.screen-link{
+  position:absolute;
+  left:1.4%;
+  top:9.5%;
+  width:24.4%;
+  height:34%;
+  clip-path:polygon(0 0,100% 20%,100% 75%,76% 80%,65% 97%,0 100%);
+}
+.screen-link:focus-visible{
+  background:rgb(255 188 88 / 22%);
+  box-shadow:inset 0 0 0 5px var(--amber);
+}
+.hero-inner{padding-block:4rem}
+.hero-video{margin:0}
+.hero-video figcaption{margin-bottom:.5rem;font-size:1rem;font-weight:700}
+.hero-video video{
+  display:block;
+  width:min(100%,13rem);
+  height:auto;
+  aspect-ratio:512/910;
+  background:#101010;
+  border-radius:.4rem;
+}
+.eyebrow{margin:0 0 1rem;font-size:.875rem;font-weight:900;letter-spacing:.13em;text-transform:uppercase;color:#87500b}
+.hero .eyebrow,.partners .eyebrow{color:var(--amber)}
+h1,h2,h3,p{margin-top:0}
+h1,h2{font-weight:900;letter-spacing:-.065em;line-height:1.01}
+h1{font-size:clamp(3.5rem,8vw,7.4rem);margin-bottom:1.4rem}
+h2{font-size:clamp(2.5rem,5vw,4.25rem);max-width:15ch;margin-bottom:1.1rem}
+.lead{font-size:clamp(1.1rem,2vw,1.32rem);max-width:32rem;color:#f3f5f5;margin-bottom:1.8rem}
+.intro,.programs,.pricing,.partners{padding-block:clamp(3.5rem,8vw,7rem)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,7vw,6rem);align-items:start}
+.process,.pricing p,.partners p{font-size:1.07rem}
+.process ol{list-style:none;margin:1.3rem 0 0;padding:0}
+.process li{display:grid;gap:.8rem;grid-template-columns:5rem 1fr;padding:.65rem 0;border-top:1px solid #c9ccc5}
+.programs{background:#e8eeed}
+.program-grid,.plans{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+details,.plans>div{background:white;border-radius:.35rem;border-top:4px solid #d7872c;padding:1.3rem 1.4rem}
+summary{cursor:pointer;font-size:clamp(1.25rem,2vw,1.7rem);font-weight:800}
+summary small{display:block;color:var(--muted);font-size:.875rem;font-weight:400;padding-left:1.1em}
+details p{margin:.8rem 0 0;color:var(--muted)}
+.plans h3{font-size:1rem;margin-bottom:.5rem}
+.plans .price{font-weight:900;letter-spacing:-.06em;font-size:clamp(1.65rem,3.3vw,3rem);line-height:1;margin-bottom:.5rem}
+.plans p:last-child{margin:0;font-size:1rem}
+.partners{background:#18363d;color:white}
+.foot p{margin:0;color:var(--muted)}
+@media(max-width:700px){.nav{flex-wrap:wrap;gap:.8rem}.links{order:3;width:100%;font-size:.94rem;gap:1.15rem}.split,.program-grid{grid-template-columns:1fr}.foot{flex-wrap:wrap}.wrap{width:calc(100% - 2rem)}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.knowledge{padding-block:clamp(3rem,6vw,5rem);background:#18363d;color:white}
+.knowledge p{font-size:1.07rem}
+.knowledge p:last-child{margin-bottom:0}
+
+@media(max-width:700px){
+  .nav{display:grid;grid-template-columns:1fr auto;column-gap:.5rem;row-gap:.45rem;padding-block:.3rem .85rem}
+  .nav .brand{grid-column:1/-1;justify-self:center;width:min(18rem,100%)}
+  .nav .links{order:initial;flex-wrap:wrap;gap:.35rem .9rem}
+  .nav .small{font-size:.9rem;white-space:nowrap;padding:.45rem .65rem}
+}
+@media(max-width:370px){
+  .nav{grid-template-columns:1fr;justify-items:center}
+  .nav .links{justify-content:center}
 }
 
-/* ------------------------------------------------------------------ *
- * 2. The site's design system, ported verbatim.
- * ------------------------------------------------------------------ */
-/* ============================================================
-   XVR Trade Skills — global stylesheet
-   Ported from the static build; class names are unchanged so the
-   components and these styles stay in step.
-   ============================================================ */
-
-/* ============================================================
-   XVR Trade Skills
-   Electric Blue + Editorial Minimalism + Balanced Contrast
-   ============================================================ */
-:root{
-  /* ---- colour system ----
-     Taken from the brand reference: cream page, near-black bands, amber
-     accent. The amber is a FILL, never text on a light background - it
-     measures 1.54:1 on the cream, which is unreadable. Where the accent has
-     to be read as text it uses the dark amber below, which measures 6.1:1.
-     The names are unchanged so the whole stylesheet follows automatically. */
-  --cloud:#F8F6F0;          /* primary background, warm cream */
-  --white:#FFFFFF;          /* secondary background, cards */
-  --ink:#10232C;            /* primary text */
-  --navy:#10232C;           /* primary text + dark surfaces */
-  --navy-2:#18363D;         /* raised surface on a dark band, deep teal */
-  --blue:#87500B;           /* the accent where it must be READ: 6.1:1 on cream */
-  --blue-dark:#6B3F08;      /* accent, pressed / hover */
-  --blue-soft:#FFBC58;      /* the accent on a dark band: 9.7:1 */
-  --accent:#FFBC58;         /* the accent as a FILL */
-  --accent-ink:#10232C;     /* text sitting on an accent fill: 9.7:1 */
-  --ice:#F0D7A6;            /* soft warm accent — connectors, hover borders */
-  --ice-wash:#E8EEED;       /* his pale tint, from both demos */
-  --slate:#46555B;          /* supporting text, 7.2:1 on cream */
-  --slate-aa:#46555B;       /* supporting text on --cloud */
-  --border:#E7E2D7;
-  --border-strong:#D4CCBC;
-  --r-pill:100px;
-
-  /* ---- type ---- */
-  --display:var(--font-display),"Barlow Condensed","Arial Narrow",Arial,sans-serif;
-  --body:var(--font-body),"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
-
-  --t-hero:clamp(3rem,1.5rem + 7.5vw,6.25rem);      /* 48 → 100px */
-  --t-sec:clamp(2.2rem,1.2rem + 3.4vw,4rem);        /* 35 → 64px  */
-  --t-sub:clamp(1.7rem,1.2rem + 1.8vw,2.6rem);
-  --t-card:clamp(1.4rem,1.1rem + .9vw,1.875rem);    /* 22 → 30px  */
-  --t-body:clamp(1rem,.96rem + .2vw,1.125rem);      /* 16 → 18px  */
-  --t-sm:clamp(.92rem,.89rem + .15vw,1rem);
-  --t-label:clamp(.75rem,.70rem + .16vw,.8125rem);  /* 12 → 13px  */
-
-  /* ---- space + shape ---- */
-  --gut:clamp(1.15rem,4vw,2.75rem);
-  --maxw:1280px;
-  --r-lg:20px;
-  --r-card:18px;
-  --r-sm:12px;
-  --sh-1:0 1px 2px rgba(16,35,44,.04),0 6px 20px rgba(16,35,44,.05);
-  --sh-2:0 2px 4px rgba(16,35,44,.05),0 16px 40px rgba(16,35,44,.09);
-  --ease:cubic-bezier(.22,.61,.36,1);
+@media(max-width:900px){
+  .hero{display:block;min-height:0}
+  .hero-inner{padding-block:2.5rem 3rem}
 }
 
-*,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-html:focus-within{scroll-behavior:smooth}
-body{
-  margin:0;
-  background:var(--cloud);
-  color:var(--navy);
-  font-family:var(--body);
-  font-size:var(--t-body);
-  line-height:1.65;
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
+@media(min-width:901px){
+  .hero{
+    grid-template-columns:minmax(0,2fr) minmax(0,3fr);
+    padding-inline:max(0px,calc((100% - 1800px)/2));
+  }
+  .hero-art{grid-column:2;grid-row:1}
+  .hero-inner{
+    grid-column:1;
+    grid-row:1;
+    width:auto;
+    margin-inline:clamp(1.5rem,4vw,5rem) 1.5rem;
+  }
+  .hero h1{font-size:clamp(3.25rem,5.6vw,6.5rem)}
 }
-img,video,svg{max-width:100%;display:block;height:auto}
-button,input,select,textarea{font:inherit;color:inherit}
-a{color:var(--blue);text-underline-offset:3px;text-decoration-thickness:1px}
-a:hover{color:var(--blue-dark)}
 
-/* ---------- accessibility ---------- */
-:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
-.on-navy :focus-visible{outline-color:var(--ice)}
-.skip{
-  position:absolute;left:-9999px;top:0;z-index:999;
-  background:var(--navy);color:#fff;padding:.85rem 1.25rem;
-  font-weight:700;border-radius:0 0 var(--r-sm) 0;
-}
-.skip:focus{left:0}
-.vh{
-  position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;
+/* ==========================================================================
+   WordPress additions. Nothing here changes the design above; it covers
+   what a WordPress page needs and the reference page, being static, did
+   not: the admin bar, the editor's own markup, and the states a form or
+   a logged-in view can produce.
+   ========================================================================== */
+
+.admin-bar header{top:32px}
+@media(max-width:782px){.admin-bar header{top:46px}}
+
+img,video{max-width:100%}
+.screen-reader-text{
+  position:absolute;width:1px;height:1px;margin:-1px;padding:0;
   overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
 }
 
-/* ---------- layout ---------- */
-.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
-.wrap--wide{max-width:1480px}
-section{position:relative}
-/* Both of the client's reference pages are considerably denser than this
-   theme was: their sections average about 700px, ours were nearer 1,100.
-   With every section from both pages now on one page that difference is
-   what made it feel endless, so the band rhythm is tightened here rather
-   than by dropping any of their content. */
-.band{padding-block:clamp(3rem,6vw,5.25rem)}
-.band--tight{padding-block:clamp(2.25rem,4.5vw,3.5rem)}
-section[id],#top,#main{scroll-margin-top:clamp(80px,9vh,100px)}
-a[href],button,input,summary,label,[role="tab"],[role="tabpanel"],details,:target{scroll-margin-top:clamp(80px,9vh,100px)}
-/* His light sections are the cream page itself, alternating with the pale
-   tint - not pure white. Ours had 7,665px of #FFFFFF, which is in neither
-   demo. The class name is kept so no template has to change. */
-.band--white{background:var(--cloud)}
-.band--wash{background:var(--ice-wash)}
-/* the pale tint the reference uses behind the trades */
-.band--pale{background:#E8EEED}
-
-/* dark surfaces — roughly 20% of the page */
-.on-navy{background:var(--navy);color:#D6E0DE}
-.on-navy h2,.on-navy h3,.on-navy h4,.on-navy blockquote,.on-navy .lede{color:#fff}
-.on-navy .eyebrow{color:var(--ice)}
-.on-navy .eyebrow::before{background:var(--ice)}
-.on-navy em{color:var(--ice)}
-
-/* ---------- type ---------- */
-h1,h2,h3,h4{
-  font-family:var(--display);
-  font-weight:800;
-  color:var(--navy);
-  line-height:.95;
-  letter-spacing:-.01em;
-  margin:0;
-  text-wrap:balance;
-}
-h1{font-size:var(--t-hero);text-transform:uppercase;letter-spacing:-.005em}
-h2{font-size:var(--t-sec);text-transform:uppercase}
-/* Headline case, set in Appearance > Customize > Site basics. The client's
-   reference sets its headings in sentence case; this theme shipped in
-   condensed capitals. Only the two page-level headings change - the small
-   uppercase labels and eyebrows are a different device and stay. */
-.tsa-sentence h1,.tsa-sentence h2{text-transform:none;letter-spacing:-.015em}
-.tsa-sentence h1 em,.tsa-sentence h2 em{font-style:normal}
-h3{font-size:var(--t-card);line-height:1.06}
-h4{font-size:clamp(1.15rem,1rem + .5vw,1.4rem);line-height:1.1}
-em{
-  font-family:var(--display);font-style:italic;font-weight:700;
-  color:var(--blue);letter-spacing:-.005em;
-}
-p{margin:0}
-.lede{
-  font-size:clamp(1.08rem,1rem + .45vw,1.35rem);
-  line-height:1.55;max-width:48ch;color:var(--navy);
-}
-.copy{max-width:66ch;color:var(--slate-aa)}
-.band--white .copy,.card .copy{color:var(--slate)}
-.on-navy .copy{color:#C4D1CE}
-
-.eyebrow{
-  font-family:var(--body);font-weight:500;
-  font-size:var(--t-label);letter-spacing:.16em;text-transform:uppercase;
-  color:var(--blue);display:flex;align-items:center;gap:.75rem;
-  margin:0 0 1.15rem;
-}
-.eyebrow::before{content:"";width:clamp(20px,3.5vw,34px);height:2px;background:var(--blue);flex:none}
-.eyebrow--plain::before{display:none}
-.sec-head{display:grid;gap:clamp(1.1rem,3vw,2.5rem);margin-bottom:clamp(1.75rem,3.75vw,2.75rem)}
-@media(min-width:900px){
-  .sec-head--split{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:end}
-}
-
-/* ---------- buttons ---------- */
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:.65rem;
-  font-family:var(--body);font-weight:700;font-size:var(--t-sm);
-  padding:.95rem 1.6rem;border-radius:var(--r-pill,100px);
-  border:2px solid transparent;cursor:pointer;text-decoration:none;
-  transition:background-color .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease),transform .25s var(--ease),box-shadow .25s var(--ease);
-}
-.btn .arw{transition:transform .3s var(--ease)}
-.btn:hover .arw{transform:translateX(4px)}
-.btn--primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);box-shadow:0 6px 18px rgba(135,80,11,.22)}
-.btn--primary:hover{background:#F0A835;border-color:#F0A835;color:var(--accent-ink);transform:translateY(-2px);box-shadow:0 10px 26px rgba(135,80,11,.28)}
-.btn--ghost{background:transparent;color:var(--navy);border-color:var(--border-strong)}
-.btn--ghost:hover{background:var(--navy);color:#fff;border-color:var(--navy);transform:translateY(-2px)}
-.on-navy .btn--primary{border-color:var(--ice)}
-.on-navy .btn--ghost{color:#fff;border-color:rgba(255,255,255,.45)}
-.on-navy .btn--ghost:hover{background:#fff;color:var(--navy);border-color:#fff}
-.btn--block{width:100%}
-
-/* ---------- sticky nav ---------- */
-/* A solid band, as on the client's reference. It used to be transparent and
-   only solidify on scroll, which worked over the old full-bleed photograph
-   but would leave dark links on the dark band the split hero opens with. */
-.nav{
-  position:fixed;inset:0 0 auto 0;z-index:100;
-  background:var(--cloud);border-bottom:1px solid var(--border);
-  transition:background-color .35s var(--ease),border-color .35s var(--ease),box-shadow .35s var(--ease);
-}
-.nav.is-stuck{
-  background:rgba(248,246,240,.9);
-  backdrop-filter:blur(16px) saturate(150%);
-  -webkit-backdrop-filter:blur(16px) saturate(150%);
-  border-bottom-color:var(--border);
-  box-shadow:0 2px 20px rgba(16,35,44,.05);
-}
-.nav__in{display:flex;align-items:center;gap:1.25rem;min-height:74px}
-.brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;margin-right:auto;flex:none}
-.brand__mark{width:36px;height:36px;flex:none}
-.brand__name{
-  font-family:var(--display);font-weight:800;font-size:1.3rem;
-  text-transform:uppercase;letter-spacing:.01em;color:var(--navy);white-space:nowrap;
-}
-/* the wordmark is one word, so nothing is hidden responsively any more */
-.brand__accent{color:var(--blue)}
-.on-navy .brand__accent,.foot .brand__accent{color:var(--blue)}
-.nav__links{display:none;align-items:center;gap:.15rem;list-style:none;margin:0;padding:0}
-@media(min-width:1060px){.nav__links{display:flex}}
-.nav__links a{
-  position:relative;display:block;padding:.55rem .85rem;
-  font-size:var(--t-sm);font-weight:500;color:var(--navy);
-  text-decoration:none;border-radius:8px;transition:color .2s,background-color .2s;
-}
-.nav__links a:hover{color:var(--blue);background:var(--ice-wash)}
-.nav__links a::after{
-  content:"";position:absolute;left:.85rem;right:.85rem;bottom:.26rem;height:2px;
-  background:var(--blue);border-radius:2px;transform:scaleX(0);transform-origin:left;
-  transition:transform .3s var(--ease);
-}
-.nav__links a[aria-current="true"]{color:var(--blue);font-weight:700}
-.nav__links a[aria-current="true"]::after{transform:scaleX(1)}
-.nav__cta{display:none}
-@media(min-width:680px){.nav__cta{display:inline-flex}}
-.burger{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:46px;height:46px;border-radius:12px;flex:none;cursor:pointer;
-  background:var(--white);border:1px solid var(--border-strong);
-}
-@media(min-width:1060px){.burger{display:none}}
-.burger__bars,.burger__bars::before,.burger__bars::after{
-  content:"";display:block;width:18px;height:2px;background:var(--navy);border-radius:2px;
-  transition:transform .3s var(--ease);
-}
-.burger__bars::before{transform:translateY(-6px)}
-.burger__bars::after{transform:translateY(4px)}
-.burger[aria-expanded="true"] .burger__bars{background:transparent}
-.burger[aria-expanded="true"] .burger__bars::before{transform:rotate(45deg)}
-.burger[aria-expanded="true"] .burger__bars::after{transform:rotate(-45deg) translateY(2px)}
-.drawer{
-  display:none;background:var(--white);border-top:1px solid var(--border);
-  padding:1rem var(--gut) 1.6rem;box-shadow:var(--sh-1);
-}
-.drawer.is-open{display:block}
-@media(min-width:1060px){.drawer,.drawer.is-open{display:none}}
-.drawer ul{list-style:none;margin:0 0 1rem;padding:0;display:grid}
-.drawer a{
-  display:block;padding:.85rem .2rem;color:var(--navy);text-decoration:none;
-  font-weight:500;border-bottom:1px solid var(--border);
-}
-.drawer a[aria-current="true"]{color:var(--blue);font-weight:700}
-
-/* ---------- media ---------- */
-.frame{
-  position:relative;overflow:hidden;border-radius:var(--r-card);
-  background:var(--ice-wash);border:1px solid var(--border);isolation:isolate;
-}
-.frame img,.frame video,.frame .art{width:100%;height:100%;object-fit:cover;display:block}
-.frame .art{position:absolute;inset:0;z-index:0}
-.frame img{position:relative;z-index:1;transition:transform .9s var(--ease)}
-.frame img.is-missing{opacity:0;visibility:hidden}
-.frame--zoom:hover img{transform:scale(1.04)}
-.frame__cap{
-  position:absolute;z-index:3;inset:auto 0 0 0;
-  display:flex;flex-wrap:wrap;align-items:center;gap:.55rem;
-  padding:3rem 1.15rem 1.05rem;
-  font-size:var(--t-label);font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#fff;
-  background:linear-gradient(to top,rgba(16,35,44,.92),rgba(16,35,44,.4) 60%,transparent);
-}
-.frame__cap strong{color:var(--ice);font-weight:700}
-.chip-label{
-  display:inline-block;font-size:var(--t-label);font-weight:500;
-  letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;
-  padding:.3rem .65rem;border-radius:100px;
-  background:var(--ice-wash);color:var(--blue);border:1px solid var(--ice);
-}
-.chip-label--solid{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.frame__cap .chip-label{background:rgba(255,255,255,.14);color:#fff;border-color:rgba(255,255,255,.45)}
-/* a placeholder frame says so, rather than pretending to be a photograph */
-.frame .art::after{
-  content:"Photography to be supplied";
-  position:absolute;left:50%;bottom:1.1rem;transform:translateX(-50%);
-  font-family:var(--body);font-size:var(--t-label);font-weight:500;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--blue);
-  background:rgba(255,255,255,.88);border:1px solid var(--ice);
-  padding:.3rem .7rem;border-radius:100px;white-space:nowrap;
-}
-
-/* ---------- hero ---------- */
-.hero{position:relative;display:flex;flex-direction:column;overflow:hidden;background:var(--cloud)}
-.hero__media{position:absolute;inset:0;z-index:0;background:var(--ice-wash)}
-.hero__media img,.hero__media video{width:100%;height:100%;object-fit:cover;object-position:68% center}
-#heroCanvas{position:absolute;inset:0;width:100%;height:100%;display:none}
-.hero__scrim{
-  position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:
-    linear-gradient(100deg,var(--cloud) 0%,rgba(245,248,252,.96) 42%,rgba(245,248,252,.62) 64%,rgba(245,248,252,.18) 100%),
-    linear-gradient(to bottom,rgba(245,248,252,.9) 0%,transparent 26%,rgba(245,248,252,.55) 100%);
-}
-@media(max-width:900px){
-  .hero__scrim{background:linear-gradient(to bottom,rgba(245,248,252,.95) 0%,rgba(245,248,252,.88) 48%,rgba(245,248,252,.96) 100%)}
-}
-.hero__in{
-  position:relative;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;
-  min-height:100svh;padding-top:clamp(7rem,15vh,10rem);padding-bottom:clamp(1.75rem,4vh,3rem);
-}
-.hero h1{max-width:15ch;margin-bottom:1.35rem}
-.hero .lede{max-width:52ch;margin-bottom:2rem}
-.hero__actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:clamp(1.75rem,4vw,2.75rem)}
-.hero__strip{
-  display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1.1rem;
-  padding:1rem 1.15rem;border-radius:var(--r-sm);
-  background:rgba(255,255,255,.72);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,.9);box-shadow:var(--sh-1);
-  width:fit-content;max-width:100%;
-}
-.hero__strip p{font-size:var(--t-label);font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--navy)}
-.hero__strip .dot{width:6px;height:6px;border-radius:50%;background:var(--blue);flex:none}
-
-/* ---- split hero: the client's reference layout ----
-   A dark band, the words on the left, the photograph bleeding off the right
-   edge of the viewport. The overlay hero above is untouched and still
-   available from Hero > Layout. */
-.hero--split{min-height:0;background:var(--navy)}
-.hero--split .hero__in{
-  display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(2rem,5vw,3.5rem);
-  min-height:0;align-items:center;justify-content:initial;
-  padding-top:clamp(6.5rem,13vh,9rem);padding-bottom:0;
-}
-.hero--split .hero__text{min-width:0}
-/* a shade smaller than the full-bleed hero: it shares the row with the
-   photograph rather than having the window to itself */
-.hero--split h1{
-  max-width:16ch;margin-bottom:1.35rem;color:#fff;
-  font-size:clamp(2.6rem,1.4rem + 4.2vw,4.5rem);
-}
-.hero--split h1 em{color:var(--accent)}
-.hero--split .lede{max-width:56ch;margin-bottom:2rem}
-.hero--split .hero__actions{margin-bottom:clamp(1.5rem,3.5vw,2.25rem)}
-
-/* the photograph: contained on small screens, reaching the right edge on
-   wide ones, where the grid gives it its own column */
-.hero--split .hero__shot{min-width:0;border-radius:var(--r-lg);overflow:hidden}
-.hero--split .hero__shot img{display:block;width:100%;height:100%;object-fit:cover;aspect-ratio:4/3}
-
-/* the film offered under the copy, as on the reference */
-.hero__film{margin-bottom:clamp(1.5rem,4vw,2.25rem);max-width:205px}
-.hero__film-h{
-  font-size:var(--t-label);font-weight:700;letter-spacing:.06em;
-  color:#fff;margin:0 0 .6rem;
-}
-/* The film the client supplied is shot portrait, and the next one may not
-   be, so the poster's own proportions set the height rather than a ratio
-   written here - no black bars either way. */
-.vcard--hero{border:0;background:none;box-shadow:none}
-.vcard--hero .vcard__media{
-  aspect-ratio:auto;border-radius:var(--r-sm);
-  border:1px solid rgba(255,255,255,.18);background:#000;
-}
-.vcard--hero .vcard__play{position:relative;inset:auto;height:auto;background:none}
-.vcard--hero .vcard__play img{position:static;display:block;width:100%;height:auto}
-.vcard--hero .vcard__icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
-.hero__strip-wrap{padding-bottom:clamp(1.75rem,4vh,3rem)}
-.hero--split .hero__strip{
-  background:var(--navy-2);border-color:rgba(255,255,255,.16);
-  backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;
-}
-.hero--split .hero__strip p{color:#F0E9DC}
-.hero--split .hero__strip .dot{background:var(--accent)}
-
-@media(min-width:901px){
-  /* The photograph runs to the edge of the window, as on the reference.
-     Rather than pulling it out of the centred wrap with a negative margin -
-     which only cancels the gutter, not the centring - this row drops the
-     wrap's width limit and pads the left side to where the wrap's content
-     would have started. The padding is a percentage of the section, not
-     100vw, so a visible scrollbar cannot push the row sideways. */
-  .hero--split .hero__in{
-    width:100%;max-width:none;margin-inline:0;
-    grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
-    padding-left:max(var(--gut),calc((100% - var(--maxw)) / 2 + var(--gut)));
-    padding-right:0;
-    padding-bottom:clamp(2rem,5vh,3.5rem);
-  }
-  /* Sized from its own proportions and centred in the band. Stretching it
-     to the full height of the words beside it cropped the classroom down to
-     one face. */
-  .hero--split .hero__shot{border-radius:var(--r-lg) 0 0 var(--r-lg)}
-  .hero--split .hero__shot img{aspect-ratio:auto;height:clamp(26rem,58vh,36rem)}
-  /* the strip below lines up with the words above it, which means dropping
-     the wrap's centring here too rather than padding on top of it */
-  .hero--split .hero__strip-wrap{
-    width:100%;max-width:none;margin-inline:0;
-    padding-left:max(var(--gut),calc((100% - var(--maxw)) / 2 + var(--gut)));
-  }
-}
-
-
-/* ---------- knowledge: one statement on a deep band ---------- */
-.knowledge{background:var(--navy-2)}
-.knowledge__in{max-width:72ch}
-.knowledge h2{color:#fff}
-.knowledge h2 em{color:var(--accent)}
-.knowledge .copy{margin-top:1.25rem;font-size:clamp(1.02rem,.96rem + .3vw,1.18rem)}
-
-/* ---------- partners: the closing band ---------- */
-.partners{background:var(--navy-2)}
-.partners__in{max-width:64ch}
-.partners h2{color:#fff}
-.partners h2 em{color:var(--accent)}
-.partners .copy{margin-top:1.1rem}
-.partners__act{margin-top:1.9rem}
-
-/* ---------- trades as plain cards (the reference layout) ----------
-   The tabbed explorer is unchanged and still used on the Curriculum
-   page; this is the simpler presentation the front page wants. */
-.tcards{
-  display:grid;gap:clamp(1rem,2.4vw,1.6rem);
-  grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));
-}
-.tcard{
-  display:flex;flex-direction:column;overflow:hidden;
-  background:var(--white);border:1px solid var(--border);
-  border-radius:var(--r-lg);box-shadow:var(--sh-1);
-}
-.tcard__body{padding:clamp(1.05rem,2.4vw,1.5rem);display:flex;flex-direction:column;gap:.3rem}
-.tcard__ico{width:26px;height:26px;color:var(--blue);margin-bottom:.55rem}
-.tcard{border-top:3px solid var(--accent)}
-.tcard__name{font-size:clamp(1.15rem,1.05rem + .4vw,1.4rem);margin:0}
-.tcard__sub{
-  font-size:var(--t-label);font-weight:600;letter-spacing:.06em;
-  text-transform:uppercase;color:var(--blue);margin:0;
-}
-.tcard__desc{margin:.45rem 0 0;color:var(--slate);font-size:.97rem;line-height:1.55}
-
-/* video controls */
-.vidctl{
-  position:absolute;z-index:4;right:var(--gut);bottom:clamp(1.5rem,4vh,2.5rem);
-  display:none;gap:.5rem;
-}
-.vidctl.is-on{display:flex}
-.vidctl button{
-  display:inline-flex;align-items:center;gap:.5rem;cursor:pointer;
-  font-size:var(--t-label);font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-  padding:.65rem 1rem;border-radius:100px;color:var(--navy);
-  background:rgba(255,255,255,.86);border:1px solid rgba(255,255,255,.95);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:var(--sh-1);
-  transition:background-color .25s var(--ease),color .25s var(--ease);
-}
-.vidctl button:hover{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.vidctl svg{width:15px;height:15px;flex:none}
-
-/* ---------- ticker ---------- */
-.ticker{border-block:1px solid var(--border);background:var(--white);overflow:hidden}
-.ticker__track{
-  display:flex;width:max-content;padding-block:.85rem;
-  font-family:var(--display);font-weight:700;font-size:1.05rem;
-  letter-spacing:.18em;text-transform:uppercase;color:var(--navy);
-  animation:slide 42s linear infinite;
-}
-.ticker__track span{display:flex;align-items:center;gap:1.9rem;white-space:nowrap;padding-right:1.9rem}
-.ticker__track i{font-style:normal;color:var(--blue)}
-@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.ticker:hover .ticker__track{animation-play-state:paused}
-
-/* ---------- cards ---------- */
-.card{
-  background:var(--white);border:1px solid var(--border);border-radius:var(--r-card);
-  padding:clamp(1.5rem,3.2vw,2.35rem);
-  transition:border-color .3s var(--ease),box-shadow .3s var(--ease),transform .3s var(--ease);
-}
-.card:hover{border-color:var(--ice);box-shadow:var(--sh-2);transform:translateY(-4px)}
-.card h3{margin-bottom:.65rem}
-.card>p{color:var(--slate)}
-.grid{display:grid;gap:clamp(1rem,2.2vw,1.5rem)}
-@media(min-width:800px){.grid--3{grid-template-columns:repeat(3,1fr)}}
-@media(min-width:760px){.grid--2{grid-template-columns:repeat(2,1fr)}}
-
-/* 02 pillars */
-.pillar__n{
-  font-family:var(--display);font-weight:800;font-size:clamp(2.6rem,5vw,3.6rem);
-  line-height:.8;color:var(--blue);display:block;margin-bottom:1.5rem;
-  transition:color .3s var(--ease);
-}
-.card:hover .pillar__n{color:var(--navy)}
-
-.ticks{list-style:none;margin:0;padding:0;display:grid;gap:.7rem}
-.ticks li{display:flex;gap:.65rem;font-size:var(--t-sm);line-height:1.5;color:var(--slate-aa)}
-.ticks svg{width:18px;height:18px;flex:none;margin-top:.2em;color:var(--blue)}
-.on-navy .ticks li{color:#C4D1CE}
-.on-navy .ticks svg{color:var(--ice)}
-
-.note{
-  display:flex;gap:.75rem;align-items:flex-start;margin-top:2rem;
-  padding:1rem 1.2rem;border:1px solid var(--border);border-left:3px solid var(--blue);
-  border-radius:0 var(--r-sm) var(--r-sm) 0;background:var(--white);
-  font-size:var(--t-sm);color:var(--slate);
-}
-.note svg{width:18px;height:18px;flex:none;margin-top:.15em;color:var(--blue)}
-.note strong{color:var(--navy)}
-.on-navy .note{background:var(--navy-2);border-color:rgba(255,255,255,.2);border-left-color:var(--ice);color:#C4D1CE}
-.on-navy .note svg{color:var(--ice)}
-.on-navy .note strong{color:#fff}
-
-/* ---------- trade selector ---------- */
-.trades{display:grid;gap:clamp(1.25rem,2.6vw,2rem)}
-@media(min-width:1020px){.trades{grid-template-columns:minmax(0,300px) minmax(0,1fr);align-items:start}}
-.tradelist{display:grid;gap:.5rem}
-@media(min-width:560px) and (max-width:1019px){.tradelist{grid-template-columns:1fr 1fr}}
-.tradebtn{
-  width:100%;display:flex;align-items:center;gap:.8rem;text-align:left;cursor:pointer;
-  padding:.95rem 1.1rem;background:var(--white);color:var(--navy);
-  border:1px solid var(--border);border-radius:var(--r-sm);
-  transition:border-color .25s var(--ease),background-color .25s var(--ease),transform .25s var(--ease),box-shadow .25s var(--ease);
-}
-.tradebtn:hover{border-color:var(--ice);box-shadow:var(--sh-1);transform:translateX(3px)}
-.tradebtn__ico{width:22px;height:22px;flex:none;color:var(--blue);transition:color .25s}
-.tradebtn__name{font-family:var(--display);font-weight:700;font-size:1.22rem;text-transform:uppercase;letter-spacing:.01em}
-.tradebtn__chev{margin-left:auto;opacity:0;color:var(--blue);transition:opacity .25s}
-.tradebtn[aria-selected="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
-.tradebtn[aria-selected="true"] .tradebtn__ico,.tradebtn[aria-selected="true"] .tradebtn__chev{color:var(--ice);opacity:1}
-.tradepanel{
-  background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);
-  overflow:hidden;box-shadow:var(--sh-1);
-}
-.tradepanel[hidden]{display:none}
-.tradepanel__media{aspect-ratio:16/7;border:0;border-radius:0;border-bottom:1px solid var(--border)}
-.tradepanel__body{padding:clamp(1.5rem,3.4vw,2.5rem)}
-/* with no photograph the panel is all body, so it keeps its own top
-   padding instead of inheriting the frame's edge */
-.tradepanel--text .tradepanel__body{padding-top:clamp(1.5rem,3.4vw,2.25rem)}
-.tradepanel h3{margin:1rem 0 .7rem;font-size:var(--t-sub)}
-.tradepanel__lead{color:var(--slate);max-width:62ch}
-.skills{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.5rem 0 0;padding:0;list-style:none}
-.skills li{
-  font-size:var(--t-label);font-weight:500;letter-spacing:.1em;text-transform:uppercase;
-  padding:.42rem .8rem;border-radius:100px;background:var(--cloud);
-  border:1px solid var(--border);color:var(--navy);
-}
-.panel-split{display:grid;gap:1rem;margin-top:1.5rem}
-@media(min-width:740px){.panel-split{grid-template-columns:1fr 1fr}}
-.panel-box{padding:1.15rem 1.3rem;border-radius:var(--r-sm);background:var(--ice-wash);border:1px solid var(--ice)}
-.panel-box p{font-size:var(--t-sm);color:var(--slate-aa)}
-.minilabel{
-  display:block;font-size:var(--t-label);font-weight:500;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--blue);margin-bottom:.55rem;
-}
-
-/* ---------- process / connected steps ---------- */
-.process{list-style:none;margin:0;padding:0;display:grid;gap:clamp(1.25rem,2.6vw,1.75rem);counter-reset:pstep}
-@media(min-width:760px){.process{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1080px){.process{grid-template-columns:repeat(4,1fr)}}
-.process li{position:relative;counter-increment:pstep;padding-top:3.6rem}
-.process li::before{  /* node */
-  content:counter(pstep,decimal-leading-zero);
-  position:absolute;top:0;left:0;z-index:2;
-  width:46px;height:46px;border-radius:50%;
-  display:grid;place-items:center;
-  font-family:var(--display);font-weight:700;font-size:1.1rem;
-  background:var(--white);color:var(--blue);
-  border:2px solid var(--blue);
-}
-.process li::after{  /* connector */
-  content:"";position:absolute;top:22px;left:46px;right:-1.75rem;height:2px;
-  background:linear-gradient(to right,var(--blue),var(--ice));
-}
-.process li:last-child::after{display:none}
-@media(max-width:1079px){
-  .process li:nth-child(2n)::after{display:none}
-}
-@media(max-width:759px){
-  .process li::after{display:none}
-  .process li{padding-top:0;padding-left:3.9rem;min-height:46px}
-  .process li::before{top:-.1rem}
-}
-.process h4{margin-bottom:.4rem}
-.process p{font-size:var(--t-sm);color:var(--slate-aa)}
-.band--white .process p{color:var(--slate)}
-.on-navy .process li::before{background:var(--navy);color:var(--ice);border-color:var(--ice)}
-.on-navy .process li::after{background:linear-gradient(to right,var(--ice),rgba(185,213,245,.25))}
-.on-navy .process p{color:#C4D1CE}
-
-/* ---------- learning cycle ---------- */
-.cycle{display:grid;gap:1rem;margin-top:clamp(2rem,4.5vw,3rem)}
-@media(min-width:720px){.cycle{grid-template-columns:repeat(4,1fr)}}
-.cycle__i{
-  background:var(--white);border:1px solid var(--border);border-radius:var(--r-card);
-  padding:clamp(1.4rem,2.8vw,1.9rem);
-  transition:border-color .3s var(--ease),box-shadow .3s var(--ease),transform .3s var(--ease);
-}
-.cycle__i:hover{border-color:var(--ice);box-shadow:var(--sh-2);transform:translateY(-4px)}
-.cycle__i svg{width:28px;height:28px;color:var(--blue);margin-bottom:1rem}
-.cycle__n{
-  display:block;font-size:var(--t-label);font-weight:500;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--blue);margin-bottom:.6rem;
-}
-.cycle__i h4{margin-bottom:.45rem;color:var(--navy)}
-.cycle__i p{font-size:var(--t-sm);color:var(--slate)}
-
-/* ---------- career timeline ---------- */
-.timeline{list-style:none;margin:0;padding:0;display:grid;gap:clamp(1.5rem,3vw,2rem);position:relative}
-@media(min-width:980px){.timeline{grid-template-columns:repeat(4,1fr)}}
-.tl{position:relative;padding-top:4.2rem}
-.tl__node{
-  position:absolute;top:0;left:0;z-index:2;
-  width:52px;height:52px;border-radius:50%;display:grid;place-items:center;
-  background:var(--blue);color:#fff;border:4px solid var(--cloud);
-  font-family:var(--display);font-weight:700;font-size:1.2rem;
-}
-.tl::after{
-  content:"";position:absolute;top:25px;left:52px;right:-2rem;height:3px;
-  background:linear-gradient(to right,var(--blue),var(--ice));border-radius:3px;
-}
-.tl:last-child::after{display:none}
-@media(max-width:979px){
-  .tl::after{display:none}
-  .tl{padding-top:0;padding-left:4.4rem}
-  .tl__node{top:-.15rem}
-}
-.tl h3{font-size:var(--t-card);margin-bottom:.5rem}
-.tl__stage{
-  display:block;font-size:var(--t-label);font-weight:500;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--blue);margin-bottom:.45rem;
-}
-.tl>p{color:var(--slate-aa);font-size:var(--t-sm);margin-bottom:1rem}
-.tl .ticks li{font-size:var(--t-sm)}
-
-/* ---------- educators: alternating rows ---------- */
-.alt{display:grid;gap:clamp(1.5rem,4vw,3.5rem)}
-/* With no picture - which is how the client's demo has these steps - the
-   row is text only, so it stops reserving a media column and the four
-   steps sit as a compact grid instead of four tall bands. */
-.alt:has(.alt__row--text){gap:clamp(1rem,2.4vw,1.6rem);grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))}
-.alt__row--text{display:block}
-.alt__row--text .alt__body{max-width:none}
-.alt__row--text .alt__body p{max-width:none}
-.alt__row{display:grid;gap:clamp(1.25rem,3vw,2.5rem);align-items:center}
-@media(min-width:900px){
-  .alt__row{grid-template-columns:1fr 1fr}
-  /* alternate which side the visual sits on, whatever leads the row */
-  .alt__row:nth-child(even)>:first-child{order:2}
-}
-.alt__media{aspect-ratio:4/3;border-radius:var(--r-card)}
-.alt__n{
-  display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;
-  background:var(--ice-wash);border:2px solid var(--blue);color:var(--blue);
-  font-family:var(--display);font-weight:700;font-size:1.05rem;margin-bottom:1rem;
-}
-.alt__body h3{margin-bottom:.6rem}
-.alt__body p{color:var(--slate-aa);max-width:52ch}
-
-/* ---------- bento: pathways by level ---------- */
-.bento{display:grid;gap:clamp(1rem,2.2vw,1.5rem)}
-@media(min-width:900px){.bento{grid-template-columns:1.08fr .92fr}}
-.bento__card{
-  border-radius:var(--r-lg);overflow:hidden;position:relative;
-  display:flex;flex-direction:column;
-  transition:box-shadow .3s var(--ease),transform .3s var(--ease);
-}
-.bento__card:hover{box-shadow:var(--sh-2);transform:translateY(-4px)}
-.bento__card--light{background:var(--white);border:1px solid var(--border)}
-.bento__card--navy{background:var(--navy);color:#D6E0DE}
-.bento__card--navy h3{color:#fff}
-.bento__card--navy .ticks li{color:#C4D1CE}
-.bento__card--navy .ticks svg{color:var(--ice)}
-.bento__card--navy .bento__eye{color:var(--ice)}
-.bento__media{aspect-ratio:16/9;border:0;border-radius:0}
-.bento__body{padding:clamp(1.5rem,3.2vw,2.35rem);flex:1}
-.bento__eye{
-  display:block;font-size:var(--t-label);font-weight:500;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--blue);margin-bottom:.8rem;
-}
-.bento__body h3{margin-bottom:.7rem}
-.bento__body>p{margin-bottom:1.3rem}
-.bento__card--light .bento__body>p{color:var(--slate)}
-
-/* ---------- mission ---------- */
-.mission{overflow:hidden}
-.mission__grid{display:grid;gap:clamp(1.75rem,4vw,3.5rem);align-items:center}
-@media(min-width:960px){.mission__grid{grid-template-columns:1.05fr .95fr}}
-.mission blockquote{
-  margin:0;font-family:var(--display);font-weight:800;text-transform:uppercase;
-  font-size:var(--t-sec);line-height:.95;letter-spacing:-.005em;color:#fff;max-width:16ch;
-}
-.mission__media{aspect-ratio:4/3;border-radius:var(--r-lg);border-color:rgba(255,255,255,.18)}
-.mission p+p{margin-top:1.1rem}
-
-/* ---------- accordion (glossary + FAQ) ---------- */
-.acc{display:grid;gap:.75rem}
-.acc__i{background:var(--white);border:1px solid var(--border);border-radius:var(--r-card);overflow:hidden;transition:border-color .25s var(--ease)}
-.acc__i:has(button[aria-expanded="true"]){border-color:var(--ice)}
-.acc__btn{
-  width:100%;display:flex;align-items:flex-start;gap:1rem;text-align:left;cursor:pointer;
-  background:transparent;border:0;padding:clamp(1.05rem,2.4vw,1.4rem) clamp(1.1rem,2.6vw,1.6rem);
-  font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.005em;
-  font-size:clamp(1.15rem,1rem + .55vw,1.5rem);line-height:1.15;color:var(--navy);
-  transition:color .25s var(--ease);
-}
-.acc__btn:hover{color:var(--blue)}
-.acc__btn:focus-visible{outline-offset:-3px}
-.acc__pm{position:relative;margin-left:auto;flex:none;width:22px;height:22px;margin-top:.1em}
-.acc__pm::before,.acc__pm::after{
-  content:"";position:absolute;left:50%;top:50%;background:var(--blue);border-radius:2px;
-  transition:transform .3s var(--ease);
-}
-.acc__pm::before{width:16px;height:2px;transform:translate(-50%,-50%)}
-.acc__pm::after{width:2px;height:16px;transform:translate(-50%,-50%)}
-.acc__btn[aria-expanded="true"] .acc__pm::after{transform:translate(-50%,-50%) rotate(90deg)}
-.acc__panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s var(--ease)}
-.acc__panel[data-open="true"]{grid-template-rows:1fr}
-.acc__panel>div{overflow:hidden}
-.acc__panel p{
-  padding:0 clamp(1.1rem,2.6vw,1.6rem) clamp(1.1rem,2.4vw,1.45rem);
-  color:var(--slate);max-width:72ch;
-}
-
-/* ---------- starter planner ---------- */
-.planner{
-  background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);
-  padding:clamp(1.5rem,3.6vw,2.75rem);box-shadow:var(--sh-1);
-}
-.field{margin-bottom:1.6rem}
-.field>legend,.field>label{
-  display:block;padding:0;margin-bottom:.75rem;
-  font-size:var(--t-label);font-weight:500;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--slate);
-}
-fieldset.field{border:0;padding:0;margin-inline:0}
-.chips{display:flex;flex-wrap:wrap;gap:.55rem}
-.chip input{position:absolute;width:1px;height:1px;opacity:0;margin:0;pointer-events:none}
-.chip span{
-  display:block;cursor:pointer;padding:.7rem 1.15rem;border-radius:100px;
-  background:var(--cloud);border:2px solid var(--border);
-  font-size:var(--t-sm);font-weight:500;color:var(--navy);
-  transition:border-color .2s,background-color .2s,color .2s;
-}
-.chip:hover span{border-color:var(--ice);background:var(--ice-wash)}
-.chip input:checked+span{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:700}
-.chip input:focus-visible+span{outline:3px solid var(--blue);outline-offset:3px}
-.textin{
-  width:100%;padding:.85rem 1.05rem;border-radius:var(--r-sm);
-  background:var(--cloud);border:2px solid var(--border);color:var(--navy);
-  font-size:var(--t-body);transition:border-color .2s,box-shadow .2s;
-}
-.textin::placeholder{color:#8795AA}
-.textin:hover{border-color:var(--border-strong)}
-.textin:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(135,80,11,.18)}
-.planner__actions{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
-.btn--quiet{background:transparent;color:var(--slate);border-color:var(--border)}
-.btn--quiet:hover{color:var(--navy);border-color:var(--border-strong);background:var(--cloud)}
-.privacy{margin-top:1.1rem;display:flex;gap:.55rem;align-items:flex-start;font-size:var(--t-sm);color:var(--slate)}
-.privacy svg{width:16px;height:16px;flex:none;margin-top:.22em;color:var(--blue)}
-.plan-out{margin-top:1.8rem}
-.plan-out[hidden]{display:none}
-.plan-out__box{
-  border:1px solid var(--ice);border-left:4px solid var(--blue);
-  border-radius:0 var(--r-card) var(--r-card) 0;
-  background:var(--ice-wash);padding:clamp(1.3rem,3vw,2rem);
-}
-.plan-out h3{margin-bottom:1.2rem;font-size:var(--t-card)}
-.plan-out ol{margin:0;padding-left:1.35rem;display:grid;gap:.85rem}
-.plan-out li{font-size:var(--t-sm);line-height:1.55;color:var(--slate)}
-.plan-out li strong{color:var(--navy)}
-
-/* ---------- access ---------- */
-.access__fig{display:grid;gap:clamp(1rem,2.2vw,1.5rem);margin-top:clamp(1.75rem,4vw,2.5rem)}
-@media(min-width:700px){.access__fig{grid-template-columns:1fr 1fr}}
-.access__cell{background:var(--white);border:1px solid var(--border);border-radius:var(--r-card);padding:clamp(1.4rem,3vw,2.1rem)}
-.access__cell h4{margin-bottom:.5rem}
-.access__cell p{font-size:var(--t-sm);color:var(--slate)}
-
-/* ---------- closing ---------- */
-.closing{overflow:hidden;text-align:center}
-.closing__in{position:relative;z-index:1}
-.closing .eyebrow{justify-content:center}
-.closing h2{max-width:18ch;margin:0 auto 1.75rem}
-.chain{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.5rem .9rem;margin:0 0 2.25rem;padding:0;list-style:none}
-.chain li{
-  display:flex;align-items:center;gap:.9rem;
-  font-size:var(--t-label);font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ice);
-}
-.chain li:not(:last-child)::after{content:"";width:22px;height:2px;background:rgba(185,213,245,.45)}
-
-/* ---------- footer ---------- */
-.foot{background:var(--white);border-top:1px solid var(--border)}
-.foot__in{display:grid;gap:2rem;padding-block:clamp(2.5rem,5vw,3.5rem)}
-@media(min-width:800px){.foot__in{grid-template-columns:1.2fr .8fr;align-items:start}}
-.foot .brand{margin-bottom:.9rem}
-.foot__tag{font-family:var(--display);font-weight:700;font-style:italic;font-size:1.4rem;color:var(--blue)}
-.foot__links{list-style:none;margin:0;padding:0;display:grid;gap:.7rem}
-@media(min-width:800px){.foot__links{justify-items:end}}
-.foot__links a{color:var(--navy);text-decoration:none;font-size:var(--t-sm);font-weight:500}
-.foot__links a:hover{color:var(--blue)}
-.foot__base{
-  border-top:1px solid var(--border);padding-block:1.3rem;
-  display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;justify-content:space-between;
-  font-size:var(--t-label);letter-spacing:.1em;text-transform:uppercase;color:var(--slate);
-}
-
-/* ---------- scroll reveal ---------- */
-.rv{opacity:0;transform:translateY(22px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
-.rv.in{opacity:1;transform:none}
-.rv-d1{transition-delay:.07s}
-.rv-d2{transition-delay:.14s}
-.rv-d3{transition-delay:.21s}
-
-@media (prefers-reduced-motion:reduce){
-  html:focus-within{scroll-behavior:auto}
-  *,*::before,*::after{
-    animation-duration:.001ms!important;animation-iteration-count:1!important;
-    transition-duration:.001ms!important;scroll-behavior:auto!important;
-  }
-  .rv{opacity:1;transform:none}
-  .ticker__track{animation:none}
-  .frame--zoom:hover img{transform:none}
-  .acc__panel{transition:none}
-}
-@media print{
-  .nav,.hero__media,.vidctl,#heroCanvas,.ticker{display:none!important}
-  body{background:#fff}
-  .on-navy{background:#fff;color:#000}
-  .on-navy h2,.on-navy h3,.on-navy blockquote{color:#000}
-  .acc__panel{grid-template-rows:1fr!important}
-}
-
-/* reveal elements are visible by default and only animate once the
-   observer takes over, so content is never hidden if JS fails */
-.rv{opacity:1;transform:none}
-.rv[data-reveal="pending"]{opacity:0;transform:translateY(22px)}
-.rv[data-reveal="in"]{opacity:1;transform:none}
-
-/* ---------- videos ---------- */
-.videos{display:grid;gap:clamp(1rem,2.4vw,1.6rem)}
-@media(min-width:760px){.videos{grid-template-columns:repeat(3,1fr)}}
-.vcard{
-  background:var(--white);border:1px solid var(--border);border-radius:var(--r-card);
-  overflow:hidden;display:flex;flex-direction:column;
-  transition:border-color .3s var(--ease),box-shadow .3s var(--ease),transform .3s var(--ease);
-}
-.vcard:hover{border-color:var(--ice);box-shadow:var(--sh-2);transform:translateY(-4px)}
-.vcard__media{position:relative;aspect-ratio:16/9;background:var(--ice-wash);overflow:hidden}
-.vcard__media iframe,.vcard__media video{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:contain;background:var(--navy)}
-.vcard__play{
-  position:absolute;inset:0;width:100%;height:100%;padding:0;cursor:pointer;
-  border:0;background:var(--ice-wash);display:grid;place-items:center;
-}
-.vcard__play[disabled]{cursor:default}
-/* contain, never cover: a film may be shot vertically, and cropping a
-   portrait video into a landscape frame throws most of it away. */
-.vcard__play img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
-.vcard__icon{
-  position:relative;display:grid;place-items:center;
-  width:56px;height:56px;border-radius:50%;
-  background:var(--accent);box-shadow:0 6px 18px rgba(135,80,11,.28);
-  transition:transform .25s var(--ease),background-color .25s var(--ease);
-}
-.vcard__icon svg{width:22px;height:22px;color:var(--accent-ink);margin-left:3px}
-.vcard__play:hover:not([disabled]) .vcard__icon{transform:scale(1.08);background:#F0A835}
-.vcard__play[disabled] .vcard__icon{background:var(--border-strong);box-shadow:none}
-.vcard__pending{
-  position:absolute;left:50%;bottom:.9rem;transform:translateX(-50%);
-  font-size:var(--t-label);font-weight:500;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--blue);background:rgba(255,255,255,.9);border:1px solid var(--ice);
-  padding:.3rem .7rem;border-radius:100px;white-space:nowrap;
-}
-.vcard__body{padding:clamp(1.1rem,2.4vw,1.5rem)}
-.vcard__body h3{font-size:var(--t-card);margin-bottom:.5rem}
-.vcard__body p{font-size:var(--t-sm);color:var(--slate)}
-
-/* shown when a picture has been cleared in the CMS and none is set */
-.frame__empty{
-  position:absolute;inset:0;display:grid;place-items:center;text-align:center;
-  padding:1rem;background:var(--ice-wash);color:var(--slate-aa);
-  font-size:var(--t-label);letter-spacing:.14em;text-transform:uppercase;font-weight:500;
-}
-
-
-/* ---------- WordPress chrome ---------- */
-/* The fixed site nav must sit below the admin bar when the owner is logged in. */
-body.admin-bar .nav{top:32px}
-@media(max-width:782px){body.admin-bar .nav{top:46px}}
-
-/* Collapsed accordion answers leave the accessibility tree as well as the
-   screen, so what a screen reader finds matches what the buttons announce.
-   The delay lets the close animation finish before the content vanishes. */
-.acc__panel[data-open="false"]>div{visibility:hidden;transition:visibility 0s .32s}
-.acc__panel[data-open="true"]>div{visibility:visible;transition:visibility 0s}
-
-/* ---------- the lead film ---------- */
-/* The first video runs the full width of the column, so an intro film gets
-   the same presence as the big photographs elsewhere on the page. The rest
-   follow underneath at card size. */
-.videos__feature{margin:0 0 clamp(1rem,2.4vw,1.6rem)}
-.vcard--feature{border-color:var(--ice)}
-.vcard--feature .vcard__icon{width:76px;height:76px}
-.vcard--feature .vcard__icon svg{width:30px;height:30px;margin-left:4px}
-.vcard--feature .vcard__body{padding:clamp(1.3rem,3vw,2.1rem)}
-.vcard--feature .vcard__body h3{font-size:var(--t-sub)}
-.vcard--feature .vcard__body p{font-size:1rem;max-width:68ch}
-.vcard--feature .vcard__pending{bottom:1.4rem}
-
-/* With a lead film above, the remainder share the row evenly however many
-   there are - two, three or more. */
-@media(min-width:760px){
-  .videos--rest{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
-}
-
-@media(min-width:1000px){
-  /* Side by side once there is room: the film leads, its description sits
-     beside it rather than stacking into a tall block. */
-  .vcard--feature{display:grid;grid-template-columns:1.55fr 1fr;align-items:stretch}
-  .vcard--feature .vcard__media{height:100%}
-  .vcard--feature .vcard__body{display:flex;flex-direction:column;justify-content:center}
-}
-
-/* ---------- licensing ---------- */
-.price{display:grid;gap:clamp(1rem,2.4vw,1.6rem)}
-@media(min-width:760px){.price{grid-template-columns:1fr 1.25fr;align-items:stretch}}
-.price__card{
-  background:var(--white);border:1px solid var(--border);border-radius:var(--r-card);
-  padding:clamp(1.5rem,3.4vw,2.4rem);display:flex;flex-direction:column;justify-content:center;
-  transition:border-color .3s var(--ease),box-shadow .3s var(--ease);
-}
-.price__card:hover{border-color:var(--ice);box-shadow:var(--sh-2)}
-.price__card--quote{background:var(--navy);border-color:transparent}
-.price__label{
-  font-family:var(--body);font-size:var(--t-label);font-weight:500;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:.9rem;
-}
-.price__card--quote .price__label{color:var(--ice)}
-.price__figure{
-  font-family:var(--display);font-weight:700;line-height:1;
-  font-size:clamp(2.8rem,7vw,4rem);color:var(--ink);letter-spacing:-.01em;
-}
-.price__unit{font-size:var(--t-sm);color:var(--slate-aa);margin-top:.5rem}
-.price__body{color:#fff;margin-bottom:1.4rem;max-width:46ch}
-.price__card--quote .btn{align-self:flex-start}
-
-/* ---------- the supplied logo ---------- */
-/* It carries the name and the tagline, so it needs more room than a letter
-   mark would and no wordmark beside it. */
-.brand--logo{display:inline-flex;align-items:center;gap:0}
-.brand__logo{display:block;width:auto;max-width:none}
-/* The header lockup has no strapline, so it stays readable small. The
-   width/height attributes on the image already set this; these rules only
-   handle the narrow screens. */
-.brand--nav .brand__logo{height:44px}
-@media(max-width:640px){.brand--nav .brand__logo{height:36px}}
-/* The footer shows the whole thing, strapline included. */
-.brand--full .brand__logo{height:64px}
-@media(max-width:640px){.brand--full .brand__logo{height:52px}}
-/* On the navy bands the logo's black tagline would disappear, so it sits on
-   a soft white plate rather than being recoloured. */
-.on-navy .brand__logo,.foot .brand__logo{
-  background:#fff;border-radius:8px;padding:5px 9px;box-sizing:content-box;
-}
-
-/* ---------- curriculum ---------- */
-.stats{
-  display:grid;gap:1px;background:var(--border);
-  border:1px solid var(--border);border-radius:var(--r-card);overflow:hidden;
-}
-@media(min-width:640px){.stats{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:900px){.stats{grid-template-columns:repeat(4,1fr)}}
-.stats__i{background:var(--white);padding:clamp(1.2rem,2.8vw,1.8rem);display:flex;flex-direction:column;gap:.35rem}
-.stats__n{font-family:var(--display);font-weight:700;line-height:1;font-size:clamp(2.2rem,5vw,3rem);color:var(--ink)}
-.stats__l{font-size:var(--t-sm);color:var(--slate-aa)}
-/* the cell that carries no figure sits level with the labels beside it */
-.stats__i--plain{justify-content:center}
-.stats__i--plain .stats__l{
-  font-family:var(--body);font-weight:500;color:var(--blue);
-  font-size:var(--t-label);letter-spacing:.12em;text-transform:uppercase;line-height:1.5;
-}
-
-.curric{display:grid;gap:clamp(.9rem,2vw,1.2rem);counter-reset:none;list-style:none}
-.curric__i{
-  display:grid;gap:.5rem 1.6rem;align-items:start;
-  background:var(--white);border:1px solid var(--border);border-radius:var(--r-card);
-  padding:clamp(1.2rem,2.8vw,1.7rem);
-  transition:border-color .3s var(--ease),box-shadow .3s var(--ease);
-}
-@media(min-width:860px){.curric__i{grid-template-columns:200px 1fr}}
-.curric__i:hover{border-color:var(--ice);box-shadow:var(--sh-2)}
-.curric__codes{
-  font-family:var(--body);font-size:var(--t-label);font-weight:500;
-  letter-spacing:.1em;text-transform:uppercase;color:var(--blue);
-  padding-top:.2rem;
-}
-.curric__code{white-space:nowrap}
-.curric__sep{opacity:.55}
-.curric__body h3{font-size:var(--t-card);margin-bottom:.5rem}
-.curric__body p{font-size:var(--t-sm);color:var(--slate-aa);max-width:76ch}
-
-.curric__practice{
-  margin-top:clamp(1.6rem,3.5vw,2.4rem);
-  background:var(--navy);border-radius:var(--r-card);
-  padding:clamp(1.6rem,4vw,2.6rem);
-}
-.curric__practice .eyebrow{color:var(--ice)}
-.curric__practice h3{color:#fff;font-size:var(--t-sub);margin:.6rem 0 .9rem}
-.curric__practice h3 em{color:var(--blue-soft,#6D9BF4);font-style:italic}
-.curric__practice p{color:rgba(255,255,255,.86);max-width:80ch}
-
-/* ---------- small-screen legibility and touch ---------- */
-
-/* The skills are content, not a label, and there are a lot of them: give
-   them a size of their own rather than the micro-label scale. */
-.skills li{font-size:clamp(.8125rem,.78rem + .14vw,.875rem);letter-spacing:.06em}
-
-/* Footer links were 20px tall - fine with a mouse, a poor target with a
-   thumb. Padding brings each one to a comfortable size and keeps them
-   apart, without changing how the column looks. */
-.foot__links a{display:inline-block;padding:.8rem 0;line-height:1.3}
-.foot__links{gap:0}
-/* With a mouse the generous target is unnecessary, so it relaxes on wider
-   screens where the pointer is precise. */
-@media(min-width:800px){.foot__links a{padding:.45rem 0}.foot__links{gap:.25rem}}
-
-
-/* ---------- the accent on dark bands ----------
-   On the near-black bands the bright amber is legible (9.7:1), so the
-   accent does not have to fall back to the dark variant it uses on cream. */
-.on-navy .eyebrow,.on-navy .bento__eye,.foot .brand__accent{color:var(--blue-soft)}
-.on-navy .eyebrow::before{background:var(--blue-soft)}
-.on-navy h2 em,.on-navy h3 em,.on-navy blockquote em{color:var(--blue-soft)}
-.on-navy .btn--primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.on-navy .ticks svg{color:var(--blue-soft)}
+/* the Elementor editor outlines each widget; keep that from shifting the
+   layout it is previewing */
+.elementor-widget-container>section{margin:0}

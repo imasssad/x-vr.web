@@ -134,42 +134,21 @@ function tsa_note($path, $style = '') {
  * Appearance > Customize > Site Identity replaces it.
  */
 function tsa_brand($class = 'brand', $variant = 'nav') {
-	$home = home_url('/');
-	$name = tsa_text('site.name');
+	$alt = tsa_text('site.logoAlt');
+	if ($alt === '') $alt = 'XVR Trades \u{2014} Skilled Labor Trades to Apprenticeships';
 	?>
-	<a class="<?php echo esc_attr($class); ?> brand--logo brand--<?php echo esc_attr($variant); ?>"
-	   href="<?php echo esc_url($home); ?>#top"
-	   aria-label="<?php echo esc_attr(sprintf(__('%s - home', 'tradeskillapps'), $name)); ?>">
+	<a class="<?php echo esc_attr($class); ?>" href="<?php echo esc_url(home_url('/')); ?>#top"
+	   aria-label="<?php esc_attr_e('XVR Trades home', 'tradeskillapps'); ?>">
 		<?php if (has_custom_logo()) {
-			$id = get_theme_mod('custom_logo');
-			echo wp_get_attachment_image($id, 'full', false, array(
-				'class' => 'brand__logo',
-				'alt'   => $name,
-				// a ceiling that survives a stale stylesheet
-				'style' => 'height:' . ($variant === 'full' ? 64 : 44) . 'px;width:auto',
-			));
+			echo wp_get_attachment_image(get_theme_mod('custom_logo'), 'full', false, array('alt' => $alt));
 		} else {
-			$base = get_template_directory_uri() . '/assets/brand';
-			// The navigation uses the lockup without the strapline: at the
-			// height a header allows, the strapline is a few pixels tall and
-			// reads as a smudge. The footer has room for the whole thing.
-			$full = ($variant === 'full');
-			$file = $full ? 'xvr-logo' : 'xvr-logo-nav';
-			// Real width and height attributes, at the size it is meant to
-			// appear. Without them the browser lays the file out at its own
-			// width, which is what a stale cached stylesheet produced: a
-			// logo several hundred pixels wide sprawling over the hero. With
-			// them the worst a missing stylesheet can do is nothing at all.
-			$h = $full ? 64 : 44;
-			$w = (int) round($h * ($full ? 1.931 : 2.143));
+			// The reference page's own lockup, at its own dimensions. Its
+			// stylesheet sizes the link, not the file, so the width and
+			// height here are the file's and the CSS does the rest.
 			printf(
-				'<img class="brand__logo" src="%1$s/%2$s.png" srcset="%1$s/%2$s.png 1x, %1$s/%2$s@2x.png 2x" width="%4$d" height="%5$d" alt="%3$s" decoding="async" />',
-				esc_url($base),
-				esc_attr($file),
-				esc_attr($full
-					? __('XVR Trades - Skilled Labor Trades to Apprenticeships', 'tradeskillapps')
-					: __('XVR Trades', 'tradeskillapps')),
-				$w, $h
+				'<img src="%s" width="960" height="480" alt="%s" />',
+				esc_url(get_template_directory_uri() . '/assets/brand/xvr-trades-logo.webp'),
+				esc_attr($alt)
 			);
 		} ?>
 	</a>

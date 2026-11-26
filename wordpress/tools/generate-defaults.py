@@ -221,182 +221,126 @@ def main():
         "sending": "Sending…",
     }
 
-    # --- The front page the client asked for ----------------------------
-    # The client supplied xvr-skilled-trades.shermanmcleod.chatgpt.site as
-    # "exactly what I wanted". That page is six sections between a white
-    # header and footer; everything else this theme can draw now lives on
-    # inner pages. The wording below is theirs, transcribed from the page.
+    # --- The reference page, transcribed -------------------------------
+    # https://xvr-skilled-trades.shermanmcleod.chatgpt.site/
+    # Every string below is that page's own text. Nothing is reworded.
 
-    # Three sections used an anchor that was not their slug (#start for the
-    # planner, #language for the glossary, #learning for the cycle). The
-    # templates now use the slug, so any link that pointed at the old name
-    # has to follow, or it lands nowhere.
-    def _fix(node):
-        if isinstance(node, dict):
-            for k, v in node.items():
-                if k == "href" and isinstance(v, str):
-                    node[k] = {"#start": "#planner", "#language": "#glossary",
-                               "#learning": "#cycle"}.get(v, v)
-                else:
-                    _fix(v)
-        elif isinstance(node, list):
-            for v in node:
-                _fix(v)
-    _fix(data)
+    data["site"]["title"] = "XVR Skilled Trades | Train for the work ahead"
+    data["site"]["description"] = (
+        "Explore XVR Skilled Trades virtual reality curriculum for welding, HVAC, "
+        "advanced manufacturing and drone technology."
+    )
 
-    # Photography the client's demos do not have.
-    #
-    # In the older demo the "A headset opens the door", "Great teaching"
-    # and "Start with curiosity" sections are text only - the whole page
-    # carries one picture, in the hero. The galleries this theme put in
-    # them were ours, and they tripled those sections' height. The fields
-    # stay, so a picture can be dropped in from the Customizer or the
-    # builder whenever the client supplies one; they just ship empty, and
-    # an empty slot now draws nothing at all.
-    for _p in ("approach.heroImage", "approach.practiceImage", "levels.highSchool.image"):
-        _grp, _rest = _p.split(".", 1)
-        _node = data[_grp]
-        _keys = _rest.split(".")
-        for _k in _keys[:-1]:
-            _node = _node[_k]
-        _node[_keys[-1]]["src"] = ""
-        _node[_keys[-1]]["srcSet"] = ""
-    for _step in data["educators"]["steps"]:
-        if "image" in _step:
-            _step["image"]["src"] = ""
-            _step["image"]["srcSet"] = ""
-
-    # Same again for the other five the demos do not have: the trade
-    # explorer's panels, pathways, mission, access and the closing band.
-    for _p in ("pathways.image", "mission.image", "access.image", "closing.image"):
-        _grp, _k = _p.split(".", 1)
-        data[_grp][_k]["src"] = ""
-        data[_grp][_k]["srcSet"] = ""
-    for _t in data["trades"]:
-        if "image" in _t:
-            _t["image"]["src"] = ""
-            _t["image"]["srcSet"] = ""
-
-    # The menu merges both references: the newer page's labels, plus the
-    # Curriculum entry the older page carried.
     data["nav"] = [
-        {"label": "Programs", "href": "#trades"},
-        {"label": "How it works", "href": "#multiplayer"},
-        {"label": "Curriculum", "href": "#curriculum"},
-        {"label": "Licensing", "href": "#licensing"},
+        {"label": "Programs", "href": "#programs"},
+        {"label": "How it works", "href": "#learning"},
+        {"label": "Licensing", "href": "#pricing"},
     ]
     data["navCta"] = {"label": "For partners", "href": "#partners"}
 
-    # Hero: no eyebrow, no buttons, no strip - the headline, the lede and
-    # the weld film, exactly as on their page. The accent falls on the full
-    # stop, which is how their headline is set.
-    data["hero"]["eyebrow"] = ""
-    data["hero"]["headline"] = "Train for the work ahead"
-    data["hero"]["headlineEm"] = "."
-    data["hero"]["lede"] = (
-        "Learn the trades together in live, instructor-led multiplayer VR. See and hear "
-        "your instructor, classmates and learn the skills to get into apprenticeships as "
-        "you practice, ask questions and prepare for mastery."
-    )
-    data["hero"]["primaryCta"] = {"label": "", "href": ""}
-    data["hero"]["secondaryCta"] = {"label": "", "href": ""}
-    data["hero"]["strip"] = []
+    data["hero"] = {
+        # his h1 has a hard break: "Train for the<br>work ahead"
+        "headline": "Train for the\nwork ahead",
+        "headlineEm": ".",
+        "lede": "Learn the trades together in live, instructor-led multiplayer VR. See and "
+                "hear your instructor, classmates and learn the skills to get into "
+                "apprenticeships as you practice, ask questions and prepare for mastery.",
+        "videoHeading": "Watch XVR Weld in action",
+        "image": {
+            "src": "/assets/images/xvr-shop-angle-grinder.webp",
+            "srcSet": "",
+            "alt": "A wall-mounted smart screen displays Trades Curriculum, with Theory, "
+                   "Measurement, Tools, Blueprints, Fabrication and Apprenticeship. Below it, "
+                   "a man measures a welded steel model with a cordless handheld angle grinder "
+                   "resting on the workbench to his right. A woman in VR holds a sparking MIG "
+                   "gun at the stairs. A tool labeled LASER projects a green line across the "
+                   "columns.",
+        },
+        "film": {
+            "src": "/assets/video/xvr-weld.mp4",
+            "poster": "/assets/video/xvr-weld-poster.webp",
+        },
+    }
 
-    # A short statement band, which this theme did not have.
+    data["multiplayer"] = {
+        "eyebrow": "Live multiplayer instruction",
+        "headline": "Learn together inside the virtual shop.",
+        "lede": "Everyone joins the same virtual training space. You can see and hear your "
+                "instructor and classmates inside VR. Watch the instructor demonstrate a task, "
+                "ask questions as they come up, and hear the feedback your classmates receive "
+                "as they practice.",
+        "steps": [
+            {"title": "Learn",
+             "body": "Watch the instructor demonstrate each step and explain why it matters."},
+            {"title": "Practice",
+             "body": "Try the procedure in VR and get feedback from your instructor as you work."},
+            {"title": "Apply",
+             "body": "Bring what you learned to the physical lab and practice with real tools."},
+        ],
+    }
+
     data["knowledge"] = {
-        # empty, but present, so the Customizer and the widget both offer it
-        "eyebrow": "",
-        "headline": "Build expert",
-        "headlineEm": "trade knowledge.",
-        "body": "Build your trade skills in live, instructor-led VR classes. Prepare to "
-                "enter a pre-apprenticeship, apply for a registered apprenticeship, get "
-                "credentialed and/or continue your education or earn a workforce career "
-                "opportunity.",
+        "headline": "Build expert trade knowledge.",
+        "body": "Build your trade skills in live, instructor-led VR classes. Prepare to enter "
+                "a pre-apprenticeship, apply for a registered apprenticeship, get credentialed "
+                "and/or continue your education or earn a workforce career opportunity.",
     }
 
-    # The closing band, likewise new.
-    data["partners"] = {
-        "eyebrow": "Schools, employers and workforce partners",
-        "headline": "Bring XVR to",
-        "headlineEm": "your training program.",
-        "body": "Give high school students, trade school learners and adult career changers "
-                "a place to explore the trades and practice the fundamentals before "
-                "entering the lab.",
-        "cta": {"label": "Contact us", "href": "#contact"},
+    data["tradesSection"] = {
+        "eyebrow": "Training pathways",
+        "headline": "Explore the trades.",
+        "limit": "4",
     }
 
-    # Their trades block is four plain cards, not the tabbed explorer this
-    # theme shipped. The explorer is kept and moves to the inner page, so
-    # the section grew a layout choice rather than losing anything.
-    data["tradesSection"]["eyebrow"] = "Training pathways"
-    data["tradesSection"]["headline"] = "Explore"
-    data["tradesSection"]["headlineEm"] = "the trades."
-    # Merged: the newer page's wording and subtitles, on the older page's
-    # tabbed explorer, which carries the photography. "cards" is still a
-    # dropdown away for the four-card grid of the newer page.
-    data["tradesSection"]["layout"] = "tabs"
-    data["tradesSection"]["limit"] = "0"
-    data["tradesSection"]["lede"] = (
-        "Explore the trade areas shaping our educational vision. Select a field to see "
-        "its foundations and a sample immersive learning experience."
-    )
-
-    # Their four cards, in their order, with their subtitles and wording.
-    REF_TRADES = {
-        "welding": ("VRWeld",
-                    "Build familiarity with shop safety, joint preparation, blueprint "
-                    "reading and groove and fillet welds in multiple positions."),
-        "hvac": ("Heating and cooling",
-                 "Identify system components, study the refrigeration cycle and work "
-                 "through installation and service procedures."),
-        "manufacturing": ("Production and automation",
-                                   "Explore shop measurement, production workflows and the "
-                                   "role of automation in manufacturing."),
-        "drone-technology": ("Uncrewed aircraft systems",
-                             "Explore aircraft components, preflight checks and "
-                             "flight-planning fundamentals."),
-    }
-    # their card calls it "Advanced manufacturing"; ours said "Manufacturing"
-    REF_NAMES = {"manufacturing": "Advanced manufacturing"}
-    order = list(REF_TRADES.keys())
-    for t in data["trades"]:
-        if t["slug"] in REF_TRADES:
-            t["title"], t["desc"] = REF_TRADES[t["slug"]]
-        if t["slug"] in REF_NAMES:
-            t["name"] = REF_NAMES[t["slug"]]
-    data["trades"].sort(
-        key=lambda t: order.index(t["slug"]) if t["slug"] in order else len(order)
-    )
-
-    # Their pricing block names the product; ours did not.
-    data["licensing"]["headline"] = "What does XVR cost"
-    data["licensing"]["headlineEm"] = "for schools?"
-    data["licensing"]["lede"] = (
-        "Bring skilled trades education into your classroom with XVR Trades lessons, "
-        "instructor-led VR activities, and skills assessments in welding, HVAC, advanced "
-        "manufacturing, and drone technology."
-    )
-    data["licensing"]["site"]["cta"]["href"] = "#partners"
-
-    # The reference sets its headings in sentence case. This theme set
-    # every h1 and h2 in condensed capitals. Which one is right is the
-    # client's call, not a decision to bury in the stylesheet, so it is a
-    # setting - and it defaults to the reference.
-    data["site"]["headingStyle"] = "sentence"
-
-    # The mobile drawer's extra links pointed at sections that are no
-    # longer on the front page. They now point at the pages those sections
-    # moved to; page.php resolves each slug to a real permalink.
-    data["drawerExtra"] = [
-        {"label": "Career pathways", "href": "#pathways"},
-        {"label": "For educators", "href": "#educators"},
-        {"label": "Trade terminology", "href": "#glossary"},
-        {"label": "Questions", "href": "#faq"},
+    REF_TRADES = [
+        ("welding", "Welding", "VRWeld",
+         "Build familiarity with shop safety, joint preparation, blueprint reading and "
+         "groove and fillet welds in multiple positions."),
+        ("hvac", "HVAC", "Heating and cooling",
+         "Identify system components, study the refrigeration cycle and work through "
+         "installation and service procedures."),
+        ("manufacturing", "Advanced manufacturing", "Production and automation",
+         "Explore shop measurement, production workflows and the role of automation in "
+         "manufacturing."),
+        ("drone-technology", "Drone technology", "Uncrewed aircraft systems",
+         "Explore aircraft components, preflight checks and flight-planning fundamentals."),
+    ]
+    data["trades"] = [
+        {"slug": slug, "name": name, "title": sub, "desc": desc,
+         "icon": "i-weld", "skills": [], "goal": "", "sample": "",
+         "image": {"src": "", "srcSet": "", "alt": ""}}
+        for slug, name, sub, desc in REF_TRADES
     ]
 
-    # Their footer names the institute.
-    data["footer"]["tagline"] = "Philadelphia Technician Training Institute"
-    data["footer"]["links"] = []
+    data["licensing"] = {
+        "eyebrow": "Annual licensing",
+        "headline": "What does XVR cost for schools?",
+        "lede": "Bring skilled trades education into your classroom with XVR Trades lessons, "
+                "instructor-led VR activities, and skills assessments in welding, HVAC, "
+                "advanced manufacturing, and drone technology.",
+        "individual": {"label": "Individual", "price": "$199.99", "unit": "Per learner, per year"},
+        "site": {
+            "label": "School site license",
+            "body": "Contact us for an annual quote covering unlimited users at one school site.",
+            "cta": {"label": "Request school pricing", "href": "https://xvrtradeskills.com/"},
+        },
+    }
+
+    data["partners"] = {
+        "eyebrow": "Schools, employers and workforce partners",
+        "headline": "Bring XVR to your training program.",
+        "body": "Give high school students, trade school learners and adult career changers a "
+                "place to explore the trades and practice the fundamentals before entering the lab.",
+        "cta": {"label": "Contact us", "href": "https://xvrtradeskills.com/"},
+    }
+
+    data["site"]["logoAlt"] = ("XVR Trades \u2014 Skilled Labor Trades to Apprenticeships")
+    data["footer"] = {"tagline": "Philadelphia Technician Training Institute"}
+
+    # Only what the page uses.
+    KEEP = ("site", "nav", "navCta", "hero", "multiplayer", "knowledge",
+            "tradesSection", "trades", "licensing", "partners", "footer")
+    data = {k: v for k, v in data.items() if k in KEEP}
 
     OUT.write_text("""<?php
 /**

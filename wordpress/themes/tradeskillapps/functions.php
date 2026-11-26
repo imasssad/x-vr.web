@@ -21,7 +21,6 @@ require_once get_template_directory() . '/inc/pages.php';
 require_once get_template_directory() . '/inc/icons.php';
 require_once get_template_directory() . '/inc/post-types.php';
 require_once get_template_directory() . '/inc/customizer.php';
-require_once get_template_directory() . '/inc/contact.php';
 require_once get_template_directory() . '/inc/elementor.php';
 
 function tsa_setup() {

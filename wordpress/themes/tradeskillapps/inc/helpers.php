@@ -57,14 +57,6 @@ function tsa_asset_exists($path) {
 function tsa_href($href) {
 	if (!is_string($href) || $href === '') return $href;
 
-	// "page:some-slug" resolves to that page's permalink, so a menu entry
-	// can point at one of the theme's own inner pages without the slug
-	// being hard-coded as a path that breaks under a different permalink
-	// setting. An absent page falls back to the home page.
-	if (strpos($href, 'page:') === 0) {
-		return tsa_page_url(substr($href, 5), home_url('/'));
-	}
-
 	return $href[0] === '#' ? home_url('/') . $href : $href;
 }
 
@@ -146,7 +138,14 @@ function tsa_lines($path) {
 		if ($out) return $out;
 	}
 	$d = tsa_default($path);
-	return is_array($d) ? $d : array();
+	if (is_array($d)) return $d;
+	// A shipped value can be several lines too, and used to come back empty:
+	// only a value the owner had SAVED was ever split. The hero headline is
+	// two lines, so that silently emptied the heading.
+	if (is_string($d) && trim($d) !== '') {
+		return array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $d)), 'strlen'));
+	}
+	return array();
 }
 
 /** An image: returns array('src' => url, 'alt' => text). src is '' when cleared. */
