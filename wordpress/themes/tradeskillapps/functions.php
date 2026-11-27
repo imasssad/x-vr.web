@@ -40,6 +40,62 @@ function tsa_setup() {
 }
 add_action('after_setup_theme', 'tsa_setup');
 
+/* ------------------------------------------------------------------ *
+ * Keeping the site out of search while it is being built
+ * ------------------------------------------------------------------ */
+
+/**
+ * Is the owner asking for the site to be kept out of search?
+ *
+ * This is WordPress's own switch, Settings > Reading > "Discourage search
+ * engines from indexing this site". The theme does not add a setting of
+ * its own: a second switch is a second thing to forget on launch day.
+ */
+function tsa_hidden_from_search() {
+	return '0' === (string) get_option('blog_public');
+}
+
+/**
+ * WordPress prints a robots meta tag when that switch is on, which covers
+ * the page. It sends no header, so nothing covers what is not a page -
+ * the weld film, the photographs, the feeds, the REST responses. This
+ * adds the header, which applies to all of them.
+ *
+ * Requests for files on disk never reach PHP, so the film still needs a
+ * rule in the server config. That is in the readme.
+ */
+function tsa_robots_header_value() {
+	return tsa_hidden_from_search()
+		? 'noindex, nofollow, noarchive, nosnippet, noimageindex'
+		: '';
+}
+
+function tsa_robots_header() {
+	$value = tsa_robots_header_value();
+	if ($value === '' || headers_sent()) return;
+	header('X-Robots-Tag: ' . $value, true);
+}
+add_action('send_headers', 'tsa_robots_header');
+add_action('rest_api_init', 'tsa_robots_header');
+
+/**
+ * Say so, loudly and on every screen, while the site is hidden.
+ *
+ * WordPress mentions it in one line of the dashboard. A site that goes
+ * live still carrying noindex is invisible to Google for as long as it
+ * takes someone to notice, so this is worth being blunt about.
+ */
+add_action('admin_notices', function () {
+	if (!tsa_hidden_from_search() || !current_user_can('manage_options')) return;
+	printf(
+		'<div class="notice notice-warning"><p><strong>%s</strong> %s</p><p><a href="%s">%s</a></p></div>',
+		esc_html__('This site is hidden from search engines.', 'tradeskillapps'),
+		esc_html__('Google and the others are asked not to list it. That is right while the site is being built - and it must be turned off when it goes live, or the site will not appear in search at all.', 'tradeskillapps'),
+		esc_url(admin_url('options-reading.php')),
+		esc_html__('Settings > Reading, where this is switched', 'tradeskillapps')
+	);
+});
+
 function tsa_assets() {
 	wp_enqueue_style('tradeskillapps', get_stylesheet_uri(), array(), TSA_VERSION);
 
