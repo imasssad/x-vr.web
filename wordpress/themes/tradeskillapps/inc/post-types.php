@@ -210,6 +210,113 @@ function tsa_upsert_shipped($type, $slug, $title, $content, $order, $meta) {
 	return $existing->ID;
 }
 
+/**
+ * Bring the trades into line with the ones the theme ships, once.
+ *
+ * The trades are posts, and tsa_upsert_shipped() deliberately never
+ * overwrites a post that already exists - the rule is that the owner's
+ * words are never touched. That rule is right, and it is also why
+ * tradeskillapps.com went on showing "Welding / Join materials. Build
+ * possibility." and an Electrical card after the theme was rebuilt as
+ * the reference page: the posts were made by an older version and the
+ * top-up had nothing blank to fill.
+ *
+ * So this runs once per version, and only when the shipped set has
+ * actually changed identity - a different list of slugs, which means
+ * the design changed rather than the wording being tweaked. Trades the
+ * theme no longer ships are moved to draft, not deleted, so nothing the
+ * owner wrote is lost and they can be published again.
+ */
+function tsa_repair_trades() {
+	if (!is_admin()) return;
+	if (get_option('tsa_trades_repaired') === TSA_VERSION) return;
+
+	$shipped = tsa_defaults();
+	$shipped = isset($shipped['trades']) ? $shipped['trades'] : array();
+	if (!$shipped) { update_option('tsa_trades_repaired', TSA_VERSION); return; }
+
+	$want = array();
+	foreach ($shipped as $t) $want[$t['slug']] = $t;
+
+	// Only what is on the page. Counting drafts too would mean a site that
+	// has already been repaired - and so has the retired trades parked as
+	// drafts - never looked settled again.
+	$have = get_posts(array(
+		'post_type' => 'tsa_trade', 'posts_per_page' => -1,
+		'post_status' => 'publish',
+		'orderby' => 'menu_order', 'order' => 'ASC', 'suppress_filters' => true,
+	));
+
+	$have_slugs = array();
+	foreach ($have as $p) $have_slugs[] = $p->post_name;
+	sort($have_slugs);
+	$want_slugs = array_keys($want);
+	sort($want_slugs);
+
+	// the same set already: the wording is the owner's business
+	if ($have_slugs === $want_slugs) { update_option('tsa_trades_repaired', TSA_VERSION); return; }
+
+	$parked = array();
+	$fixed  = array();
+
+	foreach ($have as $p) {
+		if (isset($want[$p->post_name])) continue;
+		if ($p->post_status === 'publish') {
+			wp_update_post(array('ID' => $p->ID, 'post_status' => 'draft'));
+			$parked[] = $p->post_title;
+		}
+	}
+
+	$order = 0;
+	foreach ($shipped as $t) {
+		$existing = get_page_by_path($t['slug'], OBJECT, 'tsa_trade');
+		if ($existing) {
+			wp_update_post(array(
+				'ID' => $existing->ID, 'post_title' => $t['name'],
+				'post_status' => 'publish', 'menu_order' => $order,
+			));
+			update_post_meta($existing->ID, '_tsa_title', $t['title']);
+			update_post_meta($existing->ID, '_tsa_desc', $t['desc']);
+			$fixed[] = $t['name'];
+		} else {
+			tsa_upsert_shipped('tsa_trade', $t['slug'], $t['name'], '', $order, array(
+				'_tsa_title' => $t['title'],
+				'_tsa_desc'  => $t['desc'],
+			));
+			$fixed[] = $t['name'];
+		}
+		$order++;
+	}
+
+	update_option('tsa_trades_repaired', TSA_VERSION);
+	update_option('tsa_trades_repair_report', array('parked' => $parked, 'fixed' => $fixed));
+}
+add_action('admin_init', 'tsa_repair_trades', 21);
+
+/** Say what the trades repair did, once. */
+add_action('admin_notices', function () {
+	if (!current_user_can('edit_theme_options')) return;
+	$rep = get_option('tsa_trades_repair_report');
+	if (!is_array($rep) || empty($rep['fixed'])) return;
+	delete_option('tsa_trades_repair_report');
+	printf(
+		'<div class="notice notice-success is-dismissible"><p><strong>%s</strong> %s</p>%s</div>',
+		esc_html__('The trades now match the design.', 'tradeskillapps'),
+		esc_html(sprintf(
+			/* translators: %s is a list of trade names */
+			__('These are the four on the page: %s.', 'tradeskillapps'),
+			implode(', ', $rep['fixed'])
+		)),
+		$rep['parked']
+			? '<p>' . esc_html(sprintf(
+				/* translators: %s is a list of trade names */
+				__('These are no longer part of the design and have been set to draft, not deleted - you can publish them again under Trades: %s.', 'tradeskillapps'),
+				implode(', ', $rep['parked'])
+			)) . '</p>'
+			: ''
+	);
+});
+
 add_action('after_switch_theme', 'tsa_sync_shipped_content');
 
 /**
